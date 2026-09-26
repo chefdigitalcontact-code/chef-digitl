@@ -1,0 +1,1291 @@
+<title>Aegis Maquettes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..600&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=EB+Garamond:ital,wght@0,400..600;1,400..500&family=Figtree:wght@400;500;600&family=Hanken+Grotesk:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:ital,wght@0,500;0,600;1,500&family=Instrument+Sans:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@400;500;600&display=swap">
+<style>
+/* ==========================================================================
+   Six maquettes de l'accueil Aegis Fama & Doxa sur UNE même page : textes, liens et ordre
+   des sections identiques au site actuel. Seule la feuille de style change (.m1 à .m6).
+   Charte conservée partout : bleu nuit, or, serif pour les titres. Tout reste sobre.
+   ========================================================================== */
+*, *::before, *::after { box-sizing: border-box; }
+html { background: #F5F6F9; }
+body { margin: 0; background: #F5F6F9; padding-bottom: 86px; }
+.site {
+    --navy-950: #06122A; --navy-900: #0B1B33; --navy-800: #11264A; --navy-700: #1A355F;
+    --gold: #C9A54C; --gold-600: #86681F; --gold-light: #E4CD8A; --gold-soft: #F7F0DC;
+    --ink: #141B26; --ink-2: #3E4A5C; --muted: #5F6A7B; --line: #E3E6EC; --bg-2: #F5F6F9;
+    min-height: 100vh; overflow-x: clip; -webkit-font-smoothing: antialiased;
+}
+.site p, .site h1, .site h2, .site h3, .site ul, .site ol { margin: 0; }
+.site ul, .site ol { padding: 0; list-style: none; }
+.site a { color: inherit; }
+.site :focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; border-radius: 4px; }
+.wrap { max-width: 1180px; margin-inline: auto; padding-inline: clamp(16px, 4vw, 40px); }
+.ic { width: 1em; height: 1em; flex: none; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+
+/* ---- Structure commune ---- */
+.alerte-in { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; padding-block: 8px; font-size: 14px; }
+.alerte a { text-decoration: none; font-weight: 600; }
+.pouls { display: inline-block; width: 8px; height: 8px; margin-right: 8px; border-radius: 50%; background: #FF6B5E; vertical-align: 1px; animation: pouls 2s infinite; }
+@keyframes pouls { 0% { box-shadow: 0 0 0 0 rgba(255, 107, 94, .6); } 70% { box-shadow: 0 0 0 8px rgba(255, 107, 94, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 107, 94, 0); } }
+.entete { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; }
+.entete-in { display: flex; align-items: center; gap: 20px; min-height: 74px; }
+.marque { display: flex; align-items: center; gap: 12px; text-decoration: none; flex: none; }
+.marque svg { width: 36px; height: 36px; }
+.marque-nom { display: block; line-height: 1.1; }
+.marque-sous { display: block; font-size: 10.5px; letter-spacing: .2em; text-transform: uppercase; white-space: nowrap; }
+.nav { margin-left: auto; }
+.nav > ul { display: flex; align-items: center; gap: 2px; }
+.nav a { display: block; padding: 10px 11px; text-decoration: none; white-space: nowrap; font-size: 15px; }
+.sous-menu { position: relative; }
+.sous-menu > a::after { content: ""; display: inline-block; width: 6px; height: 6px; margin-left: 8px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: rotate(45deg) translateY(-3px); opacity: .7; }
+.sous { position: absolute; top: 100%; left: 0; min-width: 250px; padding: 8px; opacity: 0; visibility: hidden; transform: translateY(6px); transition: .15s; z-index: 5; }
+.sous-menu:hover .sous, .sous-menu:focus-within .sous { opacity: 1; visibility: visible; transform: none; }
+.sous a { padding: 9px 12px; }
+.nav .btn { margin-left: 6px; padding: 9px 16px; }
+.burger { display: none; margin-left: auto; width: 42px; height: 40px; border-radius: 8px; background: none; cursor: pointer; place-items: center; color: inherit; border: 1px solid currentColor; }
+.burger span { display: block; width: 18px; height: 2px; background: currentColor; box-shadow: 0 -6px 0 currentColor, 0 6px 0 currentColor; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; white-space: nowrap; cursor: pointer; transition: background-color .15s, color .15s, border-color .15s, transform .15s; }
+.btn:hover { transform: translateY(-1px); }
+.hero-grille { display: grid; grid-template-columns: 1.25fr .75fr; gap: 48px; align-items: center; }
+.hero-surtitre { display: block; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.hero-preuves { display: flex; flex-wrap: wrap; gap: 10px 26px; }
+.hero-preuves li { display: flex; align-items: center; gap: 8px; }
+.hero-art { display: grid; place-items: center; }
+.embleme { width: 100%; max-width: 380px; height: auto; }
+.radar { display: none; width: 100%; max-width: 420px; aspect-ratio: 1; }
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.deux-col { display: grid; grid-template-columns: 1.1fr .9fr; gap: 56px; align-items: center; }
+.coches { display: grid; gap: 16px; }
+.coches li { display: flex; gap: 14px; align-items: flex-start; }
+.coches .ic { font-size: 20px; margin-top: 3px; }
+.piliers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.pilier, .carte, .post { display: flex; flex-direction: column; text-decoration: none; }
+.cartes { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+.gov { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+.gov-col ul { display: grid; gap: 8px; }
+.plans { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; align-items: stretch; }
+.plan ul { display: grid; gap: 10px; }
+.plan li { display: flex; gap: 10px; align-items: flex-start; }
+.plan li .ic { font-size: 16px; margin-top: 4px; }
+.puces { display: flex; flex-wrap: wrap; gap: 12px; }
+.puce { text-decoration: none; }
+.posts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.post h3 a { text-decoration: none; }
+.tete-ligne { display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; flex-wrap: wrap; }
+.faq-liste { display: grid; gap: 10px; }
+.faq summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; flex: none; font-size: 1.4em; line-height: 1; transition: transform .2s; }
+.faq details[open] summary::after { transform: rotate(45deg); }
+.faq summary h3 { font-size: inherit; font-weight: inherit; font-family: inherit; }
+.lien-fleche { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; text-decoration: none; }
+.lien-fleche::after { content: "→"; transition: transform .15s; }
+a:hover > .lien-fleche::after, .lien-fleche:hover::after { transform: translateX(4px); }
+.centre { text-align: center; }
+.bandeau-cta-in { display: flex; justify-content: space-between; align-items: center; gap: 28px; flex-wrap: wrap; }
+.bandeau-cta-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.pied-grille { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 36px; }
+.pied-grille ul { display: grid; gap: 8px; }
+.pied-grille a { text-decoration: none; }
+.pied-bas { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.pied-bas a { text-decoration: none; }
+.cta-mobile { display: none; }
+
+@media (max-width: 1080px) {
+    .nav { display: none; }
+    .burger { display: grid; }
+    .site.menu-ouvert .nav { display: block; position: absolute; left: 0; right: 0; top: 100%; padding: 8px clamp(16px, 4vw, 40px) 18px; }
+    .site.menu-ouvert .nav > ul { flex-direction: column; align-items: stretch; }
+    .site.menu-ouvert .sous { position: static; opacity: 1; visibility: visible; transform: none; display: none; }
+    .nav .btn { margin: 8px 0 0; }
+    .cartes { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 860px) {
+    .hero-grille, .deux-col { grid-template-columns: 1fr; }
+    .hero-art { display: none; }
+    .stats, .piliers, .gov, .plans, .posts { grid-template-columns: 1fr; }
+    .pied-grille { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 560px) {
+    .cartes, .pied-grille { grid-template-columns: 1fr; }
+    .cta-mobile { display: flex; gap: 8px; position: fixed; z-index: 40; left: 12px; right: 12px; bottom: calc(76px + env(safe-area-inset-bottom, 0px)); }
+    .cta-mobile .btn { flex: 1; padding: 11px 10px !important; }
+    body { padding-bottom: 140px; }
+    .marque-sous { display: none; }
+}
+@media (prefers-reduced-motion: reduce) { .site *, .site *::before, .site *::after { animation: none !important; transition: none !important; } }
+
+/* ==========================================================================
+   1 · CLASSIQUE — ivoire, Garamond, filets d'or, composition centrée
+   ========================================================================== */
+.m1 { --ivoire: #FBF9F4; --filet: #E6DFCF; background: var(--ivoire); color: var(--ink); font-family: 'Source Sans 3', system-ui, sans-serif; font-size: 17px; line-height: 1.65; }
+.m1 h1, .m1 h2, .m1 h3 { font-family: 'EB Garamond', Georgia, serif; font-weight: 500; color: var(--navy-900); line-height: 1.15; text-wrap: balance; }
+.m1 .alerte { background: var(--navy-950); color: rgba(255, 255, 255, .82); }
+.m1 .alerte a { color: var(--gold-light); }
+.m1 .entete { background: rgba(251, 249, 244, .96); border-bottom: 1px solid var(--filet); box-shadow: 0 1px 0 rgba(201, 165, 76, .35); }
+.m1 .marque-nom { font-family: 'EB Garamond', serif; font-size: 21px; color: var(--navy-900); }
+.m1 .marque-sous { color: var(--gold-600); }
+.m1 .nav a { color: var(--ink-2); }
+.m1 .nav a:hover { color: var(--navy-900); }
+.m1 .sous { background: #fff; border: 1px solid var(--filet); box-shadow: 0 18px 40px rgba(6, 18, 42, .12); }
+.m1 .btn { padding: 13px 24px; border-radius: 2px; font-weight: 600; font-size: 15.5px; border: 1px solid transparent; }
+.m1 .btn-or { background: var(--gold); color: var(--navy-950) !important; }
+.m1 .btn-or:hover { background: var(--gold-light); }
+.m1 .btn-clair, .m1 .btn-fantome { border-color: var(--navy-900); color: var(--navy-900) !important; background: transparent; }
+.m1 .btn-clair:hover, .m1 .btn-fantome:hover { background: var(--navy-900); color: #fff !important; }
+.m1 .btn-sombre { background: var(--navy-900); color: #fff !important; }
+.m1 .burger { color: var(--navy-900); }
+.m1.menu-ouvert .nav { background: var(--ivoire); border-bottom: 1px solid var(--filet); }
+.m1 .surtitre, .m1 .hero-surtitre { font-family: 'Source Sans 3', sans-serif; font-size: 12.5px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--gold-600); }
+.m1 .hero { padding-block: 76px 84px; text-align: center; background: radial-gradient(60% 70% at 50% 0%, rgba(201, 165, 76, .12), transparent 70%); }
+.m1 .hero-grille { grid-template-columns: 1fr; }
+.m1 .hero-art { order: -1; }
+.m1 .embleme { max-width: 150px; }
+.m1 .hero h1 { font-size: clamp(2.5rem, 5.2vw, 4.2rem); max-width: 860px; margin-inline: auto; }
+.m1 .hero-surtitre { margin-bottom: 18px; }
+.m1 .hero h1 em { color: var(--gold-600); }
+.m1 .hero .lead { margin: 22px auto 0; max-width: 700px; font-size: 1.15rem; color: var(--ink-2); }
+.m1 .hero-actions, .m1 .hero-preuves { justify-content: center; }
+.m1 .hero-actions { margin-top: 34px; }
+.m1 .hero-preuves { margin-top: 30px; font-size: 15px; color: var(--ink-2); }
+.m1 .hero-preuves .ic { color: var(--gold-600); font-size: 18px; }
+.m1 main > section { padding-block: 84px; border-top: 1px solid var(--filet); }
+.m1 .alt { background: #fff; }
+.m1 .tete { text-align: center; max-width: 780px; margin: 0 auto 48px; }
+.m1 .tete h2 { margin-top: 12px; font-size: clamp(1.9rem, 3.4vw, 2.7rem); }
+.m1 .tete p:not(.surtitre) { margin-top: 14px; color: var(--ink-2); }
+.m1 .stat { text-align: center; padding: 20px 26px; border-top: 1px solid var(--gold); }
+.m1 .stat-v { display: block; font-family: 'EB Garamond', serif; font-size: 3.2rem; color: var(--navy-900); line-height: 1; }
+.m1 .stat-l { display: block; margin-top: 12px; color: var(--ink-2); font-size: 15.5px; }
+.m1 .deux-col h2 { margin-top: 12px; font-size: clamp(1.8rem, 3.2vw, 2.5rem); }
+.m1 .deux-col p:not(.surtitre) { margin-top: 16px; color: var(--ink-2); }
+.m1 .deux-col .lien-fleche { margin-top: 20px; color: var(--navy-700); }
+.m1 .coches li { padding: 16px 18px; background: var(--ivoire); border-left: 2px solid var(--gold); }
+.m1 .alt .coches li { background: var(--ivoire); }
+.m1 .coches .ic { color: var(--gold-600); }
+.m1 .pilier { padding: 34px 28px; text-align: center; background: #fff; border: 1px solid var(--filet); border-top: 2px solid var(--gold); color: inherit; }
+.m1 .pilier .ic { font-size: 30px; margin: 0 auto; color: var(--gold-600); }
+.m1 .pilier h3 { margin-top: 16px; font-size: 1.6rem; }
+.m1 .pilier p { margin-top: 10px; color: var(--ink-2); flex: 1; }
+.m1 .pilier .lien-fleche, .m1 .carte .lien-fleche { margin-top: 16px; color: var(--navy-700); justify-content: center; }
+.m1 .carte { padding: 26px 22px; background: var(--ivoire); border: 1px solid var(--filet); color: inherit; transition: border-color .15s; }
+.m1 .carte:hover { border-color: var(--gold); }
+.m1 .carte-ic { font-size: 22px; color: var(--gold-600); }
+.m1 .carte h3 { margin-top: 12px; font-size: 1.22rem; }
+.m1 .carte p { margin-top: 8px; font-size: 15px; color: var(--ink-2); flex: 1; }
+.m1 .carte .lien-fleche { justify-content: flex-start; }
+.m1 .gov-col { padding: 0 8px; text-align: center; }
+.m1 .gov-n { display: inline-grid; place-items: center; width: 40px; height: 40px; border: 1px solid var(--gold); border-radius: 50%; font-family: 'EB Garamond', serif; font-size: 20px; color: var(--gold-600); }
+.m1 .gov-col h3 { margin-top: 14px; font-size: 1.5rem; }
+.m1 .gov-col ul { margin-top: 12px; color: var(--ink-2); font-size: 15.5px; }
+.m1 .gov-col p { margin-top: 10px; color: var(--ink-2); font-size: 15.5px; }
+.m1 .gov-col .lien-fleche { margin-top: 14px; color: var(--navy-700); }
+.m1 .sombre { background: var(--navy-900); color: rgba(255, 255, 255, .8); }
+.m1 .sombre .tete h2, .m1 .sombre h3 { color: #fff; }
+.m1 .sombre .tete p:not(.surtitre) { color: rgba(255, 255, 255, .72); }
+.m1 .sombre .surtitre { color: var(--gold-light); }
+.m1 .plan { padding: 32px 28px; border: 1px solid rgba(201, 165, 76, .35); color: rgba(255, 255, 255, .8); }
+.m1 .plan-vedette { background: var(--ivoire); color: var(--ink-2); border-color: var(--gold); }
+.m1 .plan-vedette h3 { color: var(--navy-900); }
+.m1 .plan-tag { font-size: 12px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); }
+.m1 .plan-vedette .plan-tag { color: var(--gold-600); }
+.m1 .plan h3 { margin-top: 10px; font-size: 1.8rem; }
+.m1 .plan-pour { margin-top: 6px; font-size: 15px; }
+.m1 .plan-prix { margin: 18px 0 20px; padding-block: 14px; border-block: 1px solid rgba(201, 165, 76, .3); font-size: 15px; }
+.m1 .plan-prix strong { font-family: 'EB Garamond', serif; font-size: 2.1rem; font-weight: 500; color: #fff; }
+.m1 .plan-vedette .plan-prix strong { color: var(--navy-900); }
+.m1 .plan ul { font-size: 15px; }
+.m1 .plan li .ic { color: var(--gold); }
+.m1 .plans + .centre { margin-top: 40px; }
+.m1 .note-entree { margin-top: 16px; font-size: 15px; color: rgba(255, 255, 255, .72); }
+.m1 .note-entree a { color: var(--gold-light); }
+.m1 .puces { justify-content: center; }
+.m1 .puce { padding: 10px 18px; border: 1px solid var(--filet); background: #fff; color: var(--navy-900); font-family: 'EB Garamond', serif; font-size: 1.1rem; }
+.m1 .puce:hover { border-color: var(--gold); }
+.m1 .etapes .gov-col { text-align: center; }
+.m1 .pied-section { margin-top: 44px; display: flex; flex-direction: column; align-items: center; gap: 20px; text-align: center; color: var(--ink-2); font-size: 15.5px; }
+.m1 .pied-section a:not(.btn) { color: var(--navy-700); }
+.m1 .tete-ligne { text-align: left; max-width: none; }
+.m1 .tete-ligne .lien-fleche { color: var(--navy-700); }
+.m1 .post { padding: 26px; background: var(--ivoire); border: 1px solid var(--filet); }
+.m1 .post .meta { font-size: 13.5px; color: var(--muted); }
+.m1 .post h3 { margin-top: 10px; font-size: 1.3rem; }
+.m1 .post p:not(.meta) { margin-top: 10px; font-size: 15px; color: var(--ink-2); flex: 1; }
+.m1 .post .lien-fleche { margin-top: 16px; color: var(--navy-700); }
+.m1 .faq .wrap { max-width: 820px; }
+.m1 .faq-liste { gap: 0; }
+.m1 .faq details { padding: 20px 4px; border-bottom: 1px solid var(--filet); }
+.m1 .faq summary { font-family: 'EB Garamond', serif; font-size: 1.3rem; color: var(--navy-900); }
+.m1 .faq summary::after { color: var(--gold-600); }
+.m1 .faq details p { margin-top: 10px; color: var(--ink-2); }
+.m1 .faq .centre { margin-top: 30px; }
+.m1 .faq .lien-fleche { color: var(--navy-700); }
+.m1 .bandeau-cta { padding-block: 64px; background: var(--navy-950); color: rgba(255, 255, 255, .78); border-top: 2px solid var(--gold); }
+.m1 .bandeau-cta h2 { font-family: 'EB Garamond', serif; font-weight: 500; font-size: clamp(1.7rem, 3vw, 2.3rem); color: #fff; }
+.m1 .bandeau-cta p { margin-top: 8px; }
+.m1 .bandeau-cta .btn-clair { border-color: rgba(255, 255, 255, .45); color: #fff !important; }
+.m1 .pied { padding-block: 56px 26px; background: var(--navy-950); color: rgba(255, 255, 255, .66); font-size: 15px; border-top: 1px solid rgba(255, 255, 255, .08); }
+.m1 .pied .marque-nom { color: var(--gold-light); }
+.m1 .pied h3 { font-family: 'Source Sans 3', sans-serif; font-size: 12.5px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
+.m1 .pied a:hover { color: #fff; }
+.m1 .promesse { margin-top: 16px; max-width: 36ch; }
+.m1 .conf-note { margin-top: 14px; font-size: 14px; }
+.m1 .conf { display: inline-block; margin-right: 8px; padding: 2px 8px; border: 1px solid var(--gold); color: var(--gold-light); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; }
+.m1 .pied-bas { margin-top: 44px; padding-top: 22px; border-top: 1px solid rgba(255, 255, 255, .1); font-size: 13.5px; }
+.m1 .cta-mobile .btn-clair { background: var(--navy-900); color: #fff !important; }
+
+/* ==========================================================================
+   2 · NUIT — tout en bleu nuit, Cormorant, or discret : le registre du luxe feutré
+   ========================================================================== */
+.m2 { --fond: #06122A; --fond-2: #0B1B33; --texte: #D7DDE8; --texte-2: #9AA6BA; --trait: rgba(201, 165, 76, .22); background: var(--fond); color: var(--texte); font-family: 'Hanken Grotesk', system-ui, sans-serif; font-size: 17px; line-height: 1.65; }
+.m2 h1, .m2 h2, .m2 h3 { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 600; color: #F4EEDD; line-height: 1.1; text-wrap: balance; }
+.m2 .alerte { background: #030B1C; color: var(--texte-2); border-bottom: 1px solid var(--trait); }
+.m2 .alerte a { color: var(--gold-light); }
+.m2 .entete { background: rgba(6, 18, 42, .9); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border-bottom: 1px solid var(--trait); }
+.m2 .marque-nom { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 22px; color: var(--gold-light); }
+.m2 .marque-sous { color: rgba(255, 255, 255, .45); }
+.m2 .nav a { color: rgba(255, 255, 255, .8); }
+.m2 .nav a:hover { color: #fff; }
+.m2 .sous { background: var(--fond-2); border: 1px solid var(--trait); box-shadow: 0 18px 40px rgba(0, 0, 0, .5); }
+.m2 .btn { padding: 13px 24px; border-radius: 99px; font-weight: 600; font-size: 15.5px; border: 1px solid transparent; }
+.m2 .btn-or { background: var(--gold); color: var(--navy-950) !important; }
+.m2 .btn-or:hover { background: var(--gold-light); }
+.m2 .btn-clair, .m2 .btn-fantome { border-color: rgba(228, 205, 138, .5); color: var(--gold-light) !important; }
+.m2 .btn-clair:hover, .m2 .btn-fantome:hover { background: rgba(228, 205, 138, .1); }
+.m2 .btn-sombre { background: var(--gold); color: var(--navy-950) !important; }
+.m2 .burger { color: var(--gold-light); }
+.m2.menu-ouvert .nav { background: var(--fond); border-bottom: 1px solid var(--trait); }
+.m2 .surtitre, .m2 .hero-surtitre { font-size: 12px; font-weight: 600; letter-spacing: .24em; text-transform: uppercase; color: var(--gold); }
+.m2 .hero { padding-block: 86px 96px; background: radial-gradient(55% 70% at 78% 40%, rgba(201, 165, 76, .13), transparent 70%), linear-gradient(180deg, var(--fond), var(--fond-2)); }
+.m2 .hero h1 { font-size: clamp(2.7rem, 5.6vw, 4.6rem); line-height: 1.02; }
+.m2 .hero-surtitre { margin-bottom: 20px; }
+.m2 .hero h1 em { color: var(--gold-light); font-style: italic; font-weight: 500; }
+.m2 .hero .lead { margin-top: 24px; max-width: 580px; font-size: 1.12rem; color: var(--texte-2); }
+.m2 .hero-actions { margin-top: 34px; }
+.m2 .hero-preuves { margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--trait); font-size: 14.5px; color: var(--texte-2); }
+.m2 .hero-preuves .ic { color: var(--gold); font-size: 18px; }
+.m2 .embleme { filter: drop-shadow(0 0 40px rgba(201, 165, 76, .25)); }
+.m2 main > section { padding-block: 92px; }
+.m2 .alt { background: var(--fond-2); }
+.m2 .tete { max-width: 760px; margin-bottom: 48px; }
+.m2 .tete h2 { margin-top: 12px; font-size: clamp(2.1rem, 3.8vw, 3.1rem); }
+.m2 .tete p:not(.surtitre) { margin-top: 14px; color: var(--texte-2); }
+.m2 .stat { padding: 30px 28px; border: 1px solid var(--trait); border-radius: 18px; }
+.m2 .stat-v { display: block; font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 3.6rem; line-height: 1; color: var(--gold-light); }
+.m2 .stat-l { display: block; margin-top: 12px; color: var(--texte-2); }
+.m2 .deux-col h2 { margin-top: 12px; font-size: clamp(2rem, 3.4vw, 2.8rem); }
+.m2 .deux-col p:not(.surtitre) { margin-top: 16px; color: var(--texte-2); }
+.m2 .deux-col strong { color: #fff; font-weight: 600; }
+.m2 .deux-col .lien-fleche { margin-top: 20px; color: var(--gold-light); }
+.m2 .coches li { padding: 16px 0; border-bottom: 1px solid var(--trait); }
+.m2 .coches .ic { color: var(--gold); }
+.m2 .pilier, .m2 .carte { padding: 30px 26px; border: 1px solid var(--trait); border-radius: 18px; color: inherit; transition: border-color .2s, background-color .2s; }
+.m2 .pilier:hover, .m2 .carte:hover { border-color: var(--gold); background: rgba(201, 165, 76, .04); }
+.m2 .pilier .ic { font-size: 30px; color: var(--gold); }
+.m2 .pilier h3 { margin-top: 18px; font-size: 1.8rem; }
+.m2 .pilier p, .m2 .carte p { margin-top: 10px; color: var(--texte-2); flex: 1; }
+.m2 .pilier .lien-fleche, .m2 .carte .lien-fleche { margin-top: 18px; color: var(--gold-light); }
+.m2 .carte-ic { font-size: 22px; color: var(--gold); }
+.m2 .carte h3 { margin-top: 14px; font-size: 1.35rem; }
+.m2 .carte p { font-size: 15px; }
+.m2 .gov-col { padding: 28px; border-radius: 18px; background: rgba(255, 255, 255, .02); border: 1px solid var(--trait); }
+.m2 .gov-n { font-family: 'Cormorant Garamond', serif; font-size: 2.6rem; font-weight: 600; line-height: 1; color: var(--gold); }
+.m2 .gov-col h3 { margin-top: 10px; font-size: 1.7rem; }
+.m2 .gov-col ul, .m2 .gov-col p { margin-top: 12px; color: var(--texte-2); font-size: 15.5px; }
+.m2 .gov-col li::before { content: "— "; color: var(--gold); }
+.m2 .gov-col .lien-fleche { margin-top: 16px; color: var(--gold-light); }
+.m2 .sombre { background: linear-gradient(180deg, var(--fond-2), var(--fond)); }
+.m2 .plan { padding: 34px 28px; border-radius: 22px; border: 1px solid var(--trait); }
+.m2 .plan-vedette { border: 1px solid var(--gold); background: linear-gradient(180deg, rgba(201, 165, 76, .1), transparent 60%); }
+.m2 .plan-tag { font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); }
+.m2 .plan h3 { margin-top: 10px; font-size: 2rem; }
+.m2 .plan-pour { margin-top: 6px; color: var(--texte-2); font-size: 15px; }
+.m2 .plan-prix { margin: 20px 0; color: var(--texte-2); font-size: 15px; }
+.m2 .plan-prix strong { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; font-weight: 600; color: #fff; }
+.m2 .plan ul { font-size: 15px; }
+.m2 .plan li .ic { color: var(--gold); }
+.m2 .plans + .centre { margin-top: 42px; }
+.m2 .note-entree { margin-top: 16px; color: var(--texte-2); font-size: 15px; }
+.m2 .note-entree a { color: var(--gold-light); }
+.m2 .puce { padding: 11px 20px; border-radius: 99px; border: 1px solid var(--trait); color: #F4EEDD; }
+.m2 .puce:hover { border-color: var(--gold); color: var(--gold-light); }
+.m2 .pied-section { margin-top: 40px; padding-top: 30px; border-top: 1px solid var(--trait); display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; color: var(--texte-2); font-size: 15.5px; }
+.m2 .pied-section strong { color: #fff; }
+.m2 .pied-section a:not(.btn) { color: var(--gold-light); }
+.m2 .tete-ligne .lien-fleche { color: var(--gold-light); }
+.m2 .post { padding: 28px; border-radius: 18px; border: 1px solid var(--trait); }
+.m2 .post .meta { font-size: 13.5px; color: var(--texte-2); }
+.m2 .post h3 { margin-top: 10px; font-size: 1.45rem; }
+.m2 .post p:not(.meta) { margin-top: 10px; color: var(--texte-2); font-size: 15px; flex: 1; }
+.m2 .post .lien-fleche { margin-top: 16px; color: var(--gold-light); }
+.m2 .faq .wrap { max-width: 840px; }
+.m2 .faq details { padding: 20px 24px; border-radius: 16px; border: 1px solid var(--trait); }
+.m2 .faq summary { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600; color: #F4EEDD; }
+.m2 .faq summary::after { color: var(--gold); }
+.m2 .faq details p { margin-top: 10px; color: var(--texte-2); }
+.m2 .faq .centre { margin-top: 30px; }
+.m2 .faq .lien-fleche { color: var(--gold-light); }
+.m2 .bandeau-cta { padding-block: 70px; background: radial-gradient(60% 120% at 50% 0%, rgba(201, 165, 76, .16), transparent 70%), var(--fond-2); border-block: 1px solid var(--trait); }
+.m2 .bandeau-cta h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.9rem, 3.4vw, 2.6rem); color: #F4EEDD; }
+.m2 .bandeau-cta p { margin-top: 8px; color: var(--texte-2); }
+.m2 .pied { padding-block: 56px 26px; background: #030B1C; color: var(--texte-2); font-size: 15px; }
+.m2 .pied .marque-nom { color: var(--gold-light); }
+.m2 .pied h3 { font-family: 'Hanken Grotesk', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
+.m2 .pied a:hover { color: #fff; }
+.m2 .promesse { margin-top: 16px; max-width: 36ch; }
+.m2 .conf-note { margin-top: 14px; font-size: 14px; }
+.m2 .conf { display: inline-block; margin-right: 8px; padding: 2px 9px; border-radius: 99px; border: 1px solid var(--gold); color: var(--gold-light); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; }
+.m2 .pied-bas { margin-top: 44px; padding-top: 22px; border-top: 1px solid var(--trait); font-size: 13.5px; }
+
+/* ==========================================================================
+   3 · ÉPURÉ — blanc, grille ferme, Instrument Sans, serif italique pour l'accent
+   ========================================================================== */
+.m3 { --gris: #F4F5F7; --trait: #E4E6EB; background: #fff; color: var(--ink); font-family: 'Instrument Sans', system-ui, sans-serif; font-size: 17px; line-height: 1.6; }
+.m3 h1, .m3 h2, .m3 h3 { font-family: 'Instrument Sans', system-ui, sans-serif; font-weight: 600; letter-spacing: -.025em; color: var(--navy-900); line-height: 1.08; text-wrap: balance; }
+.m3 em { font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; letter-spacing: 0; }
+.m3 .alerte { background: var(--navy-900); color: rgba(255, 255, 255, .8); font-size: 13.5px; }
+.m3 .alerte a { color: var(--gold-light); }
+.m3 .entete { background: rgba(255, 255, 255, .92); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border-bottom: 1px solid var(--trait); }
+.m3 .marque svg { width: 30px; height: 30px; }
+.m3 .marque-nom { font-weight: 600; font-size: 17px; letter-spacing: -.02em; color: var(--navy-900); }
+.m3 .marque-sous { color: var(--muted); letter-spacing: .16em; }
+.m3 .nav a { color: var(--ink-2); font-size: 14.5px; }
+.m3 .nav a:hover { color: var(--navy-900); }
+.m3 .sous { background: #fff; border: 1px solid var(--trait); border-radius: 10px; box-shadow: 0 16px 36px rgba(6, 18, 42, .1); }
+.m3 .btn { padding: 13px 22px; border-radius: 8px; font-weight: 500; font-size: 15.5px; border: 1px solid transparent; }
+.m3 .btn-or { background: var(--navy-900); color: #fff !important; }
+.m3 .btn-or:hover { background: var(--navy-700); }
+.m3 .btn-clair, .m3 .btn-fantome { border-color: var(--trait); color: var(--navy-900) !important; background: #fff; }
+.m3 .btn-clair:hover, .m3 .btn-fantome:hover { border-color: var(--navy-900); }
+.m3 .btn-sombre { background: var(--navy-900); color: #fff !important; }
+.m3 .burger { color: var(--navy-900); border-color: var(--trait); }
+.m3.menu-ouvert .nav { background: #fff; border-bottom: 1px solid var(--trait); }
+.m3 .surtitre, .m3 .hero-surtitre { display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 500; color: var(--muted); }
+.m3 .surtitre::before, .m3 .hero-surtitre::before { content: ""; width: 18px; height: 2px; background: var(--gold); }
+.m3 .hero { padding-block: 96px 100px; }
+.m3 .hero h1 { font-size: clamp(2.7rem, 6vw, 5rem); line-height: 1; }
+.m3 .hero-surtitre { margin-bottom: 26px; font-family: 'Instrument Sans', sans-serif; letter-spacing: 0; }
+.m3 .hero h1 em { display: block; color: var(--gold-600); font-size: 1.08em; }
+.m3 .hero .lead { margin-top: 28px; max-width: 560px; font-size: 1.12rem; color: var(--ink-2); }
+.m3 .hero-actions { margin-top: 34px; }
+.m3 .hero-preuves { margin-top: 44px; display: grid; grid-template-columns: repeat(3, auto); justify-content: start; gap: 28px; font-size: 14.5px; color: var(--ink-2); }
+.m3 .hero-preuves .ic { color: var(--gold-600); }
+.m3 .embleme { max-width: 300px; }
+.m3 .embleme .emb-halo, .m3 .embleme .emb-pois { display: none; }
+.m3 .embleme .emb-bouclier { fill: #fff; stroke: var(--navy-900); stroke-width: 3; }
+.m3 .embleme .emb-a { stroke: var(--gold); }
+.m3 .embleme .emb-c1, .m3 .embleme .emb-c2 { stroke: var(--trait); stroke-opacity: 1; }
+.m3 main > section { padding-block: 100px; border-top: 1px solid var(--trait); }
+.m3 .alt { background: var(--gris); }
+.m3 .tete { display: grid; grid-template-columns: 1fr 1.6fr; gap: 12px 56px; align-items: start; margin-bottom: 52px; }
+.m3 .tete .surtitre { grid-row: span 2; padding-top: 10px; }
+.m3 .tete h2 { font-size: clamp(1.9rem, 3.4vw, 2.7rem); }
+.m3 .tete p:not(.surtitre) { color: var(--ink-2); }
+.m3 .tete-ligne { display: flex; }
+.m3 .stats { gap: 0; }
+.m3 .stat { padding: 0 32px; border-left: 1px solid var(--trait); }
+.m3 .stat:first-child { border-left: 0; padding-left: 0; }
+.m3 .stat-v { display: block; font-size: 3.4rem; font-weight: 600; letter-spacing: -.04em; color: var(--navy-900); line-height: 1; }
+.m3 .stat-l { display: block; margin-top: 14px; color: var(--ink-2); font-size: 15.5px; }
+.m3 .deux-col h2 { margin-top: 16px; font-size: clamp(1.9rem, 3.2vw, 2.6rem); }
+.m3 .deux-col p:not(.surtitre) { margin-top: 16px; color: var(--ink-2); }
+.m3 .deux-col .lien-fleche { margin-top: 20px; color: var(--navy-900); }
+.m3 .coches li { padding: 18px 0; border-top: 1px solid var(--trait); }
+.m3 .coches .ic { color: var(--gold-600); }
+.m3 .piliers { gap: 0; border-top: 1px solid var(--navy-900); }
+.m3 .pilier { padding: 30px 30px 0 0; color: inherit; }
+.m3 .pilier + .pilier { padding-left: 30px; border-left: 1px solid var(--trait); }
+.m3 .pilier .ic { font-size: 26px; color: var(--gold-600); }
+.m3 .pilier h3 { margin-top: 16px; font-size: 1.5rem; }
+.m3 .pilier p { margin-top: 10px; color: var(--ink-2); flex: 1; }
+.m3 .pilier .lien-fleche, .m3 .carte .lien-fleche { margin-top: 18px; color: var(--navy-900); font-weight: 500; }
+.m3 .cartes { gap: 0; border-top: 1px solid var(--trait); border-left: 1px solid var(--trait); }
+.m3 .carte { padding: 28px 24px; border-right: 1px solid var(--trait); border-bottom: 1px solid var(--trait); background: #fff; color: inherit; transition: background-color .15s; }
+.m3 .carte:hover { background: #FBFBFC; }
+.m3 .carte-ic { font-size: 22px; color: var(--gold-600); }
+.m3 .carte h3 { margin-top: 14px; font-size: 1.1rem; letter-spacing: -.01em; }
+.m3 .carte p { margin-top: 8px; font-size: 14.5px; color: var(--ink-2); flex: 1; }
+.m3 .gov-col { padding-top: 22px; border-top: 1px solid var(--navy-900); }
+.m3 .gov-n { font-family: 'Instrument Serif', serif; font-size: 2.2rem; line-height: 1; color: var(--gold-600); }
+.m3 .gov-col h3 { margin-top: 10px; font-size: 1.4rem; }
+.m3 .gov-col ul, .m3 .gov-col p { margin-top: 12px; color: var(--ink-2); font-size: 15.5px; }
+.m3 .gov-col .lien-fleche { margin-top: 16px; color: var(--navy-900); font-weight: 500; }
+.m3 .sombre { background: var(--gris); }
+.m3 .plan { padding: 34px 30px; background: #fff; border: 1px solid var(--trait); border-radius: 14px; }
+.m3 .plan-vedette { background: var(--navy-900); border-color: var(--navy-900); color: rgba(255, 255, 255, .78); }
+.m3 .plan-vedette h3, .m3 .plan-vedette .plan-prix strong { color: #fff; }
+.m3 .plan-tag { font-size: 13px; color: var(--gold-600); font-weight: 500; }
+.m3 .plan-vedette .plan-tag { color: var(--gold-light); }
+.m3 .plan h3 { margin-top: 8px; font-size: 1.5rem; }
+.m3 .plan-pour { margin-top: 6px; font-size: 15px; color: var(--ink-2); }
+.m3 .plan-vedette .plan-pour { color: rgba(255, 255, 255, .7); }
+.m3 .plan-prix { margin: 22px 0; font-size: 15px; color: var(--muted); }
+.m3 .plan-vedette .plan-prix { color: rgba(255, 255, 255, .6); }
+.m3 .plan-prix strong { font-size: 2.3rem; font-weight: 600; letter-spacing: -.04em; color: var(--navy-900); }
+.m3 .plan ul { font-size: 15px; }
+.m3 .plan li .ic { color: var(--gold-600); }
+.m3 .plan-vedette li .ic { color: var(--gold-light); }
+.m3 .plans + .centre { margin-top: 44px; }
+.m3 .note-entree { margin-top: 16px; font-size: 15px; color: var(--ink-2); }
+.m3 .note-entree a { color: var(--navy-900); }
+.m3 .puce { padding: 12px 20px; border-radius: 8px; background: #fff; border: 1px solid var(--trait); color: var(--navy-900); font-weight: 500; }
+.m3 .puce:hover { border-color: var(--navy-900); }
+.m3 .pied-section { margin-top: 48px; padding: 26px 30px; border-radius: 14px; background: var(--gris); display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; font-size: 15.5px; color: var(--ink-2); }
+.m3 .pied-section a:not(.btn) { color: var(--navy-900); }
+.m3 .tete-ligne .lien-fleche { color: var(--navy-900); font-weight: 500; }
+.m3 .post { padding-top: 22px; border-top: 1px solid var(--navy-900); }
+.m3 .post .meta { font-size: 13.5px; color: var(--muted); }
+.m3 .post h3 { margin-top: 10px; font-size: 1.25rem; letter-spacing: -.015em; }
+.m3 .post p:not(.meta) { margin-top: 10px; font-size: 15px; color: var(--ink-2); flex: 1; }
+.m3 .post .lien-fleche { margin-top: 16px; color: var(--navy-900); font-weight: 500; }
+.m3 .faq .wrap { max-width: 1180px; }
+.m3 .faq-liste { gap: 0; border-top: 1px solid var(--trait); }
+.m3 .faq details { padding: 22px 0; border-bottom: 1px solid var(--trait); }
+.m3 .faq summary { font-size: 1.15rem; font-weight: 600; color: var(--navy-900); letter-spacing: -.01em; }
+.m3 .faq summary::after { color: var(--gold-600); }
+.m3 .faq details p { margin-top: 10px; max-width: 70ch; color: var(--ink-2); }
+.m3 .faq .centre { margin-top: 30px; text-align: left; }
+.m3 .faq .lien-fleche { color: var(--navy-900); font-weight: 500; }
+.m3 .bandeau-cta { padding-block: 72px; background: var(--navy-900); color: rgba(255, 255, 255, .75); }
+.m3 .bandeau-cta h2 { font-size: clamp(1.8rem, 3vw, 2.4rem); color: #fff; letter-spacing: -.025em; font-weight: 600; }
+.m3 .bandeau-cta p { margin-top: 8px; }
+.m3 .bandeau-cta .btn-or { background: var(--gold); color: var(--navy-950) !important; }
+.m3 .bandeau-cta .btn-clair { background: transparent; border-color: rgba(255, 255, 255, .35); color: #fff !important; }
+.m3 .pied { padding-block: 60px 26px; background: #fff; color: var(--ink-2); font-size: 15px; }
+.m3 .pied .marque-nom { color: var(--navy-900); font-weight: 600; }
+.m3 .pied h3 { font-size: 13px; font-weight: 600; color: var(--navy-900); margin-bottom: 14px; letter-spacing: 0; }
+.m3 .pied a:hover { color: var(--navy-900); }
+.m3 .promesse { margin-top: 16px; max-width: 36ch; }
+.m3 .conf-note { margin-top: 14px; font-size: 14px; }
+.m3 .conf { display: inline-block; margin-right: 8px; padding: 2px 8px; border-radius: 6px; background: var(--gold-soft); color: var(--gold-600); font-size: 12px; font-weight: 600; }
+.m3 .pied-bas { margin-top: 44px; padding-top: 22px; border-top: 1px solid var(--trait); font-size: 13.5px; }
+
+/* ==========================================================================
+   4 · REGISTRE — les codes d'un acte : articles numérotés, notes en marge, petites capitales
+   ========================================================================== */
+.m4 { --papier: #F7F3EA; --papier-2: #FFFDF8; --trait: #D9D0BD; counter-reset: article; background: var(--papier); color: #1B2230; font-family: 'IBM Plex Sans', system-ui, sans-serif; font-size: 16.5px; line-height: 1.65; }
+.m4 h1, .m4 h2, .m4 h3 { font-family: 'Libre Caslon Text', Georgia, serif; font-weight: 400; color: var(--navy-900); line-height: 1.2; text-wrap: balance; }
+.m4 .alerte { background: var(--navy-900); color: rgba(255, 255, 255, .82); }
+.m4 .alerte a { color: var(--gold-light); }
+.m4 .entete { background: var(--papier); border-bottom: 3px double var(--trait); }
+.m4 .marque-nom { font-family: 'Libre Caslon Text', serif; font-size: 19px; color: var(--navy-900); }
+.m4 .marque-sous { color: var(--gold-600); font-variant: small-caps; text-transform: lowercase; letter-spacing: .14em; font-size: 12.5px; }
+.m4 .nav a { color: #3A4252; font-size: 14.5px; }
+.m4 .nav a:hover { color: var(--navy-900); text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--gold); }
+.m4 .sous { background: var(--papier-2); border: 1px solid var(--trait); }
+.m4 .btn { padding: 12px 22px; border-radius: 0; font-weight: 500; font-size: 15px; border: 1px solid transparent; letter-spacing: .01em; }
+.m4 .btn-or { background: var(--navy-900); color: #fff !important; box-shadow: inset 0 -2px 0 var(--gold); }
+.m4 .btn-or:hover { background: var(--navy-700); }
+.m4 .btn-clair, .m4 .btn-fantome { border-color: var(--navy-900); color: var(--navy-900) !important; }
+.m4 .btn-clair:hover, .m4 .btn-fantome:hover { background: var(--papier-2); }
+.m4 .btn-sombre { background: var(--navy-900); color: #fff !important; }
+.m4 .burger { color: var(--navy-900); border-radius: 0; }
+.m4.menu-ouvert .nav { background: var(--papier); border-bottom: 1px solid var(--trait); }
+.m4 .surtitre, .m4 .hero-surtitre { font-variant: small-caps; text-transform: lowercase; letter-spacing: .12em; font-size: 15px; color: var(--gold-600); font-weight: 500; }
+.m4 .hero { padding-block: 72px 80px; }
+.m4 .hero-texte { padding: 44px 0; border-block: 3px double var(--trait); }
+.m4 .hero h1 { font-size: clamp(2.3rem, 4.6vw, 3.8rem); }
+.m4 .hero-surtitre { margin-bottom: 14px; font-family: 'IBM Plex Sans', sans-serif; line-height: 1.4; }
+.m4 .hero h1 em { color: var(--gold-600); }
+.m4 .hero .lead { margin-top: 22px; max-width: 620px; font-size: 1.1rem; color: #3A4252; }
+.m4 .hero-actions { margin-top: 30px; }
+.m4 .hero-preuves { margin-top: 28px; display: grid; gap: 8px; font-size: 15px; color: #3A4252; }
+.m4 .hero-preuves .ic { color: var(--gold-600); }
+.m4 .embleme { max-width: 280px; }
+.m4 .embleme .emb-halo { display: none; }
+.m4 .embleme .emb-c2 { stroke: var(--gold-600); stroke-opacity: .6; stroke-width: 2; }
+.m4 .embleme .emb-c1 { stroke: var(--gold-600); stroke-opacity: .5; stroke-dasharray: 1 6; stroke-width: 2; }
+.m4 .embleme .emb-pois { display: none; }
+.m4 main > section { counter-increment: article; padding-block: 72px; border-top: 1px solid var(--trait); }
+.m4 main > section.hero { counter-increment: none; border-top: 0; }
+.m4 main > section > .wrap { display: grid; grid-template-columns: 200px 1fr; gap: 0 48px; }
+.m4 main > section.hero > .wrap { display: grid; grid-template-columns: 1.25fr .75fr; gap: 48px; }
+.m4 main > section.hero > .wrap > * { grid-column: auto; }
+.m4 main > section.hero > .wrap::before { content: none; }
+.m4 main > section > .wrap > * { grid-column: 2; }
+.m4 main > section > .wrap::before { content: "Art. " counter(article); grid-column: 1; grid-row: 1 / span 20; padding-top: 6px; font-family: 'Libre Caslon Text', serif; font-style: italic; font-size: 1.05rem; color: var(--gold-600); border-top: 1px solid var(--gold); align-self: start; }
+.m4 .alt { background: var(--papier-2); }
+.m4 .tete { margin-bottom: 36px; max-width: 760px; }
+.m4 .tete h2 { margin-top: 6px; font-size: clamp(1.7rem, 3vw, 2.4rem); }
+.m4 .tete p:not(.surtitre) { margin-top: 12px; color: #3A4252; }
+.m4 .stats { gap: 0; border-top: 1px solid var(--navy-900); border-bottom: 1px solid var(--trait); }
+.m4 .stat { padding: 22px 24px 22px 0; }
+.m4 .stat + .stat { padding-left: 24px; border-left: 1px solid var(--trait); }
+.m4 .stat-v { display: block; font-family: 'Libre Caslon Text', serif; font-size: 2.6rem; color: var(--navy-900); line-height: 1; }
+.m4 .stat-l { display: block; margin-top: 10px; font-size: 15px; color: #3A4252; }
+.m4 .deux-col { grid-template-columns: 1fr; gap: 28px; }
+.m4 .deux-col h2 { margin-top: 6px; font-size: clamp(1.7rem, 3vw, 2.4rem); }
+.m4 .deux-col p:not(.surtitre) { margin-top: 14px; max-width: 72ch; color: #3A4252; }
+.m4 .deux-col .lien-fleche { margin-top: 16px; color: var(--navy-900); text-decoration: underline; text-decoration-color: var(--gold); text-underline-offset: 4px; }
+.m4 .coches { grid-template-columns: 1fr 1fr; gap: 0 32px; counter-reset: alinea; }
+.m4 .coches li { counter-increment: alinea; padding: 12px 0; border-top: 1px dotted var(--trait); }
+.m4 .coches .ic { display: none; }
+.m4 .coches li::before { content: counter(alinea) "°"; flex: none; width: 26px; font-family: 'Libre Caslon Text', serif; color: var(--gold-600); }
+.m4 .piliers, .m4 .gov, .m4 .posts { gap: 0; }
+.m4 .pilier, .m4 .gov-col, .m4 .post { padding: 4px 26px 0; border-left: 1px solid var(--trait); color: inherit; }
+.m4 .pilier:first-child, .m4 .gov-col:first-child, .m4 .post:first-child { padding-left: 0; border-left: 0; }
+.m4 .pilier .ic { font-size: 22px; color: var(--gold-600); }
+.m4 .pilier h3, .m4 .gov-col h3 { margin-top: 10px; font-size: 1.45rem; }
+.m4 .pilier p { margin-top: 8px; color: #3A4252; flex: 1; font-size: 15.5px; }
+.m4 .lien-fleche { color: var(--navy-900); text-decoration: underline; text-decoration-color: var(--gold); text-underline-offset: 4px; }
+.m4 .pilier .lien-fleche, .m4 .carte .lien-fleche, .m4 .gov-col .lien-fleche, .m4 .post .lien-fleche { margin-top: 14px; }
+.m4 .cartes { grid-template-columns: 1fr 1fr; gap: 0 36px; }
+.m4 .carte { flex-direction: row; flex-wrap: wrap; gap: 0 14px; padding: 18px 0; border-top: 1px solid var(--trait); color: inherit; }
+.m4 .carte-ic { font-size: 20px; color: var(--gold-600); padding-top: 4px; }
+.m4 .carte h3 { flex: 1; font-size: 1.12rem; }
+.m4 .carte p { flex-basis: 100%; margin-top: 6px; padding-left: 34px; font-size: 15px; color: #3A4252; }
+.m4 .carte .lien-fleche { padding-left: 34px; margin-top: 8px; font-size: 14.5px; }
+.m4 .gov-n { font-family: 'Libre Caslon Text', serif; font-style: italic; color: var(--gold-600); font-size: 1.1rem; }
+.m4 .gov-n::before { content: "§ "; }
+.m4 .gov-col ul, .m4 .gov-col p { margin-top: 10px; font-size: 15px; color: #3A4252; }
+.m4 .gov-col li { padding-left: 16px; position: relative; }
+.m4 .gov-col li::before { content: "–"; position: absolute; left: 0; color: var(--gold-600); }
+.m4 .sombre { background: var(--navy-900); color: rgba(255, 255, 255, .8); }
+.m4 .sombre > .wrap::before { color: var(--gold-light); border-color: var(--gold-light); }
+.m4 .sombre .surtitre { color: var(--gold-light); }
+.m4 .sombre .tete h2 { color: #fff; }
+.m4 .sombre .tete p:not(.surtitre) { color: rgba(255, 255, 255, .7); }
+.m4 .plans { gap: 0; border-top: 1px solid rgba(201, 165, 76, .5); }
+.m4 .plan { padding: 26px 26px 0; border-left: 1px solid rgba(255, 255, 255, .12); }
+.m4 .plan:first-child { padding-left: 0; border-left: 0; }
+.m4 .plan-vedette h3 { color: var(--gold-light); }
+.m4 .plan-tag { font-variant: small-caps; text-transform: lowercase; letter-spacing: .12em; color: var(--gold-light); }
+.m4 .plan h3 { margin-top: 6px; font-size: 1.6rem; color: #fff; }
+.m4 .plan-pour { margin-top: 6px; font-size: 15px; color: rgba(255, 255, 255, .7); }
+.m4 .plan-prix { margin: 18px 0; font-size: 15px; color: rgba(255, 255, 255, .65); }
+.m4 .plan-prix strong { font-family: 'Libre Caslon Text', serif; font-size: 2rem; font-weight: 400; color: #fff; }
+.m4 .plan ul { font-size: 15px; }
+.m4 .plan li .ic { color: var(--gold-light); }
+.m4 .sombre .centre { text-align: left; }
+.m4 .plans + .centre { margin-top: 36px; }
+.m4 .sombre .btn-or { background: var(--gold); color: var(--navy-950) !important; box-shadow: none; }
+.m4 .note-entree { margin-top: 14px; font-size: 15px; color: rgba(255, 255, 255, .7); }
+.m4 .note-entree a { color: var(--gold-light); }
+.m4 .puces { gap: 0; }
+.m4 .puce { padding: 6px 18px 6px 0; margin-right: 18px; border-right: 1px solid var(--trait); color: var(--navy-900); font-family: 'Libre Caslon Text', serif; font-size: 1.1rem; }
+.m4 .puce:last-child { border-right: 0; }
+.m4 .puce:hover { color: var(--gold-600); }
+.m4 .pied-section { margin-top: 32px; padding: 18px 22px; border: 1px solid var(--trait); background: var(--papier-2); display: grid; gap: 16px; justify-items: start; font-size: 15px; color: #3A4252; }
+.m4 .tete-ligne { display: flex; }
+.m4 .post .meta { font-size: 13.5px; color: var(--muted); font-variant: small-caps; }
+.m4 .post h3 { margin-top: 8px; font-size: 1.2rem; }
+.m4 .post p:not(.meta) { margin-top: 8px; font-size: 15px; color: #3A4252; flex: 1; }
+.m4 .faq-liste { gap: 0; max-width: 820px; }
+.m4 .faq details { padding: 16px 0; border-top: 1px solid var(--trait); }
+.m4 .faq summary { font-family: 'Libre Caslon Text', serif; font-size: 1.12rem; color: var(--navy-900); }
+.m4 .faq summary::after { color: var(--gold-600); }
+.m4 .faq details p { margin-top: 8px; color: #3A4252; }
+.m4 .faq .centre { margin-top: 26px; text-align: left; }
+.m4 .bandeau-cta { padding-block: 60px; background: var(--papier-2); border-top: 3px double var(--trait); }
+.m4 .bandeau-cta h2 { font-family: 'Libre Caslon Text', serif; font-size: clamp(1.6rem, 2.8vw, 2.1rem); color: var(--navy-900); }
+.m4 .bandeau-cta p { margin-top: 8px; color: #3A4252; }
+.m4 .pied { padding-block: 52px 24px; background: var(--navy-950); color: rgba(255, 255, 255, .66); font-size: 15px; }
+.m4 .pied .marque-nom { font-family: 'Libre Caslon Text', serif; color: var(--gold-light); }
+.m4 .pied h3 { font-family: 'IBM Plex Sans', sans-serif; font-variant: small-caps; text-transform: lowercase; letter-spacing: .12em; font-size: 15px; font-weight: 500; color: var(--gold); margin-bottom: 12px; }
+.m4 .pied a:hover { color: #fff; }
+.m4 .promesse { margin-top: 14px; max-width: 36ch; font-family: 'Libre Caslon Text', serif; font-style: italic; }
+.m4 .conf-note { margin-top: 14px; font-size: 14px; }
+.m4 .conf { display: inline-block; margin-right: 8px; padding: 1px 8px; border: 1.5px solid var(--gold); color: var(--gold-light); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; transform: rotate(-3deg); }
+.m4 .pied-bas { margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(255, 255, 255, .12); font-size: 13.5px; }
+
+/* ==========================================================================
+   5 · VEILLE — la plateforme en avant : radar discret, IBM Plex, cartes nettes
+   ========================================================================== */
+.m5 { --gris: #F3F5F8; --trait: #DFE3EA; background: #fff; color: var(--ink); font-family: 'IBM Plex Sans', system-ui, sans-serif; font-size: 16.5px; line-height: 1.6; }
+.m5 h1, .m5 h2, .m5 h3 { font-family: 'IBM Plex Serif', Georgia, serif; font-weight: 500; color: var(--navy-900); line-height: 1.15; text-wrap: balance; }
+.m5 .alerte { background: #030B1C; color: rgba(255, 255, 255, .8); font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; }
+.m5 .alerte a { color: var(--gold-light); }
+.m5 .entete { background: var(--navy-900); border-bottom: 1px solid rgba(255, 255, 255, .08); }
+.m5 .marque-nom { font-family: 'IBM Plex Serif', serif; font-size: 19px; color: #fff; }
+.m5 .marque-sous { font-family: 'IBM Plex Mono', monospace; color: var(--gold); letter-spacing: .12em; }
+.m5 .nav a { color: rgba(255, 255, 255, .78); font-size: 14.5px; }
+.m5 .nav a:hover { color: #fff; }
+.m5 .sous { background: #fff; border-radius: 8px; box-shadow: 0 18px 40px rgba(6, 18, 42, .3); }
+.m5 .sous a { color: var(--ink); }
+.m5 .sous a:hover { background: var(--gold-soft); }
+.m5 .btn { padding: 12px 22px; border-radius: 6px; font-weight: 500; font-size: 15px; border: 1px solid transparent; }
+.m5 .btn-or { background: var(--gold); color: var(--navy-950) !important; }
+.m5 .btn-or:hover { background: var(--gold-light); }
+.m5 .btn-clair, .m5 .btn-fantome { border-color: rgba(255, 255, 255, .35); color: #fff !important; }
+.m5 .btn-clair:hover, .m5 .btn-fantome:hover { background: rgba(255, 255, 255, .08); }
+.m5 .btn-sombre { background: var(--navy-900); color: #fff !important; }
+.m5 .burger { color: #fff; }
+.m5.menu-ouvert .nav { background: var(--navy-900); }
+.m5 .surtitre, .m5 .hero-surtitre { font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--gold-600); }
+.m5 .surtitre::before { content: "// "; opacity: .6; }
+.m5 .hero { padding-block: 72px 84px; color: rgba(255, 255, 255, .8); background: linear-gradient(rgba(255, 255, 255, .035) 1px, transparent 1px) 0 0 / 44px 44px, linear-gradient(90deg, rgba(255, 255, 255, .035) 1px, transparent 1px) 0 0 / 44px 44px, radial-gradient(60% 80% at 80% 50%, rgba(201, 165, 76, .1), transparent 70%), var(--navy-900); }
+.m5 .hero h1 { font-size: clamp(2.4rem, 4.8vw, 3.9rem); color: #fff; }
+.m5 .hero-surtitre { margin-bottom: 18px; color: var(--gold); font-family: 'IBM Plex Mono', monospace; }
+.m5 .hero h1 em { color: var(--gold-light); }
+.m5 .hero .lead { margin-top: 22px; max-width: 580px; font-size: 1.1rem; color: rgba(255, 255, 255, .72); }
+.m5 .hero-actions { margin-top: 32px; }
+.m5 .hero-preuves { margin-top: 34px; font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; letter-spacing: .03em; color: rgba(255, 255, 255, .7); }
+.m5 .hero-preuves li { padding: 7px 12px; border: 1px solid rgba(255, 255, 255, .14); border-radius: 6px; }
+.m5 .hero-preuves .ic { color: var(--gold); font-size: 16px; }
+.m5 .embleme { display: none; }
+.m5 .radar { display: block; }
+.m5 main > section { padding-block: 88px; }
+.m5 .alt { background: var(--gris); }
+.m5 .tete { max-width: 760px; margin-bottom: 44px; }
+.m5 .tete h2 { margin-top: 12px; font-size: clamp(1.8rem, 3.2vw, 2.6rem); }
+.m5 .tete p:not(.surtitre) { margin-top: 12px; color: var(--ink-2); }
+.m5 .stat { padding: 26px; border: 1px solid var(--trait); border-radius: 10px; }
+.m5 .stat-v { display: block; font-family: 'IBM Plex Mono', monospace; font-size: 2.8rem; font-weight: 500; color: var(--navy-900); line-height: 1; letter-spacing: -.03em; }
+.m5 .stat-l { display: block; margin-top: 14px; color: var(--ink-2); font-size: 15px; }
+.m5 .stat::before { content: ""; display: block; width: 32px; height: 3px; margin-bottom: 18px; background: var(--gold); }
+.m5 .deux-col h2 { margin-top: 12px; font-size: clamp(1.8rem, 3vw, 2.5rem); }
+.m5 .deux-col p:not(.surtitre) { margin-top: 14px; color: var(--ink-2); }
+.m5 .deux-col .lien-fleche { margin-top: 18px; color: var(--navy-700); }
+.m5 .coches li { padding: 16px 18px; background: #fff; border: 1px solid var(--trait); border-radius: 10px; }
+.m5 .coches .ic { color: var(--navy-700); }
+.m5 .pilier, .m5 .carte { padding: 28px 24px; background: #fff; border: 1px solid var(--trait); border-radius: 10px; color: inherit; transition: border-color .15s, box-shadow .15s; }
+.m5 .pilier:hover, .m5 .carte:hover { border-color: var(--navy-700); box-shadow: 0 12px 28px -18px rgba(6, 18, 42, .45); }
+.m5 .pilier .ic, .m5 .carte-ic { display: grid; place-items: center; color: var(--gold-light); }
+.m5 .pilier > .ic { width: 46px; height: 46px; padding: 11px; border-radius: 8px; background: var(--navy-900); }
+.m5 .carte-ic { width: 40px; height: 40px; border-radius: 8px; background: var(--navy-900); font-size: 20px; }
+.m5 .pilier h3 { margin-top: 18px; font-size: 1.45rem; }
+.m5 .pilier p, .m5 .carte p { margin-top: 8px; color: var(--ink-2); flex: 1; font-size: 15px; }
+.m5 .pilier .lien-fleche, .m5 .carte .lien-fleche { margin-top: 16px; color: var(--navy-700); font-size: 14.5px; }
+.m5 .carte h3 { margin-top: 16px; font-size: 1.12rem; }
+.m5 .gov-col { padding: 26px; border-left: 3px solid var(--gold); background: var(--gris); border-radius: 0 10px 10px 0; }
+.m5 .gov-n { font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: var(--gold-600); }
+.m5 .gov-n::before { content: "0"; }
+.m5 .gov-col h3 { margin-top: 8px; font-size: 1.35rem; }
+.m5 .gov-col ul, .m5 .gov-col p { margin-top: 10px; color: var(--ink-2); font-size: 15px; }
+.m5 .gov-col li::before { content: "› "; color: var(--gold-600); }
+.m5 .gov-col .lien-fleche { margin-top: 14px; color: var(--navy-700); font-size: 14.5px; }
+.m5 .alt .gov-col { background: #fff; }
+.m5 .sombre { background: var(--navy-900); color: rgba(255, 255, 255, .78); }
+.m5 .sombre .tete h2 { color: #fff; }
+.m5 .sombre .tete p:not(.surtitre) { color: rgba(255, 255, 255, .7); }
+.m5 .sombre .surtitre { color: var(--gold); }
+.m5 .plan { padding: 30px 26px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, .12); background: rgba(255, 255, 255, .03); }
+.m5 .plan-vedette { background: #fff; color: var(--ink-2); border-color: #fff; }
+.m5 .plan-tag { font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--gold); }
+.m5 .plan-vedette .plan-tag { color: var(--gold-600); }
+.m5 .plan h3 { margin-top: 8px; font-size: 1.6rem; color: #fff; }
+.m5 .plan-vedette h3 { color: var(--navy-900); }
+.m5 .plan-pour { margin-top: 6px; font-size: 15px; }
+.m5 .plan-prix { margin: 20px 0; padding-block: 12px; border-block: 1px dashed rgba(255, 255, 255, .18); font-size: 14px; }
+.m5 .plan-vedette .plan-prix { border-color: var(--trait); }
+.m5 .plan-prix strong { font-family: 'IBM Plex Mono', monospace; font-size: 1.9rem; font-weight: 500; color: #fff; letter-spacing: -.03em; }
+.m5 .plan-vedette .plan-prix strong { color: var(--navy-900); }
+.m5 .plan ul { font-size: 14.5px; }
+.m5 .plan li .ic { color: var(--gold); }
+.m5 .plan-vedette li .ic { color: var(--gold-600); }
+.m5 .plans + .centre { margin-top: 40px; }
+.m5 .note-entree { margin-top: 16px; font-size: 15px; color: rgba(255, 255, 255, .7); }
+.m5 .note-entree a { color: var(--gold-light); }
+.m5 .puce { padding: 10px 16px; border-radius: 6px; background: #fff; border: 1px solid var(--trait); color: var(--navy-900); font-size: 15px; }
+.m5 .puce::before { content: "#"; margin-right: 6px; font-family: 'IBM Plex Mono', monospace; color: var(--gold-600); }
+.m5 .puce:hover { border-color: var(--navy-700); }
+.m5 .pied-section { margin-top: 40px; padding: 22px 24px; border: 1px solid var(--trait); border-left: 3px solid var(--navy-900); border-radius: 0 10px 10px 0; display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; font-size: 15px; color: var(--ink-2); }
+.m5 .pied-section a:not(.btn) { color: var(--navy-700); }
+.m5 .tete-ligne .lien-fleche { color: var(--navy-700); }
+.m5 .post { padding: 24px; background: #fff; border: 1px solid var(--trait); border-radius: 10px; }
+.m5 .post .meta { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--muted); }
+.m5 .post h3 { margin-top: 10px; font-size: 1.18rem; }
+.m5 .post p:not(.meta) { margin-top: 8px; font-size: 15px; color: var(--ink-2); flex: 1; }
+.m5 .post .lien-fleche { margin-top: 14px; color: var(--navy-700); font-size: 14.5px; }
+.m5 .faq .wrap { max-width: 860px; }
+.m5 .faq details { padding: 18px 22px; border: 1px solid var(--trait); border-radius: 10px; }
+.m5 .faq details[open] { border-color: var(--navy-700); }
+.m5 .faq summary { font-family: 'IBM Plex Serif', serif; font-size: 1.1rem; font-weight: 500; color: var(--navy-900); }
+.m5 .faq summary::after { color: var(--gold-600); font-family: 'IBM Plex Mono', monospace; }
+.m5 .faq details p { margin-top: 10px; color: var(--ink-2); font-size: 15.5px; }
+.m5 .faq .centre { margin-top: 28px; }
+.m5 .faq .lien-fleche { color: var(--navy-700); }
+.m5 .bandeau-cta { padding-block: 64px; background: var(--navy-950); color: rgba(255, 255, 255, .75); }
+.m5 .bandeau-cta h2 { font-family: 'IBM Plex Serif', serif; font-size: clamp(1.7rem, 2.8vw, 2.2rem); color: #fff; }
+.m5 .bandeau-cta p { margin-top: 8px; }
+.m5 .pied { padding-block: 56px 26px; background: var(--navy-950); color: rgba(255, 255, 255, .62); font-size: 15px; border-top: 1px solid rgba(255, 255, 255, .08); }
+.m5 .pied .marque-nom { font-family: 'IBM Plex Serif', serif; color: #fff; }
+.m5 .pied h3 { font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
+.m5 .pied a:hover { color: #fff; }
+.m5 .promesse { margin-top: 16px; max-width: 36ch; }
+.m5 .conf-note { margin-top: 14px; font-size: 14px; }
+.m5 .conf { display: inline-block; margin-right: 8px; padding: 2px 8px; border-radius: 4px; background: rgba(201, 165, 76, .15); color: var(--gold-light); font-family: 'IBM Plex Mono', monospace; font-size: 11px; text-transform: uppercase; }
+.m5 .pied-bas { margin-top: 44px; padding-top: 22px; border-top: 1px solid rgba(255, 255, 255, .1); font-size: 13px; font-family: 'IBM Plex Mono', monospace; }
+
+/* ==========================================================================
+   6 · MONOGRAMME — Bodoni, grand emblème en filigrane, alternance ivoire / bleu nuit
+   ========================================================================== */
+.m6 { --ivoire: #FAF7F0; --trait: #E4DDCC; background: var(--ivoire); color: var(--ink); font-family: 'Figtree', system-ui, sans-serif; font-size: 16.5px; line-height: 1.65; }
+.m6 h1, .m6 h2, .m6 h3 { font-family: 'Bodoni Moda', 'Didot', Georgia, serif; font-weight: 500; color: var(--navy-900); line-height: 1.08; letter-spacing: -.01em; text-wrap: balance; }
+.m6 .alerte { background: var(--navy-950); color: rgba(255, 255, 255, .8); }
+.m6 .alerte a { color: var(--gold-light); }
+.m6 .entete { background: var(--navy-950); border-bottom: 1px solid rgba(201, 165, 76, .3); }
+.m6 .marque-nom { font-family: 'Bodoni Moda', serif; font-size: 20px; color: var(--gold-light); }
+.m6 .marque-sous { color: rgba(255, 255, 255, .5); }
+.m6 .nav a { color: rgba(255, 255, 255, .82); font-size: 14.5px; }
+.m6 .nav a:hover { color: var(--gold-light); }
+.m6 .sous { background: var(--ivoire); box-shadow: 0 18px 40px rgba(6, 18, 42, .3); }
+.m6 .sous a { color: var(--ink); }
+.m6 .btn { padding: 13px 24px; border-radius: 0; font-weight: 500; font-size: 15px; letter-spacing: .04em; border: 1px solid transparent; }
+.m6 .btn-or { background: var(--gold); color: var(--navy-950) !important; }
+.m6 .btn-or:hover { background: var(--gold-light); }
+.m6 .btn-clair, .m6 .btn-fantome { border-color: rgba(228, 205, 138, .55); color: var(--gold-light) !important; }
+.m6 .btn-clair:hover, .m6 .btn-fantome:hover { background: rgba(228, 205, 138, .1); }
+.m6 .btn-sombre { background: var(--navy-900); color: #fff !important; }
+.m6 .burger { color: var(--gold-light); border-radius: 0; }
+.m6.menu-ouvert .nav { background: var(--navy-950); }
+.m6 .surtitre, .m6 .hero-surtitre { font-size: 12px; font-weight: 600; letter-spacing: .26em; text-transform: uppercase; color: var(--gold-600); }
+.m6 .hero { position: relative; overflow: hidden; padding-block: 90px 100px; background: var(--navy-950); color: rgba(255, 255, 255, .78); }
+.m6 .hero-grille { grid-template-columns: 1fr; }
+.m6 .hero-art { position: absolute; right: -80px; top: 50%; translate: 0 -50%; width: 640px; opacity: .1; pointer-events: none; }
+.m6 .embleme { max-width: none; }
+.m6 .hero-texte { position: relative; display: grid; grid-template-columns: 1.3fr 1fr; gap: 24px 60px; align-items: end; }
+.m6 .hero h1 { grid-column: 1 / -1; font-size: clamp(2.8rem, 6.6vw, 6rem); line-height: .98; color: #F6EFDD; font-weight: 600; }
+.m6 .hero-surtitre { margin-bottom: 26px; color: var(--gold); }
+.m6 .hero h1 em { color: var(--gold-light); }
+.m6 .hero .lead { grid-column: 1; font-size: 1.12rem; max-width: 560px; }
+.m6 .hero-actions { grid-column: 2; grid-row: 2; justify-content: flex-end; }
+.m6 .hero-preuves { grid-column: 1 / -1; margin-top: 18px; padding-top: 22px; border-top: 1px solid rgba(201, 165, 76, .3); font-size: 14.5px; }
+.m6 .hero-preuves .ic { color: var(--gold); }
+.m6 main > section { padding-block: 96px; }
+.m6 .alt { background: #fff; }
+.m6 .tete { max-width: 800px; margin-bottom: 50px; }
+.m6 .tete h2 { margin-top: 14px; font-size: clamp(2.1rem, 4vw, 3.3rem); }
+.m6 .tete p:not(.surtitre) { margin-top: 14px; color: var(--ink-2); }
+.m6 .stats { gap: 0; }
+.m6 .stat { padding: 0 34px; border-left: 1px solid var(--trait); }
+.m6 .stat:first-child { padding-left: 0; border-left: 0; }
+.m6 .stat-v { display: block; font-family: 'Bodoni Moda', serif; font-size: 4.4rem; font-weight: 400; line-height: 1; color: var(--navy-900); }
+.m6 .stat-l { display: block; margin-top: 14px; color: var(--ink-2); }
+.m6 .deux-col h2 { margin-top: 14px; font-size: clamp(2rem, 3.6vw, 2.9rem); }
+.m6 .deux-col p:not(.surtitre) { margin-top: 16px; color: var(--ink-2); }
+.m6 .deux-col .lien-fleche { margin-top: 20px; color: var(--navy-900); }
+.m6 .constat { background: var(--navy-900); color: rgba(255, 255, 255, .78); }
+.m6 .constat h2 { color: #F6EFDD; }
+.m6 .constat .surtitre { color: var(--gold); }
+.m6 .constat .deux-col p:not(.surtitre) { color: rgba(255, 255, 255, .72); }
+.m6 .constat strong { color: #fff; }
+.m6 .constat .lien-fleche { color: var(--gold-light); }
+.m6 .coches li { padding: 16px 0; border-bottom: 1px solid var(--trait); }
+.m6 .constat .coches li { border-color: rgba(201, 165, 76, .22); }
+.m6 .coches .ic { color: var(--gold); }
+.m6 .piliers { gap: 0; }
+.m6 .pilier { padding: 10px 34px 0; border-left: 1px solid var(--trait); color: inherit; }
+.m6 .pilier:first-child { padding-left: 0; border-left: 0; }
+.m6 .pilier .ic { font-size: 26px; color: var(--gold-600); }
+.m6 .pilier h3 { margin-top: 16px; font-size: 2.1rem; font-style: italic; }
+.m6 .pilier p { margin-top: 10px; color: var(--ink-2); flex: 1; }
+.m6 .pilier .lien-fleche, .m6 .carte .lien-fleche { margin-top: 16px; color: var(--navy-900); }
+.m6 .cartes { gap: 1px; background: var(--trait); border: 1px solid var(--trait); }
+.m6 .carte { padding: 30px 24px; background: #fff; color: inherit; transition: background-color .2s; }
+.m6 .carte:hover { background: var(--ivoire); }
+.m6 .carte-ic { font-size: 22px; color: var(--gold-600); }
+.m6 .carte h3 { margin-top: 14px; font-size: 1.28rem; }
+.m6 .carte p { margin-top: 8px; font-size: 15px; color: var(--ink-2); flex: 1; }
+.m6 .gov-col { padding-top: 6px; }
+.m6 .gov-n { display: block; font-family: 'Bodoni Moda', serif; font-size: 4.6rem; font-weight: 400; line-height: .9; color: var(--gold); }
+.m6 .gov-col h3 { margin-top: 12px; font-size: 1.8rem; }
+.m6 .gov-col ul, .m6 .gov-col p { margin-top: 12px; color: var(--ink-2); font-size: 15.5px; }
+.m6 .gov-col li { padding-bottom: 8px; border-bottom: 1px solid var(--trait); }
+.m6 .gov-col .lien-fleche { margin-top: 16px; color: var(--navy-900); }
+.m6 .sombre { background: var(--navy-950); color: rgba(255, 255, 255, .78); }
+.m6 .sombre h2, .m6 .sombre h3 { color: #F6EFDD; }
+.m6 .sombre .surtitre { color: var(--gold); }
+.m6 .sombre .tete p:not(.surtitre) { color: rgba(255, 255, 255, .7); }
+.m6 .plans { gap: 0; border-top: 1px solid rgba(201, 165, 76, .35); border-bottom: 1px solid rgba(201, 165, 76, .35); }
+.m6 .plan { padding: 34px 30px; border-left: 1px solid rgba(201, 165, 76, .2); }
+.m6 .plan:first-child { border-left: 0; }
+.m6 .plan-vedette { background: rgba(201, 165, 76, .08); }
+.m6 .plan-tag { font-size: 11.5px; letter-spacing: .22em; text-transform: uppercase; color: var(--gold); }
+.m6 .plan h3 { margin-top: 10px; font-size: 2.1rem; font-style: italic; }
+.m6 .plan-pour { margin-top: 6px; font-size: 15px; color: rgba(255, 255, 255, .7); }
+.m6 .plan-prix { margin: 22px 0; font-size: 15px; color: rgba(255, 255, 255, .6); }
+.m6 .plan-prix strong { font-family: 'Bodoni Moda', serif; font-size: 2.6rem; font-weight: 400; color: #fff; }
+.m6 .plan ul { font-size: 15px; }
+.m6 .plan li .ic { color: var(--gold); }
+.m6 .plans + .centre { margin-top: 44px; }
+.m6 .note-entree { margin-top: 16px; font-size: 15px; color: rgba(255, 255, 255, .7); }
+.m6 .note-entree a { color: var(--gold-light); }
+.m6 .marches { background: var(--navy-900); }
+.m6 .marches h2 { color: #F6EFDD; }
+.m6 .marches .surtitre { color: var(--gold); }
+.m6 .puce { padding: 12px 22px; border: 1px solid rgba(201, 165, 76, .45); color: #F6EFDD; font-family: 'Bodoni Moda', serif; font-size: 1.12rem; font-style: italic; }
+.m6 .puce:hover { background: rgba(201, 165, 76, .1); }
+.m6 .pied-section { margin-top: 44px; padding-top: 28px; border-top: 1px solid var(--trait); display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; font-size: 15.5px; color: var(--ink-2); }
+.m6 .pied-section a:not(.btn) { color: var(--navy-900); }
+.m6 .tete-ligne .lien-fleche { color: var(--navy-900); }
+.m6 .post { padding-top: 22px; border-top: 2px solid var(--navy-900); }
+.m6 .post .meta { font-size: 13px; color: var(--muted); letter-spacing: .04em; }
+.m6 .post h3 { margin-top: 10px; font-size: 1.4rem; }
+.m6 .post p:not(.meta) { margin-top: 10px; font-size: 15px; color: var(--ink-2); flex: 1; }
+.m6 .post .lien-fleche { margin-top: 16px; color: var(--navy-900); }
+.m6 .faq .wrap { max-width: 860px; }
+.m6 .faq-liste { gap: 0; }
+.m6 .faq details { padding: 22px 0; border-bottom: 1px solid var(--trait); }
+.m6 .faq summary { font-family: 'Bodoni Moda', serif; font-size: 1.35rem; color: var(--navy-900); }
+.m6 .faq summary::after { color: var(--gold-600); }
+.m6 .faq details p { margin-top: 10px; color: var(--ink-2); }
+.m6 .faq .centre { margin-top: 30px; }
+.m6 .faq .lien-fleche { color: var(--navy-900); }
+.m6 .bandeau-cta { padding-block: 72px; background: var(--gold-soft); border-top: 1px solid var(--trait); }
+.m6 .bandeau-cta h2 { font-family: 'Bodoni Moda', serif; font-size: clamp(1.8rem, 3.2vw, 2.5rem); color: var(--navy-900); }
+.m6 .bandeau-cta p { margin-top: 8px; color: var(--ink-2); }
+.m6 .bandeau-cta .btn-or { background: var(--navy-900); color: #fff !important; }
+.m6 .bandeau-cta .btn-clair { border-color: var(--navy-900); color: var(--navy-900) !important; }
+.m6 .pied { padding-block: 60px 26px; background: var(--navy-950); color: rgba(255, 255, 255, .64); font-size: 15px; }
+.m6 .pied .marque-nom { font-family: 'Bodoni Moda', serif; color: var(--gold-light); font-size: 24px; }
+.m6 .pied h3 { font-family: 'Figtree', sans-serif; font-size: 11.5px; font-weight: 600; letter-spacing: .24em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
+.m6 .pied a:hover { color: var(--gold-light); }
+.m6 .promesse { margin-top: 16px; max-width: 36ch; font-family: 'Bodoni Moda', serif; font-style: italic; font-size: 1.05rem; color: rgba(255, 255, 255, .78); }
+.m6 .conf-note { margin-top: 14px; font-size: 14px; }
+.m6 .conf { display: inline-block; margin-right: 8px; padding: 2px 9px; border: 1px solid var(--gold); color: var(--gold-light); font-size: 10.5px; letter-spacing: .2em; text-transform: uppercase; }
+.m6 .pied-bas { margin-top: 44px; padding-top: 22px; border-top: 1px solid rgba(201, 165, 76, .2); font-size: 13.5px; }
+
+@media (max-width: 860px) {
+    .m4 main > section.hero > .wrap { grid-template-columns: 1fr; }
+    .m3 .tete { grid-template-columns: 1fr; }
+    .m3 .tete .surtitre { grid-row: auto; }
+    .m3 .stat, .m6 .stat { padding: 22px 0; border-left: 0; border-top: 1px solid var(--trait); }
+    .m3 .stat:first-child, .m6 .stat:first-child { border-top: 0; }
+    .m3 .pilier + .pilier { padding-left: 0; border-left: 0; }
+    .m3 .hero-preuves { grid-template-columns: 1fr; }
+    .m4 main > section > .wrap { grid-template-columns: 1fr; }
+    .m4 main > section > .wrap > * { grid-column: 1; }
+    .m4 main > section > .wrap::before { grid-row: auto; margin-bottom: 18px; padding-top: 6px; width: 90px; }
+    .m4 .stat + .stat, .m4 .pilier, .m4 .gov-col, .m4 .post, .m4 .plan { padding-left: 0; border-left: 0; }
+    .m4 .coches, .m4 .cartes { grid-template-columns: 1fr; }
+    .m4 .pilier + .pilier, .m4 .gov-col + .gov-col, .m4 .post + .post, .m4 .plan + .plan { margin-top: 24px; }
+    .m6 .hero-texte { grid-template-columns: 1fr; }
+    .m6 .hero-actions { grid-column: 1; grid-row: auto; justify-content: flex-start; }
+    .m6 .pilier, .m6 .plan { padding-left: 0; border-left: 0; }
+    .m6 .pilier + .pilier { margin-top: 26px; }
+    .m6 .plan + .plan { border-top: 1px solid rgba(201, 165, 76, .2); }
+}
+
+/* ---- Sélecteur de maquette (hors maquette) ---- */
+.selecteur { position: fixed; z-index: 100; left: 50%; bottom: calc(14px + env(safe-area-inset-bottom, 0px)); translate: -50% 0; display: flex; align-items: center; gap: 6px; max-width: calc(100vw - 24px); padding: 6px; border-radius: 16px; background: rgba(8, 12, 22, .95); color: #fff; font: 500 13px/1.2 system-ui, -apple-system, 'Segoe UI', sans-serif; box-shadow: 0 16px 40px -12px rgba(0, 0, 0, .6); }
+.selecteur button { font: inherit; color: inherit; border: 0; cursor: pointer; border-radius: 11px; background: transparent; }
+.sel-fleche { width: 36px; height: 36px; font-size: 18px; }
+.sel-fleche:hover, .sel-choix button:hover { background: rgba(255, 255, 255, .1); }
+.sel-choix { display: flex; gap: 2px; }
+.sel-choix button { display: grid; gap: 2px; padding: 6px 12px; text-align: left; }
+.sel-choix button b { font-size: 13px; white-space: nowrap; }
+.sel-choix button span { font-size: 10.5px; opacity: .6; text-transform: uppercase; letter-spacing: .08em; white-space: nowrap; }
+.sel-choix button[aria-pressed="true"] { background: #E4CD8A; color: #06122A; }
+.selecteur :focus-visible { outline: 2px solid #E4CD8A; outline-offset: 2px; }
+.sel-actuel { display: none; padding: 0 8px; text-align: center; }
+.sel-actuel b { display: block; font-size: 13.5px; white-space: nowrap; }
+.sel-actuel span { font-size: 11px; opacity: .65; }
+@media (max-width: 1000px) { .sel-choix { display: none; } .sel-actuel { display: block; min-width: 180px; } }
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-flame" viewBox="0 0 24 24"><path d="M12 3s5 4.5 5 10a5 5 0 0 1-10 0c0-2.2 1-3.6 2-4.6 0 2 1 3 2 3 0-3.4 1-6.4 1-8.4z"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></symbol>
+    <symbol id="i-eyeoff" viewBox="0 0 24 24"><path d="M3 3l18 18M10.6 5.1A10 10 0 0 1 12 5c6.4 0 10 7 10 7a17 17 0 0 1-3.2 4M6.6 6.6A17 17 0 0 0 2 12s3.6 7 10 7a9.8 9.8 0 0 0 4.4-1"/></symbol>
+    <symbol id="i-scale" viewBox="0 0 24 24"><path d="M12 3v18M5 21h14M6 7h12"/><path d="m6 7-3 7a3 3 0 0 0 6 0zM18 7l-3 7a3 3 0 0 0 6 0z"/></symbol>
+    <symbol id="i-radar" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><path d="M12 12 19 5"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol>
+    <symbol id="i-audit" viewBox="0 0 24 24"><path d="M9 11l2 2 4-4"/><path d="M12 3 20 6v6c0 5-3.4 8.6-8 10-4.6-1.4-8-5-8-10V6z"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 20 6v6c0 5-3.4 8.6-8 10-4.6-1.4-8-5-8-10V6z"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 5 5L20 7"/></symbol>
+    <symbol id="i-team" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 14a6 6 0 0 1 3.5 6"/></symbol>
+    <symbol id="i-doc" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></symbol>
+    <symbol id="i-chip" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/></symbol>
+</svg>
+
+<div class="site m1" id="site">
+    <div class="alerte" role="note">
+        <div class="wrap alerte-in">
+            <span><span class="pouls" aria-hidden="true"></span> Crise en cours ? Notre cellule d'intervention répond 24h/24, 7j/7.</span>
+            <a href="#">Déclencher la cellule de crise</a>
+        </div>
+    </div>
+
+    <header class="entete">
+        <div class="wrap entete-in">
+            <a class="marque" href="#">
+                <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M32 6 52 14v15c0 13.5-8.5 24-20 28-11.5-4-20-14.5-20-28V14z" fill="rgba(201,165,76,.12)" stroke="#C9A54C" stroke-width="3" stroke-linejoin="round"/><path d="M23.5 40 32 20l8.5 20M26.6 33h10.8" fill="none" stroke="#C9A54C" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span><span class="marque-nom">Aegis Fama &amp; Doxa</span><span class="marque-sous">Capital réputationnel</span></span>
+            </a>
+            <button type="button" class="burger" id="burger" aria-expanded="false" aria-controls="nav"><span></span><b style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Menu</b></button>
+            <nav id="nav" class="nav" aria-label="Navigation principale">
+                <ul>
+                    <li class="sous-menu"><a href="#">Expertises</a>
+                        <ul class="sous">
+                            <li><a href="#">Gestion de crise</a></li><li><a href="#">Avis hostiles</a></li><li><a href="#">Droit à l'oubli</a></li><li><a href="#">Diffamation en ligne</a></li><li><a href="#">Veille e-réputation</a></li><li><a href="#">Dirigeants &amp; Comex</a></li><li><a href="#">Audit &amp; due diligence</a></li><li><a href="#">SEO Shield</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Approche</a></li>
+                    <li><a href="#">Offres</a></li>
+                    <li><a href="#">Secteurs</a></li>
+                    <li><a href="#">Ressources</a></li>
+                    <li><a href="#">Le cabinet</a></li>
+                    <li><a class="btn btn-fantome" href="#">Espace client</a></li>
+                    <li><a class="btn btn-or" href="#">Nous contacter</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="wrap hero-grille">
+                <div class="hero-texte">
+                    <h1><span class="hero-surtitre surtitre-h">Cabinet de conseil en e-réputation</span> La Protection du <em>Capital Réputationnel</em></h1>
+                    <p class="lead">Avocats et experts du numérique réunis pour détecter, contenir et faire retirer les attaques en ligne qui visent votre entreprise et ses dirigeants. Riposte engagée sous 2 heures, en toute confidentialité.</p>
+                    <div class="hero-actions">
+                        <a class="btn btn-or" href="#">Demander un échange confidentiel</a>
+                        <a class="btn btn-clair" href="#">Cellule de crise 24/7</a>
+                    </div>
+                    <ul class="hero-preuves">
+                        <li><svg class="ic"><use href="#i-radar"/></svg> Veille 24h/24</li>
+                        <li><svg class="ic"><use href="#i-clock"/></svg> Riposte engagée sous 2 heures</li>
+                        <li><svg class="ic"><use href="#i-lock"/></svg> Accord de confidentialité dès le premier échange</li>
+                    </ul>
+                </div>
+                <div class="hero-art" aria-hidden="true">
+                    <svg viewBox="0 0 420 420" class="embleme">
+                        <defs><radialGradient id="halo" cx="50%" cy="45%" r="55%"><stop offset="0" stop-color="#C9A54C" stop-opacity=".28"/><stop offset="1" stop-color="#C9A54C" stop-opacity="0"/></radialGradient></defs>
+                        <circle class="emb-halo" cx="210" cy="210" r="200" fill="url(#halo)"/>
+                        <circle class="emb-c1" cx="210" cy="210" r="170" fill="none" stroke="#C9A54C" stroke-opacity=".25" stroke-dasharray="2 8"/>
+                        <circle class="emb-c2" cx="210" cy="210" r="128" fill="none" stroke="#C9A54C" stroke-opacity=".35"/>
+                        <path class="emb-bouclier" d="M210 92 290 124v58c0 54-34 96-80 112-46-16-80-58-80-112v-58z" fill="#0B1B33" stroke="#C9A54C" stroke-width="5" stroke-linejoin="round"/>
+                        <path class="emb-a" d="M176 250 210 170l34 80M188.5 222h43" fill="none" stroke="#E4CD8A" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+                        <g class="emb-pois"><circle cx="380" cy="210" r="6" fill="#E4CD8A"/><circle cx="82" cy="110" r="4" fill="#E4CD8A" fill-opacity=".7"/><circle cx="120" cy="352" r="5" fill="#E4CD8A" fill-opacity=".6"/></g>
+                    </svg>
+                    <canvas class="radar" id="radar" width="840" height="840"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section class="pourquoi">
+            <div class="wrap">
+                <div class="tete">
+                    <p class="surtitre">Pourquoi maintenant</p>
+                    <h2>La perception est la nouvelle réalité</h2>
+                    <p>Un incident de réputation se propage en quelques minutes et peut détruire des années de confiance. Les dirigeants n'ont plus le luxe de l'improvisation.</p>
+                </div>
+                <div class="stats">
+                    <div class="stat"><span class="stat-v">24 h</span><span class="stat-l">Fenêtre critique avant qu'une crise numérique ne devienne difficilement réversible</span></div>
+                    <div class="stat"><span class="stat-v">3 mois</span><span class="stat-l">Délai pour agir en diffamation après une publication en ligne</span></div>
+                    <div class="stat"><span class="stat-v">0</span><span class="stat-l">Droit à l'erreur à l'ère de la viralité algorithmique</span></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="constat alt">
+            <div class="wrap deux-col">
+                <div>
+                    <p class="surtitre">Le constat</p>
+                    <h2>Trois terrains à tenir en même temps, un seul interlocuteur</h2>
+                    <p>Une atteinte à la réputation se joue simultanément sur le web, où tout va très vite, sur le terrain du droit, qui seul permet d'obtenir des retraits contraints et des réparations, et sur celui de la parole publique, où chaque mot engage. Quand ces compétences sont dispersées entre plusieurs prestataires, chaque heure de coordination profite à l'attaque.</p>
+                    <p><strong>Aegis Fama &amp; Doxa réunit experts du numérique et juristes au sein d'un guichet unique</strong>, confidentiel, qui parle directement le langage des comités de direction.</p>
+                    <a class="lien-fleche" href="#">Découvrir le cabinet</a>
+                </div>
+                <ul class="coches">
+                    <li><svg class="ic"><use href="#i-radar"/></svg><span><strong>Le numérique</strong> : détecter tôt, contenir la propagation, reprendre la première page de Google</span></li>
+                    <li><svg class="ic"><use href="#i-scale"/></svg><span><strong>Le droit</strong> : notifier, mettre en demeure, agir en justice dans les délais</span></li>
+                    <li><svg class="ic"><use href="#i-team"/></svg><span><strong>La parole</strong> : dire juste, au bon moment, sans aggraver votre exposition</span></li>
+                    <li><svg class="ic"><use href="#i-shield"/></svg><span><strong>Une seule équipe</strong> qui coordonne les trois, de la première alerte au dernier recours</span></li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="solution">
+            <div class="wrap">
+                <div class="tete">
+                    <p class="surtitre">Notre solution</p>
+                    <h2>Le bouclier intégral : détecter, neutraliser, réparer</h2>
+                </div>
+                <div class="piliers">
+                    <a class="pilier" href="#"><svg class="ic"><use href="#i-radar"/></svg><h3>Détecter</h3><p>Veille active, analyse des signaux faibles, surveillance algorithmique en temps réel.</p><span class="lien-fleche">Veille e-réputation</span></a>
+                    <a class="pilier" href="#"><svg class="ic"><use href="#i-shield"/></svg><h3>Neutraliser</h3><p>SEO Shield, modération d'urgence, traitement des contenus préjudiciables.</p><span class="lien-fleche">SEO Shield</span></a>
+                    <a class="pilier" href="#"><svg class="ic"><use href="#i-scale"/></svg><h3>Réparer</h3><p>Notifications de retrait, constats numériques, contentieux pénal et civil.</p><span class="lien-fleche">Diffamation en ligne</span></a>
+                </div>
+            </div>
+        </section>
+
+        <section class="expertises alt">
+            <div class="wrap">
+                <div class="tete">
+                    <p class="surtitre">Expertises</p>
+                    <h2>Une réponse à chaque menace</h2>
+                </div>
+                <div class="cartes">
+                    <a class="carte" href="#"><span class="carte-ic"><svg class="ic"><use href="#i-flame"/></svg></span><h3>Gestion de crise réputationnelle, 24 heures sur 24</h3><p>Cellule de crise e-réputation activable 24h/24 : riposte sous 2 heures, blocage juridique des contenus illicites, communication sous contrainte.</p><span class="lien-fleche">En savoir plus</span></a>
+                    <a class="carte" href="#"><span class="carte-ic"><svg class="ic"><use href="#i-star"/></svg></span><h3>Faux avis et avis hostiles : faire respecter les règles</h3><p>Faux avis et campagnes d'avis hostiles sur Google, Trustpilot ou Glassdoor : détection, signalement et notification juridique aux plateformes.</p><span class="lien-fleche">En savoir plus</span></a>
+                    <a class="carte" href="#"><span class="carte-ic"><svg class="ic"><use href="#i-eyeoff"/></svg></span><h3>Droit à l'oubli : faire déréférencer ce qui ne devrait plus vous suivre</h3><p>Faire déréférencer de Google et Bing des articles anciens, inexacts ou préjudiciables : dossier technique et juridique (RGPD, CJUE).</p><span class="lien-fleche">En savoir plus</span></a>
+                    <a class="carte" href="#"><span class="carte-ic"><svg class="ic"><use href="#i-scale"/></svg></span><h3>Diffamation en ligne : agir vite, et dans les règles</h3><p>Diffamation, injure, dénigrement en ligne : constat, notification LCEN à l'hébergeur, mise en demeure et action judiciaire. Délai de prescription de 3 mois.</p><span class="lien-fleche">En savoir plus</span></a>
+                    <a class="carte" href="#"><span class="carte-ic"><svg class="ic"><use href="#i-radar"/></svg></span><h3>Veille e-réputation : détecter avant que cela ne se voie</h3><p>Surveillance continue de la presse, des réseaux sociaux, des forums et des avis : signaux faibles, alertes immédiates et rapport mensuel.</p><span class="lien-fleche">En savoir plus</span></a>
+                    <a class="carte" href="#"><span class="carte-ic"><svg class="ic"><use href="#i-user"/></svg></span><h3>La réputation de vos dirigeants est un actif de l'entreprise</h3><p>E-réputation des dirigeants et du Comex : surveillance personnelle, données exposées, faux profils, personal branding et sécurisation VIP.</p><span class="lien-fleche">En savoir plus</span></a>
+                    <a class="carte" href="#"><span class="carte-ic"><svg class="ic"><use href="#i-audit"/></svg></span><h3>Due diligence réputationnelle : l'audit avant une opération</h3><p>Due diligence réputationnelle avant une levée de fonds, une fusion-acquisition ou une IPO : cartographie des risques et plan d'action daté.</p><span class="lien-fleche">En savoir plus</span></a>
+                    <a class="carte" href="#"><span class="carte-ic"><svg class="ic"><use href="#i-shield"/></svg></span><h3>SEO Shield : reprendre la maîtrise de votre page 1 Google</h3><p>Reprendre la maîtrise de la page 1 de Google : suivi des résultats sur votre nom, contenus d'autorité authentiques, déréférencement des URL éligibles.</p><span class="lien-fleche">En savoir plus</span></a>
+                </div>
+            </div>
+        </section>
+
+        <section class="gouvernance">
+            <div class="wrap">
+                <div class="tete">
+                    <p class="surtitre">Gouvernance de la réputation</p>
+                    <h2>Prévenir, guérir, sanctionner</h2>
+                </div>
+                <div class="gov">
+                    <div class="gov-col"><span class="gov-n">1</span><h3>Prévenir</h3><ul><li>Audits de vulnérabilité avant une levée de fonds, une fusion-acquisition ou une introduction en bourse</li><li>Chartes de gouvernance internes</li><li>Cartographie des risques réputationnels</li></ul><a class="lien-fleche" href="#">Audit et due diligence</a></div>
+                    <div class="gov-col"><span class="gov-n">2</span><h3>Guérir</h3><ul><li>Gestion de crise algorithmique</li><li>Traitement des avis frauduleux</li><li>Communication sous contrainte</li><li>Cellule d'intervention 24/7</li></ul><a class="lien-fleche" href="#">Gestion de crise</a></div>
+                    <div class="gov-col"><span class="gov-n">3</span><h3>Sanctionner</h3><ul><li>Procédures de droit à l'oubli</li><li>Poursuites pour diffamation, dénigrement et concurrence déloyale</li><li>Recours devant les juridictions compétentes</li></ul><a class="lien-fleche" href="#">Droit à l'oubli</a></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="offres sombre">
+            <div class="wrap">
+                <div class="tete">
+                    <p class="surtitre">Nos offres</p>
+                    <h2>Trois niveaux d'accompagnement</h2>
+                    <p>Un abonnement mensuel pour la veille et la prévention, des missions ponctuelles pour les urgences.</p>
+                </div>
+                <div class="plans">
+                    <div class="plan"><p class="plan-tag">Veille &amp; Alerte</p><h3>Aegis Sentinel</h3><p class="plan-pour">Pour surveiller et être prévenu avant les autres.</p><p class="plan-prix"><strong>2 500 €</strong> HT / mois</p><ul><li><svg class="ic"><use href="#i-check"/></svg> Veille stratégique web et réseaux sociaux, 24h/24</li><li><svg class="ic"><use href="#i-check"/></svg> Rapport de réputation mensuel</li><li><svg class="ic"><use href="#i-check"/></svg> Alerte immédiate sur les signaux faibles</li><li><svg class="ic"><use href="#i-check"/></svg> 2 heures de conseil juridique incluses par mois</li></ul></div>
+                    <div class="plan plan-vedette"><p class="plan-tag">Défense Proactive</p><h3>Aegis Shield</h3><p class="plan-pour">Pour défendre activement votre réputation.</p><p class="plan-prix"><strong>5 500 €</strong> HT / mois</p><ul><li><svg class="ic"><use href="#i-check"/></svg> Tout le pack Sentinel</li><li><svg class="ic"><use href="#i-check"/></svg> Stratégie de SEO Shielding</li><li><svg class="ic"><use href="#i-check"/></svg> Nettoyage et modération active des avis</li><li><svg class="ic"><use href="#i-check"/></svg> Retraits juridiques illimités (LCEN)</li><li><svg class="ic"><use href="#i-check"/></svg> 10 heures de conseil juridique incluses par mois</li></ul></div>
+                    <div class="plan"><p class="plan-tag">Souveraineté Totale</p><h3>Aegis Imperium</h3><p class="plan-pour">Pour les directions exposées et les situations sensibles.</p><p class="plan-prix"><strong>12 000 €</strong> HT / mois</p><ul><li><svg class="ic"><use href="#i-check"/></svg> Protection renforcée du Comex et des dirigeants</li><li><svg class="ic"><use href="#i-check"/></svg> Cellule de crise intégrée, prise en charge sous 15 minutes</li><li><svg class="ic"><use href="#i-check"/></svg> Personal branding et sécurisation VIP</li><li><svg class="ic"><use href="#i-check"/></svg> Expert digital et juriste dédiés</li></ul></div>
+                </div>
+                <p class="centre"><a class="btn btn-or" href="#">Comparer les offres</a></p>
+                <p class="centre note-entree">Pour commencer : le <a href="#">Diagnostic confidentiel</a>, 1 500 € HT prix fixe, livré en 5 jours ouvrés.</p>
+            </div>
+        </section>
+
+        <section class="technologie">
+            <div class="wrap deux-col">
+                <div>
+                    <p class="surtitre">Technologie</p>
+                    <h2>L'intelligence artificielle, sans compromis sur la confidentialité</h2>
+                    <p>Notre plateforme analyse en continu des milliers de contenus, détecte les attaques coordonnées et prépare les documents juridiques. Vos dossiers restent chiffrés, dans notre périmètre sécurisé : en mode souverain, aucune donnée n'est transmise à un service d'IA externe.</p>
+                    <a class="lien-fleche" href="#">Notre technologie</a>
+                </div>
+                <ul class="coches">
+                    <li><svg class="ic"><use href="#i-lock"/></svg><span><strong>Données chiffrées</strong> au repos, accès journalisés</span></li>
+                    <li><svg class="ic"><use href="#i-chip"/></svg><span><strong>Mode souverain</strong> : aucune donnée transmise à un service d'IA externe</span></li>
+                    <li><svg class="ic"><use href="#i-team"/></svg><span><strong>Validation humaine</strong> de chaque décision sensible</span></li>
+                    <li><svg class="ic"><use href="#i-doc"/></svg><span><strong>Relecture juridique</strong> par un second juriste avant tout envoi</span></li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="marches alt">
+            <div class="wrap">
+                <div class="tete">
+                    <p class="surtitre">Marchés</p>
+                    <h2>Là où le risque coûte le plus cher</h2>
+                </div>
+                <div class="puces">
+                    <a class="puce" href="#">Finance et gestion de patrimoine</a><a class="puce" href="#">Immobilier d'excellence</a><a class="puce" href="#">Santé</a><a class="puce" href="#">Luxe</a><a class="puce" href="#">ETI et scale-ups</a><a class="puce" href="#">Dirigeants et mandataires sociaux</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="premier-contact">
+            <div class="wrap">
+                <div class="tete">
+                    <p class="surtitre">Premier contact</p>
+                    <h2>Comment se passe le premier échange</h2>
+                    <p>Sans engagement, et sous le sceau de la confidentialité dès le premier message.</p>
+                </div>
+                <div class="gov etapes">
+                    <div class="gov-col"><span class="gov-n">1</span><h3>Vous exposez la situation</h3><p>Par le formulaire confidentiel ou par téléphone. Inutile d'entrer dans les détails sensibles à ce stade : quelques lignes suffisent.</p></div>
+                    <div class="gov-col"><span class="gov-n">2</span><h3>Un premier diagnostic</h3><p>Un consultant et un juriste analysent la situation avec vous, sous accord de non-divulgation si vous le souhaitez. Nous vous disons ce qui est possible, et ce qui ne l'est pas.</p></div>
+                    <div class="gov-col"><span class="gov-n">3</span><h3>Une proposition écrite</h3><p>Approche, calendrier et honoraires sont précisés par écrit avant tout démarrage. En cas d'urgence, la cellule de crise peut être activée immédiatement.</p></div>
+                </div>
+                <div class="pied-section">
+                    <p><strong>Ce que nous refusons de faire :</strong> faux avis, faux profils, faux sites, suppression de critiques légitimes, promesses de résultat. <a href="#">Nos principes</a></p>
+                    <a class="btn btn-sombre" href="#">Demander un échange confidentiel</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="ressources alt">
+            <div class="wrap">
+                <div class="tete tete-ligne">
+                    <div><p class="surtitre">Ressources</p><h2>Guides pratiques</h2></div>
+                    <a class="lien-fleche" href="#">Tous les guides</a>
+                </div>
+                <div class="posts">
+                    <article class="post"><p class="meta"><time datetime="2026-09-24">24 septembre 2026</time> · 6 min de lecture</p><h3><a href="#">Diffamation sur internet : que faire, et dans quels délais ?</a></h3><p>Définition, délai de trois mois, constat, notification à l'hébergeur, mise en demeure et action : les étapes à connaître.</p><a class="lien-fleche" href="#">Lire le guide</a></article>
+                    <article class="post"><p class="meta"><time datetime="2026-09-24">24 septembre 2026</time> · 5 min de lecture</p><h3><a href="#">Comment faire supprimer un avis Google illicite ?</a></h3><p>Ce que Google retire, comment signaler efficacement, les recours en cas de refus et les erreurs à éviter.</p><a class="lien-fleche" href="#">Lire le guide</a></article>
+                    <article class="post"><p class="meta"><time datetime="2026-09-24">24 septembre 2026</time> · 6 min de lecture</p><h3><a href="#">Droit à l'oubli : obtenir le déréférencement d'un article sur Google</a></h3><p>Qui peut en bénéficier, les critères de la CJUE, la procédure pas à pas et les recours en cas de refus.</p><a class="lien-fleche" href="#">Lire le guide</a></article>
+                </div>
+            </div>
+        </section>
+
+        <section class="faq">
+            <div class="wrap">
+                <div class="tete"><p class="surtitre">Questions fréquentes</p><h2>Vos questions</h2></div>
+                <div class="faq-liste">
+                    <details open><summary><h3>Qu'est-ce qu'un cabinet de conseil en e-réputation ?</h3></summary><p>C'est un cabinet qui surveille, protège et restaure la réputation en ligne d'une entreprise ou d'une personne. Aegis Fama &amp; Doxa a la particularité de réunir experts du numérique et juristes : nous agissons à la fois sur le terrain technique (veille, contenus, signalements) et sur le terrain légal (notifications, mises en demeure, actions).</p></details>
+                    <details><summary><h3>Pourquoi associer technique et droit ?</h3></summary><p>Parce qu'une atteinte à la réputation se joue sur les deux terrains à la fois. Les leviers techniques (veille, signalements, contenus) permettent d'agir en quelques heures ; les leviers juridiques (notifications, mises en demeure, actions) permettent d'obtenir des retraits contraints et des réparations. Coordonnés par une même équipe, ils se renforcent au lieu de se succéder.</p></details>
+                    <details><summary><h3>Travaillez-vous avec des particuliers ?</h3></summary><p>Nous accompagnons principalement des entreprises, leurs dirigeants et des personnalités exposées. N'hésitez pas à nous décrire votre situation.</p></details>
+                    <details><summary><h3>Pouvez-vous garantir la suppression d'un contenu ?</h3></summary><p>Non, et aucun cabinet sérieux ne le peut : la décision appartient à la plateforme, à l'éditeur ou au juge. Nous garantissons en revanche la rigueur de la démarche et la rapidité de notre intervention.</p></details>
+                </div>
+                <p class="centre"><a class="lien-fleche" href="#">Toutes les questions</a></p>
+            </div>
+        </section>
+    </main>
+
+    <section class="bandeau-cta">
+        <div class="wrap bandeau-cta-in">
+            <div>
+                <h2>Parlons de votre situation, en toute confidentialité</h2>
+                <p>Accord de non-divulgation dès le premier échange. Un consultant ou un juriste vous répond rapidement.</p>
+            </div>
+            <div class="bandeau-cta-actions">
+                <a class="btn btn-or" href="#">Demander un échange confidentiel</a>
+                <a class="btn btn-clair" href="#">Urgence 24/7</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="pied">
+        <div class="wrap pied-grille">
+            <div>
+                <a class="marque" href="#"><span class="marque-nom">Aegis Fama &amp; Doxa</span></a>
+                <p class="promesse">Allier l'action technologique immédiate à la force de frappe légale, pour protéger ce que vos bilans ne reflètent pas.</p>
+                <p class="conf-note"><span class="conf">Confidentiel</span> Accord de non-divulgation dès le premier échange.</p>
+            </div>
+            <div>
+                <h3>Expertises</h3>
+                <ul><li><a href="#">Gestion de crise</a></li><li><a href="#">Avis hostiles</a></li><li><a href="#">Droit à l'oubli</a></li><li><a href="#">Diffamation en ligne</a></li><li><a href="#">Veille e-réputation</a></li><li><a href="#">Dirigeants &amp; Comex</a></li><li><a href="#">Audit &amp; due diligence</a></li><li><a href="#">SEO Shield</a></li></ul>
+            </div>
+            <div>
+                <h3>Le cabinet</h3>
+                <ul><li><a href="#">Notre approche</a></li><li><a href="#">Nos offres</a></li><li><a href="#">Diagnostic confidentiel</a></li><li><a href="#">Secteurs</a></li><li><a href="#">Technologie et sécurité</a></li><li><a href="#">Ressources</a></li><li><a href="#">La lettre Aegis</a></li><li><a href="#">Questions fréquentes</a></li></ul>
+            </div>
+            <div>
+                <h3>Contact</h3>
+                <ul><li><a href="#">Formulaire confidentiel</a></li><li><a href="#">Espace client sécurisé</a></li></ul>
+            </div>
+        </div>
+        <div class="wrap pied-bas">
+            <span>© 2026 Aegis Fama &amp; Doxa</span>
+            <span><a href="#">Mentions légales</a> · <a href="#">Confidentialité</a> · <a href="#">Cookies</a> · <a href="#">Plan du site</a></span>
+        </div>
+    </footer>
+
+    <nav class="cta-mobile" aria-label="Contact rapide">
+        <a class="btn btn-or" href="#">Échange confidentiel</a>
+        <a class="btn btn-clair" href="#">Urgence 24/7</a>
+    </nav>
+</div>
+
+<nav class="selecteur" aria-label="Choisir une maquette">
+    <button type="button" class="sel-fleche" id="sel-prec" aria-label="Maquette précédente">‹</button>
+    <div class="sel-choix" id="sel-choix"></div>
+    <p class="sel-actuel" id="sel-actuel" aria-live="polite"></p>
+    <button type="button" class="sel-fleche" id="sel-suiv" aria-label="Maquette suivante">›</button>
+</nav>
+
+<script>
+(function () {
+    'use strict';
+    const MAQUETTES = [
+        { nom: 'Classique', type: 'Ivoire, Garamond' },
+        { nom: 'Nuit', type: 'Bleu nuit, Cormorant' },
+        { nom: 'Épuré', type: 'Blanc, grille' },
+        { nom: 'Registre', type: 'Codes de l’acte' },
+        { nom: 'Veille', type: 'Plateforme, radar' },
+        { nom: 'Monogramme', type: 'Bodoni, filigrane' }
+    ];
+    const site = document.getElementById('site');
+    const reduit = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const choix = document.getElementById('sel-choix');
+    const actuel = document.getElementById('sel-actuel');
+    let courante = 1;
+
+    // Maquettes seulement : les pages internes n'ont pas d'adresse ici.
+    document.querySelectorAll('.site a[href="#"]').forEach(function (a) { a.addEventListener('click', function (e) { e.preventDefault(); }); });
+
+    MAQUETTES.forEach(function (m, i) {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.innerHTML = '<b>' + (i + 1) + ' · ' + m.nom + '</b><span>' + m.type + '</span>';
+        b.addEventListener('click', function () { afficher(i + 1, true); });
+        choix.appendChild(b);
+    });
+
+    function afficher(n, defiler) {
+        courante = n;
+        const ouvert = site.classList.contains('menu-ouvert');
+        site.className = 'site m' + n + (ouvert ? ' menu-ouvert' : '');
+        choix.querySelectorAll('button').forEach(function (b, i) { b.setAttribute('aria-pressed', String(i + 1 === n)); });
+        actuel.innerHTML = '<b>Maquette ' + n + ' / 6 · ' + MAQUETTES[n - 1].nom + '</b><span>' + MAQUETTES[n - 1].type + '</span>';
+        try { localStorage.setItem('aegis-maquette', String(n)); } catch (e) {}
+        if (location.hash !== '#m' + n) history.replaceState(null, '', '#m' + n);
+        if (defiler) window.scrollTo({ top: 0 });
+        radar.actualiser();
+    }
+    document.getElementById('sel-prec').addEventListener('click', function () { afficher(courante === 1 ? 6 : courante - 1, true); });
+    document.getElementById('sel-suiv').addEventListener('click', function () { afficher(courante === 6 ? 1 : courante + 1, true); });
+
+    const burger = document.getElementById('burger');
+    burger.addEventListener('click', function () {
+        const ouvert = !site.classList.contains('menu-ouvert');
+        site.classList.toggle('menu-ouvert', ouvert);
+        burger.setAttribute('aria-expanded', String(ouvert));
+    });
+
+    // Radar de la maquette Veille : un balayage lent, quelques signaux qui s'allument.
+    const radar = (function () {
+        const cv = document.getElementById('radar');
+        const ctx = cv.getContext('2d');
+        const W = cv.width, R = W / 2 - 20, C = W / 2;
+        const signaux = [];
+        for (let i = 0; i < 14; i++) signaux.push({ a: Math.random() * Math.PI * 2, r: 0.25 + Math.random() * 0.7, vu: -10 });
+        let angle = 0, actif = false, visible = true, dernier = null;
+        function dessiner(t) {
+            ctx.clearRect(0, 0, W, W);
+            ctx.lineWidth = 2;
+            for (let k = 1; k <= 4; k++) { ctx.beginPath(); ctx.arc(C, C, R * k / 4, 0, Math.PI * 2); ctx.strokeStyle = 'rgba(228,205,138,' + (k === 4 ? .35 : .14) + ')'; ctx.stroke(); }
+            ctx.beginPath(); ctx.moveTo(C - R, C); ctx.lineTo(C + R, C); ctx.moveTo(C, C - R); ctx.lineTo(C, C + R); ctx.strokeStyle = 'rgba(228,205,138,.1)'; ctx.stroke();
+            const g = ctx.createConicGradient ? ctx.createConicGradient(angle - Math.PI * 0.5, C, C) : null;
+            if (g) {
+                g.addColorStop(0, 'rgba(201,165,76,0)'); g.addColorStop(0.75, 'rgba(201,165,76,0)'); g.addColorStop(0.998, 'rgba(201,165,76,.28)'); g.addColorStop(1, 'rgba(201,165,76,0)');
+                ctx.beginPath(); ctx.moveTo(C, C); ctx.arc(C, C, R, 0, Math.PI * 2); ctx.fillStyle = g; ctx.fill();
+            }
+            ctx.beginPath(); ctx.moveTo(C, C); ctx.lineTo(C + Math.cos(angle) * R, C + Math.sin(angle) * R); ctx.strokeStyle = 'rgba(228,205,138,.8)'; ctx.lineWidth = 3; ctx.stroke();
+            signaux.forEach(function (s) {
+                let d = ((angle - s.a) % (Math.PI * 2) + Math.PI * 2) % (Math.PI * 2);
+                if (d < 0.05) s.vu = t;
+                const age = (t - s.vu) / 3200;
+                if (age >= 0 && age < 1) {
+                    const x = C + Math.cos(s.a) * s.r * R, y = C + Math.sin(s.a) * s.r * R;
+                    ctx.beginPath(); ctx.arc(x, y, 7, 0, Math.PI * 2); ctx.fillStyle = 'rgba(228,205,138,' + (1 - age).toFixed(3) + ')'; ctx.fill();
+                    ctx.beginPath(); ctx.arc(x, y, 7 + age * 26, 0, Math.PI * 2); ctx.strokeStyle = 'rgba(228,205,138,' + ((1 - age) * .5).toFixed(3) + ')'; ctx.lineWidth = 2; ctx.stroke();
+                }
+            });
+            ctx.beginPath(); ctx.arc(C, C, 8, 0, Math.PI * 2); ctx.fillStyle = '#E4CD8A'; ctx.fill();
+        }
+        function boucle(t) {
+            if (!actif || !visible) { dernier = null; return; }
+            const dt = dernier === null ? 0 : Math.min(64, t - dernier); dernier = t;
+            angle = (angle + dt * 0.0009) % (Math.PI * 2);
+            dessiner(t);
+            requestAnimationFrame(boucle);
+        }
+        if ('IntersectionObserver' in window) new IntersectionObserver(function (e) { visible = e[0].isIntersecting; if (visible && actif) requestAnimationFrame(boucle); }).observe(cv);
+        return {
+            actualiser: function () {
+                const etait = actif;
+                actif = courante === 5;
+                if (actif && reduit) { dessiner(performance.now()); return; }
+                if (actif && !etait) requestAnimationFrame(boucle);
+            }
+        };
+    })();
+
+    let depart = 1;
+    const h = (location.hash || '').match(/^#m([1-6])$/);
+    if (h) depart = Number(h[1]);
+    else { try { const s = Number(localStorage.getItem('aegis-maquette')); if (s >= 1 && s <= 6) depart = s; } catch (e) {} }
+    afficher(depart, false);
+})();
+</script>
