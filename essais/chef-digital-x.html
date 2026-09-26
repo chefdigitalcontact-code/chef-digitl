@@ -1,0 +1,1375 @@
+<title>Chef Digital X</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,600&family=JetBrains+Mono:wght@400;600&family=Manrope:wght@400;500;600;700&family=Montserrat:wght@800&family=Playfair+Display:wght@700&family=Unbounded:wght@200..900&display=swap">
+<style>
+    /* Chef Digital X : page de test, un seul monde visuel (sombre), assumé.
+       Palette tirée de la cuisine : l'encre (noir lie-de-vin), la braise, le laiton des cuivres,
+       la flamme bleue du gaz, la fumée pour le texte courant. */
+    :root {
+        color-scheme: dark;
+        --encre: #0B0608;
+        --encre-2: #140A0D;
+        --encre-3: #1E1014;
+        --ligne: rgba(246, 238, 233, .12);
+        --braise: #FF5A36;
+        --lie: #9B1B30;
+        --laiton: #E3B45C;
+        --flamme: #58C7FF;
+        --fumee: #B8A7A2;
+        --blanc: #F6EEE9;
+        --f-display: 'Unbounded', 'Arial Black', system-ui, sans-serif;
+        --f-texte: 'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif;
+        --f-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+        --gouttiere: clamp(16px, 4vw, 56px);
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { background: var(--encre); }
+    body { margin: 0; background: var(--encre); color: var(--fumee); font-family: var(--f-texte); font-size: 16px; line-height: 1.6; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+    a { color: inherit; }
+    p { margin: 0; }
+    h1, h2, h3, h4 { margin: 0; font-family: var(--f-display); color: var(--blanc); font-weight: 700; letter-spacing: -.03em; line-height: 1.04; text-wrap: balance; }
+    ::selection { background: var(--braise); color: var(--encre); }
+    .conteneur { max-width: 1240px; margin-inline: auto; padding-inline: var(--gouttiere); }
+    .surtitre { font-family: var(--f-mono); font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: var(--laiton); }
+    .titre-section { font-size: clamp(2rem, 5vw, 4rem); margin-top: 18px; }
+    .titre-compact { font-size: clamp(1.8rem, 3.6vw, 3.1rem); }
+    .accent { color: var(--braise); }
+    a:focus-visible, button:focus-visible { outline: 2px solid var(--laiton); outline-offset: 3px; border-radius: 6px; }
+
+    /* ---------- Mise en place (chargement) ---------- */
+    .chargement {
+        position: fixed; inset: 0; z-index: 100; background: var(--encre); display: grid; place-content: center; justify-items: center; gap: 14px;
+        font-family: var(--f-mono); font-size: 12px; letter-spacing: .22em; color: var(--laiton);
+        transition: opacity .6s ease, visibility .6s; animation: chargement-secours .6s ease 2.8s forwards;
+    }
+    .chargement.fini { opacity: 0; visibility: hidden; }
+    @keyframes chargement-secours { to { opacity: 0; visibility: hidden; } }
+    .chargement-pct { font-family: var(--f-display); font-size: 64px; font-weight: 300; letter-spacing: -.04em; color: var(--blanc); font-variant-numeric: tabular-nums; line-height: 1; }
+    .chargement-barre { width: 220px; height: 2px; background: var(--ligne); overflow: hidden; }
+    .chargement-barre i { display: block; height: 100%; transform-origin: left; transform: scaleX(0); background: linear-gradient(90deg, var(--lie), var(--braise), var(--laiton)); }
+
+    /* ---------- Curseur ---------- */
+    .curseur { display: none; position: fixed; left: 0; top: 0; z-index: 95; pointer-events: none; border-radius: 50%; transform: translate3d(-100px, -100px, 0); }
+    .curseur-perso .curseur { display: block; }
+    .curseur-point { width: 6px; height: 6px; margin: -3px 0 0 -3px; background: var(--braise); box-shadow: 0 0 10px var(--braise); }
+    .curseur-anneau { width: 38px; height: 38px; margin: -19px 0 0 -19px; border: 1px solid rgba(227, 180, 92, .7); transition: width .25s, height .25s, margin .25s, background-color .25s, border-color .25s; }
+    .curseur-anneau.actif { width: 70px; height: 70px; margin: -35px 0 0 -35px; background: rgba(255, 90, 54, .1); border-color: var(--braise); }
+    .curseur-perso, .curseur-perso a, .curseur-perso button { cursor: none; }
+
+    /* ---------- Navigation ---------- */
+    .nav {
+        position: fixed; top: 0; left: 0; right: 0; z-index: 50; display: flex; align-items: center; gap: 28px;
+        padding: calc(env(safe-area-inset-top, 0px) + 14px) var(--gouttiere) 14px;
+        border-bottom: 1px solid transparent; transition: background-color .35s, border-color .35s;
+    }
+    .nav.opaque { background: rgba(11, 6, 8, .66); -webkit-backdrop-filter: blur(14px) saturate(140%); backdrop-filter: blur(14px) saturate(140%); border-color: var(--ligne); }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; font-family: var(--f-display); font-weight: 600; font-size: 15px; color: var(--blanc); letter-spacing: -.02em; }
+    .logo-cd { width: 32px; height: 32px; border-radius: 9px; display: grid; place-items: center; background: var(--lie); font-size: 11px; font-weight: 700; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .14), 0 0 24px rgba(155, 27, 48, .7); }
+    .nav-liens { display: flex; gap: 30px; margin-left: auto; font-size: 14px; }
+    .nav-liens a { text-decoration: none; color: var(--fumee); transition: color .2s; }
+    .nav-liens a:hover { color: var(--blanc); }
+    .nav-actions { display: flex; align-items: center; gap: 12px; }
+    .son {
+        display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 99px; border: 1px solid var(--ligne); background: none;
+        color: var(--fumee); font-family: var(--f-mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase;
+    }
+    .son:hover { color: var(--blanc); border-color: rgba(246, 238, 233, .3); }
+    .son-barres { display: inline-flex; align-items: flex-end; gap: 2px; height: 10px; }
+    .son-barres i { width: 2px; height: 3px; background: currentColor; }
+    .son[aria-pressed="true"] { color: var(--laiton); border-color: rgba(227, 180, 92, .5); }
+    .son[aria-pressed="true"] .son-barres i { animation: egaliseur .8s ease-in-out infinite alternate; }
+    .son-barres i:nth-child(2) { animation-delay: -.3s; }
+    .son-barres i:nth-child(3) { animation-delay: -.55s; }
+    @keyframes egaliseur { from { height: 2px; } to { height: 10px; } }
+
+    /* ---------- Boutons ---------- */
+    .bouton {
+        display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 15px 26px; border-radius: 999px;
+        font-family: var(--f-texte); font-weight: 700; font-size: 15px; text-decoration: none; white-space: nowrap;
+        transition: box-shadow .3s, background-color .3s, border-color .3s, color .3s; will-change: transform;
+    }
+    .bouton-plein { background: var(--braise); color: #1A0A06; }
+    .bouton-plein:hover { box-shadow: 0 12px 40px -8px rgba(255, 90, 54, .75); }
+    .bouton-contour { border: 1px solid rgba(246, 238, 233, .24); color: var(--blanc); background: rgba(246, 238, 233, .03); }
+    .bouton-contour:hover { border-color: var(--laiton); background: rgba(227, 180, 92, .08); }
+    .bouton-petit { padding: 10px 16px; font-size: 13px; }
+    .bouton-grand { padding: 20px 34px; font-size: 17px; }
+
+    /* ---------- Horloge du service ---------- */
+    .hud {
+        opacity: 0; transform: translateY(12px); transition: opacity .4s, transform .4s;
+        position: fixed; z-index: 40; left: var(--gouttiere); bottom: calc(18px + env(safe-area-inset-bottom, 0px));
+        display: flex; align-items: center; gap: 12px; padding: 8px 14px; border-radius: 99px; pointer-events: none;
+        background: rgba(11, 6, 8, .6); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border: 1px solid var(--ligne);
+        font-family: var(--f-mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase;
+    }
+    .hud.visible { opacity: 1; transform: none; }
+    .hud-heure { color: var(--blanc); font-size: 13px; letter-spacing: .06em; font-variant-numeric: tabular-nums; }
+    .hud-piste { position: relative; width: 84px; height: 2px; background: var(--ligne); overflow: hidden; }
+    .hud-piste i { position: absolute; inset: 0; transform-origin: left; transform: scaleX(0); background: linear-gradient(90deg, var(--braise), var(--laiton)); }
+    .hud-etat { color: var(--flamme); }
+
+    /* ---------- Ouverture ---------- */
+    .hero { position: relative; min-height: 100svh; display: flex; align-items: center; overflow: hidden; background: radial-gradient(120% 80% at 72% 115%, rgba(155, 27, 48, .55), transparent 62%), var(--encre); }
+    #scene { position: absolute; inset: 0; width: 100%; height: 100%; display: block; opacity: 0; transition: opacity 1.4s ease; }
+    #scene.pret { opacity: 1; }
+    .hero-voile { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(90deg, rgba(11, 6, 8, .9) 0%, rgba(11, 6, 8, .45) 42%, transparent 68%); }
+    .hero-contenu { position: relative; z-index: 2; width: 100%; padding-block: 130px 120px; }
+    .hero-contenu > * { max-width: 640px; }
+    .ticket { display: inline-flex; align-items: center; gap: 10px; padding: 7px 12px; border: 1px dashed rgba(227, 180, 92, .5); border-radius: 6px; font-family: var(--f-mono); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--laiton); }
+    .ticket::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--braise); box-shadow: 0 0 12px var(--braise); animation: pouls 1.6s ease-in-out infinite; }
+    @keyframes pouls { 50% { opacity: .35; } }
+    .hero-titre { margin-top: 26px; font-size: clamp(2.3rem, 4.2vw, 4.3rem); line-height: 1.02; letter-spacing: -.045em; }
+    .hero-contenu > .hero-titre { max-width: 780px; }
+    .hero-titre .ligne { display: block; }
+    .hero-titre .mot { display: inline-block; white-space: nowrap; overflow: hidden; padding-bottom: .1em; margin-bottom: -.1em; vertical-align: top; }
+    .hero-titre .car { display: inline-block; font-variation-settings: "wght" 700; will-change: transform; }
+    .hero-titre .accent .car { color: var(--braise); }
+    .hero-texte { margin-top: 26px; max-width: 540px; font-size: clamp(1rem, 1.35vw, 1.18rem); }
+    .hero-boutons { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
+    .hero-note { margin-top: 18px; font-family: var(--f-mono); font-size: 12px; letter-spacing: .05em; color: rgba(184, 167, 162, .85); }
+    .hero-legende-qr { position: absolute; z-index: 2; right: var(--gouttiere); bottom: 30px; display: flex; align-items: center; gap: 10px; font-family: var(--f-mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--flamme); }
+    .hero-legende-qr::before { content: ""; width: 28px; height: 1px; background: currentColor; }
+    .sans-webgl .hero-legende-qr { display: none; }
+
+    /* ---------- Bandeau des cuisines ---------- */
+    .bandeau { overflow: hidden; padding-block: 34px; background: var(--encre-2); border-block: 1px solid var(--ligne); }
+    .bandeau-piste { display: flex; gap: 44px; width: max-content; will-change: transform; font-family: var(--f-display); font-size: clamp(2.2rem, 6vw, 5rem); font-weight: 800; line-height: 1; letter-spacing: -.02em; text-transform: uppercase; }
+    .bandeau-piste span { color: transparent; -webkit-text-stroke: 1.2px rgba(246, 238, 233, .42); }
+    .bandeau-piste .plein { color: var(--blanc); -webkit-text-stroke: 0; }
+    .bandeau-piste .etoile { color: var(--braise); -webkit-text-stroke: 0; font-weight: 300; }
+
+    /* ---------- Le service (24 h) ---------- */
+    .service { background: var(--encre); }
+    .service-cadre { min-height: 100svh; display: flex; flex-direction: column; justify-content: center; gap: 36px; padding-block: 96px 48px; overflow: hidden; }
+    .service-entete { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 18px 40px; width: 100%; }
+    .service-entete .titre-section { max-width: 760px; }
+    .service-indice { font-family: var(--f-mono); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--fumee); }
+    .service-piste { display: flex; gap: 28px; width: max-content; padding-inline: var(--gouttiere); will-change: transform; }
+    .etape {
+        position: relative; width: min(84vw, 960px); min-height: 400px; display: grid; grid-template-columns: 1fr 1fr; gap: 36px; padding: 42px;
+        border: 1px solid var(--ligne); border-radius: 24px; overflow: hidden;
+        background: linear-gradient(160deg, rgba(246, 238, 233, .055), rgba(246, 238, 233, .012) 60%), var(--encre-2);
+    }
+    .etape::after { content: ""; position: absolute; width: 380px; height: 380px; right: -140px; bottom: -180px; border-radius: 50%; background: radial-gradient(circle, rgba(255, 90, 54, .22), transparent 65%); pointer-events: none; }
+    .etape-texte { display: flex; flex-direction: column; }
+    .etape-marqueur { font-family: var(--f-mono); font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--flamme); }
+    .etape-num { margin-top: 14px; font-family: var(--f-display); font-size: clamp(4rem, 8vw, 7.5rem); font-weight: 800; line-height: .9; color: transparent; -webkit-text-stroke: 1.5px rgba(255, 90, 54, .75); letter-spacing: -.04em; }
+    .etape h3 { margin-top: auto; padding-top: 28px; font-size: clamp(1.45rem, 2.4vw, 2.2rem); }
+    .etape-texte p { margin-top: 14px; max-width: 40ch; }
+    .etape-visuel { position: relative; z-index: 1; display: grid; place-items: center; }
+
+    /* Étape 1 : bon de commande */
+    .bon {
+        width: min(300px, 100%); padding: 22px 20px 34px; transform: rotate(-3deg); background: #F4ECE2; color: #1B1113;
+        font-family: var(--f-mono); font-size: 12.5px; box-shadow: 0 30px 60px -20px rgba(0, 0, 0, .75);
+        -webkit-mask: conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) 50% / 16px 100%;
+        mask: conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) 50% / 16px 100%;
+    }
+    .bon-titre { text-align: center; font-weight: 600; letter-spacing: .18em; padding-bottom: 10px; border-bottom: 2px solid #1B1113; }
+    .bon-ligne { display: flex; justify-content: space-between; gap: 10px; padding: 8px 0; border-bottom: 1px dashed rgba(27, 17, 19, .28); }
+    .bon-ligne span { color: #6E5A55; }
+    .bon-pied { margin-top: 12px; text-align: center; font-size: 11px; letter-spacing: .16em; color: #6E5A55; }
+
+    /* Étape 2 : lecture de la carte */
+    .lecture { position: relative; width: min(320px, 100%); padding: 22px; border-radius: 16px; overflow: hidden; background: #150B0E; border: 1px solid var(--ligne); box-shadow: 0 30px 60px -24px rgba(0, 0, 0, .8); }
+    .lecture-titre { font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; font-weight: 600; font-size: 28px; color: var(--blanc); text-align: center; }
+    .lecture-plat { display: flex; align-items: baseline; gap: 8px; margin-top: 11px; font-size: 14px; color: var(--blanc); }
+    .lecture-plat i { flex: 1; border-bottom: 1px dotted rgba(246, 238, 233, .3); }
+    .lecture-plat b { font-family: var(--f-mono); font-weight: 600; color: var(--laiton); }
+    .faisceau { position: absolute; left: 0; right: 0; top: -70px; height: 70px; background: linear-gradient(180deg, transparent, rgba(88, 199, 255, .22) 70%, rgba(88, 199, 255, .85)); border-bottom: 1px solid var(--flamme); box-shadow: 0 6px 22px rgba(88, 199, 255, .6); animation: balayage 2.8s cubic-bezier(.65, 0, .35, 1) infinite; }
+    @keyframes balayage { to { top: 100%; } }
+    .lecture-etat { margin-top: 18px; font-family: var(--f-mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--flamme); text-align: center; }
+
+    /* Étape 3 : la maquette (les couleurs passent d'un style à l'autre) */
+    @property --m-fond { syntax: '<color>'; inherits: true; initial-value: #1C1210; }
+    @property --m-texte { syntax: '<color>'; inherits: true; initial-value: #F3E6D8; }
+    @property --m-accent { syntax: '<color>'; inherits: true; initial-value: #B0413E; }
+    .navigateur { width: min(360px, 100%); border-radius: 14px; overflow: hidden; border: 1px solid var(--ligne); box-shadow: 0 30px 70px -24px rgba(0, 0, 0, .85); animation: styles-cycle 7.5s ease-in-out infinite; }
+    @keyframes styles-cycle {
+        0%, 28% { --m-fond: #1C1210; --m-texte: #F3E6D8; --m-accent: #B0413E; }
+        33%, 61% { --m-fond: #FFFAF3; --m-texte: #241A12; --m-accent: #C0392B; }
+        66%, 94% { --m-fond: #0B0B1A; --m-texte: #F4F4FF; --m-accent: #FF3CAC; }
+        100% { --m-fond: #1C1210; --m-texte: #F3E6D8; --m-accent: #B0413E; }
+    }
+    .navigateur-barre { display: flex; align-items: center; gap: 6px; height: 30px; padding: 0 12px; background: #1E1316; border-bottom: 1px solid var(--ligne); }
+    .navigateur-barre i { width: 8px; height: 8px; border-radius: 50%; background: rgba(246, 238, 233, .2); }
+    .navigateur-barre span { margin-left: 10px; font-family: var(--f-mono); font-size: 10px; color: var(--fumee); }
+    .maquette { background: var(--m-fond); color: var(--m-texte); padding: 16px 18px 20px; }
+    .maquette-nav { display: flex; align-items: center; gap: 6px; font-size: 9px; }
+    .maquette-nav strong { margin-right: auto; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 14px; font-style: italic; }
+    .maquette-nav i { width: 16px; height: 3px; border-radius: 2px; background: currentColor; opacity: .35; }
+    .maquette-nav b { padding: 4px 8px; border-radius: 99px; background: var(--m-accent); color: #fff; font-size: 8px; }
+    .maquette-hero { padding-block: 34px 26px; text-align: center; }
+    .maquette-hero small { display: block; font-size: 8px; letter-spacing: .24em; color: var(--m-accent); font-weight: 700; }
+    .maquette-hero strong { display: block; margin-top: 8px; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 30px; line-height: 1; }
+    .maquette-hero span { display: inline-block; margin-top: 14px; padding: 6px 12px; border-radius: 99px; background: var(--m-accent); color: #fff; font-size: 9px; font-weight: 700; }
+    .maquette-grille { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+    .maquette-grille i { aspect-ratio: 4 / 3; border-radius: 6px; background: linear-gradient(135deg, color-mix(in srgb, var(--m-accent) 60%, var(--m-fond)), color-mix(in srgb, var(--m-texte) 18%, var(--m-fond))); }
+    .pastille-style { margin-top: 16px; display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 99px; border: 1px solid var(--ligne); font-family: var(--f-mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--blanc); }
+    .etape-visuel .pile { display: grid; justify-items: center; }
+
+    /* Étape 4 : en ligne */
+    .en-ligne { display: grid; justify-items: center; gap: 16px; }
+    .domaine { display: inline-flex; align-items: center; gap: 10px; padding: 10px 16px; border-radius: 99px; background: rgba(246, 238, 233, .05); border: 1px solid var(--ligne); font-family: var(--f-mono); font-size: 13px; color: var(--blanc); }
+    .point-en-ligne { width: 8px; height: 8px; border-radius: 50%; background: var(--flamme); box-shadow: 0 0 0 0 rgba(88, 199, 255, .6); animation: onde 1.8s ease-out infinite; }
+    @keyframes onde { to { box-shadow: 0 0 0 12px rgba(88, 199, 255, 0); } }
+    .qr-mini { width: 170px; height: 170px; border-radius: 14px; box-shadow: 0 0 0 1px var(--ligne), 0 24px 50px -20px rgba(0, 0, 0, .8), 0 0 60px -10px rgba(227, 180, 92, .35); image-rendering: pixelated; }
+    .coches { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+    .coches li { padding: 6px 10px; border-radius: 99px; border: 1px solid rgba(88, 199, 255, .35); font-family: var(--f-mono); font-size: 11px; color: var(--flamme); }
+
+    /* ---------- Le manège des styles (3D) ---------- */
+    .styles { position: relative; padding-block: 140px 110px; overflow: hidden; background: radial-gradient(70% 50% at 50% 60%, rgba(155, 27, 48, .22), transparent 70%), var(--encre); }
+    .styles-entete { max-width: 760px; }
+    .styles-entete p:last-child { margin-top: 18px; max-width: 56ch; }
+    .anneau-scene { height: 540px; margin-top: 20px; display: grid; place-items: center; perspective: 1300px; touch-action: pan-y; cursor: grab; user-select: none; -webkit-user-select: none; }
+    .anneau-scene.saisi { cursor: grabbing; }
+    .anneau { position: relative; width: 250px; height: 350px; transform-style: preserve-3d; will-change: transform; }
+    .carte-style {
+        position: absolute; inset: 0; display: flex; flex-direction: column; overflow: hidden; border-radius: 16px;
+        background: var(--fond); color: var(--texte); backface-visibility: hidden; -webkit-backface-visibility: hidden;
+        box-shadow: 0 30px 60px -25px rgba(0, 0, 0, .85), 0 0 0 1px rgba(255, 255, 255, .08);
+    }
+    .mini-nav { display: flex; align-items: center; gap: 5px; padding: 12px 14px; border-bottom: 1px solid color-mix(in srgb, var(--texte) 12%, transparent); }
+    .mini-logo { margin-right: auto; font-family: var(--police); font-size: 11px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 120px; }
+    .mini-nav i { width: 14px; height: 3px; border-radius: 2px; background: color-mix(in srgb, var(--texte) 35%, transparent); }
+    .mini-nav b { padding: 4px 7px; border-radius: 99px; background: var(--accent); color: var(--sur-accent, #fff); font-size: 7px; font-family: var(--f-texte); }
+    .mini-hero { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 8px; padding: 18px; background: radial-gradient(90% 70% at 80% 20%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 70%); }
+    .mini-sur { font-size: 8px; font-weight: 700; letter-spacing: .22em; color: var(--accent); text-transform: uppercase; }
+    .mini-hero strong { font-family: var(--police); font-size: 27px; line-height: 1.02; }
+    .mini-sous { font-size: 10px; opacity: .75; }
+    .mini-bouton { align-self: flex-start; margin-top: 6px; padding: 6px 10px; border-radius: 99px; background: var(--accent); color: var(--sur-accent, #fff); font-size: 9px; font-weight: 700; }
+    .mini-grille { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; padding: 0 14px 14px; }
+    .mini-grille i { aspect-ratio: 1; border-radius: 6px; background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 55%, var(--fond)), color-mix(in srgb, var(--texte) 20%, var(--fond))); }
+    .carte-pied { display: flex; justify-content: space-between; padding: 9px 14px; font-family: var(--f-mono); font-size: 9px; letter-spacing: .12em; text-transform: uppercase; background: color-mix(in srgb, var(--texte) 8%, var(--fond)); }
+    .styles-lien { display: flex; justify-content: center; }
+
+    /* ---------- Téléphone ---------- */
+    .telephone { padding-block: 110px; overflow: hidden; }
+    .telephone-grille { display: grid; grid-template-columns: 1.05fr .95fr; align-items: center; gap: 60px; }
+    .telephone-texte p { margin-top: 20px; max-width: 48ch; }
+    .puces { list-style: none; margin: 28px 0 0; padding: 0; display: grid; gap: 12px; }
+    .puces li { display: flex; gap: 12px; align-items: baseline; color: var(--blanc); }
+    .puces li::before { content: "✦"; color: var(--braise); font-size: 12px; }
+    .telephone-scene { min-height: 640px; display: grid; place-items: center; perspective: 1400px; }
+    .telephone-3d {
+        position: relative; width: 300px; height: 610px; padding: 12px; border-radius: 48px; transform-style: preserve-3d;
+        background: linear-gradient(145deg, #2C1B20, #0C0709);
+        box-shadow: inset 0 0 0 1.5px rgba(246, 238, 233, .15), 0 60px 90px -30px rgba(0, 0, 0, .9), 0 0 90px -20px rgba(255, 90, 54, .4);
+    }
+    .telephone-ecran { position: relative; height: 100%; display: flex; flex-direction: column; overflow: hidden; border-radius: 37px; background: #F7F1EA; color: #1B1113; font-size: 13px; }
+    .app-barre { display: flex; justify-content: space-between; padding: 14px 24px 6px; font-size: 12px; font-weight: 700; }
+    .app-entete { padding: 14px 22px 18px; background: var(--lie); color: #fff; }
+    .app-entete p { font-size: 11px; opacity: .75; letter-spacing: .08em; text-transform: uppercase; }
+    .app-entete h4 { color: #fff; font-family: var(--f-display); font-size: 22px; margin-top: 4px; letter-spacing: -.02em; }
+    .app-liste { padding: 10px 12px; display: grid; gap: 6px; }
+    .app-plat { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 12px; border-radius: 14px; background: #fff; box-shadow: 0 1px 0 rgba(27, 17, 19, .06); }
+    .app-plat b { display: block; font-size: 13.5px; }
+    .app-plat span { font-size: 11px; color: #7A6661; }
+    .app-plat em { font-style: normal; font-family: var(--f-mono); font-weight: 600; font-size: 13px; padding: 4px 8px; border-radius: 8px; border: 1px solid transparent; min-width: 74px; text-align: right; }
+    .app-plat em.edition { border-color: var(--braise); background: #FFF3EF; }
+    .app-plat em.edition::after { content: ""; display: inline-block; width: 1px; height: 13px; margin-left: 1px; vertical-align: -2px; background: #1B1113; animation: pouls .9s steps(1) infinite; }
+    .app-toast { position: absolute; left: 16px; right: 16px; bottom: 22px; padding: 12px 14px; border-radius: 14px; background: #1B1113; color: #fff; font-weight: 600; font-size: 13px; display: flex; gap: 10px; align-items: center; opacity: 0; transform: translateY(40px); }
+    .app-toast::before { content: "✓"; width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; background: var(--braise); color: #1B1113; font-size: 12px; }
+
+    /* ---------- Chiffres ---------- */
+    .chiffres { padding-block: 30px 110px; }
+    .chiffres-grille { display: grid; grid-template-columns: repeat(4, 1fr); border-block: 1px solid var(--ligne); }
+    .chiffre { padding: 34px 22px; border-left: 1px solid var(--ligne); }
+    .chiffre:first-child { border-left: 0; }
+    .chiffre-valeur { font-family: var(--f-display); font-size: clamp(2.2rem, 4.2vw, 3.6rem); font-weight: 700; line-height: 1; color: var(--blanc); letter-spacing: -.03em; font-variant-numeric: tabular-nums; white-space: nowrap; }
+    .chiffre-unite { margin-left: 6px; font-size: .38em; letter-spacing: 0; color: var(--laiton); }
+    .chiffre p { margin-top: 12px; font-size: 14px; }
+
+    /* ---------- Tarifs ---------- */
+    .tarifs { padding-block: 110px; }
+    .tarifs-entete p:last-child { margin-top: 18px; }
+    .tarifs-grille { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 50px; perspective: 1200px; }
+    .offre { position: relative; display: flex; flex-direction: column; padding: 34px 30px; border-radius: 24px; overflow: hidden; border: 1px solid var(--ligne); background: var(--encre-2); --x: 50%; --y: 0%; }
+    .offre::before { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity .3s; background: radial-gradient(420px circle at var(--x) var(--y), rgba(255, 90, 54, .2), transparent 45%); }
+    .offre:hover::before { opacity: 1; }
+    .offre.vedette { border-color: rgba(255, 90, 54, .55); background: linear-gradient(180deg, rgba(155, 27, 48, .4), var(--encre-2) 62%); }
+    .offre-badge { position: absolute; top: 20px; right: 20px; padding: 5px 9px; border-radius: 99px; background: var(--laiton); color: var(--encre); font-family: var(--f-mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; }
+    .offre h3 { font-size: 1.2rem; }
+    .offre-accroche { margin-top: 8px; font-size: 14.5px; }
+    .offre-prix { margin-top: 22px; font-family: var(--f-display); font-size: 2.7rem; font-weight: 700; line-height: 1; color: var(--blanc); letter-spacing: -.03em; font-variant-numeric: tabular-nums; }
+    .offre-prix small { margin-left: 6px; font-family: var(--f-texte); font-size: 14px; font-weight: 500; letter-spacing: 0; color: var(--fumee); }
+    .offre ul { list-style: none; margin: 26px 0 30px; padding: 0; display: grid; gap: 11px; font-size: 14.5px; }
+    .offre li { display: flex; gap: 10px; align-items: baseline; }
+    .offre li::before { content: "✦"; color: var(--braise); font-size: 11px; }
+    .offre .bouton { margin-top: auto; width: 100%; }
+
+    /* ---------- Final ---------- */
+    .final { position: relative; overflow: hidden; display: grid; place-items: center; text-align: center; min-height: 82svh; background: radial-gradient(90% 70% at 50% 115%, rgba(255, 90, 54, .38), rgba(155, 27, 48, .25) 40%, transparent 72%), var(--encre); }
+    #braises { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .final-contenu { position: relative; z-index: 2; display: grid; justify-items: center; gap: 22px; padding-block: 120px; }
+    .final h2 { font-size: clamp(2.6rem, 7vw, 6rem); }
+    .final p { max-width: 46ch; font-size: 1.1rem; }
+    .pied { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 24px; padding: 30px var(--gouttiere) calc(84px + env(safe-area-inset-bottom, 0px)); border-top: 1px solid var(--ligne); font-family: var(--f-mono); font-size: 12px; letter-spacing: .04em; }
+    .pied a { color: var(--laiton); }
+
+    /* ---------- Petits écrans ---------- */
+    @media (max-width: 899px) {
+        .hero { align-items: flex-end; }
+        .hero-voile { background: linear-gradient(0deg, rgba(11, 6, 8, .96) 38%, rgba(11, 6, 8, .35) 68%, transparent); }
+        .hero-contenu { padding-block: calc(96px + min(72vw, 36svh) + 28px) 96px; }
+        .hero-legende-qr { top: calc(env(safe-area-inset-top, 0px) + 78px); bottom: auto; right: auto; left: var(--gouttiere); }
+        .service-cadre { padding-block: 100px 40px; }
+        .service-piste { flex-direction: column; width: auto; }
+        .etape { width: 100%; grid-template-columns: 1fr; gap: 26px; padding: 26px; min-height: 0; }
+        .etape h3 { margin-top: 0; padding-top: 18px; }
+        .service-indice { display: none; }
+        .telephone-grille { grid-template-columns: 1fr; gap: 20px; }
+        .telephone-scene { min-height: 600px; }
+        .tarifs-grille { grid-template-columns: 1fr; }
+        .chiffres-grille { grid-template-columns: 1fr 1fr; }
+        .chiffre:nth-child(3) { border-left: 0; }
+        .chiffre:nth-child(n + 3) { border-top: 1px solid var(--ligne); }
+    }
+    @media (max-width: 760px) {
+        .nav-liens { display: none; }
+        .nav-actions { margin-left: auto; }
+        .hud-piste, .hud-etat, .hud-libelle { display: none; }
+        .hud { z-index: 60; top: calc(env(safe-area-inset-top, 0px) + 18px); bottom: auto; left: auto; right: calc(var(--gouttiere) + 104px); padding: 6px 11px; transform: translateY(-8px); }
+        .anneau { width: 188px; height: 264px; }
+        .anneau-scene { height: 400px; }
+        .mini-hero strong { font-size: 20px; }
+    }
+    @media (max-width: 420px) {
+        .nav-cta { display: none; }
+        .telephone-3d { width: 262px; height: 540px; }
+        .chiffre { padding: 26px 14px; }
+        .bouton { white-space: normal; text-align: center; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+        .chargement { display: none; }
+        *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+    }
+</style>
+
+<div class="chargement" id="chargement" aria-hidden="true">
+    <span>MISE EN PLACE</span>
+    <span class="chargement-pct" id="chargement-pct">000</span>
+    <span class="chargement-barre"><i id="chargement-remplissage"></i></span>
+</div>
+<div class="curseur curseur-point" aria-hidden="true"></div>
+<div class="curseur curseur-anneau" aria-hidden="true"></div>
+
+<header class="nav">
+    <a class="nav-logo" href="#haut"><span class="logo-cd">CD</span>Chef Digital</a>
+    <nav class="nav-liens" aria-label="Sections">
+        <a href="#service">Le service</a>
+        <a href="#styles">Les styles</a>
+        <a href="#tarifs">Tarifs</a>
+    </nav>
+    <div class="nav-actions">
+        <button type="button" class="son" id="son" aria-pressed="false"><span class="son-barres" aria-hidden="true"><i></i><i></i><i></i></span>Son <span class="son-etat">off</span></button>
+        <a class="bouton bouton-plein bouton-petit magnetique nav-cta" href="https://chefdigital.fr/register" target="_blank" rel="noopener">Maquette gratuite</a>
+    </div>
+</header>
+
+<div class="hud" aria-hidden="true">
+    <span class="hud-libelle">Service</span>
+    <span class="hud-heure" id="hud-heure">00:00</span>
+    <span class="hud-piste"><i id="hud-progression"></i></span>
+    <span class="hud-etat" id="hud-etat">Commande reçue</span>
+</div>
+
+<main>
+    <section class="hero" id="haut">
+        <canvas id="scene" aria-hidden="true"></canvas>
+        <div class="hero-voile"></div>
+        <div class="conteneur hero-contenu">
+            <p class="ticket">Bon n° 0001 · Table : votre restaurant</p>
+            <h1 class="hero-titre"><span class="ligne">Votre restaurant</span><span class="ligne">en ligne</span><span class="ligne accent">avant demain.</span></h1>
+            <p class="hero-texte">Chef Digital crée le site complet de votre restaurant : carte, photos, horaires, réservations et QR code. Vous voyez la maquette avant de payer. À partir de 14,99 € HT par mois.</p>
+            <div class="hero-boutons">
+                <a class="bouton bouton-plein magnetique" href="https://chefdigital.fr/register" target="_blank" rel="noopener">Demander ma maquette gratuite</a>
+                <a class="bouton bouton-contour magnetique" href="#styles">Voir les styles</a>
+            </div>
+            <p class="hero-note">Maquette offerte · Sans carte bancaire · Livrée en 24 h</p>
+        </div>
+        <p class="hero-legende-qr">Ce QR code est réel : scannez-le</p>
+    </section>
+
+    <section class="bandeau" aria-label="Types de restaurants">
+        <div class="bandeau-piste" id="bandeau-piste">
+            <span class="plein">Pizzeria</span><span class="etoile">✺</span><span>Bistrot</span><span class="etoile">✺</span><span class="plein">Sushi</span><span class="etoile">✺</span><span>Burger</span><span class="etoile">✺</span><span class="plein">Brasserie</span><span class="etoile">✺</span><span>Crêperie</span><span class="etoile">✺</span><span class="plein">Kebab</span><span class="etoile">✺</span><span>Gastronomique</span><span class="etoile">✺</span><span class="plein">Traiteur</span><span class="etoile">✺</span><span>Tacos</span><span class="etoile">✺</span>
+        </div>
+    </section>
+
+    <section class="service" id="service">
+        <div class="service-cadre">
+            <div class="conteneur service-entete">
+                <div>
+                    <p class="surtitre">Le service · 24 heures</p>
+                    <h2 class="titre-section titre-compact">De la commande au site en ligne, en une journée.</h2>
+                </div>
+                <p class="service-indice">Continuez à défiler →</p>
+            </div>
+            <div class="service-piste" id="service-piste">
+                <article class="etape">
+                    <div class="etape-texte">
+                        <p class="etape-marqueur">Étape 1 sur 4</p>
+                        <p class="etape-num" aria-hidden="true">01</p>
+                        <h3>Vous passez commande.</h3>
+                        <p>Le nom du restaurant, la ville et une photo de votre carte. Quelques minutes suffisent, et on ne vous demande pas de carte bancaire.</p>
+                    </div>
+                    <div class="etape-visuel">
+                        <div class="bon">
+                            <p class="bon-titre">BON DE COMMANDE</p>
+                            <p class="bon-ligne"><span>Restaurant</span><b>Chez Marcel</b></p>
+                            <p class="bon-ligne"><span>Ville</span><b>Lyon 2e</b></p>
+                            <p class="bon-ligne"><span>Carte</span><b>carte-midi.jpg ✓</b></p>
+                            <p class="bon-ligne"><span>Carte bancaire</span><b>non demandée</b></p>
+                            <p class="bon-pied">REÇU À 00:00 · MERCI</p>
+                        </div>
+                    </div>
+                </article>
+                <article class="etape">
+                    <div class="etape-texte">
+                        <p class="etape-marqueur">Étape 2 sur 4</p>
+                        <p class="etape-num" aria-hidden="true">02</p>
+                        <h3>Nous lisons votre carte.</h3>
+                        <p>Notre IA recopie vos plats et vos prix depuis votre photo, votre site ou votre fiche Google, sans rien inventer.</p>
+                    </div>
+                    <div class="etape-visuel">
+                        <div class="lecture">
+                            <p class="lecture-titre">La carte</p>
+                            <p class="lecture-plat"><span>Salade lyonnaise</span><i></i><b>12,00</b></p>
+                            <p class="lecture-plat"><span>Pâté en croûte</span><i></i><b>14,00</b></p>
+                            <p class="lecture-plat"><span>Quenelle de brochet</span><i></i><b>22,00</b></p>
+                            <p class="lecture-plat"><span>Saucisson brioché</span><i></i><b>19,00</b></p>
+                            <p class="lecture-plat"><span>Tarte aux pralines</span><i></i><b>8,50</b></p>
+                            <p class="lecture-etat">5 plats · 5 prix recopiés</p>
+                            <div class="faisceau" aria-hidden="true"></div>
+                        </div>
+                    </div>
+                </article>
+                <article class="etape">
+                    <div class="etape-texte">
+                        <p class="etape-marqueur">Étape 3 sur 4</p>
+                        <p class="etape-num" aria-hidden="true">03</p>
+                        <h3>Vous recevez la maquette.</h3>
+                        <p>Un site complet à votre nom, gratuit. Vous le parcourez, vous changez de style en un clic, et vous décidez ensuite.</p>
+                    </div>
+                    <div class="etape-visuel">
+                        <div class="pile">
+                            <div class="navigateur">
+                                <div class="navigateur-barre"><i></i><i></i><i></i><span>chez-marcel.fr</span></div>
+                                <div class="maquette">
+                                    <div class="maquette-nav"><strong>Chez Marcel</strong><i></i><i></i><i></i><b>Réserver</b></div>
+                                    <div class="maquette-hero"><small>BOUCHON LYONNAIS</small><strong>Chez Marcel</strong><span>Voir la carte</span></div>
+                                    <div class="maquette-grille"><i></i><i></i><i></i></div>
+                                </div>
+                            </div>
+                            <p class="pastille-style">⟳ Changer de style</p>
+                        </div>
+                    </div>
+                </article>
+                <article class="etape">
+                    <div class="etape-texte">
+                        <p class="etape-marqueur">Étape 4 sur 4</p>
+                        <p class="etape-num" aria-hidden="true">04</p>
+                        <h3>Votre site est en ligne.</h3>
+                        <p>Nom de domaine, hébergement sécurisé, menu digital et QR code à poser sur vos tables. Ensuite, vous gérez tout depuis votre téléphone.</p>
+                    </div>
+                    <div class="etape-visuel">
+                        <div class="en-ligne">
+                            <p class="domaine"><span class="point-en-ligne"></span>chez-marcel.fr</p>
+                            <canvas class="qr-mini" width="232" height="232" data-qr aria-label="QR code vers chefdigital.fr" role="img"></canvas>
+                            <ul class="coches"><li>HTTPS</li><li>Menu digital</li><li>Réservations</li></ul>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="styles" id="styles">
+        <div class="conteneur styles-entete revele">
+            <p class="surtitre">35 styles</p>
+            <h2 class="titre-section">Choisissez l'allure de votre salle.</h2>
+            <p>Faites tourner le manège à la souris ou au doigt. Chaque style existe en vrai, avec votre carte et vos photos.</p>
+        </div>
+        <div class="anneau-scene" id="anneau-scene" aria-label="Manège de styles de sites" role="img">
+            <div class="anneau" id="anneau">
+                <div class="carte-style" style="--fond:#FFFAF3;--texte:#241A12;--accent:#C0392B;--police:'Playfair Display',Georgia,serif">
+                    <div class="mini-nav"><span class="mini-logo">Bella Napoli</span><i></i><i></i><b>Réserver</b></div>
+                    <div class="mini-hero"><span class="mini-sur">Pizzeria</span><strong>Bella Napoli</strong><span class="mini-sous">Pizza napolitaine au feu de bois</span><span class="mini-bouton">Voir la carte</span></div>
+                    <div class="mini-grille"><i></i><i></i><i></i></div>
+                    <p class="carte-pied"><span>Style Vitrine</span><span>01</span></p>
+                </div>
+                <div class="carte-style" style="--fond:#FFFFFF;--texte:#111827;--accent:#EF4444;--police:'Montserrat',Arial,sans-serif">
+                    <div class="mini-nav"><span class="mini-logo">Le Comptoir Burger</span><i></i><i></i><b>Commander</b></div>
+                    <div class="mini-hero"><span class="mini-sur">Burger</span><strong>Le Comptoir Burger</strong><span class="mini-sous">Viande fraîche hachée sur place</span><span class="mini-bouton">Commander en ligne</span></div>
+                    <div class="mini-grille"><i></i><i></i><i></i></div>
+                    <p class="carte-pied"><span>Style Braise</span><span>02</span></p>
+                </div>
+                <div class="carte-style" style="--fond:#111111;--texte:#F1ECE4;--accent:#D64545;--police:'Cormorant Garamond',Georgia,serif">
+                    <div class="mini-nav"><span class="mini-logo">Sakura Sushi</span><i></i><i></i><b>Réserver</b></div>
+                    <div class="mini-hero"><span class="mini-sur">Sushi</span><strong>Sakura Sushi</strong><span class="mini-sous">Préparés minute par notre chef</span><span class="mini-bouton">Voir la carte</span></div>
+                    <div class="mini-grille"><i></i><i></i><i></i></div>
+                    <p class="carte-pied"><span>Style Épuré</span><span>03</span></p>
+                </div>
+                <div class="carte-style" style="--fond:#14110D;--texte:#F5EDE0;--accent:#B8860B;--police:'Cormorant Garamond',Georgia,serif">
+                    <div class="mini-nav"><span class="mini-logo">Brasserie du Marché</span><i></i><i></i><b>Réserver</b></div>
+                    <div class="mini-hero"><span class="mini-sur">Brasserie</span><strong>La Brasserie du Marché</strong><span class="mini-sous">Produits frais du marché</span><span class="mini-bouton">Réserver une table</span></div>
+                    <div class="mini-grille"><i></i><i></i><i></i></div>
+                    <p class="carte-pied"><span>Style Éditorial</span><span>04</span></p>
+                </div>
+                <div class="carte-style" style="--fond:#1C1210;--texte:#F3E6D8;--accent:#B0413E;--police:'Cormorant Garamond',Georgia,serif">
+                    <div class="mini-nav"><span class="mini-logo">Le Bistrot de la Place</span><i></i><i></i><b>Réserver</b></div>
+                    <div class="mini-hero"><span class="mini-sur">Bistrot</span><strong><em>Le Bistrot de la Place</em></strong><span class="mini-sous">Cuisine généreuse et authentique</span><span class="mini-bouton">Découvrir la carte</span></div>
+                    <div class="mini-grille"><i></i><i></i><i></i></div>
+                    <p class="carte-pied"><span>Style Mario</span><span>05</span></p>
+                </div>
+                <div class="carte-style" style="--fond:#C0392B;--texte:#FFFFFF;--accent:#1B1113;--police:'Montserrat',Arial,sans-serif">
+                    <div class="mini-nav"><span class="mini-logo">LE BISTROT</span><i></i><i></i><b>Réserver</b></div>
+                    <div class="mini-hero"><span class="mini-sur" style="color:#fff">Restaurant</span><strong>LE BISTROT DE LA PLACE</strong><span class="mini-sous">Au cœur de la ville</span><span class="mini-bouton">Voir la carte</span></div>
+                    <div class="mini-grille"><i></i><i></i><i></i></div>
+                    <p class="carte-pied"><span>Style Affiche</span><span>06</span></p>
+                </div>
+                <div class="carte-style" style="--fond:#0B0B1A;--texte:#F4F4FF;--accent:#FF3CAC;--police:'Unbounded',Arial,sans-serif">
+                    <div class="mini-nav"><span class="mini-logo">Ramen Néon</span><i></i><i></i><b>Commander</b></div>
+                    <div class="mini-hero"><span class="mini-sur">Ramen</span><strong>Ramen Néon</strong><span class="mini-sous">Bouillons mijotés douze heures</span><span class="mini-bouton">Voir la carte</span></div>
+                    <div class="mini-grille"><i></i><i></i><i></i></div>
+                    <p class="carte-pied"><span>Style Néon</span><span>07</span></p>
+                </div>
+                <div class="carte-style" style="--fond:#F1E9DA;--texte:#3B2F22;--accent:#6B7F2A;--police:'Playfair Display',Georgia,serif">
+                    <div class="mini-nav"><span class="mini-logo">L'Auberge du Coin</span><i></i><i></i><b>Réserver</b></div>
+                    <div class="mini-hero"><span class="mini-sur">Cuisine du terroir</span><strong>L'Auberge du Coin</strong><span class="mini-sous">Produits de nos fermes voisines</span><span class="mini-bouton">Voir la carte</span></div>
+                    <div class="mini-grille"><i></i><i></i><i></i></div>
+                    <p class="carte-pied"><span>Style Terroir</span><span>08</span></p>
+                </div>
+                <div class="carte-style" style="--fond:#F6F3EC;--texte:#222222;--accent:#7A8B6F;--police:'Cormorant Garamond',Georgia,serif">
+                    <div class="mini-nav"><span class="mini-logo">Maison Kyo</span><i></i><i></i><b>Réserver</b></div>
+                    <div class="mini-hero"><span class="mini-sur">Japonais</span><strong>Maison Kyo</strong><span class="mini-sous">Cuisine de saison, huit couverts</span><span class="mini-bouton">Réserver</span></div>
+                    <div class="mini-grille"><i></i><i></i><i></i></div>
+                    <p class="carte-pied"><span>Style Zen</span><span>09</span></p>
+                </div>
+                <div class="carte-style" style="--fond:#0F0D0A;--texte:#EFE3C8;--accent:#C9A55A;--sur-accent:#0F0D0A;--police:'Cormorant Garamond',Georgia,serif">
+                    <div class="mini-nav"><span class="mini-logo">Le Grand Salon</span><i></i><i></i><b>Réserver</b></div>
+                    <div class="mini-hero"><span class="mini-sur">Gastronomique</span><strong>Le Grand Salon</strong><span class="mini-sous">Menu dégustation en sept temps</span><span class="mini-bouton">Réserver une table</span></div>
+                    <div class="mini-grille"><i></i><i></i><i></i></div>
+                    <p class="carte-pied"><span>Style Palace</span><span>10</span></p>
+                </div>
+            </div>
+        </div>
+        <p class="styles-lien"><a class="bouton bouton-contour magnetique" href="https://chefdigital.fr/exemples" target="_blank" rel="noopener">Voir les 35 styles en vrai ↗</a></p>
+    </section>
+
+    <section class="telephone">
+        <div class="conteneur telephone-grille">
+            <div class="telephone-texte revele">
+                <p class="surtitre">Espace client</p>
+                <h2 class="titre-section titre-compact">Un prix change ? Modifiez-le depuis votre téléphone.</h2>
+                <p>Carte, photos, horaires, réservations : tout se modifie depuis votre espace client, et le site se met à jour tout seul. Avec la formule Gestion complète, un message WhatsApp suffit.</p>
+                <ul class="puces">
+                    <li>Réservations en ligne, sans commission</li>
+                    <li>Menu digital et QR code inclus</li>
+                    <li>Support 7 j/7 par chat</li>
+                </ul>
+            </div>
+            <div class="telephone-scene">
+                <div class="telephone-3d" id="telephone">
+                    <div class="telephone-ecran">
+                        <div class="app-barre"><span>9:41</span><span>● ● ●</span></div>
+                        <div class="app-entete"><p>Chez Marcel</p><h4>Ma carte</h4></div>
+                        <div class="app-liste">
+                            <div class="app-plat"><div><b>Salade lyonnaise</b><span>Entrée</span></div><em>12,00 €</em></div>
+                            <div class="app-plat cible"><div><b>Quenelle de brochet</b><span>Plat</span></div><em id="prix-demo">22,00 €</em></div>
+                            <div class="app-plat"><div><b>Saucisson brioché</b><span>Plat</span></div><em>19,00 €</em></div>
+                            <div class="app-plat"><div><b>Tarte aux pralines</b><span>Dessert</span></div><em>8,50 €</em></div>
+                            <div class="app-plat"><div><b>Cervelle de canut</b><span>Fromage</span></div><em>7,00 €</em></div>
+                        </div>
+                        <p class="app-toast" id="app-toast">Site mis à jour</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="chiffres">
+        <div class="conteneur">
+            <div class="chiffres-grille">
+                <div class="chiffre"><p class="chiffre-valeur"><span data-compte="14.99" data-decimales="2">14,99</span><span class="chiffre-unite">€ HT</span></p><p>par mois pour commencer, domaine et hébergement compris</p></div>
+                <div class="chiffre"><p class="chiffre-valeur"><span data-compte="35">35</span><span class="chiffre-unite">styles</span></p><p>de site, à changer quand vous voulez</p></div>
+                <div class="chiffre"><p class="chiffre-valeur"><span data-compte="24">24</span><span class="chiffre-unite">h</span></p><p>pour recevoir votre maquette</p></div>
+                <div class="chiffre"><p class="chiffre-valeur"><span data-compte="0">0</span><span class="chiffre-unite">€</span></p><p>la maquette, sans carte bancaire</p></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="tarifs" id="tarifs">
+        <div class="conteneur">
+            <div class="tarifs-entete revele">
+                <p class="surtitre">Tarifs</p>
+                <h2 class="titre-section">Trois formules, sans frais cachés.</h2>
+                <p>Prix hors taxes, par mois. 30 jours d'essai gratuit.</p>
+            </div>
+            <div class="tarifs-grille">
+                <article class="offre">
+                    <h3>Essentiel</h3>
+                    <p class="offre-accroche">Le site complet, prêt à servir.</p>
+                    <p class="offre-prix">14,99 €<small>HT / mois</small></p>
+                    <ul>
+                        <li>Site créé et mis en ligne par notre équipe</li>
+                        <li>Nom de domaine .fr ou .com</li>
+                        <li>Menu digital et QR code, jusqu'à 8 photos</li>
+                        <li>Réservations en ligne, sans commission</li>
+                        <li>Support 7 j/7 par chat</li>
+                    </ul>
+                    <a class="bouton bouton-contour" href="https://chefdigital.fr/register?plan=essentiel" target="_blank" rel="noopener">Démarrer</a>
+                </article>
+                <article class="offre vedette">
+                    <span class="offre-badge">Recommandé</span>
+                    <h3>Premium</h3>
+                    <p class="offre-accroche">Tout l'Essentiel, en plus libre.</p>
+                    <p class="offre-prix">19,99 €<small>HT / mois</small></p>
+                    <ul>
+                        <li>35 styles, à changer à volonté</li>
+                        <li>24 photos au lieu de 8</li>
+                        <li>Génération de site prioritaire</li>
+                        <li>Retouche de vos photos par notre équipe</li>
+                        <li>Tout l'Essentiel inclus</li>
+                    </ul>
+                    <a class="bouton bouton-plein" href="https://chefdigital.fr/register?plan=premium" target="_blank" rel="noopener">Démarrer en Premium</a>
+                </article>
+                <article class="offre">
+                    <h3>Gestion complète</h3>
+                    <p class="offre-accroche">On s'occupe de tout, vous cuisinez.</p>
+                    <p class="offre-prix">39,99 €<small>HT / mois</small></p>
+                    <ul>
+                        <li>Gestion directe par WhatsApp</li>
+                        <li>Horaires, carte, prix, photos : on s'en charge</li>
+                        <li>Gestion de vos réseaux sociaux</li>
+                        <li>Tout le Premium inclus</li>
+                    </ul>
+                    <a class="bouton bouton-contour" href="https://chefdigital.fr/register?plan=gestion_complete" target="_blank" rel="noopener">Démarrer</a>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="final">
+        <canvas id="braises" aria-hidden="true"></canvas>
+        <div class="conteneur final-contenu">
+            <p class="surtitre">24:00 · Fin du service</p>
+            <h2>On allume les <span class="accent">fourneaux</span> ?</h2>
+            <p>Votre maquette gratuite en moins de 24 heures, sans carte bancaire.</p>
+            <a class="bouton bouton-plein bouton-grand magnetique" id="cta-final" href="https://chefdigital.fr/register" target="_blank" rel="noopener">Demander ma maquette gratuite</a>
+        </div>
+    </section>
+</main>
+
+<footer class="pied">
+    <p>Chef Digital X : page de test. Le site officiel reste <a href="https://chefdigital.fr" target="_blank" rel="noopener">chefdigital.fr</a>.</p>
+    <p>Three.js · GSAP · Lenis · WebGL · Web Audio</p>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script>
+    // QR code réel (version 2, correction M) de https://chefdigital.fr : une ligne par rangée de modules.
+    window.CDX_QR = '1111111001100000101111111|1000001001111001001000001|1011101011100011101011101|1011101011100111101011101|1011101010101100101011101|1000001011100011101000001|1111111010101010101111111|0000000010000001000000000|1011111001101100001111100|1110000011110100100100010|1111001100011111100111011|0001110001000000101000001|0000111000110111011010111|1010010100001000100101010|1000101110100111111111011|1010100000001001011110001|1001101100101110111110100|0000000010100011100011000|1111111000011100101010111|1000001011010000100011000|1011101010010001111110111|1011101011001101011011111|1011101011000110000001101|1000001001001101111111001|1111111011001010000111111';
+
+    (function () {
+        'use strict';
+        const racine = document.documentElement;
+        const reduit = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const pointeurFin = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+        const G = window.gsap;
+        const ST = window.ScrollTrigger;
+        const aGsap = Boolean(G && ST);
+        if (aGsap) G.registerPlugin(ST);
+        const borne = (v, a, b) => Math.min(b, Math.max(a, v));
+
+        // ---------- QR 2D de l'étape « en ligne » ----------
+        const rangees = window.CDX_QR.split('|');
+        document.querySelectorAll('canvas[data-qr]').forEach(function (c) {
+            const ctx = c.getContext('2d');
+            const n = rangees.length, marge = 2, cote = c.width / (n + marge * 2);
+            ctx.fillStyle = '#F4ECE2';
+            ctx.fillRect(0, 0, c.width, c.height);
+            ctx.fillStyle = '#1B1113';
+            rangees.forEach(function (r, y) {
+                for (let x = 0; x < n; x++) if (r[x] === '1') ctx.fillRect(Math.round((x + marge) * cote), Math.round((y + marge) * cote), Math.ceil(cote), Math.ceil(cote));
+            });
+        });
+
+        // ---------- Défilement doux ----------
+        let lenis = null;
+        if (!reduit && window.Lenis) {
+            lenis = new window.Lenis({ lerp: 0.09, smoothWheel: true });
+            if (aGsap) {
+                lenis.on('scroll', ST.update);
+                G.ticker.add(function (t) { lenis.raf(t * 1000); });
+                G.ticker.lagSmoothing(0);
+            } else {
+                (function f(t) { lenis.raf(t); requestAnimationFrame(f); })(performance.now());
+            }
+        }
+        document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+            a.addEventListener('click', function (e) {
+                const cible = document.querySelector(a.getAttribute('href'));
+                if (!cible) return;
+                e.preventDefault();
+                if (lenis) lenis.scrollTo(cible, { duration: 1.4 });
+                else cible.scrollIntoView({ behavior: reduit ? 'auto' : 'smooth' });
+            });
+        });
+
+        // ---------- Titre découpé en lettres (lecteurs d'écran : le titre entier) ----------
+        const titre = document.querySelector('.hero-titre');
+        titre.setAttribute('aria-label', titre.textContent.replace(/\s+/g, ' ').trim());
+        titre.querySelectorAll('.ligne').forEach(function (ligne) {
+            const mots = ligne.textContent.trim().split(/\s+/);
+            ligne.textContent = '';
+            mots.forEach(function (mot, i) {
+                const m = document.createElement('span');
+                m.className = 'mot';
+                m.setAttribute('aria-hidden', 'true');
+                Array.from(mot).forEach(function (ch) {
+                    const c = document.createElement('span');
+                    c.className = 'car';
+                    c.textContent = ch;
+                    m.appendChild(c);
+                });
+                ligne.appendChild(m);
+                if (i < mots.length - 1) ligne.appendChild(document.createTextNode(' '));
+            });
+        });
+
+        // ---------- Mise en place puis entrée du titre ----------
+        const chargement = document.getElementById('chargement');
+        let introLancee = false;
+        function lancerIntro() {
+            if (introLancee) return;
+            introLancee = true;
+            chargement.classList.add('fini');
+            window.CDX_PRET = true;
+            document.dispatchEvent(new CustomEvent('cdx:pret'));
+            if (aGsap && !reduit) {
+                G.from('.hero-titre .car', { yPercent: 115, rotate: 6, duration: 1.15, ease: 'expo.out', stagger: 0.018 });
+                G.from('.hero .ticket, .hero-texte, .hero-boutons, .hero-note, .hero-legende-qr', { y: 26, opacity: 0, duration: 0.9, ease: 'power3.out', stagger: 0.08, delay: 0.45 });
+                G.from('.nav', { y: -24, opacity: 0, duration: 0.8, ease: 'power3.out', delay: 0.2 });
+            }
+        }
+        if (reduit) {
+            lancerIntro();
+        } else {
+            const pct = document.getElementById('chargement-pct');
+            const remplissage = document.getElementById('chargement-remplissage');
+            const debut = performance.now();
+            (function avancer(t) {
+                const p = borne((t - debut) / 1100, 0, 1), e = 1 - Math.pow(1 - p, 3);
+                pct.textContent = String(Math.round(e * 100)).padStart(3, '0');
+                remplissage.style.transform = 'scaleX(' + e + ')';
+                if (p < 1) requestAnimationFrame(avancer); else setTimeout(lancerIntro, 140);
+            })(debut);
+            setTimeout(lancerIntro, 2600); // si l'onglet est en arrière-plan
+        }
+
+        // ---------- Graisse du titre qui réagit au curseur (police variable) ----------
+        if (pointeurFin && !reduit) {
+            const cars = Array.from(document.querySelectorAll('.hero-titre .car'));
+            const hero = document.querySelector('.hero');
+            let sx = -9999, sy = -9999, prevu = false;
+            const peser = function () {
+                prevu = false;
+                cars.forEach(function (c) {
+                    const r = c.getBoundingClientRect();
+                    const f = Math.max(0, 1 - Math.hypot(r.left + r.width / 2 - sx, r.top + r.height / 2 - sy) / 240);
+                    c.style.fontVariationSettings = '"wght" ' + Math.round(700 - 480 * f * f);
+                });
+            };
+            hero.addEventListener('pointermove', function (e) { sx = e.clientX; sy = e.clientY; if (!prevu) { prevu = true; requestAnimationFrame(peser); } });
+            hero.addEventListener('pointerleave', function () { sx = sy = -9999; requestAnimationFrame(peser); });
+        }
+
+        // ---------- Curseur ----------
+        if (pointeurFin && !reduit) {
+            racine.classList.add('curseur-perso');
+            const point = document.querySelector('.curseur-point');
+            const anneau = document.querySelector('.curseur-anneau');
+            let mx = -100, my = -100, ax = -100, ay = -100;
+            window.addEventListener('pointermove', function (e) {
+                mx = e.clientX; my = e.clientY;
+                point.style.transform = 'translate3d(' + mx + 'px,' + my + 'px,0)';
+            }, { passive: true });
+            (function suivre() {
+                ax += (mx - ax) * 0.18; ay += (my - ay) * 0.18;
+                anneau.style.transform = 'translate3d(' + ax.toFixed(1) + 'px,' + ay.toFixed(1) + 'px,0)';
+                requestAnimationFrame(suivre);
+            })();
+            const interactif = 'a, button, .anneau-scene, .offre';
+            document.addEventListener('pointerover', function (e) { if (e.target.closest(interactif)) anneau.classList.add('actif'); });
+            document.addEventListener('pointerout', function (e) { if (e.target.closest(interactif) && !(e.relatedTarget && e.relatedTarget.closest && e.relatedTarget.closest(interactif))) anneau.classList.remove('actif'); });
+            document.addEventListener('pointerleave', function () { mx = my = -100; point.style.transform = 'translate3d(-100px,-100px,0)'; });
+        }
+
+        // ---------- Son (Web Audio, uniquement après un clic) ----------
+        const boutonSon = document.getElementById('son');
+        let audio = null, sonActif = false;
+        function bip(freq, duree, volume) {
+            if (!sonActif || !audio) return;
+            const t = audio.currentTime, o = audio.createOscillator(), g = audio.createGain();
+            o.type = 'sine';
+            o.frequency.setValueAtTime(freq, t);
+            o.frequency.exponentialRampToValueAtTime(freq * 1.5, t + duree);
+            g.gain.setValueAtTime(volume || 0.04, t);
+            g.gain.exponentialRampToValueAtTime(0.0001, t + duree);
+            o.connect(g).connect(audio.destination);
+            o.start(t); o.stop(t + duree + 0.02);
+        }
+        // Grésillement de poêle : bruit blanc filtré, qui retombe.
+        function gresiller() {
+            if (!sonActif || !audio) return;
+            const duree = 1.2, t = audio.currentTime;
+            const tampon = audio.createBuffer(1, Math.floor(audio.sampleRate * duree), audio.sampleRate);
+            const d = tampon.getChannelData(0);
+            for (let i = 0; i < d.length; i++) d[i] = (Math.random() * 2 - 1) * (Math.random() < 0.08 ? 1 : 0.35);
+            const src = audio.createBufferSource(), filtre = audio.createBiquadFilter(), g = audio.createGain();
+            src.buffer = tampon;
+            filtre.type = 'bandpass'; filtre.frequency.value = 3200; filtre.Q.value = 0.8;
+            g.gain.setValueAtTime(0.0001, t);
+            g.gain.exponentialRampToValueAtTime(0.12, t + 0.05);
+            g.gain.exponentialRampToValueAtTime(0.0001, t + duree);
+            src.connect(filtre).connect(g).connect(audio.destination);
+            src.start(t);
+        }
+        boutonSon.addEventListener('click', function () {
+            sonActif = !sonActif;
+            boutonSon.setAttribute('aria-pressed', String(sonActif));
+            boutonSon.querySelector('.son-etat').textContent = sonActif ? 'on' : 'off';
+            if (sonActif && !audio) {
+                try { audio = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) { sonActif = false; }
+            }
+            if (audio && audio.state === 'suspended') audio.resume();
+            bip(660, 0.09, 0.05);
+        });
+        document.querySelectorAll('.bouton, .nav-liens a').forEach(function (el) {
+            el.addEventListener('pointerenter', function () { bip(880, 0.05, 0.025); });
+        });
+
+        // ---------- Boutons aimantés ----------
+        if (pointeurFin && !reduit && aGsap) {
+            document.querySelectorAll('.magnetique').forEach(function (b) {
+                b.addEventListener('pointermove', function (e) {
+                    const r = b.getBoundingClientRect();
+                    G.to(b, { x: (e.clientX - r.left - r.width / 2) * 0.3, y: (e.clientY - r.top - r.height / 2) * 0.4, duration: 0.4, ease: 'power3.out', overwrite: 'auto' });
+                });
+                b.addEventListener('pointerleave', function () {
+                    G.to(b, { x: 0, y: 0, duration: 1, ease: 'elastic.out(1, 0.35)', overwrite: 'auto' });
+                });
+            });
+        }
+
+        // ---------- Barre de navigation et horloge du service (00:00 → 24:00) ----------
+        const nav = document.querySelector('.nav');
+        const hud = document.querySelector('.hud');
+        const hudHeure = document.getElementById('hud-heure');
+        const hudProgression = document.getElementById('hud-progression');
+        const hudEtat = document.getElementById('hud-etat');
+        const etats = ['Commande reçue', 'Lecture de la carte', 'Maquette envoyée', 'Site en ligne'];
+        function majDefilement() {
+            const y = window.scrollY;
+            const max = document.documentElement.scrollHeight - window.innerHeight;
+            const p = max > 0 ? borne(y / max, 0, 1) : 0;
+            const minutes = Math.round(p * 24 * 60);
+            hudHeure.textContent = String(Math.floor(minutes / 60)).padStart(2, '0') + ':' + String(minutes % 60).padStart(2, '0');
+            hudProgression.style.transform = 'scaleX(' + p.toFixed(4) + ')';
+            hudEtat.textContent = etats[Math.min(3, Math.floor(p * 4))];
+            nav.classList.toggle('opaque', y > 40);
+            hud.classList.toggle('visible', y > window.innerHeight * 0.6);
+        }
+        window.addEventListener('scroll', majDefilement, { passive: true });
+        majDefilement();
+
+        // ---------- Bandeau des cuisines : suit le sens et la vitesse du défilement ----------
+        const bande = document.getElementById('bandeau-piste');
+        if (bande) {
+            const copie = bande.innerHTML;
+            bande.insertAdjacentHTML('beforeend', copie.replace(/<span/g, '<span aria-hidden="true"'));
+            if (!reduit) {
+                let x = 0, sens = -1, largeur = bande.scrollWidth / 2, dernier = performance.now(), visible = true;
+                window.addEventListener('resize', function () { largeur = bande.scrollWidth / 2; });
+                if ('IntersectionObserver' in window) new IntersectionObserver(function (e) { visible = e[0].isIntersecting; }).observe(bande);
+                (function defiler(t) {
+                    const dt = Math.min(64, t - dernier); dernier = t;
+                    if (visible) {
+                        const v = lenis ? lenis.velocity : 0;
+                        if (v > 0.3) sens = -1; else if (v < -0.3) sens = 1;
+                        x += sens * (0.05 + Math.min(Math.abs(v), 60) * 0.012) * dt;
+                        if (x <= -largeur) x += largeur;
+                        if (x > 0) x -= largeur;
+                        bande.style.transform = 'translate3d(' + x.toFixed(1) + 'px,0,0) skewX(' + borne(-v * 0.35, -10, 10).toFixed(2) + 'deg)';
+                    }
+                    requestAnimationFrame(defiler);
+                })(dernier);
+            }
+        }
+
+        // ---------- Manège 3D des styles ----------
+        (function () {
+            const scene = document.getElementById('anneau-scene');
+            const anneau = document.getElementById('anneau');
+            const cartes = Array.from(anneau.children);
+            const n = cartes.length, pasAngle = 360 / n;
+            let rayon = 0, angle = 0, vitesseAuto = reduit ? 0 : 9, inertie = 0, saisie = null, survol = false, visible = false, dernier = null;
+            function mesurer() {
+                rayon = Math.round((cartes[0].offsetWidth / 2) / Math.tan(Math.PI / n) + 40);
+                cartes.forEach(function (c, i) { c.style.transform = 'rotateY(' + (i * pasAngle) + 'deg) translateZ(' + rayon + 'px)'; });
+                dessiner();
+            }
+            function dessiner() {
+                anneau.style.transform = 'translateZ(' + (-rayon) + 'px) rotateX(-6deg) rotateY(' + angle.toFixed(2) + 'deg)';
+                cartes.forEach(function (c, i) {
+                    let a = ((i * pasAngle + angle) % 360 + 360) % 360;
+                    if (a > 180) a -= 360;
+                    const face = Math.max(0, Math.cos(a * Math.PI / 180));
+                    c.style.filter = 'brightness(' + (0.35 + 0.65 * face).toFixed(2) + ')';
+                });
+            }
+            function tourner(t) {
+                const dt = dernier === null ? 0 : Math.min(64, t - dernier) / 1000;
+                dernier = t;
+                if (!saisie) {
+                    if (Math.abs(inertie) > 0.01) { angle += inertie * dt * 60; inertie *= Math.pow(0.94, dt * 60); }
+                    else if (!survol) angle -= vitesseAuto * dt;
+                }
+                dessiner();
+                if (visible) requestAnimationFrame(tourner); else dernier = null;
+            }
+            scene.addEventListener('pointerdown', function (e) {
+                saisie = { x: e.clientX, angle: angle, dernierX: e.clientX, vitesse: 0 };
+                scene.setPointerCapture(e.pointerId);
+                scene.classList.add('saisi');
+                inertie = 0;
+            });
+            scene.addEventListener('pointermove', function (e) {
+                if (!saisie) return;
+                angle = saisie.angle + (e.clientX - saisie.x) * 0.3;
+                saisie.vitesse = (e.clientX - saisie.dernierX) * 0.3;
+                saisie.dernierX = e.clientX;
+            });
+            const lacher = function () { if (!saisie) return; inertie = borne(saisie.vitesse, -12, 12); saisie = null; scene.classList.remove('saisi'); };
+            scene.addEventListener('pointerup', lacher);
+            scene.addEventListener('pointercancel', lacher);
+            scene.addEventListener('pointerenter', function () { survol = true; });
+            scene.addEventListener('pointerleave', function () { survol = false; });
+            window.addEventListener('resize', mesurer);
+            mesurer();
+            if ('IntersectionObserver' in window) {
+                new IntersectionObserver(function (e) {
+                    const etait = visible;
+                    visible = e[0].isIntersecting;
+                    if (visible && !etait) requestAnimationFrame(tourner);
+                }).observe(scene);
+            }
+        })();
+
+        // ---------- Cartes de tarifs : lueur sous le curseur et inclinaison ----------
+        document.querySelectorAll('.offre').forEach(function (c) {
+            c.addEventListener('pointermove', function (e) {
+                const r = c.getBoundingClientRect(), px = (e.clientX - r.left) / r.width, py = (e.clientY - r.top) / r.height;
+                c.style.setProperty('--x', (px * 100).toFixed(1) + '%');
+                c.style.setProperty('--y', (py * 100).toFixed(1) + '%');
+                if (aGsap && !reduit && pointeurFin) G.to(c, { rotateY: (px - 0.5) * 10, rotateX: (0.5 - py) * 8, duration: 0.5, ease: 'power2.out', overwrite: 'auto' });
+            });
+            c.addEventListener('pointerleave', function () {
+                if (aGsap && !reduit) G.to(c, { rotateY: 0, rotateX: 0, duration: 1.1, ease: 'elastic.out(1, 0.4)', overwrite: 'auto' });
+            });
+        });
+
+        // ---------- Braises de la fin, gerbe d'étincelles au clic ----------
+        (function () {
+            const cv = document.getElementById('braises');
+            const ctx = cv.getContext('2d');
+            const section = cv.parentElement;
+            let W = 0, H = 0, parts = [], visible = false, enCours = false;
+            function taille() {
+                const dpr = Math.min(window.devicePixelRatio || 1, 2);
+                W = cv.clientWidth; H = cv.clientHeight;
+                cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+                ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+            }
+            function braise(x, y, gerbe) {
+                const a = Math.random() * Math.PI * 2, v = 2 + Math.random() * 7;
+                return {
+                    x: x === undefined ? Math.random() * W : x, y: y === undefined ? H + 10 : y,
+                    vx: gerbe ? Math.cos(a) * v : (Math.random() - 0.5) * 0.4,
+                    vy: gerbe ? Math.sin(a) * v - 3 : -(0.35 + Math.random() * 1.1),
+                    r: gerbe ? 1 + Math.random() * 2.2 : 0.7 + Math.random() * 1.9,
+                    vie: 1, usure: gerbe ? 0.012 + Math.random() * 0.016 : 0.0025 + Math.random() * 0.004,
+                    teinte: Math.random(), gerbe: gerbe
+                };
+            }
+            function remplir() { parts = []; const nb = W < 600 ? 45 : 90; for (let i = 0; i < nb; i++) parts.push(braise(Math.random() * W, Math.random() * H, false)); }
+            function image(t) {
+                if (!visible) { enCours = false; return; }
+                ctx.clearRect(0, 0, W, H);
+                ctx.globalCompositeOperation = 'lighter';
+                for (let i = parts.length - 1; i >= 0; i--) {
+                    const p = parts[i];
+                    p.x += p.vx + Math.sin((p.y + t * 0.05) * 0.02) * 0.25;
+                    p.y += p.vy;
+                    if (p.gerbe) { p.vx *= 0.96; p.vy = p.vy * 0.96 - 0.02; }
+                    p.vie -= p.usure;
+                    if (p.vie <= 0 || p.y < -20) { if (p.gerbe) parts.splice(i, 1); else parts[i] = braise(undefined, undefined, false); continue; }
+                    const a = p.vie * (0.55 + 0.45 * Math.sin(t * 0.01 + i));
+                    const r = 255, gv = Math.round(90 + p.teinte * 90), b = Math.round(54 + p.teinte * 38);
+                    const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 4);
+                    grad.addColorStop(0, 'rgba(' + r + ',' + gv + ',' + b + ',' + a.toFixed(3) + ')');
+                    grad.addColorStop(1, 'rgba(' + r + ',' + gv + ',' + b + ',0)');
+                    ctx.fillStyle = grad;
+                    ctx.beginPath(); ctx.arc(p.x, p.y, p.r * 4, 0, Math.PI * 2); ctx.fill();
+                }
+                ctx.globalCompositeOperation = 'source-over';
+                requestAnimationFrame(image);
+            }
+            taille(); remplir();
+            window.addEventListener('resize', function () { taille(); remplir(); });
+            if (reduit) return;
+            new IntersectionObserver(function (e) {
+                visible = e[0].isIntersecting;
+                if (visible && !enCours) { enCours = true; requestAnimationFrame(image); }
+            }).observe(section);
+            document.getElementById('cta-final').addEventListener('click', function (e) {
+                const rs = section.getBoundingClientRect(), rb = e.currentTarget.getBoundingClientRect();
+                const cx = rb.left + rb.width / 2 - rs.left, cy = rb.top + rb.height / 2 - rs.top;
+                for (let i = 0; i < 110; i++) parts.push(braise(cx, cy, true));
+                gresiller();
+            });
+        })();
+
+        if (!aGsap || reduit) return;
+
+        // ---------- Apparitions au défilement ----------
+        G.utils.toArray('.revele').forEach(function (el) {
+            G.from(el, { y: 50, opacity: 0, duration: 1.1, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 88%', once: true } });
+        });
+        G.from('.chiffre', { y: 40, opacity: 0, duration: 1, ease: 'power3.out', stagger: 0.1, scrollTrigger: { trigger: '.chiffres', start: 'top 85%', once: true } });
+        G.from('.offre', { y: 70, opacity: 0, rotateX: -12, duration: 1.1, ease: 'power3.out', stagger: 0.12, scrollTrigger: { trigger: '.tarifs-grille', start: 'top 85%', once: true } });
+        G.from('.final-contenu > *', { y: 40, opacity: 0, duration: 1, ease: 'power3.out', stagger: 0.1, scrollTrigger: { trigger: '.final', start: 'top 70%', once: true } });
+
+        // ---------- Compteurs ----------
+        document.querySelectorAll('[data-compte]').forEach(function (el) {
+            const fin = parseFloat(el.dataset.compte), dec = Number(el.dataset.decimales || 0), o = { v: 0 };
+            const ecrire = function (v) { el.textContent = v.toFixed(dec).replace('.', ','); };
+            if (el.getBoundingClientRect().top > window.innerHeight) ecrire(0);
+            ST.create({ trigger: el, start: 'top 90%', once: true, onEnter: function () { G.fromTo(o, { v: 0 }, { v: fin, duration: 1.8, ease: 'power2.out', onUpdate: function () { ecrire(o.v); } }); } });
+        });
+
+        // ---------- Le service : défilement horizontal épinglé (grands écrans) ----------
+        const mm = G.matchMedia();
+        mm.add('(min-width: 900px)', function () {
+            const cadre = document.querySelector('.service-cadre');
+            const piste = document.getElementById('service-piste');
+            const distance = function () { return Math.max(0, piste.scrollWidth - document.documentElement.clientWidth); };
+            const horizontal = G.to(piste, {
+                x: function () { return -distance(); }, ease: 'none',
+                scrollTrigger: { trigger: cadre, start: 'top top', end: function () { return '+=' + distance(); }, pin: true, scrub: 0.8, invalidateOnRefresh: true }
+            });
+            G.utils.toArray('.etape').forEach(function (et, i) {
+                if (i === 0) return;
+                G.from(et.querySelector('.etape-visuel > *'), { scale: 0.8, rotate: -6, opacity: 0, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: et, containerAnimation: horizontal, start: 'left 70%' } });
+            });
+        });
+        mm.add('(max-width: 899px)', function () {
+            G.utils.toArray('.etape').forEach(function (et) {
+                G.from(et, { y: 60, opacity: 0, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: et, start: 'top 88%', once: true } });
+            });
+        });
+
+        // ---------- Téléphone : se redresse au défilement, puis démonstration d'un prix modifié ----------
+        G.fromTo('#telephone', { rotateY: -34, rotateX: 16, rotateZ: -6 }, { rotateY: 12, rotateX: 2, rotateZ: 0, ease: 'none', scrollTrigger: { trigger: '.telephone', start: 'top bottom', end: 'bottom top', scrub: 1 } });
+        const prix = document.getElementById('prix-demo');
+        const ligneCible = document.querySelector('.app-plat.cible');
+        const toast = document.getElementById('app-toast');
+        const taper = function (texte) { prix.textContent = ''; Array.from(texte).forEach(function (ch, i) { G.delayedCall(0.08 * i, function () { prix.textContent += ch; }); }); };
+        const demo = G.timeline({ repeat: -1, repeatDelay: 1.4, paused: true });
+        demo.to(ligneCible, { backgroundColor: '#FFE9E2', duration: 0.4 })
+            .call(function () { prix.classList.add('edition'); })
+            .to({}, { duration: 0.6 })
+            .call(function () { taper('23,50 €'); })
+            .to({}, { duration: 1 })
+            .call(function () { prix.classList.remove('edition'); bip(1320, 0.12, 0.03); })
+            .fromTo(toast, { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: 'back.out(1.6)' })
+            .to({}, { duration: 1.6 })
+            .to(toast, { y: 40, opacity: 0, duration: 0.4 })
+            .to(ligneCible, { backgroundColor: '#FFFFFF', duration: 0.4 }, '<')
+            .call(function () { prix.textContent = '22,00 €'; });
+        ST.create({ trigger: '.telephone', start: 'top 80%', end: 'bottom top', onToggle: function (s) { if (s.isActive) demo.play(); else demo.pause(); } });
+
+        window.addEventListener('load', function () { ST.refresh(); });
+    })();
+</script>
+
+<script type="importmap">
+{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/" } }
+</script>
+<script type="module">
+    // Ouverture en WebGL : le vrai QR code de chefdigital.fr, un cube par module, qui s'assemble
+    // puis se disperse quand on fait défiler. Fond en shader, braises en particules, halo (bloom).
+    import * as THREE from 'three';
+    import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+    import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+    import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+    import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
+    import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
+
+    function demarrer() {
+        const canvas = document.getElementById('scene');
+        const hero = canvas.parentElement;
+        const reduit = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        let renderer;
+        try {
+            renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, powerPreference: 'high-performance' });
+        } catch (e) {
+            document.documentElement.classList.add('sans-webgl');
+            return;
+        }
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.75));
+        renderer.toneMapping = THREE.ACESFilmicToneMapping;
+        renderer.toneMappingExposure = 1.05;
+
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(32, 1, 0.1, 300);
+        camera.position.set(0, 0, 40);
+
+        // --- Fond : fumée et chaleur en shader (bruit fractal), braise en bas, flamme bleue près du QR ---
+        const fondMat = new THREE.ShaderMaterial({
+            uniforms: { uTemps: { value: 0 }, uRes: { value: new THREE.Vector2(1, 1) }, uSouris: { value: new THREE.Vector2() }, uFoyer: { value: new THREE.Vector2(0.28, 0.02) } },
+            vertexShader: 'varying vec2 vUv; void main(){ vUv = uv; gl_Position = vec4(position.xy, 0.9999, 1.0); }',
+            fragmentShader: `
+                uniform float uTemps; uniform vec2 uRes; uniform vec2 uSouris; uniform vec2 uFoyer; varying vec2 vUv;
+                float hash(vec2 p){ return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
+                float bruit(vec2 p){ vec2 i = floor(p), f = fract(p); vec2 u = f*f*(3.0-2.0*f);
+                    return mix(mix(hash(i), hash(i+vec2(1,0)), u.x), mix(hash(i+vec2(0,1)), hash(i+vec2(1,1)), u.x), u.y); }
+                float fbm(vec2 p){ float v = 0.0, a = 0.5; for (int i = 0; i < 5; i++){ v += a*bruit(p); p = p*2.03 + 17.1; a *= 0.5; } return v; }
+                vec3 lin(vec3 c){ return pow(c, vec3(2.2)); }
+                void main(){
+                    vec2 p = (vUv - 0.5) * vec2(uRes.x / uRes.y, 1.0);
+                    float n = fbm(p * 1.7 + vec2(0.0, -uTemps * 0.06));
+                    float n2 = fbm(p * 3.2 + n * 1.4 + vec2(uTemps * 0.02, -uTemps * 0.09));
+                    vec3 encre = lin(vec3(0.043, 0.024, 0.031));
+                    vec3 lie = lin(vec3(0.608, 0.106, 0.188));
+                    vec3 braise = lin(vec3(1.0, 0.353, 0.212));
+                    vec3 flamme = lin(vec3(0.345, 0.78, 1.0));
+                    float bas = smoothstep(0.75, -0.55, vUv.y + (n - 0.5) * 0.35);
+                    vec3 c = encre;
+                    c = mix(c, lie * 0.5, bas * 0.9);
+                    c += braise * pow(bas, 3.0) * 0.28 * (0.4 + n2);
+                    float d = length(p - uFoyer - uSouris * 0.04);
+                    c += flamme * 0.05 * smoothstep(0.75, 0.0, d) * (0.3 + n2);
+                    c += lie * 0.12 * smoothstep(0.6, 0.0, d);
+                    c += (hash(vUv * uRes + fract(uTemps)) - 0.5) * 0.006;
+                    c *= smoothstep(1.35, 0.25, length(p));
+                    gl_FragColor = vec4(c, 1.0);
+                }`,
+            depthWrite: false, depthTest: false
+        });
+        const fond = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), fondMat);
+        fond.frustumCulled = false;
+        fond.renderOrder = -10;
+        scene.add(fond);
+
+        // --- Lumières : face douce, braise en contre-plongée, flamme bleue en rasant ---
+        scene.add(new THREE.AmbientLight(0xffffff, 0.35));
+        const face = new THREE.DirectionalLight(0xfff1e6, 0.6); face.position.set(0, 2, 30); scene.add(face);
+        const lumBraise = new THREE.PointLight(0xff5a36, 220, 90, 1.6); lumBraise.position.set(-14, -12, 12); scene.add(lumBraise);
+        const lumFlamme = new THREE.PointLight(0x58c7ff, 180, 90, 1.6); lumFlamme.position.set(16, 14, 8); scene.add(lumFlamme);
+
+        // --- Le QR code : un cube par module sombre ---
+        const rangees = window.CDX_QR.split('|');
+        const N = rangees.length;
+        const cibles = [];
+        rangees.forEach(function (r, y) { for (let x = 0; x < N; x++) if (r[x] === '1') cibles.push(new THREE.Vector3(x - (N - 1) / 2, (N - 1) / 2 - y, 0.5)); });
+        const nb = cibles.length;
+        const cubes = new THREE.InstancedMesh(new RoundedBoxGeometry(0.97, 0.97, 0.97, 2, 0.08), new THREE.MeshStandardMaterial({ color: 0x1a0c10, metalness: 0.5, roughness: 0.35 }), nb);
+        cubes.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
+        const groupe = new THREE.Group();
+        groupe.add(cubes);
+        scene.add(groupe);
+
+        // Plaque claire sous les modules (le QR reste lisible par un téléphone) et cadre lumineux.
+        const cotePlaque = N + 6;
+        // Plaque non éclairée : sa teinte reste sous le seuil du halo, le code garde son contraste.
+        const texPlaque = document.createElement('canvas'); texPlaque.width = texPlaque.height = 256;
+        const tp = texPlaque.getContext('2d'), gp = tp.createRadialGradient(128, 110, 10, 128, 128, 190);
+        gp.addColorStop(0, '#EDE2D3'); gp.addColorStop(1, '#C8B9A6');
+        tp.fillStyle = gp; tp.fillRect(0, 0, 256, 256);
+        const cartePlaque = new THREE.CanvasTexture(texPlaque); cartePlaque.colorSpace = THREE.SRGBColorSpace;
+        const plaqueMat = new THREE.MeshBasicMaterial({ map: cartePlaque, transparent: true, opacity: 0 });
+        const plaque = new THREE.Mesh(new RoundedBoxGeometry(cotePlaque, cotePlaque, 0.5, 3, 0.9), plaqueMat);
+        plaque.position.z = -0.2;
+        groupe.add(plaque);
+        const cadreMat = new THREE.MeshBasicMaterial({ color: new THREE.Color(0xff5a36).multiplyScalar(2.2), toneMapped: false, transparent: true, opacity: 0 });
+        const cadre = new THREE.Mesh(new RoundedBoxGeometry(cotePlaque + 0.7, cotePlaque + 0.7, 0.3, 3, 1.2), cadreMat);
+        cadre.position.z = -0.6;
+        groupe.add(cadre);
+
+        // Faisceau de lecture qui passe sur le code, comme un téléphone qui le scanne.
+        const faisceauMat = new THREE.MeshBasicMaterial({ color: new THREE.Color(0x58c7ff).multiplyScalar(3), toneMapped: false, transparent: true, opacity: 0, blending: THREE.AdditiveBlending, depthWrite: false });
+        const faisceau = new THREE.Mesh(new THREE.PlaneGeometry(cotePlaque + 2, 0.22), faisceauMat);
+        faisceau.position.z = 1.3;
+        groupe.add(faisceau);
+
+        // Départs, délais et directions de fuite de chaque cube.
+        const alea = function (a, b) { return a + Math.random() * (b - a); };
+        const departs = [], rotDeparts = [], delais = [], fuites = [], rotFuites = [];
+        cibles.forEach(function (c) {
+            const u = alea(-1, 1), th = alea(0, Math.PI * 2), r = alea(24, 42), s = Math.sqrt(1 - u * u);
+            departs.push(new THREE.Vector3(r * s * Math.cos(th), r * u * 0.7, r * s * Math.sin(th) - 10));
+            rotDeparts.push(new THREE.Vector3(alea(-6, 6), alea(-6, 6), alea(-6, 6)));
+            delais.push(0.15 + (c.length() / (N * 0.7)) * 0.9 + alea(0, 0.35));
+            const dir = new THREE.Vector3(c.x + alea(-4, 4), c.y + alea(-4, 4), alea(6, 26)).normalize();
+            fuites.push(dir.multiplyScalar(alea(16, 38)));
+            rotFuites.push(new THREE.Vector3(alea(-4, 4), alea(-4, 4), alea(-4, 4)));
+        });
+
+        // --- Braises : particules qui montent ---
+        const nbBraises = window.innerWidth < 700 ? 260 : 620;
+        const posB = new Float32Array(nbBraises * 3), colB = new Float32Array(nbBraises * 3), vitB = new Float32Array(nbBraises);
+        const teintes = [new THREE.Color(0xff5a36), new THREE.Color(0xe3b45c), new THREE.Color(0xff8a4c), new THREE.Color(0x58c7ff)];
+        for (let i = 0; i < nbBraises; i++) {
+            posB[i * 3] = alea(-45, 45); posB[i * 3 + 1] = alea(-28, 28); posB[i * 3 + 2] = alea(-35, 12);
+            const t = teintes[Math.random() < 0.08 ? 3 : Math.floor(Math.random() * 3)];
+            colB[i * 3] = t.r * 1.8; colB[i * 3 + 1] = t.g * 1.8; colB[i * 3 + 2] = t.b * 1.8;
+            vitB[i] = alea(0.6, 2.2);
+        }
+        const geoB = new THREE.BufferGeometry();
+        geoB.setAttribute('position', new THREE.BufferAttribute(posB, 3));
+        geoB.setAttribute('color', new THREE.BufferAttribute(colB, 3));
+        const sprite = document.createElement('canvas'); sprite.width = sprite.height = 64;
+        const sc = sprite.getContext('2d'), sg = sc.createRadialGradient(32, 32, 0, 32, 32, 32);
+        sg.addColorStop(0, 'rgba(255,255,255,1)'); sg.addColorStop(0.25, 'rgba(255,255,255,.55)'); sg.addColorStop(1, 'rgba(255,255,255,0)');
+        sc.fillStyle = sg; sc.fillRect(0, 0, 64, 64);
+        const braises = new THREE.Points(geoB, new THREE.PointsMaterial({ size: 0.42, map: new THREE.CanvasTexture(sprite), vertexColors: true, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending }));
+        scene.add(braises);
+
+        // --- Rendu avec halo ---
+        const composer = new EffectComposer(renderer);
+        composer.addPass(new RenderPass(scene, camera));
+        const bloom = new UnrealBloomPass(new THREE.Vector2(1, 1), 0.8, 0.5, 0.95);
+        composer.addPass(bloom);
+        composer.addPass(new OutputPass());
+
+        // --- Mise en page : à droite sur grand écran, en haut sur téléphone ---
+        let echelle = 0.5;
+        function placer() {
+            const vh = 2 * camera.position.z * Math.tan(THREE.MathUtils.degToRad(camera.fov / 2));
+            const vw = vh * camera.aspect;
+            if (camera.aspect >= 1) {
+                echelle = (vh * 0.58) / cotePlaque;
+                const x = vw / 2 - (cotePlaque * echelle) / 2 - vw * 0.06;
+                groupe.position.set(x, 0.2, 0);
+                fondMat.uniforms.uFoyer.value.set((x / vw) * camera.aspect, 0.02);
+            } else {
+                // Même zone que le CSS (.hero-contenu) : 96 px sous le haut, min(72vw, 36svh) de côté.
+                const hPx = hero.clientHeight, parPx = vh / hPx;
+                const cotePx = Math.min(hero.clientWidth * 0.72, window.innerHeight * 0.36);
+                const centrePx = 96 + cotePx / 2;
+                echelle = (cotePx * parPx) / cotePlaque;
+                groupe.position.set(0, (hPx / 2 - centrePx) * parPx, 0);
+                fondMat.uniforms.uFoyer.value.set(0, 0.5 - centrePx / hPx);
+            }
+            groupe.scale.setScalar(echelle);
+        }
+        function redimensionner() {
+            const w = hero.clientWidth, h = hero.clientHeight;
+            if (!w || !h) return;
+            renderer.setSize(w, h, false);
+            composer.setSize(w, h);
+            camera.aspect = w / h;
+            camera.updateProjectionMatrix();
+            fondMat.uniforms.uRes.value.set(w, h);
+            placer();
+        }
+        redimensionner();
+        new ResizeObserver(redimensionner).observe(hero);
+
+        // --- Souris, défilement, visibilité ---
+        const souris = new THREE.Vector2(), sourisLissee = new THREE.Vector2();
+        window.addEventListener('pointermove', function (e) { souris.set(e.clientX / window.innerWidth * 2 - 1, -(e.clientY / window.innerHeight * 2 - 1)); }, { passive: true });
+        let fuite = 0;
+        let visible = true, enCours = false;
+        new IntersectionObserver(function (e) { visible = e[0].isIntersecting; if (visible && !enCours) boucle(); }).observe(hero);
+
+        let debutAssemblage = null;
+        const horloge = new THREE.Clock();
+        const lancer = function () { if (debutAssemblage === null) debutAssemblage = reduit ? -100 : horloge.getElapsedTime(); };
+        if (window.CDX_PRET) lancer(); else document.addEventListener('cdx:pret', lancer);
+        setTimeout(lancer, 3000);
+
+        const mannequin = new THREE.Object3D();
+        const tmp = new THREE.Vector3();
+        let premiereImage = true;
+
+        function boucle() {
+            if (!visible) { enCours = false; return; }
+            enCours = true;
+            requestAnimationFrame(boucle);
+            const temps = reduit ? 0 : horloge.getElapsedTime();
+            const tA = debutAssemblage === null ? 0 : (reduit ? 100 : temps - debutAssemblage);
+
+            const cibleFuite = Math.min(1, Math.max(0, window.scrollY / (hero.offsetHeight * 0.85)));
+            fuite += (cibleFuite - fuite) * (reduit ? 1 : 0.08);
+            sourisLissee.lerp(souris, 0.05);
+
+            for (let i = 0; i < nb; i++) {
+                let p = debutAssemblage === null ? 0 : Math.min(1, Math.max(0, (tA - delais[i]) / 1.7));
+                p = 1 - Math.pow(1 - p, 4);
+                const d = departs[i], c = cibles[i], rd = rotDeparts[i], f = fuites[i], rf = rotFuites[i];
+                // Avant l'assemblage, le nuage tourne lentement.
+                const ang = temps * 0.12;
+                const dx = d.x * Math.cos(ang) - d.z * Math.sin(ang), dz = d.x * Math.sin(ang) + d.z * Math.cos(ang);
+                tmp.set(dx + (c.x - dx) * p, d.y + (c.y - d.y) * p, dz + (c.z - dz) * p);
+                tmp.z += Math.sin(temps * 1.3 + c.x * 0.35 + c.y * 0.25) * 0.07 * p * (1 - fuite);
+                tmp.addScaledVector(f, fuite * fuite);
+                mannequin.position.copy(tmp);
+                mannequin.rotation.set(rd.x * (1 - p) + rf.x * fuite, rd.y * (1 - p) + rf.y * fuite, rd.z * (1 - p) + rf.z * fuite);
+                mannequin.scale.setScalar(1 - fuite * 0.35);
+                mannequin.updateMatrix();
+                cubes.setMatrixAt(i, mannequin.matrix);
+            }
+            cubes.instanceMatrix.needsUpdate = true;
+
+            const assemble = Math.min(1, Math.max(0, (tA - 2.3) / 0.9));
+            plaqueMat.opacity = assemble * Math.max(0, 1 - fuite * 2.4);
+            cadreMat.opacity = plaqueMat.opacity * (0.75 + 0.25 * Math.sin(temps * 2));
+
+            // Balayage toutes les 5 s une fois le code assemblé.
+            const cycle = (tA - 3.2) % 5;
+            if (assemble >= 1 && tA > 3.2 && cycle < 1.6 && fuite < 0.2) {
+                const q = cycle / 1.6;
+                faisceau.position.y = cotePlaque / 2 - q * cotePlaque;
+                faisceauMat.opacity = Math.sin(q * Math.PI) * 0.9;
+            } else faisceauMat.opacity = 0;
+
+            groupe.rotation.y = sourisLissee.x * 0.32 + Math.sin(temps * 0.35) * 0.05 + fuite * 0.6;
+            groupe.rotation.x = -sourisLissee.y * 0.22 + fuite * 0.25;
+            camera.position.z = 40 - fuite * 8;
+
+            const pos = geoB.attributes.position.array;
+            for (let i = 0; i < nbBraises; i++) {
+                pos[i * 3 + 1] += vitB[i] * 0.016;
+                pos[i * 3] += Math.sin(temps * 0.6 + i) * 0.006;
+                if (pos[i * 3 + 1] > 28) pos[i * 3 + 1] = -28;
+            }
+            geoB.attributes.position.needsUpdate = true;
+            braises.rotation.y = sourisLissee.x * 0.08;
+
+            fondMat.uniforms.uTemps.value = temps;
+            fondMat.uniforms.uSouris.value.copy(sourisLissee);
+            composer.render();
+            if (premiereImage) { premiereImage = false; canvas.classList.add('pret'); }
+        }
+        boucle();
+    }
+    demarrer();
+</script>
