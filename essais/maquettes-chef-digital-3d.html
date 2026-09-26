@@ -1,0 +1,1218 @@
+<title>Chef Digital Maquettes 3D</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Cormorant+Garamond:ital,wght@0,600;1,600&family=DM+Serif+Display:ital@0;1&family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..600&family=Gloock&family=IBM+Plex+Mono:wght@500;600&family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&family=Montserrat:wght@700;800&family=Outfit:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap">
+<style>
+/* ==========================================================================
+   Six maquettes de chefdigital.fr sur UNE même page d'accueil : mêmes textes, mêmes liens,
+   mêmes sections dans le même ordre que le site en ligne. Seule la feuille de style change
+   (classe .m1 à .m6 sur .site). Chaque maquette assume un seul rendu, clair ou sombre.
+   ========================================================================== */
+*, *::before, *::after { box-sizing: border-box; }
+html { background: #F4F0EB; }
+body { margin: 0; background: #F4F0EB; padding-bottom: 86px; }
+.site { --wine: #9B1B30; --wine-dark: #7A1526; --brass: #C08A2E; min-height: 100vh; overflow-x: clip; -webkit-font-smoothing: antialiased; }
+.site p, .site h1, .site h2, .site h3, .site ol, .site ul { margin: 0; }
+.site ol, .site ul { padding: 0; list-style: none; }
+.site a { color: inherit; }
+.site :focus-visible { outline: 2px solid var(--wine); outline-offset: 3px; border-radius: 4px; }
+.enveloppe { max-width: 1180px; margin-inline: auto; padding-inline: clamp(16px, 4vw, 40px); }
+
+/* ---- Structure commune (identique pour les 6) ---- */
+.entete { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; }
+.tete-sous { margin-top: 16px; }
+.insecable { white-space: nowrap; }
+.btn-entete .court { display: none; }
+@media (max-width: 560px) { .btn-entete .court { display: inline; } .btn-entete .long { display: none; } .entete-in { gap: 12px; } .entete-actions { gap: 8px; margin-left: auto; } .marque-nom { white-space: nowrap; } }
+.hero-titre .hero-accent.mot { display: inline; }
+.m5 .hero-titre .hero-accent.mot { display: inline-block; }
+.entete-in { display: flex; align-items: center; gap: 28px; min-height: 72px; }
+.marque { display: flex; align-items: center; gap: 10px; text-decoration: none; flex: none; }
+.marque-logo { display: grid; place-items: center; width: 34px; height: 34px; font-size: 12px; font-weight: 700; }
+.menu { display: flex; gap: 26px; margin-inline: auto; }
+.menu a { text-decoration: none; white-space: nowrap; }
+.entete-actions { display: flex; align-items: center; gap: 18px; flex: none; }
+.lien-client { text-decoration: none; white-space: nowrap; }
+.burger { display: none; width: 42px; height: 42px; border-radius: 10px; background: none; cursor: pointer; place-items: center; }
+.burger span { display: block; width: 18px; height: 2px; background: currentColor; box-shadow: 0 -6px 0 currentColor, 0 6px 0 currentColor; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; white-space: nowrap; transition: background-color .2s, color .2s, border-color .2s, transform .2s, box-shadow .2s; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.stats, .etapes-liste, .offres { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.inclus-liste { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px 40px; }
+.faq-liste { display: grid; gap: 12px; }
+.faq summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; flex: none; font-size: 1.4em; line-height: 1; transition: transform .2s; }
+.faq details[open] summary::after { transform: rotate(45deg); }
+.lien-fleche { display: inline-flex; gap: 8px; align-items: center; text-decoration: none; }
+.pied-cols { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 32px; }
+.pied-cols ul { display: grid; gap: 9px; }
+.pied-cols a { text-decoration: none; }
+
+/* Exemples (manège) */
+.exemples { position: relative; max-width: 1320px; margin-inline: auto; }
+.ex-fenetre { overflow: hidden; padding-block: 14px 10px; }
+.ex-piste { display: flex; gap: var(--ex-ecart, 24px); }
+.ex-carte { flex: 0 0 var(--ex-l, 360px); will-change: transform; }
+.ex-lien { display: block; text-decoration: none; user-select: none; -webkit-user-select: none; -webkit-user-drag: none; }
+.ex-ecran { overflow: hidden; transition: transform .35s cubic-bezier(.22, 1, .36, 1), box-shadow .35s; }
+.ex-lien:hover .ex-ecran { transform: translateY(-5px); }
+.ex-barre { display: flex; align-items: center; gap: 5px; height: 28px; padding: 0 10px; }
+.ex-barre i { width: 7px; height: 7px; border-radius: 50%; flex: none; }
+.ex-barre span { margin-inline: auto; transform: translateX(-12px); font-size: 10.5px; padding: 1px 12px; border-radius: 9px; white-space: nowrap; }
+.ex-site { aspect-ratio: 16 / 10; display: flex; flex-direction: column; overflow: hidden; background: var(--fond); color: var(--texte); font-family: 'Manrope', system-ui, sans-serif; }
+.mini-nav { display: flex; align-items: center; gap: 6px; padding: 9px 14px; font-size: 8px; }
+.mini-logo { margin-right: auto; font-family: var(--police); font-weight: 700; font-size: 11px; white-space: nowrap; }
+.mini-nav i { width: 14px; height: 3px; border-radius: 2px; background: currentColor; opacity: .35; }
+.mini-nav b { padding: 3px 8px; border-radius: 99px; background: var(--accent); color: var(--sur, #fff); font-size: 7px; }
+.mini-hero { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: var(--aligne, center); text-align: var(--texte-al, center); gap: 6px; padding: 8px 22px; background: radial-gradient(80% 90% at 75% 30%, color-mix(in srgb, var(--accent) 24%, transparent), transparent 70%); }
+.mini-sur { font-size: 7px; font-weight: 700; letter-spacing: .22em; color: var(--accent); text-transform: uppercase; }
+.mini-hero strong { font-family: var(--police); font-size: 25px; line-height: 1.02; font-weight: 700; }
+.mini-sous { font-size: 9px; opacity: .75; }
+.mini-bouton { margin-top: 4px; padding: 5px 11px; border-radius: 99px; background: var(--accent); color: var(--sur, #fff); font-size: 8px; font-weight: 700; }
+.mini-grille { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; padding: 0 14px 12px; }
+.mini-grille i { height: 30px; border-radius: 5px; background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 55%, var(--fond)), color-mix(in srgb, var(--texte) 18%, var(--fond))); }
+.ex-legende { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; margin: 12px 4px 0; font-size: 14px; }
+.ex-voir { opacity: 0; transform: translateX(-4px); transition: opacity .25s, transform .25s; font-size: 13px; font-weight: 600; }
+.ex-lien:hover .ex-voir, .ex-lien:focus-visible .ex-voir { opacity: 1; transform: none; }
+.ex-fleche { position: absolute; z-index: 3; top: calc(14px + (28px + var(--ex-l, 360px) * .625) / 2 - 22px); width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; cursor: pointer; }
+.ex-prec { left: 8px; }
+.ex-suiv { right: 8px; }
+.ex-note { text-align: center; }
+
+@media (max-width: 960px) {
+    .menu { display: none; }
+    .burger { display: grid; }
+    .site.menu-ouvert .menu { display: flex; flex-direction: column; gap: 0; position: absolute; left: 0; right: 0; top: 100%; padding: 8px clamp(16px, 4vw, 40px) 16px; }
+    .site.menu-ouvert .menu a { padding: 12px 0; }
+    .stats, .etapes-liste, .offres { grid-template-columns: 1fr; }
+    .inclus-liste { grid-template-columns: 1fr 1fr; }
+    .pied-cols { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 560px) {
+    .inclus-liste { grid-template-columns: 1fr; }
+    .lien-client { display: none; }
+    .pied-cols { grid-template-columns: 1fr; }
+    .ex-fleche { display: none; }
+    .btn-entete { padding-inline: 14px !important; }
+}
+
+/* ==========================================================================
+   Maquettes animées 7 à 11 : une base commune pilotée par des variables, puis les réglages
+   propres à chaque maquette. Scène 3D (Three.js) dans l'ouverture, animations GSAP au défilement.
+   ========================================================================== */
+.site { background: var(--fond); color: var(--texte); font-family: var(--f-texte); font-size: 16px; line-height: 1.65; }
+.site h1, .site h2, .site h3 { font-family: var(--f-titre); font-weight: var(--g-titre, 600); letter-spacing: var(--ls-titre, -.02em); text-wrap: balance; color: var(--titre, var(--texte)); }
+.entete { background: var(--entete-fond); -webkit-backdrop-filter: blur(14px) saturate(140%); backdrop-filter: blur(14px) saturate(140%); border-bottom: 1px solid var(--trait); }
+.marque-logo { border-radius: var(--rayon-logo, 10px); background: var(--wine); color: #fff; }
+.marque-nom { font-family: var(--f-titre); font-weight: var(--g-titre, 600); font-size: 19px; letter-spacing: -.02em; }
+.menu a, .lien-client { font-size: 14.5px; color: var(--texte-2); font-weight: 500; }
+.menu a:hover, .lien-client:hover { color: var(--accent); }
+.btn { font-weight: 600; font-size: 15px; padding: 15px 26px; border-radius: var(--rayon-btn, 99px); }
+.btn-principal { background: var(--bouton, var(--wine)); color: var(--bouton-texte, #fff); box-shadow: 0 12px 26px -12px rgba(155, 27, 48, .65); }
+.btn-principal:hover { background: var(--bouton-survol, var(--wine-dark)); }
+.btn-secondaire { border: 1px solid var(--trait-fort); color: var(--texte); background: transparent; }
+.btn-secondaire:hover { border-color: var(--texte); }
+.btn-entete { padding: 10px 18px; font-size: 14px; box-shadow: none; }
+.surtitre { font-size: 12.5px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--accent-2); }
+.hero { position: relative; overflow: hidden; padding-block: 56px 56px; }
+.scene-3d { position: absolute; top: 0; right: 0; width: 52%; height: 640px; pointer-events: none; }
+.scene-3d canvas { display: block; width: 100%; height: 100%; opacity: 0; transition: opacity 1s ease; }
+.scene-3d canvas.pret { opacity: 1; }
+.hero > .enveloppe, .hero > .exemples, .hero > .ex-note { position: relative; z-index: 1; }
+.hero-texte { max-width: 560px; min-height: 540px; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; }
+.hero-titre { margin-top: 18px; font-size: clamp(2.5rem, 5vw, 4.3rem); line-height: 1.03; }
+.hero-titre .mot { display: inline-block; overflow: hidden; vertical-align: top; padding: 0 .05em .12em 0; margin: 0 -.05em -.12em 0; }
+.hero-titre .mot-i { display: inline-block; will-change: transform; }
+.hero-accent { color: var(--accent); }
+.hero-chapo { margin-top: 22px; font-size: 1.08rem; color: var(--texte-2); }
+.hero-chapo strong { color: var(--texte); }
+.hero-actions { margin-top: 30px; }
+.hero-garanties { margin-top: 18px; font-size: 13.5px; color: var(--texte-2); }
+.exemples { margin-top: 30px; }
+.ex-fenetre { -webkit-mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent); mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent); }
+.ex-ecran { border-radius: var(--rayon, 18px); background: var(--carte-fond); border: 1px solid var(--trait); box-shadow: var(--ombre, none); }
+.ex-barre { background: var(--fond-2); }
+.ex-barre i { background: var(--trait-fort); }
+.ex-barre span { background: var(--carte-fond); color: var(--texte-2); }
+.ex-legende { color: var(--texte-2); }
+.ex-legende strong { color: var(--texte); }
+.ex-voir { color: var(--accent); }
+.ex-fleche { background: var(--carte-fond); border: 1px solid var(--trait); color: var(--texte); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+.ex-note { margin-top: 22px; font-size: 14px; color: var(--texte-2); }
+main > section:not(.hero) { padding-block: 104px; }
+.tete { max-width: 780px; margin-bottom: 52px; }
+.tete h2 { margin-top: 14px; font-size: clamp(2rem, 4vw, 3.2rem); line-height: 1.06; }
+.tete-sous { color: var(--texte-2); }
+.stat { padding: 30px; border-radius: var(--rayon, 18px); background: var(--carte-fond); border: 1px solid var(--trait); }
+.stat-v { font-family: var(--f-titre); font-weight: var(--g-titre, 600); font-size: 3.8rem; line-height: 1; color: var(--accent); font-variant-numeric: tabular-nums; }
+.stat-l { margin-top: 12px; font-weight: 700; }
+.stat-t { margin-top: 8px; color: var(--texte-2); font-size: 15px; }
+.etape { padding: 32px 28px; border-radius: var(--rayon, 18px); background: var(--carte-fond); border: 1px solid var(--trait); }
+.etape-n { font-size: 12.5px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--accent-2); }
+.etape h3 { margin-top: 12px; font-size: 1.5rem; line-height: 1.12; }
+.etape p:last-child { margin-top: 10px; color: var(--texte-2); }
+.lien-fleche { margin-top: 36px; font-weight: 700; color: var(--accent); }
+.inclus-item { padding: 26px; border-radius: var(--rayon, 18px); background: var(--carte-fond); border: 1px solid var(--trait); }
+.inclus-item h3 { font-size: 1.2rem; }
+.inclus-item p { margin-top: 6px; color: var(--texte-2); font-size: 15px; }
+.offres { perspective: 1200px; }
+.offre { padding: 34px 30px; border-radius: var(--rayon, 18px); background: var(--carte-fond); border: 1px solid var(--trait); }
+.offre h3 { font-size: 1.35rem; }
+.offre-prix { margin-top: 14px; font-family: var(--f-titre); font-weight: var(--g-titre, 600); font-size: 2.5rem; line-height: 1.05; }
+.offre-prix small { font-family: var(--f-texte); font-size: .36em; font-weight: 500; color: var(--texte-2); letter-spacing: 0; }
+.offre-annuel { margin-top: 6px; font-size: 13px; font-weight: 700; color: var(--accent-2); }
+.offre-texte { margin-top: 14px; color: var(--texte-2); font-size: 15px; }
+.offre-vedette { background: var(--vedette-fond); border-color: transparent; color: var(--vedette-texte); }
+.offre-vedette h3, .offre-vedette .offre-prix { color: var(--vedette-texte); }
+.offre-vedette .offre-prix small, .offre-vedette .offre-texte { color: var(--vedette-texte-2); }
+.offre-vedette .offre-annuel { color: var(--vedette-accent); }
+.faq .enveloppe { max-width: 860px; }
+.faq details { padding: 20px 24px; border-radius: var(--rayon, 18px); background: var(--carte-fond); border: 1px solid var(--trait); }
+.faq summary { font-weight: 700; }
+.faq summary::after { color: var(--accent); }
+.faq details p { margin-top: 10px; color: var(--texte-2); font-size: 15px; }
+.pied { background: var(--pied-fond); color: var(--pied-texte-2); }
+.pied-cta { padding-block: 100px; text-align: center; }
+.pied-cta h2 { color: var(--pied-texte); font-size: clamp(2.1rem, 4.4vw, 3.6rem); max-width: 840px; margin-inline: auto; line-height: 1.06; }
+.pied-cta p { margin: 16px auto 30px; max-width: 560px; }
+.pied-cols { padding-block: 56px 36px; font-size: 14.5px; border-top: 1px solid var(--pied-trait); }
+.pied-cols h3 { font-family: var(--f-texte); font-size: 12.5px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--pied-accent); margin-bottom: 14px; }
+.pied-cols a:hover { color: var(--pied-texte); }
+.pied-marque .marque-nom { color: var(--pied-texte); }
+.pied-marque p { margin-top: 14px; max-width: 32ch; }
+.pied-bas { padding-block: 22px; border-top: 1px solid var(--pied-trait); font-size: 13px; }
+.site.menu-ouvert .menu { background: var(--fond); border-bottom: 1px solid var(--trait); }
+@media (max-width: 960px) {
+    .scene-3d { position: relative; width: 100%; height: 330px; margin-top: -20px; }
+    .hero-texte { max-width: none; min-height: 0; }
+}
+
+/* --------------------------------------------------------------------------
+   7 · CLOCHE — crème et lie-de-vin : la cloche se soulève et sert le site
+   -------------------------------------------------------------------------- */
+.m7 {
+    --fond: #F8F3EC; --fond-2: #EFE6D9; --texte: #1D1614; --texte-2: #64574F; --trait: #E4D8C8; --trait-fort: #CDBDA9;
+    --accent: var(--wine); --accent-2: #A8741E; --f-titre: 'Gloock', Georgia, serif; --g-titre: 400; --ls-titre: -.015em; --f-texte: 'Manrope', system-ui, sans-serif;
+    --rayon: 22px; --carte-fond: #FFFFFF; --ombre: 0 18px 40px -26px rgba(29, 22, 20, .45); --entete-fond: rgba(248, 243, 236, .82);
+    --vedette-fond: var(--wine); --vedette-texte: #FFFFFF; --vedette-texte-2: rgba(255, 255, 255, .78); --vedette-accent: #F2C98A;
+    --pied-fond: #1D1614; --pied-texte: #FFFFFF; --pied-texte-2: rgba(248, 243, 236, .66); --pied-trait: rgba(255, 255, 255, .1); --pied-accent: #E0B062; --rayon-logo: 50%;
+}
+.m7 .hero { background: radial-gradient(46% 60% at 80% 34%, rgba(192, 138, 46, .16), transparent 70%); }
+.m7 .hero-accent { font-family: 'Fraunces', Georgia, serif; font-style: italic; font-weight: 400; }
+.m7 .surtitre { display: inline-flex; align-items: center; gap: 10px; }
+.m7 .surtitre::before { content: ""; width: 26px; height: 1px; background: currentColor; }
+.m7 .btn-secondaire { border-color: var(--texte); }
+.m7 .btn-secondaire:hover { background: var(--texte); color: var(--fond); }
+.m7 .constat { background: #FFFFFF; }
+.m7 .stat { padding: 26px 0 0; border: 0; border-top: 1.5px solid var(--texte); border-radius: 0; background: none; }
+.m7 .stat-v { font-size: 4.6rem; }
+.m7 .etapes { background: var(--texte); color: var(--fond); }
+.m7 .etapes h2, .m7 .etapes h3 { color: #FFFFFF; }
+.m7 .etapes .surtitre { color: #E0B062; }
+.m7 .etape { background: rgba(255, 255, 255, .04); border-color: rgba(255, 255, 255, .12); }
+.m7 .etape-n { font-family: 'Fraunces', serif; font-style: italic; font-weight: 400; font-size: 1.1rem; letter-spacing: 0; text-transform: none; color: #E0B062; }
+.m7 .etape p:last-child { color: rgba(248, 243, 236, .7); }
+.m7 .etapes .lien-fleche { color: #E0B062; }
+.m7 .tarifs { background: var(--fond-2); }
+.m7 .offre-vedette { translate: 0 -14px; box-shadow: 0 30px 50px -30px rgba(155, 27, 48, .8); }
+.m7 .faq details[open] { border-color: var(--wine); }
+
+/* --------------------------------------------------------------------------
+   8 · SERVICE DE NUIT — sombre et chaud : téléphone en 3D, étapes qui défilent à l'horizontale
+   -------------------------------------------------------------------------- */
+.m8 {
+    color-scheme: dark;
+    --fond: #120C0D; --fond-2: #1C1416; --texte: #F3EBE4; --texte-2: #B4A59E; --trait: rgba(243, 235, 228, .1); --trait-fort: rgba(243, 235, 228, .28);
+    --accent: #E3B461; --accent-2: #E3B461; --f-titre: 'DM Serif Display', Georgia, serif; --g-titre: 400; --ls-titre: -.01em; --f-texte: 'Outfit', system-ui, sans-serif;
+    --rayon: 20px; --carte-fond: rgba(255, 255, 255, .035); --entete-fond: rgba(18, 12, 13, .7);
+    --vedette-fond: linear-gradient(160deg, #A51F36, #5B0E1C); --vedette-texte: #FFFFFF; --vedette-texte-2: rgba(255, 255, 255, .76); --vedette-accent: #F2C98A;
+    --pied-fond: #0A0607; --pied-texte: #FFFFFF; --pied-texte-2: rgba(243, 235, 228, .6); --pied-trait: rgba(255, 255, 255, .08); --pied-accent: #E3B461;
+}
+.m8 .hero { background: radial-gradient(50% 70% at 78% 40%, rgba(155, 27, 48, .38), transparent 70%), radial-gradient(40% 50% at 10% 100%, rgba(227, 180, 97, .08), transparent 70%); }
+.m8 .hero-accent { font-style: italic; }
+.m8 .btn-principal { box-shadow: 0 14px 34px -12px rgba(155, 27, 48, .9); }
+.m8 .btn-secondaire:hover { background: rgba(255, 255, 255, .06); }
+.m8 .ex-barre { background: #241A1C; }
+.m8 .stat { background: linear-gradient(180deg, rgba(255, 255, 255, .05), rgba(255, 255, 255, .01)); }
+.m8 .etape { position: relative; overflow: hidden; }
+.m8 .etape::after { content: ""; position: absolute; width: 260px; height: 260px; right: -90px; bottom: -120px; border-radius: 50%; background: radial-gradient(circle, rgba(155, 27, 48, .35), transparent 70%); }
+.m8 .etape-n { color: #D98C5F; }
+@media (min-width: 900px) {
+    .m8 .etapes { overflow: hidden; }
+    .m8 .etapes .enveloppe { max-width: none; padding-inline: 0; }
+    .m8 .etapes .tete, .m8 .etapes .lien-fleche { margin-inline: max(clamp(16px, 4vw, 40px), calc((100vw - 1180px) / 2 + 40px)); }
+    .m8 .etapes .lien-fleche { display: inline-flex; }
+    .m8 .etapes-liste { display: flex; width: max-content; gap: 28px; padding-inline: max(clamp(16px, 4vw, 40px), calc((100vw - 1180px) / 2 + 40px)); }
+    .m8 .etape { width: min(62vw, 720px); min-height: 330px; padding: 44px; display: flex; flex-direction: column; justify-content: flex-end; }
+    .m8 .etape h3 { font-size: 2.4rem; }
+    .m8 .etape p:last-child { font-size: 1.1rem; max-width: 36ch; }
+}
+
+/* --------------------------------------------------------------------------
+   9 · QR DE TABLE — l'identité actuelle (Bricolage + Inter), QR code en relief sur son chevalet
+   -------------------------------------------------------------------------- */
+.m9 {
+    --fond: #FFFDF9; --fond-2: #F5EFE8; --texte: #171313; --texte-2: #5A4F4B; --trait: #ECE4DB; --trait-fort: #D9CEC2;
+    --accent: var(--wine); --accent-2: var(--brass); --f-titre: 'Bricolage Grotesque', 'Inter', sans-serif; --g-titre: 700; --ls-titre: -.03em; --f-texte: 'Inter', system-ui, sans-serif;
+    --rayon: 22px; --carte-fond: #FFFFFF; --ombre: 0 22px 44px -30px rgba(23, 19, 19, .4); --entete-fond: rgba(255, 253, 249, .85); --rayon-btn: 14px;
+    --vedette-fond: #171313; --vedette-texte: #FFFFFF; --vedette-texte-2: rgba(255, 255, 255, .72); --vedette-accent: #E0B062;
+    --pied-fond: #171313; --pied-texte: #FFFFFF; --pied-texte-2: rgba(255, 255, 255, .66); --pied-trait: rgba(255, 255, 255, .1); --pied-accent: #E0B062;
+}
+.m9 .hero { background: linear-gradient(180deg, #FFFDF9, #F7F1EA); }
+.m9 .hero-titre { font-size: clamp(2.5rem, 5.2vw, 4.4rem); line-height: 1; }
+.m9 .stat, .m9 .offre, .m9 .inclus-item, .m9 .etape { box-shadow: var(--ombre); transform-style: preserve-3d; }
+.m9 .stat { border-top: 4px solid var(--wine); }
+.m9 .etapes { background: var(--fond-2); }
+.m9 .etape-n { display: inline-block; padding: 4px 10px; border-radius: 99px; background: rgba(155, 27, 48, .08); color: var(--wine); letter-spacing: .08em; }
+.m9 .inclus-liste { perspective: 1000px; }
+.m9 .inclus-item::before { content: ""; display: block; width: 34px; height: 34px; margin-bottom: 16px; border-radius: 10px; background: var(--wine) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m5 12 5 5L20 7'/%3E%3C/svg%3E") center / 18px no-repeat; }
+.m9 .faq { background: var(--fond-2); }
+
+/* --------------------------------------------------------------------------
+   10 · VAPEUR — éditorial chaud : fumée de cuisine en WebGL, grands titres serif qui glissent
+   -------------------------------------------------------------------------- */
+.m10 {
+    --fond: #FBF4EC; --fond-2: #F3E5D8; --texte: #221816; --texte-2: #6B5A54; --trait: #E8D8CA; --trait-fort: #CDB5A1;
+    --accent: var(--wine); --accent-2: #A8691F; --f-titre: 'Instrument Serif', Georgia, serif; --g-titre: 400; --ls-titre: -.015em; --f-texte: 'Instrument Sans', system-ui, sans-serif;
+    --rayon: 6px; --carte-fond: rgba(255, 255, 255, .62); --entete-fond: rgba(251, 244, 236, .7); --rayon-btn: 6px;
+    --vedette-fond: var(--wine); --vedette-texte: #FFFFFF; --vedette-texte-2: rgba(255, 255, 255, .78); --vedette-accent: #F4CF95;
+    --pied-fond: #221816; --pied-texte: #FFFFFF; --pied-texte-2: rgba(251, 244, 236, .64); --pied-trait: rgba(255, 255, 255, .1); --pied-accent: #E6B26B;
+}
+.m10 .scene-3d { inset: 0; width: auto; height: auto; }
+.m10 .hero { padding-block: 40px 56px; }
+.m10 .hero-texte { max-width: 900px; margin-inline: auto; min-height: 560px; align-items: center; text-align: center; }
+.m10 .hero-titre { font-size: clamp(3rem, 7vw, 6.2rem); line-height: .98; }
+.m10 .hero-accent { font-style: italic; }
+.m10 .hero-chapo { max-width: 640px; font-size: 1.12rem; }
+.m10 .hero-actions { justify-content: center; }
+.m10 .surtitre { letter-spacing: .26em; }
+.m10 .tete h2 { font-size: clamp(2.5rem, 5.6vw, 4.8rem); line-height: 1; will-change: transform; }
+.m10 .stat, .m10 .etape, .m10 .inclus-item, .m10 .offre, .m10 .faq details { -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+.m10 .stat-v { font-size: 5rem; font-style: italic; }
+.m10 .etapes { background: var(--fond-2); }
+.m10 .etape-n { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 1.3rem; font-weight: 400; letter-spacing: 0; text-transform: none; }
+.m10 .etape h3 { font-size: 2rem; }
+.m10 .inclus-liste { perspective: 900px; gap: 0; border-top: 1px solid var(--trait-fort); border-left: 1px solid var(--trait-fort); }
+.m10 .inclus-item { border-radius: 0; border: 0; border-right: 1px solid var(--trait-fort); border-bottom: 1px solid var(--trait-fort); background: transparent; transform-origin: top center; }
+.m10 .inclus-item h3 { font-size: 1.6rem; }
+.m10 .offre h3 { font-size: 2rem; }
+.m10 .offre-prix { font-size: 3rem; }
+.m10 .pied-cta h2 { font-size: clamp(2.6rem, 6vw, 5rem); font-style: italic; }
+
+/* --------------------------------------------------------------------------
+   11 · GALERIE — théâtre sombre : les sites des restaurants flottent en 3D derrière le titre
+   -------------------------------------------------------------------------- */
+.m11 {
+    color-scheme: dark;
+    --fond: #0F0B0C; --fond-2: #1A1315; --texte: #F4ECE6; --texte-2: #A99A90; --trait: rgba(244, 236, 230, .1); --trait-fort: rgba(244, 236, 230, .3);
+    --accent: #E3A857; --accent-2: #E88494; --f-titre: 'Archivo', 'Arial Narrow', sans-serif; --g-titre: 800; --ls-titre: -.01em; --f-texte: 'Manrope', system-ui, sans-serif;
+    --rayon: 14px; --carte-fond: rgba(255, 255, 255, .04); --entete-fond: rgba(15, 11, 12, .6); --rayon-btn: 10px;
+    --vedette-fond: linear-gradient(160deg, #F4ECE6, #E7D9CD); --vedette-texte: #1A1214; --vedette-texte-2: #5E514C; --vedette-accent: var(--wine);
+    --pied-fond: #080607; --pied-texte: #FFFFFF; --pied-texte-2: rgba(244, 236, 230, .6); --pied-trait: rgba(255, 255, 255, .08); --pied-accent: #E3A857;
+}
+.m11 h1, .m11 h2, .m11 .marque-nom { font-stretch: 82%; text-transform: uppercase; }
+.m11 .marque-nom { font-size: 20px; }
+.m11 .scene-3d { top: 0; left: 0; right: 0; width: auto; height: 100%; max-height: 900px; }
+.m11 .hero::after { content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none; background: linear-gradient(90deg, rgba(15, 11, 12, .94) 0%, rgba(15, 11, 12, .6) 40%, rgba(15, 11, 12, .1) 70%), linear-gradient(0deg, var(--fond) 0%, transparent 30%); }
+.m11 .hero-texte { max-width: 580px; min-height: 600px; }
+.m11 .hero-titre { font-size: clamp(2.4rem, 4.3vw, 4rem); line-height: .96; }
+.m11 .btn-secondaire:hover { background: rgba(255, 255, 255, .06); }
+.m11 .ex-barre { background: #221A1C; }
+.m11 .tete h2 { font-size: clamp(2.2rem, 4.8vw, 4rem); line-height: .98; }
+.m11 .stat-v { font-size: 4.6rem; font-stretch: 75%; }
+.m11 .etape h3, .m11 .inclus-item h3, .m11 .offre h3 { font-family: 'Manrope', sans-serif; font-weight: 700; letter-spacing: -.01em; }
+.m11 .offre-prix { font-stretch: 78%; font-size: 3rem; }
+.m11 .pied-cta h2 { font-stretch: 80%; text-transform: uppercase; }
+@media (max-width: 960px) {
+    .m11 .scene-3d { position: absolute; height: 100%; margin: 0; }
+    .m11 .hero::after { background: linear-gradient(0deg, rgba(15, 11, 12, .96) 30%, rgba(15, 11, 12, .45) 70%, rgba(15, 11, 12, .2)); }
+    .m11 .hero-texte { padding-top: 260px; }
+    .m10 .scene-3d { position: absolute; height: auto; margin: 0; }
+    .m10 .hero-texte { min-height: 520px; }
+}
+
+/* ==========================================================================
+   Sélecteur de maquette (hors maquette)
+   ========================================================================== */
+.selecteur { position: fixed; z-index: 100; left: 50%; bottom: calc(14px + env(safe-area-inset-bottom, 0px)); translate: -50% 0; display: flex; align-items: center; gap: 6px; max-width: calc(100vw - 24px); padding: 6px; border-radius: 16px; background: rgba(18, 16, 15, .94); color: #fff; font: 500 13px/1.2 system-ui, -apple-system, 'Segoe UI', sans-serif; box-shadow: 0 16px 40px -12px rgba(0, 0, 0, .6); }
+.selecteur button { font: inherit; color: inherit; border: 0; cursor: pointer; border-radius: 11px; background: transparent; }
+.sel-fleche { width: 36px; height: 36px; font-size: 18px; }
+.sel-fleche:hover, .sel-choix button:hover { background: rgba(255, 255, 255, .1); }
+.sel-choix { display: flex; gap: 2px; }
+.sel-choix button { display: grid; gap: 2px; padding: 6px 12px; text-align: left; min-width: 0; }
+.sel-choix button b { font-size: 13px; white-space: nowrap; }
+.sel-choix button span { font-size: 10.5px; opacity: .6; text-transform: uppercase; letter-spacing: .08em; }
+.sel-choix button[aria-pressed="true"] { background: #fff; color: #12100F; }
+.sel-choix button[aria-pressed="true"] span { opacity: .55; }
+.selecteur :focus-visible { outline: 2px solid #E9B35A; outline-offset: 2px; }
+.sel-actuel { display: none; padding: 0 8px; text-align: center; }
+.sel-actuel b { display: block; font-size: 13.5px; white-space: nowrap; }
+.sel-actuel span { font-size: 11px; opacity: .65; }
+@media (max-width: 980px) {
+    .sel-choix { display: none; }
+    .sel-actuel { display: block; min-width: 170px; }
+}
+</style>
+
+<div class="site m7" id="site">
+    <header class="entete">
+        <div class="enveloppe entete-in">
+            <a class="marque" href="https://chefdigital.fr/" target="_blank" rel="noopener"><span class="marque-logo">CD</span><span class="marque-nom">Chef Digital</span></a>
+            <nav class="menu" aria-label="Navigation principale">
+                <a href="https://chefdigital.fr/exemples" target="_blank" rel="noopener">Exemples</a>
+                <a href="https://chefdigital.fr/fonctionnalites" target="_blank" rel="noopener">Fonctionnalités</a>
+                <a href="https://chefdigital.fr/tarifs" target="_blank" rel="noopener">Tarifs</a>
+                <a href="https://chefdigital.fr/comment-ca-marche" target="_blank" rel="noopener">Comment ça marche</a>
+                <a href="https://chefdigital.fr/faq" target="_blank" rel="noopener">FAQ</a>
+            </nav>
+            <div class="entete-actions">
+                <a class="lien-client" href="https://chefdigital.fr/login" target="_blank" rel="noopener">Espace client</a>
+                <a class="btn btn-principal btn-entete" href="https://chefdigital.fr/register" target="_blank" rel="noopener"><span class="court">Maquette</span><span class="long">Maquette gratuite</span></a>
+                <button type="button" class="burger" id="burger" aria-expanded="false" aria-label="Ouvrir le menu"><span></span></button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="scene-3d" aria-hidden="true"><canvas id="scene-3d"></canvas></div>
+            <div class="enveloppe">
+                <div class="hero-texte">
+                    <p class="surtitre">Création de site internet pour restaurant</p>
+                    <h1 class="hero-titre">Vos clients vous cherchent sur Google. <span class="hero-accent"><span class="insecable">Qu'est-ce</span> qu'ils trouvent ?</span></h1>
+                    <p class="hero-chapo">Nous créons le site web complet de votre restaurant — votre carte, vos photos, vos horaires, vos réservations — <strong>en moins de 24h</strong>. Vous le voyez avant de payer, et vous le gérez ensuite depuis votre téléphone.</p>
+                    <div class="hero-actions">
+                        <a class="btn btn-principal" href="https://chefdigital.fr/register" target="_blank" rel="noopener">Demander ma maquette gratuite</a>
+                        <a class="btn btn-secondaire" href="https://chefdigital.fr/exemples" target="_blank" rel="noopener">Voir des exemples</a>
+                    </div>
+                    <p class="hero-garanties">Maquette offerte · Sans carte bancaire · Livrée en 24h · Sans engagement</p>
+                </div>
+            </div>
+
+            <div class="exemples" id="exemples" role="region" aria-roledescription="carrousel" aria-label="Exemples de sites de restaurants">
+                <div class="ex-fenetre">
+                    <ul class="ex-piste">
+                        <li class="ex-carte"><a class="ex-lien" href="https://sites.chefdigital.fr/preview-template/vitrine/" target="_blank" rel="noopener">
+                            <div class="ex-ecran"><div class="ex-barre" aria-hidden="true"><i></i><i></i><i></i><span>votre-restaurant.fr</span></div>
+                                <div class="ex-site" style="--fond:#FFFAF3;--texte:#241A12;--accent:#C0392B;--police:'Playfair Display',Georgia,serif"><div class="mini-nav"><span class="mini-logo">Pizzeria Bella Napoli</span><i></i><i></i><b>Réserver</b></div><div class="mini-hero"><span class="mini-sur">Restaurant</span><strong>Pizzeria Bella Napoli</strong><span class="mini-sous">Pizza napolitaine au feu de bois, depuis 1998</span><span class="mini-bouton">Voir la carte</span></div><div class="mini-grille"><i></i><i></i><i></i></div></div></div>
+                            <p class="ex-legende"><span><strong>Pizzeria</strong> · Style Vitrine</span><span class="ex-voir" aria-hidden="true">Voir le site ↗</span></p></a></li>
+                        <li class="ex-carte"><a class="ex-lien" href="https://sites.chefdigital.fr/preview-template/mario/" target="_blank" rel="noopener">
+                            <div class="ex-ecran"><div class="ex-barre" aria-hidden="true"><i></i><i></i><i></i><span>votre-restaurant.fr</span></div>
+                                <div class="ex-site" style="--fond:#1C1210;--texte:#F3E6D8;--accent:#B0413E;--police:'Cormorant Garamond',Georgia,serif"><div class="mini-nav"><span class="mini-logo">Le Bistrot de la Place</span><i></i><i></i><b>Réserver</b></div><div class="mini-hero"><strong><em>Le Bistrot de la Place</em></strong><span class="mini-sous">Une cuisine généreuse et authentique au cœur de la ville</span><span class="mini-bouton">Découvrir la carte</span></div><div class="mini-grille"><i></i><i></i><i></i></div></div></div>
+                            <p class="ex-legende"><span><strong>Bistrot</strong> · Style Mario</span><span class="ex-voir" aria-hidden="true">Voir le site ↗</span></p></a></li>
+                        <li class="ex-carte"><a class="ex-lien" href="https://sites.chefdigital.fr/preview-template/braise/" target="_blank" rel="noopener">
+                            <div class="ex-ecran"><div class="ex-barre" aria-hidden="true"><i></i><i></i><i></i><span>votre-restaurant.fr</span></div>
+                                <div class="ex-site" style="--fond:#FFFFFF;--texte:#111827;--accent:#EF4444;--police:'Montserrat',Arial,sans-serif;--aligne:flex-start;--texte-al:left"><div class="mini-nav"><span class="mini-logo">Le Comptoir Burger</span><i></i><i></i><b>Commander</b></div><div class="mini-hero"><span class="mini-sur">Restaurant</span><strong>Le Comptoir Burger</strong><span class="mini-sous">Burgers gourmets, viande fraîche hachée sur place</span><span class="mini-bouton">Commander en ligne</span></div><div class="mini-grille"><i></i><i></i><i></i></div></div></div>
+                            <p class="ex-legende"><span><strong>Burger</strong> · Style Braise</span><span class="ex-voir" aria-hidden="true">Voir le site ↗</span></p></a></li>
+                        <li class="ex-carte"><a class="ex-lien" href="https://sites.chefdigital.fr/preview-template/affiche/" target="_blank" rel="noopener">
+                            <div class="ex-ecran"><div class="ex-barre" aria-hidden="true"><i></i><i></i><i></i><span>votre-restaurant.fr</span></div>
+                                <div class="ex-site" style="--fond:#C0392B;--texte:#FFFFFF;--accent:#FFFFFF;--sur:#C0392B;--police:'Montserrat',Arial,sans-serif;--aligne:flex-start;--texte-al:left"><div class="mini-nav"><span class="mini-logo">LE BISTROT DE LA PLACE</span><i></i><i></i><b>Réserver</b></div><div class="mini-hero"><span class="mini-sur">Restaurant</span><strong>LE BISTROT DE LA PLACE</strong><span class="mini-sous">Une cuisine généreuse et authentique</span><span class="mini-bouton">Voir la carte</span></div><div class="mini-grille"><i></i><i></i><i></i></div></div></div>
+                            <p class="ex-legende"><span><strong>Bistrot</strong> · Style Affiche</span><span class="ex-voir" aria-hidden="true">Voir le site ↗</span></p></a></li>
+                        <li class="ex-carte"><a class="ex-lien" href="https://sites.chefdigital.fr/preview-template/epure/" target="_blank" rel="noopener">
+                            <div class="ex-ecran"><div class="ex-barre" aria-hidden="true"><i></i><i></i><i></i><span>votre-restaurant.fr</span></div>
+                                <div class="ex-site" style="--fond:#121212;--texte:#F1ECE4;--accent:#D64545;--police:'Cormorant Garamond',Georgia,serif"><div class="mini-nav"><span class="mini-logo">Sakura Sushi</span><i></i><i></i><b>Réserver</b></div><div class="mini-hero"><span class="mini-sur">Restaurant</span><strong>Sakura Sushi</strong><span class="mini-sous">Sushis et sashimis préparés minute</span><span class="mini-bouton">Voir la carte</span></div><div class="mini-grille"><i></i><i></i><i></i></div></div></div>
+                            <p class="ex-legende"><span><strong>Sushi</strong> · Style Épuré</span><span class="ex-voir" aria-hidden="true">Voir le site ↗</span></p></a></li>
+                        <li class="ex-carte"><a class="ex-lien" href="https://sites.chefdigital.fr/preview-template/chez-solange/" target="_blank" rel="noopener">
+                            <div class="ex-ecran"><div class="ex-barre" aria-hidden="true"><i></i><i></i><i></i><span>votre-restaurant.fr</span></div>
+                                <div class="ex-site" style="--fond:#1A1614;--texte:#F2E8DC;--accent:#C0392B;--police:'Playfair Display',Georgia,serif;--aligne:flex-start;--texte-al:left"><div class="mini-nav"><span class="mini-logo">Le Bistrot de la Place</span><i></i><i></i><b>Réserver</b></div><div class="mini-hero"><span class="mini-sur">Restaurant</span><strong>Le Bistrot de la Place</strong><span class="mini-sous">Une cuisine généreuse et authentique</span><span class="mini-bouton">Voir la carte</span></div><div class="mini-grille"><i></i><i></i><i></i></div></div></div>
+                            <p class="ex-legende"><span><strong>Bistrot</strong> · Style Chez Solange</span><span class="ex-voir" aria-hidden="true">Voir le site ↗</span></p></a></li>
+                        <li class="ex-carte"><a class="ex-lien" href="https://sites.chefdigital.fr/preview-template/editorial/" target="_blank" rel="noopener">
+                            <div class="ex-ecran"><div class="ex-barre" aria-hidden="true"><i></i><i></i><i></i><span>votre-restaurant.fr</span></div>
+                                <div class="ex-site" style="--fond:#14110D;--texte:#F5EDE0;--accent:#B8860B;--police:'Cormorant Garamond',Georgia,serif;--aligne:flex-start;--texte-al:left"><div class="mini-nav"><span class="mini-logo">La Brasserie du Marché</span><i></i><i></i><b>Réserver</b></div><div class="mini-hero"><span class="mini-sur">Restaurant</span><strong>La Brasserie du Marché</strong><span class="mini-sous">Brasserie traditionnelle, produits frais du marché</span><span class="mini-bouton">Réserver une table</span></div><div class="mini-grille"><i></i><i></i><i></i></div></div></div>
+                            <p class="ex-legende"><span><strong>Brasserie</strong> · Style Éditorial</span><span class="ex-voir" aria-hidden="true">Voir le site ↗</span></p></a></li>
+                        <li class="ex-carte"><a class="ex-lien" href="https://sites.chefdigital.fr/preview-template/signature/" target="_blank" rel="noopener">
+                            <div class="ex-ecran"><div class="ex-barre" aria-hidden="true"><i></i><i></i><i></i><span>votre-restaurant.fr</span></div>
+                                <div class="ex-site" style="--fond:#17110F;--texte:#F3EAE0;--accent:#E0503C;--police:'Montserrat',Arial,sans-serif"><div class="mini-nav"><span class="mini-logo">Le Bistrot de la Place</span><i></i><i></i><b>Réserver</b></div><div class="mini-hero"><span class="mini-sur">Restaurant</span><strong>Le Bistrot de la Place</strong><span class="mini-sous">Une cuisine généreuse et authentique</span><span class="mini-bouton">Voir la carte</span></div><div class="mini-grille"><i></i><i></i><i></i></div></div></div>
+                            <p class="ex-legende"><span><strong>Bistrot</strong> · Style Signature</span><span class="ex-voir" aria-hidden="true">Voir le site ↗</span></p></a></li>
+                    </ul>
+                </div>
+                <button type="button" class="ex-fleche ex-prec" aria-label="Sites précédents"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></button>
+                <button type="button" class="ex-fleche ex-suiv" aria-label="Sites suivants"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></button>
+            </div>
+            <p class="ex-note enveloppe">Sites d'exemple : cliquez pour les visiter en entier. <a href="https://chefdigital.fr/exemples" target="_blank" rel="noopener">Voir les 35 styles disponibles →</a></p>
+        </section>
+
+        <section class="constat">
+            <div class="enveloppe">
+                <div class="tete revele">
+                    <p class="surtitre">Le constat</p>
+                    <h2>Sans site web, votre restaurant perd des clients chaque jour.</h2>
+                </div>
+                <div class="stats">
+                    <div class="stat revele"><p class="stat-v">8/10</p><p class="stat-l">clients cherchent sur Google avant de sortir</p><p class="stat-t">Sans site, ce sont vos concurrents qu'ils trouvent — et c'est là qu'ils réservent.</p></div>
+                    <div class="stat revele"><p class="stat-v">30%</p><p class="stat-l">de commission prélevée par les plateformes</p><p class="stat-t">Un site à vous pousse vos habitués à commander en direct, sans intermédiaire.</p></div>
+                    <div class="stat revele"><p class="stat-v">+90€</p><p class="stat-l">net par mois, au minimum</p><p class="stat-t">Avec seulement 1 client de plus par semaine grâce à votre site.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="etapes">
+            <div class="enveloppe">
+                <div class="tete revele">
+                    <p class="surtitre">Comment ça marche</p>
+                    <h2>Créer le site web de votre restaurant, simple comme passer une commande.</h2>
+                </div>
+                <ol class="etapes-liste">
+                    <li class="etape revele"><p class="etape-n">Étape 1</p><h3>Vous nous envoyez votre carte</h3><p>Une photo de votre menu papier suffit, avec votre adresse et vos horaires.</p></li>
+                    <li class="etape revele"><p class="etape-n">Étape 2</p><h3>On construit votre site en 24h</h3><p>Vous recevez un lien pour tout voir — avant de payer quoi que ce soit.</p></li>
+                    <li class="etape revele"><p class="etape-n">Étape 3</p><h3>Vous gardez la main</h3><p>Prix, plats, horaires : vous modifiez vous-même en 30 secondes.</p></li>
+                </ol>
+                <a class="lien-fleche" href="https://chefdigital.fr/comment-ca-marche" target="_blank" rel="noopener">Voir le détail des 3 étapes <span aria-hidden="true">→</span></a>
+            </div>
+        </section>
+
+        <section class="inclus">
+            <div class="enveloppe">
+                <div class="tete revele">
+                    <p class="surtitre">Tout inclus</p>
+                    <h2>Menu digital, QR code, réservations : tout ce dont votre restaurant a besoin.</h2>
+                </div>
+                <div class="inclus-liste revele">
+                    <div class="inclus-item"><h3>Menu digital &amp; QR code</h3><p>Toujours à jour, sans réimpression.</p></div>
+                    <div class="inclus-item"><h3>Réservations en ligne</h3><p>Sans commission, confirmées d'un clic.</p></div>
+                    <div class="inclus-item"><h3>Nom de domaine inclus</h3><p>Votre adresse .fr ou .com à votre nom.</p></div>
+                    <div class="inclus-item"><h3>Visible sur Google</h3><p>Pensé pour le référencement local.</p></div>
+                    <div class="inclus-item"><h3>Mentions légales incluses</h3><p>Générées depuis votre SIRET.</p></div>
+                    <div class="inclus-item"><h3>Support 7j/7</h3><p>Une question ? On répond par chat.</p></div>
+                </div>
+                <a class="lien-fleche" href="https://chefdigital.fr/fonctionnalites" target="_blank" rel="noopener">Voir tout ce qui est inclus <span aria-hidden="true">→</span></a>
+            </div>
+        </section>
+
+        <section class="tarifs">
+            <div class="enveloppe">
+                <div class="tete revele">
+                    <p class="surtitre">Tarifs</p>
+                    <h2>Un prix. Simple. Honnête.</h2>
+                    <p class="tete-sous">À partir de 14,99 € HT/mois — 30 jours d'essai gratuit, ou annuel avec -20 % la première année.</p>
+                </div>
+                <div class="offres">
+                    <div class="offre revele"><h3>Essentiel</h3><p class="offre-prix">14,99 € HT <small>/mois</small></p><p class="offre-annuel">ou 143,90 € HT la 1re année (-20 %)</p><p class="offre-texte">Site complet, domaine inclus, réservations, support 7j/7.</p></div>
+                    <div class="offre offre-vedette revele"><h3>Premium</h3><p class="offre-prix">19,99 € HT <small>/mois</small></p><p class="offre-annuel">ou 191,90 € HT la 1re année (-20 %)</p><p class="offre-texte">Tout l'Essentiel + 35 styles au choix, 24 photos, retouche pro.</p></div>
+                    <div class="offre revele"><h3>Gestion Complète</h3><p class="offre-prix">39,99 € HT <small>/mois</small></p><p class="offre-annuel">ou 383,90 € HT la 1re année (-20 %)</p><p class="offre-texte">On gère tout par WhatsApp : carte, photos, réseaux sociaux.</p></div>
+                </div>
+                <a class="lien-fleche" href="https://chefdigital.fr/tarifs" target="_blank" rel="noopener">Comparer les 3 forfaits en détail <span aria-hidden="true">→</span></a>
+            </div>
+        </section>
+
+        <section class="faq">
+            <div class="enveloppe">
+                <div class="tete revele">
+                    <p class="surtitre">Questions fréquentes</p>
+                    <h2>On répond avant que vous demandiez.</h2>
+                </div>
+                <div class="faq-liste">
+                    <details><summary>Combien coûte un site internet pour un restaurant ?</summary><p>À partir de 14,99 € HT/mois tout compris — contre 1 500€ à 5 000€ chez une agence classique. <a href="https://chefdigital.fr/tarifs" target="_blank" rel="noopener">Voir le détail des forfaits</a>.</p></details>
+                    <details><summary>Dois-je fournir une carte bancaire pour la maquette ?</summary><p>Non, jamais. La maquette est gratuite et sans carte bancaire.</p></details>
+                    <details><summary>Puis-je résilier facilement ?</summary><p>Oui, à tout moment depuis votre espace client, sans justification. En mensuel, aucun engagement : l'abonnement s'arrête à la fin du mois en cours. En annuel, l'engagement est de 12 mois : la résiliation prend effet à la fin de l'année en cours.</p></details>
+                </div>
+                <a class="lien-fleche" href="https://chefdigital.fr/faq" target="_blank" rel="noopener">Voir toutes les questions <span aria-hidden="true">→</span></a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="pied">
+        <div class="pied-cta">
+            <div class="enveloppe">
+                <h2>Voyez à quoi ressemblerait le site de votre restaurant.</h2>
+                <p>C'est gratuit, sans carte bancaire, et vous l'avez sous 24h. Vous ne payez que s'il vous plaît.</p>
+                <a class="btn btn-principal" href="https://chefdigital.fr/register" target="_blank" rel="noopener">Demander ma maquette gratuite</a>
+            </div>
+        </div>
+        <div class="enveloppe pied-cols">
+            <div class="pied-marque">
+                <a class="marque" href="https://chefdigital.fr/" target="_blank" rel="noopener"><span class="marque-logo">CD</span><span class="marque-nom">Chef Digital</span></a>
+                <p>Agence web spécialisée dans la création de sites internet pour restaurants, en France.</p>
+            </div>
+            <div><h3>Le service</h3><ul><li><a href="https://chefdigital.fr/fonctionnalites" target="_blank" rel="noopener">Fonctionnalités</a></li><li><a href="https://chefdigital.fr/exemples" target="_blank" rel="noopener">Exemples de sites</a></li><li><a href="https://chefdigital.fr/comment-ca-marche" target="_blank" rel="noopener">Comment ça marche</a></li><li><a href="https://chefdigital.fr/tarifs" target="_blank" rel="noopener">Tarifs</a></li><li><a href="https://chefdigital.fr/parrainage" target="_blank" rel="noopener">Parrainage</a></li></ul></div>
+            <div><h3>Aide</h3><ul><li><a href="https://chefdigital.fr/faq" target="_blank" rel="noopener">Questions fréquentes</a></li><li><a href="https://chefdigital.fr/contact" target="_blank" rel="noopener">Contact</a></li><li><a href="https://chefdigital.fr/register" target="_blank" rel="noopener">Créer un compte</a></li><li><a href="https://chefdigital.fr/login" target="_blank" rel="noopener">Espace client</a></li></ul></div>
+            <div><h3>Légal</h3><ul><li><a href="https://chefdigital.fr/cgv.html" target="_blank" rel="noopener">CGV</a></li><li><a href="https://chefdigital.fr/mentions-legales.html" target="_blank" rel="noopener">Mentions légales</a></li><li><a href="https://chefdigital.fr/politique-confidentialite.html" target="_blank" rel="noopener">Confidentialité</a></li><li><a href="https://chefdigital.fr/" target="_blank" rel="noopener">Gérer les cookies</a></li></ul></div>
+        </div>
+        <div class="enveloppe pied-bas"><p>Chef Digital — agence web spécialisée en restauration.</p></div>
+    </footer>
+</div>
+
+<nav class="selecteur" aria-label="Choisir une maquette">
+    <button type="button" class="sel-fleche" id="sel-prec" aria-label="Maquette précédente">‹</button>
+    <div class="sel-choix" id="sel-choix"></div>
+    <p class="sel-actuel" id="sel-actuel" aria-live="polite"></p>
+    <button type="button" class="sel-fleche" id="sel-suiv" aria-label="Maquette suivante">›</button>
+</nav>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script>
+(function () {
+    'use strict';
+    const MAQUETTES = {
+        7: { nom: 'Cloche', type: 'Cloche 3D, crème' },
+        8: { nom: 'Service de nuit', type: 'Téléphone 3D, sombre' },
+        9: { nom: 'QR de table', type: 'QR code 3D, clair' },
+        10: { nom: 'Vapeur', type: 'Fumée WebGL, éditorial' },
+        11: { nom: 'Galerie', type: 'Sites en 3D, sombre' }
+    };
+    const NUMEROS = [7, 8, 9, 10, 11];
+    const site = document.getElementById('site');
+    const reduit = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const G = window.gsap, ST = window.ScrollTrigger;
+    const aGsap = Boolean(G && ST);
+    if (aGsap) G.registerPlugin(ST);
+    const choix = document.getElementById('sel-choix');
+    const actuel = document.getElementById('sel-actuel');
+    let courante = 7, animations = null;
+
+    // ---- Défilement doux ----
+    let lenis = null;
+    if (!reduit && window.Lenis) {
+        lenis = new window.Lenis({ lerp: 0.1, smoothWheel: true });
+        if (aGsap) { lenis.on('scroll', ST.update); G.ticker.add(function (t) { lenis.raf(t * 1000); }); G.ticker.lagSmoothing(0); }
+        else { (function f(t) { lenis.raf(t); requestAnimationFrame(f); })(performance.now()); }
+    }
+    function allerEnHaut() { if (lenis) lenis.scrollTo(0, { immediate: true }); else window.scrollTo(0, 0); }
+
+    // ---- Titre découpé en mots (chaque mot glisse depuis son masque) ----
+    const titre = document.querySelector('.hero-titre');
+    function decouper(noeud) {
+        Array.from(noeud.childNodes).forEach(function (n) {
+            if (n.nodeType === 3) {
+                const frag = document.createDocumentFragment();
+                n.textContent.split(/(\s+)/).forEach(function (m) {
+                    if (!m) return;
+                    if (/^\s+$/.test(m)) { frag.appendChild(document.createTextNode(' ')); return; }
+                    const o = document.createElement('span'); o.className = 'mot';
+                    const i = document.createElement('span'); i.className = 'mot-i'; i.textContent = m;
+                    o.appendChild(i); frag.appendChild(o);
+                });
+                n.replaceWith(frag);
+            } else if (n.classList && n.classList.contains('insecable')) {
+                const o = document.createElement('span'); o.className = 'mot';
+                const i = document.createElement('span'); i.className = 'mot-i'; i.textContent = n.textContent;
+                o.appendChild(i); n.replaceWith(o);
+            } else if (n.nodeType === 1) decouper(n);
+        });
+    }
+    titre.setAttribute('aria-label', titre.textContent.replace(/\s+/g, ' ').trim());
+    decouper(titre);
+
+    // ---- Sélecteur ----
+    NUMEROS.forEach(function (n) {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.innerHTML = '<b>' + n + ' · ' + MAQUETTES[n].nom + '</b><span>' + MAQUETTES[n].type + '</span>';
+        b.addEventListener('click', function () { afficher(n, true); });
+        choix.appendChild(b);
+    });
+    function voisine(sens) { const i = NUMEROS.indexOf(courante); return NUMEROS[(i + sens + NUMEROS.length) % NUMEROS.length]; }
+    document.getElementById('sel-prec').addEventListener('click', function () { afficher(voisine(-1), true); });
+    document.getElementById('sel-suiv').addEventListener('click', function () { afficher(voisine(1), true); });
+
+    const burger = document.getElementById('burger');
+    burger.addEventListener('click', function () {
+        const ouvert = !site.classList.contains('menu-ouvert');
+        site.classList.toggle('menu-ouvert', ouvert);
+        burger.setAttribute('aria-expanded', String(ouvert));
+    });
+
+    // ---- Outils d'animation ----
+    function apparaitre(elements, depart, options) {
+        // Une animation par élément, créée tout de suite : le changement de maquette peut ainsi
+        // tout annuler proprement (gsap.matchMedia().revert()).
+        const els = G.utils.toArray(elements);
+        if (!els.length) return;
+        const fin = { opacity: 1, x: 0, y: 0, scale: 1, rotateX: 0, rotateY: 0, rotate: 0, clipPath: 'inset(0% 0% 0% 0% round 0px)', duration: 1, ease: 'power3.out' };
+        Object.keys(fin).forEach(function (k) { if (!(k in depart) && ['duration', 'ease'].indexOf(k) < 0) delete fin[k]; });
+        els.forEach(function (el, i) {
+            const rang = el.parentElement ? Array.prototype.indexOf.call(el.parentElement.children, el) : i;
+            G.fromTo(el, Object.assign({}, depart), Object.assign({}, fin, { delay: (rang % 4) * 0.09, scrollTrigger: { trigger: el, start: 'top 90%', once: true } }, options || {}));
+        });
+    }
+    function compteurs() {
+        G.utils.toArray('.stat-v').forEach(function (el) {
+            const texte = el.textContent, m = texte.match(/-?\d+(?:[.,]\d+)?/);
+            if (!m) return;
+            const cible = parseFloat(m[0].replace(',', '.')), avant = texte.slice(0, m.index), apres = texte.slice(m.index + m[0].length);
+            const dec = (m[0].split(/[.,]/)[1] || '').length, o = { v: 0 };
+            ST.create({ trigger: el, start: 'top 90%', once: true, onEnter: function () {
+                G.fromTo(o, { v: 0 }, { v: cible, duration: 1.6, ease: 'power2.out', onUpdate: function () { el.textContent = avant + o.v.toFixed(dec).replace('.', ',') + apres; }, onComplete: function () { el.textContent = texte; } });
+            } });
+        });
+    }
+    function entreeTitre(duree) {
+        G.from('.hero-titre .mot-i', { yPercent: 115, duration: duree || 1.1, ease: 'expo.out', stagger: 0.045, delay: 0.1 });
+        G.from('.hero .surtitre, .hero-chapo, .hero-actions, .hero-garanties', { y: 24, opacity: 0, duration: 0.9, ease: 'power3.out', stagger: 0.08, delay: 0.35 });
+        G.from('.exemples', { y: 50, opacity: 0, duration: 1.1, ease: 'power3.out', delay: 0.6 });
+    }
+    // Survol : inclinaison 3D qui suit le curseur. Renvoie de quoi retirer les écouteurs.
+    function inclinaison(selecteur, force) {
+        const nettoyages = [];
+        G.utils.toArray(selecteur).forEach(function (c) {
+            const rx = G.quickTo(c, 'rotateX', { duration: 0.5, ease: 'power3' }), ry = G.quickTo(c, 'rotateY', { duration: 0.5, ease: 'power3' });
+            G.set(c, { transformPerspective: 900 });
+            const bouge = function (e) { const r = c.getBoundingClientRect(); ry(((e.clientX - r.left) / r.width - 0.5) * force); rx((0.5 - (e.clientY - r.top) / r.height) * force * 0.8); };
+            const sort = function () { rx(0); ry(0); };
+            c.addEventListener('pointermove', bouge); c.addEventListener('pointerleave', sort);
+            nettoyages.push(function () { c.removeEventListener('pointermove', bouge); c.removeEventListener('pointerleave', sort); G.set(c, { clearProps: 'transform' }); });
+        });
+        return function () { nettoyages.forEach(function (f) { f(); }); };
+    }
+    function aimant(selecteur) {
+        const nettoyages = [];
+        G.utils.toArray(selecteur).forEach(function (b) {
+            const bouge = function (e) { const r = b.getBoundingClientRect(); G.to(b, { x: (e.clientX - r.left - r.width / 2) * 0.28, y: (e.clientY - r.top - r.height / 2) * 0.38, duration: 0.4, ease: 'power3.out', overwrite: 'auto' }); };
+            const sort = function () { G.to(b, { x: 0, y: 0, duration: 0.9, ease: 'elastic.out(1, 0.35)', overwrite: 'auto' }); };
+            b.addEventListener('pointermove', bouge); b.addEventListener('pointerleave', sort);
+            nettoyages.push(function () { b.removeEventListener('pointermove', bouge); b.removeEventListener('pointerleave', sort); G.set(b, { clearProps: 'transform' }); });
+        });
+        return function () { nettoyages.forEach(function (f) { f(); }); };
+    }
+
+    // ---- Une chorégraphie par maquette ----
+    const CHOREGRAPHIES = {
+        7: function () {
+            entreeTitre(1.2);
+            apparaitre('main > section:not(.hero) .tete', { opacity: 0, y: 40 });
+            apparaitre('.stat', { opacity: 0, y: 50 });
+            apparaitre('.etape', { opacity: 0, y: 60, rotateX: -14 }, { transformPerspective: 900 });
+            apparaitre('.inclus-item', { opacity: 0, y: 40, scale: 0.96 });
+            apparaitre('.offre', { opacity: 0, y: 80 }, { duration: 1.2 });
+            apparaitre('.faq details', { opacity: 0, y: 24 });
+            apparaitre('.pied-cta h2, .pied-cta p, .pied-cta .btn', { opacity: 0, y: 30 });
+            compteurs();
+            return aimant('.hero-actions .btn, .pied-cta .btn');
+        },
+        8: function (grand) {
+            entreeTitre(1.3);
+            G.utils.toArray('main > section:not(.hero) .tete h2').forEach(function (h) {
+                G.fromTo(h, { clipPath: 'inset(0% 0% 100% 0%)', y: 30 }, { clipPath: 'inset(0% 0% 0% 0%)', y: 0, duration: 1.1, ease: 'power3.out', scrollTrigger: { trigger: h, start: 'top 88%', once: true } });
+            });
+            apparaitre('.stat', { opacity: 0, y: 40 });
+            apparaitre('.inclus-item', { opacity: 0, y: 30 });
+            apparaitre('.offre', { opacity: 0, rotateY: -30, x: -30 }, { transformPerspective: 1000, duration: 1.2 });
+            apparaitre('.faq details', { opacity: 0, y: 24 });
+            compteurs();
+            if (grand) {
+                const piste = document.querySelector('.etapes-liste');
+                const distance = function () { return Math.max(0, piste.scrollWidth - document.documentElement.clientWidth); };
+                G.to(piste, { x: function () { return -distance(); }, ease: 'none', scrollTrigger: { trigger: '.etapes', start: 'top top', end: function () { return '+=' + distance(); }, pin: true, scrub: 0.8, invalidateOnRefresh: true } });
+            } else {
+                apparaitre('.etape', { opacity: 0, y: 50 });
+            }
+            return aimant('.hero-actions .btn, .pied-cta .btn');
+        },
+        9: function () {
+            entreeTitre(1);
+            apparaitre('main > section:not(.hero) .tete', { opacity: 0, y: 30 });
+            apparaitre('.stat, .etape, .inclus-item, .offre', { opacity: 0, y: 40, scale: 0.94 }, { ease: 'back.out(1.4)' });
+            apparaitre('.faq details', { opacity: 0, y: 20 });
+            compteurs();
+            const a = inclinaison('.offre, .inclus-item, .stat, .etape', 12), b = aimant('.hero-actions .btn');
+            return function () { a(); b(); };
+        },
+        10: function () {
+            entreeTitre(1.5);
+            G.utils.toArray('main > section:not(.hero) .tete h2').forEach(function (h, i) {
+                G.fromTo(h, { x: i % 2 ? -70 : 70 }, { x: i % 2 ? 40 : -40, ease: 'none', scrollTrigger: { trigger: h, start: 'top bottom', end: 'bottom top', scrub: true } });
+            });
+            apparaitre('.stat', { opacity: 0, y: 40 });
+            apparaitre('.etape', { opacity: 0, y: 40 });
+            apparaitre('.inclus-item', { opacity: 0, rotateX: -90 }, { duration: 1.1, ease: 'power4.out' });
+            apparaitre('.offre', { opacity: 0, y: 60 });
+            apparaitre('.faq details', { opacity: 0, y: 20 });
+            G.fromTo('.pied-cta h2', { scale: 0.9, opacity: 0.4 }, { scale: 1, opacity: 1, ease: 'none', scrollTrigger: { trigger: '.pied-cta', start: 'top bottom', end: 'center center', scrub: true } });
+            compteurs();
+            return aimant('.hero-actions .btn, .pied-cta .btn');
+        },
+        11: function () {
+            entreeTitre(1.1);
+            apparaitre('main > section:not(.hero) .tete, .stats, .etapes-liste, .inclus-liste, .faq-liste', { opacity: 0, clipPath: 'inset(14% 0% 14% 0% round 24px)' }, { duration: 1.3, ease: 'power4.out' });
+            G.utils.toArray('.offre').forEach(function (o, i) {
+                G.fromTo(o, { y: 60 + i * 30 }, { y: 0, ease: 'none', scrollTrigger: { trigger: '.offres', start: 'top bottom', end: 'center center', scrub: true } });
+            });
+            compteurs();
+            return aimant('.hero-actions .btn, .pied-cta .btn');
+        }
+    };
+
+    function lancerAnimations() {
+        if (animations) { animations.revert(); animations = null; }
+        if (!aGsap || reduit) return;
+        animations = G.matchMedia();
+        animations.add({ grand: '(min-width: 900px)', petit: '(max-width: 899px)' }, function (ctx) {
+            const retirer = CHOREGRAPHIES[courante](ctx.conditions.grand);
+            return function () { if (typeof retirer === 'function') retirer(); };
+        });
+        ST.refresh();
+    }
+
+    function afficher(n, defiler) {
+        courante = n;
+        const ouvert = site.classList.contains('menu-ouvert');
+        if (animations) { animations.revert(); animations = null; }
+        site.className = 'site m' + n + (ouvert ? ' menu-ouvert' : '');
+        choix.querySelectorAll('button').forEach(function (b, i) { b.setAttribute('aria-pressed', String(NUMEROS[i] === n)); });
+        actuel.innerHTML = '<b>Maquette ' + n + ' · ' + MAQUETTES[n].nom + '</b><span>' + MAQUETTES[n].type + '</span>';
+        try { localStorage.setItem('cd-maquette-3d', String(n)); } catch (e) {}
+        if (location.hash !== '#m' + n) history.replaceState(null, '', '#m' + n);
+        if (defiler) allerEnHaut();
+        window.CD_MAQUETTE = n;
+        document.dispatchEvent(new CustomEvent('maquette', { detail: n }));
+        manege.reinitialiser();
+        requestAnimationFrame(lancerAnimations);
+    }
+
+    // ---- Manège des exemples (bande qui défile, identique au site) ----
+    const manege = (function () {
+        const racine = document.getElementById('exemples');
+        const fenetre = racine.querySelector('.ex-fenetre');
+        const cartes = Array.from(racine.querySelectorAll('.ex-carte'));
+        const n = cartes.length;
+        let largeurF = 0, largeurC = 0, pas = 0, decalage = 0, trajet = null, survol = false, saisie = null, clicBloque = false, visible = true, instant = null;
+        function mesurer() {
+            largeurF = fenetre.clientWidth;
+            const parVue = largeurF >= 1024 ? 3 : largeurF >= 640 ? 2 : 1.15, ecart = largeurF >= 640 ? 24 : 16;
+            largeurC = (largeurF - ecart * (parVue - 1)) / parVue;
+            pas = largeurC + ecart;
+            racine.style.setProperty('--ex-ecart', ecart + 'px');
+            racine.style.setProperty('--ex-l', largeurC + 'px');
+            placer();
+        }
+        function placer() {
+            const tour = n * pas;
+            cartes.forEach(function (c, i) {
+                let x = ((i * pas - decalage) % tour + tour) % tour;
+                if (x >= tour - pas) x -= tour;
+                c.style.transform = 'translate3d(' + (x - i * pas).toFixed(2) + 'px,0,0)';
+                const hors = x < -largeurC / 2 || x > largeurF - largeurC / 2;
+                if (c.inert !== hors) c.inert = hors;
+            });
+        }
+        function tourner(t) {
+            const dt = instant === null ? 0 : Math.min(t - instant, 64) / 1000;
+            instant = t;
+            if (trajet) {
+                const p = Math.min(1, (t - trajet.debut) / trajet.duree);
+                decalage = trajet.de + (trajet.vers - trajet.de) * (1 - Math.pow(1 - p, 3));
+                if (p === 1) trajet = null;
+            } else if (!survol && !saisie && !reduit) decalage += 30 * dt;
+            placer();
+            if (visible) requestAnimationFrame(tourner); else instant = null;
+        }
+        function avancer(sens) { trajet = { de: decalage, vers: Math.round(decalage / pas) * pas + sens * pas, debut: performance.now(), duree: reduit ? 1 : 650 }; }
+        racine.querySelector('.ex-prec').addEventListener('click', function () { avancer(-1); });
+        racine.querySelector('.ex-suiv').addEventListener('click', function () { avancer(1); });
+        racine.addEventListener('mouseenter', function () { survol = true; });
+        racine.addEventListener('mouseleave', function () { survol = false; });
+        racine.addEventListener('focusin', function () { survol = true; });
+        racine.addEventListener('focusout', function () { survol = false; });
+        fenetre.addEventListener('pointerdown', function (e) { if (e.button !== 0) return; trajet = null; saisie = { x: e.clientX, depart: decalage, id: e.pointerId, bouge: false }; });
+        fenetre.addEventListener('pointermove', function (e) {
+            if (!saisie || e.pointerId !== saisie.id) return;
+            const dx = e.clientX - saisie.x;
+            if (!saisie.bouge && Math.abs(dx) > 6) { saisie.bouge = true; fenetre.setPointerCapture(e.pointerId); }
+            if (saisie.bouge) { decalage = saisie.depart - dx; placer(); }
+        });
+        const lacher = function (e) { if (!saisie || e.pointerId !== saisie.id) return; clicBloque = saisie.bouge; saisie = null; };
+        fenetre.addEventListener('pointerup', lacher);
+        fenetre.addEventListener('pointercancel', lacher);
+        fenetre.addEventListener('click', function (e) { if (clicBloque) { e.preventDefault(); clicBloque = false; } }, true);
+        fenetre.addEventListener('dragstart', function (e) { e.preventDefault(); });
+        if ('IntersectionObserver' in window) new IntersectionObserver(function (e) { const avant = visible; visible = e[0].isIntersecting; if (visible && !avant) requestAnimationFrame(tourner); }).observe(racine);
+        if ('ResizeObserver' in window) new ResizeObserver(mesurer).observe(fenetre); else window.addEventListener('resize', mesurer);
+        requestAnimationFrame(tourner);
+        return { reinitialiser: function () { decalage = 0; trajet = null; requestAnimationFrame(mesurer); } };
+    })();
+
+    let depart = 7;
+    const h = (location.hash || '').match(/^#m(7|8|9|10|11)$/);
+    if (h) depart = Number(h[1]);
+    else { try { const s = Number(localStorage.getItem('cd-maquette-3d')); if (NUMEROS.indexOf(s) >= 0) depart = s; } catch (e) {} }
+    afficher(depart, false);
+    window.addEventListener('load', function () { if (aGsap) ST.refresh(); });
+})();
+</script>
+<script type="importmap">
+{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/" } }
+</script>
+<script type="module">
+// Scènes 3D de l'ouverture (Three.js) : une par maquette, reconstruite à chaque changement.
+import * as THREE from 'three';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
+
+const canvas = document.getElementById('scene-3d');
+const boite = canvas.parentElement;
+const reduit = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+let renderer;
+try {
+    renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true, powerPreference: 'high-performance' });
+} catch (e) {
+    renderer = null;
+}
+
+const lisse = (a, b, x) => { const t = Math.min(1, Math.max(0, (x - a) / (b - a))); return t * t * (3 - 2 * t); };
+const doux = x => x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+const alea = (a, b) => a + Math.random() * (b - a);
+
+// ---- Dessins pour les textures (sites d'exemple, écran de téléphone, ombres) ----
+function rondRect(x, px, py, l, h, r) { x.beginPath(); x.moveTo(px + r, py); x.arcTo(px + l, py, px + l, py + h, r); x.arcTo(px + l, py + h, px, py + h, r); x.arcTo(px, py + h, px, py, r); x.arcTo(px, py, px + l, py, r); x.closePath(); }
+const SITES = [
+    { nom: 'Pizzeria Bella Napoli', sous: 'Pizza napolitaine au feu de bois, depuis 1998', fond: '#FFFAF3', texte: '#241A12', accent: '#C0392B', police: '"Playfair Display", Georgia, serif', bouton: 'Voir la carte' },
+    { nom: 'Le Bistrot de la Place', sous: 'Une cuisine généreuse et authentique', fond: '#1C1210', texte: '#F3E6D8', accent: '#B0413E', police: 'italic 600 "Cormorant Garamond", Georgia, serif', bouton: 'Découvrir la carte' },
+    { nom: 'Le Comptoir Burger', sous: 'Burgers gourmets, viande fraîche hachée sur place', fond: '#FFFFFF', texte: '#111827', accent: '#EF4444', police: '"Montserrat", Arial, sans-serif', bouton: 'Commander en ligne' },
+    { nom: 'LE BISTROT DE LA PLACE', sous: 'Une cuisine généreuse et authentique', fond: '#C0392B', texte: '#FFFFFF', accent: '#FFFFFF', surAccent: '#C0392B', police: '"Montserrat", Arial, sans-serif', bouton: 'Voir la carte' },
+    { nom: 'Sakura Sushi', sous: 'Sushis et sashimis préparés minute', fond: '#121212', texte: '#F1ECE4', accent: '#D64545', police: '600 "Cormorant Garamond", Georgia, serif', bouton: 'Voir la carte' },
+    { nom: 'Le Bistrot de la Place', sous: 'Une cuisine généreuse et authentique', fond: '#1A1614', texte: '#F2E8DC', accent: '#C0392B', police: '"Playfair Display", Georgia, serif', bouton: 'Voir la carte' },
+    { nom: 'La Brasserie du Marché', sous: 'Brasserie traditionnelle, produits frais du marché', fond: '#14110D', texte: '#F5EDE0', accent: '#B8860B', police: '600 "Cormorant Garamond", Georgia, serif', bouton: 'Réserver une table' },
+    { nom: 'Le Bistrot de la Place', sous: 'Une cuisine généreuse et authentique', fond: '#17110F', texte: '#F3EAE0', accent: '#E0503C', police: '"Montserrat", Arial, sans-serif', bouton: 'Voir la carte' }
+];
+function policeTitre(s, taille) {
+    const p = s.police;
+    if (/^italic/.test(p)) return p.replace(/^italic (\d+) /, 'italic $1 ' + taille + 'px ');
+    if (/^\d/.test(p)) return p.replace(/^(\d+) /, '$1 ' + taille + 'px ');
+    return '700 ' + taille + 'px ' + p;
+}
+function dessinerSite(s) {
+    const c = document.createElement('canvas'); c.width = 1024; c.height = 640;
+    const x = c.getContext('2d');
+    x.fillStyle = '#EEE8E2'; x.fillRect(0, 0, 1024, 46);
+    ['#F87171', '#FBBF24', '#34D399'].forEach(function (col, i) { x.fillStyle = col; x.beginPath(); x.arc(26 + i * 22, 23, 7, 0, Math.PI * 2); x.fill(); });
+    x.fillStyle = '#FFFFFF'; rondRect(x, 382, 11, 260, 24, 12); x.fill();
+    x.fillStyle = '#6B605B'; x.font = '500 14px "Manrope", sans-serif'; x.textAlign = 'center'; x.fillText('votre-restaurant.fr', 512, 28);
+    x.fillStyle = s.fond; x.fillRect(0, 46, 1024, 594);
+    const g = x.createRadialGradient(780, 190, 20, 780, 190, 520); g.addColorStop(0, s.accent + '44'); g.addColorStop(1, s.accent + '00'); x.fillStyle = g; x.fillRect(0, 46, 1024, 594);
+    x.textAlign = 'left'; x.fillStyle = s.texte; x.font = policeTitre(s, 26); x.fillText(s.nom, 44, 104);
+    x.globalAlpha = 0.35; for (let i = 0; i < 3; i++) { rondRect(x, 640 + i * 70, 94, 46, 6, 3); x.fill(); } x.globalAlpha = 1;
+    x.fillStyle = s.accent; rondRect(x, 866, 80, 116, 36, 18); x.fill();
+    x.fillStyle = s.surAccent || '#FFFFFF'; x.font = '700 15px "Manrope", sans-serif'; x.textAlign = 'center'; x.fillText('Réserver', 924, 103);
+    x.fillStyle = s.accent; x.font = '700 15px "Manrope", sans-serif'; x.fillText('R E S T A U R A N T', 512, 212);
+    x.fillStyle = s.texte; let t = 74; x.font = policeTitre(s, t);
+    while (x.measureText(s.nom).width > 900 && t > 30) { t -= 4; x.font = policeTitre(s, t); }
+    x.fillText(s.nom, 512, 300);
+    x.globalAlpha = 0.75; x.font = '400 22px "Manrope", sans-serif'; x.fillText(s.sous, 512, 350); x.globalAlpha = 1;
+    x.fillStyle = s.accent; rondRect(x, 422, 382, 180, 48, 24); x.fill();
+    x.fillStyle = s.surAccent || '#FFFFFF'; x.font = '700 17px "Manrope", sans-serif'; x.fillText(s.bouton, 512, 412);
+    for (let i = 0; i < 3; i++) {
+        const gi = x.createLinearGradient(0, 470, 0, 610); gi.addColorStop(0, s.accent + 'AA'); gi.addColorStop(1, s.texte + '33');
+        x.fillStyle = gi; rondRect(x, 44 + i * 318, 470, 300, 150, 14); x.fill();
+    }
+    return c;
+}
+function textureOmbre(force) {
+    const c = document.createElement('canvas'); c.width = c.height = 256;
+    const x = c.getContext('2d'), g = x.createRadialGradient(128, 128, 0, 128, 128, 128);
+    g.addColorStop(0, 'rgba(40,20,15,' + force + ')'); g.addColorStop(0.55, 'rgba(40,20,15,' + (force * 0.4) + ')'); g.addColorStop(1, 'rgba(40,20,15,0)');
+    x.fillStyle = g; x.fillRect(0, 0, 256, 256);
+    return new THREE.CanvasTexture(c);
+}
+function ombreSol(taille, force) {
+    const m = new THREE.Mesh(new THREE.PlaneGeometry(taille, taille), new THREE.MeshBasicMaterial({ map: textureOmbre(force), transparent: true, depthWrite: false }));
+    m.rotation.x = -Math.PI / 2;
+    return m;
+}
+function textureDepuis(c) {
+    const t = new THREE.CanvasTexture(c);
+    t.colorSpace = THREE.SRGBColorSpace;
+    t.anisotropy = renderer ? renderer.capabilities.getMaxAnisotropy() : 1;
+    return t;
+}
+function spriteRond() {
+    const c = document.createElement('canvas'); c.width = c.height = 64;
+    const x = c.getContext('2d'), g = x.createRadialGradient(32, 32, 0, 32, 32, 32);
+    g.addColorStop(0, 'rgba(255,255,255,1)'); g.addColorStop(0.3, 'rgba(255,255,255,.5)'); g.addColorStop(1, 'rgba(255,255,255,0)');
+    x.fillStyle = g; x.fillRect(0, 0, 64, 64);
+    return new THREE.CanvasTexture(c);
+}
+
+// ---- 7 · La cloche se soulève et sert le site du restaurant ----
+function sceneCloche(env) {
+    const scene = new THREE.Scene(); scene.environment = env;
+    const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 100);
+    scene.add(new THREE.HemisphereLight(0xfff6ea, 0x6b4a3a, 0.7));
+    const soleil = new THREE.DirectionalLight(0xffffff, 1.6); soleil.position.set(4, 9, 6); scene.add(soleil);
+    const groupe = new THREE.Group(); scene.add(groupe);
+    const ombre = ombreSol(10, 0.3); ombre.position.y = -0.01; groupe.add(ombre);
+    const profil = [[0, 0.1], [2.2, 0.1], [2.5, 0.15], [3.1, 0.33], [3.5, 0.42], [3.64, 0.41], [3.66, 0.36], [3.45, 0.3], [2.9, 0.14], [2.45, 0.03], [2.25, 0], [2.05, 0.04], [0, 0.05]].map(p => new THREE.Vector2(p[0], p[1]));
+    const assiette = new THREE.Mesh(new THREE.LatheGeometry(profil, 96), new THREE.MeshPhysicalMaterial({ color: 0xFBF7F1, roughness: 0.25, clearcoat: 0.9, clearcoatRoughness: 0.15, side: THREE.DoubleSide }));
+    groupe.add(assiette);
+    const filet = new THREE.Mesh(new THREE.TorusGeometry(3.28, 0.025, 8, 160), new THREE.MeshStandardMaterial({ color: 0x9B1B30, roughness: 0.4 }));
+    filet.rotation.x = -Math.PI / 2; filet.position.y = 0.37; groupe.add(filet);
+    const carte = new THREE.Group();
+    const face = new THREE.Mesh(new THREE.PlaneGeometry(3.4, 2.125), new THREE.MeshStandardMaterial({ map: textureDepuis(dessinerSite(SITES[1])), roughness: 0.55 }));
+    face.position.z = 0.036;
+    const dos = new THREE.Mesh(new RoundedBoxGeometry(3.52, 2.24, 0.06, 3, 0.04), new THREE.MeshStandardMaterial({ color: 0xFFFFFF, roughness: 0.6 }));
+    carte.add(dos, face); groupe.add(carte);
+    const courbe = []; for (let i = 0; i <= 28; i++) { const a = i / 28 * Math.PI / 2; courbe.push(new THREE.Vector2(Math.cos(a) * 3.35, Math.sin(a) * 2.55)); }
+    courbe.unshift(new THREE.Vector2(3.5, 0), new THREE.Vector2(3.5, 0.06));
+    const metal = new THREE.MeshStandardMaterial({ color: 0xEDE4D6, metalness: 1, roughness: 0.14, side: THREE.DoubleSide });
+    const cloche = new THREE.Group();
+    cloche.add(new THREE.Mesh(new THREE.LatheGeometry(courbe, 96), metal));
+    const bouton = new THREE.Mesh(new THREE.SphereGeometry(0.3, 32, 24), new THREE.MeshStandardMaterial({ color: 0xC89A4A, metalness: 1, roughness: 0.25 }));
+    bouton.position.y = 2.82; cloche.add(bouton);
+    const col = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.2, 0.3, 24), metal); col.position.y = 2.6; cloche.add(col);
+    cloche.position.y = 0.38; groupe.add(cloche);
+    const vapeur = new THREE.Points(new THREE.BufferGeometry(), new THREE.PointsMaterial({ size: 0.9, map: spriteRond(), transparent: true, opacity: 0.35, depthWrite: false, color: 0xFFFFFF }));
+    const nbV = 18, posV = new Float32Array(nbV * 3), vitV = [];
+    for (let i = 0; i < nbV; i++) { posV[i * 3] = alea(-1.2, 1.2); posV[i * 3 + 1] = alea(0.5, 4); posV[i * 3 + 2] = alea(-0.8, 0.8); vitV.push(alea(0.25, 0.6)); }
+    vapeur.geometry.setAttribute('position', new THREE.BufferAttribute(posV, 3)); groupe.add(vapeur);
+    return {
+        scene: scene, camera: camera,
+        dimension: function (w, h) { camera.aspect = w / h; camera.position.set(0, 5.4, w / h < 1 ? 17 : 14.5); camera.lookAt(0, 1, 0); camera.updateProjectionMatrix(); },
+        maj: function (t, souris, defil) {
+            const p = lisse(0.7, 2.6, t);
+            cloche.position.set(0, 0.38 + doux(p) * 10, -p * 2);
+            cloche.rotation.x = -p * 0.55;
+            const q = lisse(1.5, 3.1, t);
+            carte.rotation.x = -Math.PI / 2 + q * 1.1;
+            carte.position.set(0, 0.26 + q * 1.25 + Math.sin(t * 1.1) * 0.06 * q, q * 0.55);
+            const pv = vapeur.geometry.attributes.position.array;
+            for (let i = 0; i < nbV; i++) { pv[i * 3 + 1] += vitV[i] * 0.012; pv[i * 3] += Math.sin(t + i) * 0.003; if (pv[i * 3 + 1] > 4.5) pv[i * 3 + 1] = 0.6; }
+            vapeur.geometry.attributes.position.needsUpdate = true;
+            vapeur.material.opacity = 0.3 * lisse(2, 3.5, t);
+            groupe.rotation.y = souris.x * 0.28 + Math.sin(t * 0.3) * 0.06 + defil * 0.7;
+            groupe.rotation.x = -souris.y * 0.05;
+        }
+    };
+}
+
+// ---- 8 · Le téléphone du restaurateur : la carte, et un prix modifié en direct ----
+function dessinerEcran(c, etat) {
+    const x = c.getContext('2d'), W = c.width, H = c.height;
+    x.clearRect(0, 0, W, H);
+    x.save(); rondRect(x, 0, 0, W, H, 70); x.clip();
+    x.fillStyle = '#F7F1EA'; x.fillRect(0, 0, W, H);
+    x.fillStyle = '#1B1113'; x.font = '700 26px "Outfit", sans-serif'; x.textAlign = 'left'; x.fillText('9:41', 56, 62); x.textAlign = 'right'; x.fillText('● ● ●', W - 50, 62);
+    x.fillStyle = '#9B1B30'; x.fillRect(0, 96, W, 170);
+    x.fillStyle = 'rgba(255,255,255,.75)'; x.textAlign = 'left'; x.font = '600 22px "Outfit", sans-serif'; x.fillText('CHEZ MARCEL', 48, 160);
+    x.fillStyle = '#FFFFFF'; x.font = '400 54px "DM Serif Display", Georgia, serif'; x.fillText('Ma carte', 48, 224);
+    const plats = [['Salade lyonnaise', 'Entrée', '12,00 €'], ['Quenelle de brochet', 'Plat', etat.prix], ['Saucisson brioché', 'Plat', '19,00 €'], ['Tarte aux pralines', 'Dessert', '8,50 €'], ['Cervelle de canut', 'Fromage', '7,00 €']];
+    plats.forEach(function (p, i) {
+        const y = 300 + i * 150;
+        x.fillStyle = i === 1 && etat.surligne ? '#FFE9E2' : '#FFFFFF'; rondRect(x, 30, y, W - 60, 128, 26); x.fill();
+        x.fillStyle = '#1B1113'; x.font = '700 30px "Outfit", sans-serif'; x.textAlign = 'left'; x.fillText(p[0], 62, y + 56);
+        x.fillStyle = '#7A6661'; x.font = '400 24px "Outfit", sans-serif'; x.fillText(p[1], 62, y + 94);
+        x.textAlign = 'right'; x.fillStyle = '#1B1113'; x.font = '600 30px "IBM Plex Mono", monospace'; x.fillText(p[2], W - 62, y + 74);
+        if (i === 1 && etat.edition) { x.strokeStyle = '#E0503C'; x.lineWidth = 4; rondRect(x, W - 250, y + 34, 200, 60, 14); x.stroke(); }
+    });
+    if (etat.toast) {
+        x.fillStyle = '#1B1113'; rondRect(x, 40, H - 170, W - 80, 104, 26); x.fill();
+        x.fillStyle = '#E3B461'; x.beginPath(); x.arc(100, H - 118, 24, 0, Math.PI * 2); x.fill();
+        x.fillStyle = '#1B1113'; x.font = '700 28px "Outfit", sans-serif'; x.textAlign = 'center'; x.fillText('✓', 100, H - 108);
+        x.fillStyle = '#FFFFFF'; x.textAlign = 'left'; x.font = '600 30px "Outfit", sans-serif'; x.fillText('Site mis à jour', 144, H - 108);
+    }
+    x.restore();
+}
+function sceneTelephone(env) {
+    const scene = new THREE.Scene(); scene.environment = env;
+    const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 100);
+    scene.add(new THREE.AmbientLight(0xffffff, 0.3));
+    const cle = new THREE.DirectionalLight(0xfff0e6, 1.2); cle.position.set(3, 4, 8); scene.add(cle);
+    const vin = new THREE.PointLight(0xff3050, 80, 30, 1.6); vin.position.set(-5, 2, 3); scene.add(vin);
+    const laiton = new THREE.PointLight(0xE3B461, 60, 30, 1.6); laiton.position.set(5, -3, 4); scene.add(laiton);
+    const tel = new THREE.Group(); scene.add(tel);
+    tel.add(new THREE.Mesh(new RoundedBoxGeometry(3.1, 6.3, 0.36, 8, 0.46), new THREE.MeshPhysicalMaterial({ color: 0x1D1517, metalness: 0.75, roughness: 0.25, clearcoat: 1, clearcoatRoughness: 0.1 })));
+    const c = document.createElement('canvas'); c.width = 620; c.height = 1300;
+    const etat = { prix: '22,00 €', surligne: false, edition: false, toast: false };
+    dessinerEcran(c, etat);
+    const tex = textureDepuis(c);
+    const ecran = new THREE.Mesh(new THREE.PlaneGeometry(2.86, 6.0), new THREE.MeshBasicMaterial({ map: tex, transparent: true, toneMapped: false }));
+    ecran.position.z = 0.185; tel.add(ecran);
+    const encoche = new THREE.Mesh(new RoundedBoxGeometry(0.85, 0.22, 0.02, 3, 0.1), new THREE.MeshBasicMaterial({ color: 0x050304 }));
+    encoche.position.set(0, 2.78, 0.2); tel.add(encoche);
+    const nb = 70, pos = new Float32Array(nb * 3), col = new Float32Array(nb * 3), teintes = [new THREE.Color(0xE3B461), new THREE.Color(0x9B1B30), new THREE.Color(0xff8a6a)];
+    for (let i = 0; i < nb; i++) { pos[i * 3] = alea(-9, 9); pos[i * 3 + 1] = alea(-6, 6); pos[i * 3 + 2] = alea(-12, -3); const t = teintes[i % 3]; col[i * 3] = t.r; col[i * 3 + 1] = t.g; col[i * 3 + 2] = t.b; }
+    const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.BufferAttribute(pos, 3)); g.setAttribute('color', new THREE.BufferAttribute(col, 3));
+    const bokeh = new THREE.Points(g, new THREE.PointsMaterial({ size: 1.4, map: spriteRond(), vertexColors: true, transparent: true, opacity: 0.45, depthWrite: false, blending: THREE.AdditiveBlending }));
+    scene.add(bokeh);
+    let phase = -1;
+    return {
+        scene: scene, camera: camera,
+        dimension: function (w, h) { camera.aspect = w / h; camera.position.set(0, 0, w / h < 1 ? 17 : 15.5); camera.updateProjectionMatrix(); },
+        maj: function (t, souris, defil) {
+            const e = doux(lisse(0, 1.6, t));
+            tel.position.y = (1 - e) * -6 + Math.sin(t * 0.9) * 0.12;
+            tel.rotation.y = (1 - e) * 1.4 - 0.32 + Math.sin(t * 0.5) * 0.1 + souris.x * 0.3 + defil * 0.9;
+            tel.rotation.x = 0.06 - souris.y * 0.12;
+            tel.rotation.z = 0.05;
+            bokeh.rotation.z = t * 0.02;
+            // Démonstration : un prix changé depuis le téléphone, toutes les 6 s.
+            const cycle = Math.floor(Math.max(0, t - 2) % 6 / 0.75);
+            if (cycle !== phase && t > 2) {
+                phase = cycle;
+                etat.surligne = cycle >= 1 && cycle <= 6; etat.edition = cycle >= 2 && cycle <= 3;
+                etat.prix = cycle >= 3 && cycle <= 6 ? '23,50 €' : '22,00 €'; etat.toast = cycle >= 4 && cycle <= 6;
+                dessinerEcran(c, etat); tex.needsUpdate = true;
+            }
+        }
+    };
+}
+
+// ---- 9 · Le QR code (réel, vers chefdigital.fr) sur son chevalet de table ----
+const QR = '1111111001100000101111111|1000001001111001001000001|1011101011100011101011101|1011101011100111101011101|1011101010101100101011101|1000001011100011101000001|1111111010101010101111111|0000000010000001000000000|1011111001101100001111100|1110000011110100100100010|1111001100011111100111011|0001110001000000101000001|0000111000110111011010111|1010010100001000100101010|1000101110100111111111011|1010100000001001011110001|1001101100101110111110100|0000000010100011100011000|1111111000011100101010111|1000001011010000100011000|1011101010010001111110111|1011101011001101011011111|1011101011000110000001101|1000001001001101111111001|1111111011001010000111111'.split('|');
+function sceneQR(env) {
+    const scene = new THREE.Scene(); scene.environment = env;
+    const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 100);
+    scene.add(new THREE.HemisphereLight(0xffffff, 0x8a6a5a, 0.8));
+    const soleil = new THREE.DirectionalLight(0xffffff, 1.3); soleil.position.set(5, 8, 7); scene.add(soleil);
+    const chevalet = new THREE.Group(); scene.add(chevalet);
+    const carton = new THREE.MeshStandardMaterial({ color: 0xF7F1E7, roughness: 0.75 });
+    const faire = function (sens) { const pivot = new THREE.Group(); pivot.position.y = 5.3; pivot.rotation.x = -0.26 * sens; const m = new THREE.Mesh(new RoundedBoxGeometry(4.4, 5.6, 0.08, 3, 0.07), carton); m.position.y = -2.8; pivot.add(m); chevalet.add(pivot); return m; };
+    const avant = faire(1); faire(-1);
+    const bord = new THREE.Mesh(new THREE.BoxGeometry(4.2, 0.12, 0.02), new THREE.MeshStandardMaterial({ color: 0x9B1B30, roughness: 0.5 }));
+    bord.position.set(0, -2.35, 0.06); avant.add(bord);
+    const N = QR.length, cote = 0.13, cibles = [];
+    QR.forEach(function (r, y) { for (let x = 0; x < N; x++) if (r[x] === '1') cibles.push(new THREE.Vector3((x - (N - 1) / 2) * cote, ((N - 1) / 2 - y) * cote + 0.35, 0.04 + cote / 2)); });
+    const cubes = new THREE.InstancedMesh(new THREE.BoxGeometry(cote * 0.98, cote * 0.98, cote), new THREE.MeshStandardMaterial({ color: 0x4A0B16, roughness: 0.45, metalness: 0.1 }), cibles.length);
+    cubes.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
+    avant.add(cubes);
+    const departs = cibles.map(function () { return new THREE.Vector3(alea(-3, 3), alea(-2, 3), alea(2, 6)); });
+    const delais = cibles.map(function (c) { return 0.3 + c.length() * 0.35 + alea(0, 0.3); });
+    const rots = cibles.map(function () { return new THREE.Vector3(alea(-4, 4), alea(-4, 4), alea(-4, 4)); });
+    const ombre = ombreSol(9, 0.28); ombre.position.y = 0.01; chevalet.add(ombre);
+    const m = new THREE.Object3D();
+    return {
+        scene: scene, camera: camera,
+        dimension: function (w, h) { camera.aspect = w / h; camera.position.set(0, 2.8, w / h < 1 ? 19 : 16.5); camera.lookAt(0, 2.4, 0); camera.updateProjectionMatrix(); },
+        maj: function (t, souris, defil) {
+            for (let i = 0; i < cibles.length; i++) {
+                let p = lisse(delais[i], delais[i] + 1.1, t); p = 1 - Math.pow(1 - p, 3);
+                m.position.lerpVectors(departs[i], cibles[i], p);
+                m.rotation.set(rots[i].x * (1 - p), rots[i].y * (1 - p), rots[i].z * (1 - p));
+                m.updateMatrix(); cubes.setMatrixAt(i, m.matrix);
+            }
+            cubes.instanceMatrix.needsUpdate = true;
+            chevalet.rotation.y = -0.42 + Math.sin(t * 0.35) * 0.16 + souris.x * 0.35 + defil * 0.8;
+            chevalet.position.y = Math.sin(t * 0.8) * 0.05;
+        }
+    };
+}
+
+// ---- 10 · Vapeur de cuisine : bruit fractal qui monte, sur tout le haut de page ----
+function sceneVapeur() {
+    const scene = new THREE.Scene();
+    const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+    const mat = new THREE.ShaderMaterial({
+        uniforms: { uT: { value: 0 }, uRes: { value: new THREE.Vector2(1, 1) }, uSouris: { value: new THREE.Vector2() } },
+        vertexShader: 'varying vec2 vUv; void main(){ vUv = uv; gl_Position = vec4(position.xy, 0.0, 1.0); }',
+        fragmentShader: [
+            'uniform float uT; uniform vec2 uRes; uniform vec2 uSouris; varying vec2 vUv;',
+            'float h(vec2 p){ return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }',
+            'float n(vec2 p){ vec2 i = floor(p), f = fract(p); vec2 u = f*f*(3.0-2.0*f); return mix(mix(h(i), h(i+vec2(1,0)), u.x), mix(h(i+vec2(0,1)), h(i+vec2(1,1)), u.x), u.y); }',
+            'float fbm(vec2 p){ float v = 0.0, a = 0.5; for (int i = 0; i < 5; i++){ v += a*n(p); p = p*2.02 + 11.3; a *= 0.5; } return v; }',
+            'void main(){',
+            '  vec2 p = (vUv - 0.5) * vec2(uRes.x/uRes.y, 1.0);',
+            '  vec2 q = p * 1.6 + vec2(0.0, -uT * 0.07);',
+            '  vec2 d = vec2(fbm(q + uT * 0.03), fbm(q + 5.2 - uT * 0.02));',
+            '  vec2 m = uSouris * vec2(uRes.x/uRes.y, 1.0) * 0.5;',
+            '  float tourb = exp(-3.0 * length(p - m));',
+            '  float v = fbm(q + 1.8 * d + tourb * 0.6);',
+            '  float colonne = smoothstep(1.1, 0.0, abs(p.x * 0.8)) * smoothstep(-0.7, 0.4, p.y + 0.2);',
+            '  float fumee = smoothstep(0.38, 0.9, v) * (0.45 + 0.55 * colonne);',
+            '  vec3 creme = vec3(0.984, 0.957, 0.925);',
+            '  vec3 rose = vec3(0.949, 0.84, 0.79);',
+            '  vec3 laiton = vec3(0.89, 0.72, 0.45);',
+            '  vec3 vin = vec3(0.608, 0.106, 0.188);',
+            '  vec3 c = creme;',
+            '  c = mix(c, rose, smoothstep(0.25, 0.85, v) * 0.75);',
+            '  c = mix(c, laiton, fumee * 0.28);',
+            '  c = mix(c, vin, smoothstep(0.7, 1.0, v) * 0.16);',
+            '  c = mix(c, vec3(1.0), fumee * 0.35);',
+            '  c += (h(vUv * uRes + uT) - 0.5) * 0.012;',
+            '  gl_FragColor = vec4(c, 1.0);',
+            '}'
+        ].join('\n'),
+        depthTest: false, depthWrite: false
+    });
+    const plan = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), mat); plan.frustumCulled = false; scene.add(plan);
+    return {
+        scene: scene, camera: camera,
+        dimension: function (w, h) { mat.uniforms.uRes.value.set(w, h); },
+        maj: function (t, souris) { mat.uniforms.uT.value = t; mat.uniforms.uSouris.value.copy(souris); }
+    };
+}
+
+// ---- 11 · Galerie : les sites d'exemple flottent en cercle autour de la caméra ----
+function sceneGalerie() {
+    const scene = new THREE.Scene();
+    scene.fog = new THREE.Fog(0x0F0B0C, 7, 17);
+    const camera = new THREE.PerspectiveCamera(42, 1, 0.1, 100);
+    const groupe = new THREE.Group(); scene.add(groupe);
+    const R = 12.5, liste = SITES.concat(SITES);
+    liste.forEach(function (s, i) {
+        const a = i / liste.length * Math.PI * 2;
+        const m = new THREE.Mesh(new THREE.PlaneGeometry(5.2, 3.25), new THREE.MeshBasicMaterial({ map: textureDepuis(dessinerSite(s)), side: THREE.DoubleSide }));
+        m.position.set(Math.sin(a) * R, (i % 2 ? 1.1 : -0.9), -Math.cos(a) * R);
+        m.lookAt(0, m.position.y, 0);
+        groupe.add(m);
+        const cadre = new THREE.Mesh(new THREE.PlaneGeometry(5.4, 3.45), new THREE.MeshBasicMaterial({ color: 0xE3A857, transparent: true, opacity: 0.18, side: THREE.DoubleSide }));
+        cadre.position.copy(m.position); cadre.quaternion.copy(m.quaternion); cadre.translateZ(-0.02); groupe.add(cadre);
+    });
+    return {
+        scene: scene, camera: camera,
+        dimension: function (w, h) { camera.aspect = w / h; camera.position.set(0, 0, 3); camera.updateProjectionMatrix(); },
+        maj: function (t, souris, defil) {
+            groupe.rotation.y = t * 0.05 + souris.x * 0.18 + defil * 1.4;
+            groupe.rotation.x = -0.05 + souris.y * 0.05;
+            camera.position.y = souris.y * 0.3;
+            camera.lookAt(camera.aspect >= 1 ? 4.5 : 0, 0, -10);
+        }
+    };
+}
+
+const SCENES = { 7: sceneCloche, 8: sceneTelephone, 9: sceneQR, 10: sceneVapeur, 11: sceneGalerie };
+
+if (renderer) {
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.75));
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1;
+    const pmrem = new THREE.PMREMGenerator(renderer);
+    const env = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+    const horloge = new THREE.Clock();
+    const souris = new THREE.Vector2(), sourisL = new THREE.Vector2();
+    window.addEventListener('pointermove', function (e) { souris.set(e.clientX / window.innerWidth * 2 - 1, -(e.clientY / window.innerHeight * 2 - 1)); }, { passive: true });
+    let actuelle = null, debut = 0, visible = true, premiere = false;
+
+    const liberer = function (s) {
+        s.scene.traverse(function (o) {
+            if (o.geometry) o.geometry.dispose();
+            if (o.material) [].concat(o.material).forEach(function (m) { Object.values(m).forEach(function (v) { if (v && v.isTexture) v.dispose(); }); m.dispose(); });
+        });
+    };
+    const taille = function () {
+        const w = boite.clientWidth, h = boite.clientHeight;
+        if (!w || !h) return;
+        renderer.setSize(w, h, false);
+        if (actuelle) actuelle.dimension(w, h);
+    };
+    const construire = function (n) {
+        if (actuelle) { liberer(actuelle); actuelle = null; }
+        canvas.classList.remove('pret'); premiere = false;
+        if (!SCENES[n]) return;
+        const lancer = function () {
+            actuelle = SCENES[n](env);
+            debut = horloge.getElapsedTime();
+            requestAnimationFrame(taille);
+        };
+        // Les textures dessinent du texte : on attend les polices du site d'exemple.
+        if (document.fonts && document.fonts.load) Promise.all(['700 40px "Playfair Display"', '600 40px "Cormorant Garamond"', 'italic 600 40px "Cormorant Garamond"', '700 40px "Montserrat"', '400 40px "Outfit"', '400 40px "DM Serif Display"', '500 20px "Manrope"'].map(function (f) { return document.fonts.load(f).catch(function () {}); })).then(function () { if (window.CD_MAQUETTE === n) lancer(); });
+        else lancer();
+    };
+    new ResizeObserver(taille).observe(boite);
+    if ('IntersectionObserver' in window) new IntersectionObserver(function (e) { visible = e[0].isIntersecting; }).observe(boite);
+    document.addEventListener('maquette', function (e) { construire(e.detail); });
+    if (window.CD_MAQUETTE) construire(window.CD_MAQUETTE);
+
+    (function boucle() {
+        requestAnimationFrame(boucle);
+        if (!actuelle || !visible) return;
+        const t = reduit ? 12 : horloge.getElapsedTime() - debut;
+        sourisL.lerp(reduit ? new THREE.Vector2() : souris, 0.05);
+        const defil = Math.min(1, window.scrollY / Math.max(1, boite.getBoundingClientRect().height + 200));
+        actuelle.maj(t, sourisL, defil);
+        renderer.render(actuelle.scene, actuelle.camera);
+        if (!premiere) { premiere = true; canvas.classList.add('pret'); }
+    })();
+}
+</script>

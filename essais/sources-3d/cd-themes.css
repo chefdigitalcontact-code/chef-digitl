@@ -1,0 +1,234 @@
+/* ==========================================================================
+   Maquettes animées 7 à 11 : une base commune pilotée par des variables, puis les réglages
+   propres à chaque maquette. Scène 3D (Three.js) dans l'ouverture, animations GSAP au défilement.
+   ========================================================================== */
+.site { background: var(--fond); color: var(--texte); font-family: var(--f-texte); font-size: 16px; line-height: 1.65; }
+.site h1, .site h2, .site h3 { font-family: var(--f-titre); font-weight: var(--g-titre, 600); letter-spacing: var(--ls-titre, -.02em); text-wrap: balance; color: var(--titre, var(--texte)); }
+.entete { background: var(--entete-fond); -webkit-backdrop-filter: blur(14px) saturate(140%); backdrop-filter: blur(14px) saturate(140%); border-bottom: 1px solid var(--trait); }
+.marque-logo { border-radius: var(--rayon-logo, 10px); background: var(--wine); color: #fff; }
+.marque-nom { font-family: var(--f-titre); font-weight: var(--g-titre, 600); font-size: 19px; letter-spacing: -.02em; }
+.menu a, .lien-client { font-size: 14.5px; color: var(--texte-2); font-weight: 500; }
+.menu a:hover, .lien-client:hover { color: var(--accent); }
+.btn { font-weight: 600; font-size: 15px; padding: 15px 26px; border-radius: var(--rayon-btn, 99px); }
+.btn-principal { background: var(--bouton, var(--wine)); color: var(--bouton-texte, #fff); box-shadow: 0 12px 26px -12px rgba(155, 27, 48, .65); }
+.btn-principal:hover { background: var(--bouton-survol, var(--wine-dark)); }
+.btn-secondaire { border: 1px solid var(--trait-fort); color: var(--texte); background: transparent; }
+.btn-secondaire:hover { border-color: var(--texte); }
+.btn-entete { padding: 10px 18px; font-size: 14px; box-shadow: none; }
+.surtitre { font-size: 12.5px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--accent-2); }
+.hero { position: relative; overflow: hidden; padding-block: 56px 56px; }
+.scene-3d { position: absolute; top: 0; right: 0; width: 52%; height: 640px; pointer-events: none; }
+.scene-3d canvas { display: block; width: 100%; height: 100%; opacity: 0; transition: opacity 1s ease; }
+.scene-3d canvas.pret { opacity: 1; }
+.hero > .enveloppe, .hero > .exemples, .hero > .ex-note { position: relative; z-index: 1; }
+.hero-texte { max-width: 560px; min-height: 540px; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; }
+.hero-titre { margin-top: 18px; font-size: clamp(2.5rem, 5vw, 4.3rem); line-height: 1.03; }
+.hero-titre .mot { display: inline-block; overflow: hidden; vertical-align: top; padding: 0 .05em .12em 0; margin: 0 -.05em -.12em 0; }
+.hero-titre .mot-i { display: inline-block; will-change: transform; }
+.hero-accent { color: var(--accent); }
+.hero-chapo { margin-top: 22px; font-size: 1.08rem; color: var(--texte-2); }
+.hero-chapo strong { color: var(--texte); }
+.hero-actions { margin-top: 30px; }
+.hero-garanties { margin-top: 18px; font-size: 13.5px; color: var(--texte-2); }
+.exemples { margin-top: 30px; }
+.ex-fenetre { -webkit-mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent); mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent); }
+.ex-ecran { border-radius: var(--rayon, 18px); background: var(--carte-fond); border: 1px solid var(--trait); box-shadow: var(--ombre, none); }
+.ex-barre { background: var(--fond-2); }
+.ex-barre i { background: var(--trait-fort); }
+.ex-barre span { background: var(--carte-fond); color: var(--texte-2); }
+.ex-legende { color: var(--texte-2); }
+.ex-legende strong { color: var(--texte); }
+.ex-voir { color: var(--accent); }
+.ex-fleche { background: var(--carte-fond); border: 1px solid var(--trait); color: var(--texte); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+.ex-note { margin-top: 22px; font-size: 14px; color: var(--texte-2); }
+main > section:not(.hero) { padding-block: 104px; }
+.tete { max-width: 780px; margin-bottom: 52px; }
+.tete h2 { margin-top: 14px; font-size: clamp(2rem, 4vw, 3.2rem); line-height: 1.06; }
+.tete-sous { color: var(--texte-2); }
+.stat { padding: 30px; border-radius: var(--rayon, 18px); background: var(--carte-fond); border: 1px solid var(--trait); }
+.stat-v { font-family: var(--f-titre); font-weight: var(--g-titre, 600); font-size: 3.8rem; line-height: 1; color: var(--accent); font-variant-numeric: tabular-nums; }
+.stat-l { margin-top: 12px; font-weight: 700; }
+.stat-t { margin-top: 8px; color: var(--texte-2); font-size: 15px; }
+.etape { padding: 32px 28px; border-radius: var(--rayon, 18px); background: var(--carte-fond); border: 1px solid var(--trait); }
+.etape-n { font-size: 12.5px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--accent-2); }
+.etape h3 { margin-top: 12px; font-size: 1.5rem; line-height: 1.12; }
+.etape p:last-child { margin-top: 10px; color: var(--texte-2); }
+.lien-fleche { margin-top: 36px; font-weight: 700; color: var(--accent); }
+.inclus-item { padding: 26px; border-radius: var(--rayon, 18px); background: var(--carte-fond); border: 1px solid var(--trait); }
+.inclus-item h3 { font-size: 1.2rem; }
+.inclus-item p { margin-top: 6px; color: var(--texte-2); font-size: 15px; }
+.offres { perspective: 1200px; }
+.offre { padding: 34px 30px; border-radius: var(--rayon, 18px); background: var(--carte-fond); border: 1px solid var(--trait); }
+.offre h3 { font-size: 1.35rem; }
+.offre-prix { margin-top: 14px; font-family: var(--f-titre); font-weight: var(--g-titre, 600); font-size: 2.5rem; line-height: 1.05; }
+.offre-prix small { font-family: var(--f-texte); font-size: .36em; font-weight: 500; color: var(--texte-2); letter-spacing: 0; }
+.offre-annuel { margin-top: 6px; font-size: 13px; font-weight: 700; color: var(--accent-2); }
+.offre-texte { margin-top: 14px; color: var(--texte-2); font-size: 15px; }
+.offre-vedette { background: var(--vedette-fond); border-color: transparent; color: var(--vedette-texte); }
+.offre-vedette h3, .offre-vedette .offre-prix { color: var(--vedette-texte); }
+.offre-vedette .offre-prix small, .offre-vedette .offre-texte { color: var(--vedette-texte-2); }
+.offre-vedette .offre-annuel { color: var(--vedette-accent); }
+.faq .enveloppe { max-width: 860px; }
+.faq details { padding: 20px 24px; border-radius: var(--rayon, 18px); background: var(--carte-fond); border: 1px solid var(--trait); }
+.faq summary { font-weight: 700; }
+.faq summary::after { color: var(--accent); }
+.faq details p { margin-top: 10px; color: var(--texte-2); font-size: 15px; }
+.pied { background: var(--pied-fond); color: var(--pied-texte-2); }
+.pied-cta { padding-block: 100px; text-align: center; }
+.pied-cta h2 { color: var(--pied-texte); font-size: clamp(2.1rem, 4.4vw, 3.6rem); max-width: 840px; margin-inline: auto; line-height: 1.06; }
+.pied-cta p { margin: 16px auto 30px; max-width: 560px; }
+.pied-cols { padding-block: 56px 36px; font-size: 14.5px; border-top: 1px solid var(--pied-trait); }
+.pied-cols h3 { font-family: var(--f-texte); font-size: 12.5px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--pied-accent); margin-bottom: 14px; }
+.pied-cols a:hover { color: var(--pied-texte); }
+.pied-marque .marque-nom { color: var(--pied-texte); }
+.pied-marque p { margin-top: 14px; max-width: 32ch; }
+.pied-bas { padding-block: 22px; border-top: 1px solid var(--pied-trait); font-size: 13px; }
+.site.menu-ouvert .menu { background: var(--fond); border-bottom: 1px solid var(--trait); }
+@media (max-width: 960px) {
+    .scene-3d { position: relative; width: 100%; height: 330px; margin-top: -20px; }
+    .hero-texte { max-width: none; min-height: 0; }
+}
+
+/* --------------------------------------------------------------------------
+   7 · CLOCHE — crème et lie-de-vin : la cloche se soulève et sert le site
+   -------------------------------------------------------------------------- */
+.m7 {
+    --fond: #F8F3EC; --fond-2: #EFE6D9; --texte: #1D1614; --texte-2: #64574F; --trait: #E4D8C8; --trait-fort: #CDBDA9;
+    --accent: var(--wine); --accent-2: #A8741E; --f-titre: 'Gloock', Georgia, serif; --g-titre: 400; --ls-titre: -.015em; --f-texte: 'Manrope', system-ui, sans-serif;
+    --rayon: 22px; --carte-fond: #FFFFFF; --ombre: 0 18px 40px -26px rgba(29, 22, 20, .45); --entete-fond: rgba(248, 243, 236, .82);
+    --vedette-fond: var(--wine); --vedette-texte: #FFFFFF; --vedette-texte-2: rgba(255, 255, 255, .78); --vedette-accent: #F2C98A;
+    --pied-fond: #1D1614; --pied-texte: #FFFFFF; --pied-texte-2: rgba(248, 243, 236, .66); --pied-trait: rgba(255, 255, 255, .1); --pied-accent: #E0B062; --rayon-logo: 50%;
+}
+.m7 .hero { background: radial-gradient(46% 60% at 80% 34%, rgba(192, 138, 46, .16), transparent 70%); }
+.m7 .hero-accent { font-family: 'Fraunces', Georgia, serif; font-style: italic; font-weight: 400; }
+.m7 .surtitre { display: inline-flex; align-items: center; gap: 10px; }
+.m7 .surtitre::before { content: ""; width: 26px; height: 1px; background: currentColor; }
+.m7 .btn-secondaire { border-color: var(--texte); }
+.m7 .btn-secondaire:hover { background: var(--texte); color: var(--fond); }
+.m7 .constat { background: #FFFFFF; }
+.m7 .stat { padding: 26px 0 0; border: 0; border-top: 1.5px solid var(--texte); border-radius: 0; background: none; }
+.m7 .stat-v { font-size: 4.6rem; }
+.m7 .etapes { background: var(--texte); color: var(--fond); }
+.m7 .etapes h2, .m7 .etapes h3 { color: #FFFFFF; }
+.m7 .etapes .surtitre { color: #E0B062; }
+.m7 .etape { background: rgba(255, 255, 255, .04); border-color: rgba(255, 255, 255, .12); }
+.m7 .etape-n { font-family: 'Fraunces', serif; font-style: italic; font-weight: 400; font-size: 1.1rem; letter-spacing: 0; text-transform: none; color: #E0B062; }
+.m7 .etape p:last-child { color: rgba(248, 243, 236, .7); }
+.m7 .etapes .lien-fleche { color: #E0B062; }
+.m7 .tarifs { background: var(--fond-2); }
+.m7 .offre-vedette { translate: 0 -14px; box-shadow: 0 30px 50px -30px rgba(155, 27, 48, .8); }
+.m7 .faq details[open] { border-color: var(--wine); }
+
+/* --------------------------------------------------------------------------
+   8 · SERVICE DE NUIT — sombre et chaud : téléphone en 3D, étapes qui défilent à l'horizontale
+   -------------------------------------------------------------------------- */
+.m8 {
+    color-scheme: dark;
+    --fond: #120C0D; --fond-2: #1C1416; --texte: #F3EBE4; --texte-2: #B4A59E; --trait: rgba(243, 235, 228, .1); --trait-fort: rgba(243, 235, 228, .28);
+    --accent: #E3B461; --accent-2: #E3B461; --f-titre: 'DM Serif Display', Georgia, serif; --g-titre: 400; --ls-titre: -.01em; --f-texte: 'Outfit', system-ui, sans-serif;
+    --rayon: 20px; --carte-fond: rgba(255, 255, 255, .035); --entete-fond: rgba(18, 12, 13, .7);
+    --vedette-fond: linear-gradient(160deg, #A51F36, #5B0E1C); --vedette-texte: #FFFFFF; --vedette-texte-2: rgba(255, 255, 255, .76); --vedette-accent: #F2C98A;
+    --pied-fond: #0A0607; --pied-texte: #FFFFFF; --pied-texte-2: rgba(243, 235, 228, .6); --pied-trait: rgba(255, 255, 255, .08); --pied-accent: #E3B461;
+}
+.m8 .hero { background: radial-gradient(50% 70% at 78% 40%, rgba(155, 27, 48, .38), transparent 70%), radial-gradient(40% 50% at 10% 100%, rgba(227, 180, 97, .08), transparent 70%); }
+.m8 .hero-accent { font-style: italic; }
+.m8 .btn-principal { box-shadow: 0 14px 34px -12px rgba(155, 27, 48, .9); }
+.m8 .btn-secondaire:hover { background: rgba(255, 255, 255, .06); }
+.m8 .ex-barre { background: #241A1C; }
+.m8 .stat { background: linear-gradient(180deg, rgba(255, 255, 255, .05), rgba(255, 255, 255, .01)); }
+.m8 .etape { position: relative; overflow: hidden; }
+.m8 .etape::after { content: ""; position: absolute; width: 260px; height: 260px; right: -90px; bottom: -120px; border-radius: 50%; background: radial-gradient(circle, rgba(155, 27, 48, .35), transparent 70%); }
+.m8 .etape-n { color: #D98C5F; }
+@media (min-width: 900px) {
+    .m8 .etapes { overflow: hidden; }
+    .m8 .etapes .enveloppe { max-width: none; padding-inline: 0; }
+    .m8 .etapes .tete, .m8 .etapes .lien-fleche { margin-inline: max(clamp(16px, 4vw, 40px), calc((100vw - 1180px) / 2 + 40px)); }
+    .m8 .etapes .lien-fleche { display: inline-flex; }
+    .m8 .etapes-liste { display: flex; width: max-content; gap: 28px; padding-inline: max(clamp(16px, 4vw, 40px), calc((100vw - 1180px) / 2 + 40px)); }
+    .m8 .etape { width: min(62vw, 720px); min-height: 330px; padding: 44px; display: flex; flex-direction: column; justify-content: flex-end; }
+    .m8 .etape h3 { font-size: 2.4rem; }
+    .m8 .etape p:last-child { font-size: 1.1rem; max-width: 36ch; }
+}
+
+/* --------------------------------------------------------------------------
+   9 · QR DE TABLE — l'identité actuelle (Bricolage + Inter), QR code en relief sur son chevalet
+   -------------------------------------------------------------------------- */
+.m9 {
+    --fond: #FFFDF9; --fond-2: #F5EFE8; --texte: #171313; --texte-2: #5A4F4B; --trait: #ECE4DB; --trait-fort: #D9CEC2;
+    --accent: var(--wine); --accent-2: var(--brass); --f-titre: 'Bricolage Grotesque', 'Inter', sans-serif; --g-titre: 700; --ls-titre: -.03em; --f-texte: 'Inter', system-ui, sans-serif;
+    --rayon: 22px; --carte-fond: #FFFFFF; --ombre: 0 22px 44px -30px rgba(23, 19, 19, .4); --entete-fond: rgba(255, 253, 249, .85); --rayon-btn: 14px;
+    --vedette-fond: #171313; --vedette-texte: #FFFFFF; --vedette-texte-2: rgba(255, 255, 255, .72); --vedette-accent: #E0B062;
+    --pied-fond: #171313; --pied-texte: #FFFFFF; --pied-texte-2: rgba(255, 255, 255, .66); --pied-trait: rgba(255, 255, 255, .1); --pied-accent: #E0B062;
+}
+.m9 .hero { background: linear-gradient(180deg, #FFFDF9, #F7F1EA); }
+.m9 .hero-titre { font-size: clamp(2.5rem, 5.2vw, 4.4rem); line-height: 1; }
+.m9 .stat, .m9 .offre, .m9 .inclus-item, .m9 .etape { box-shadow: var(--ombre); transform-style: preserve-3d; }
+.m9 .stat { border-top: 4px solid var(--wine); }
+.m9 .etapes { background: var(--fond-2); }
+.m9 .etape-n { display: inline-block; padding: 4px 10px; border-radius: 99px; background: rgba(155, 27, 48, .08); color: var(--wine); letter-spacing: .08em; }
+.m9 .inclus-liste { perspective: 1000px; }
+.m9 .inclus-item::before { content: ""; display: block; width: 34px; height: 34px; margin-bottom: 16px; border-radius: 10px; background: var(--wine) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m5 12 5 5L20 7'/%3E%3C/svg%3E") center / 18px no-repeat; }
+.m9 .faq { background: var(--fond-2); }
+
+/* --------------------------------------------------------------------------
+   10 · VAPEUR — éditorial chaud : fumée de cuisine en WebGL, grands titres serif qui glissent
+   -------------------------------------------------------------------------- */
+.m10 {
+    --fond: #FBF4EC; --fond-2: #F3E5D8; --texte: #221816; --texte-2: #6B5A54; --trait: #E8D8CA; --trait-fort: #CDB5A1;
+    --accent: var(--wine); --accent-2: #A8691F; --f-titre: 'Instrument Serif', Georgia, serif; --g-titre: 400; --ls-titre: -.015em; --f-texte: 'Instrument Sans', system-ui, sans-serif;
+    --rayon: 6px; --carte-fond: rgba(255, 255, 255, .62); --entete-fond: rgba(251, 244, 236, .7); --rayon-btn: 6px;
+    --vedette-fond: var(--wine); --vedette-texte: #FFFFFF; --vedette-texte-2: rgba(255, 255, 255, .78); --vedette-accent: #F4CF95;
+    --pied-fond: #221816; --pied-texte: #FFFFFF; --pied-texte-2: rgba(251, 244, 236, .64); --pied-trait: rgba(255, 255, 255, .1); --pied-accent: #E6B26B;
+}
+.m10 .scene-3d { inset: 0; width: auto; height: auto; }
+.m10 .hero { padding-block: 40px 56px; }
+.m10 .hero-texte { max-width: 900px; margin-inline: auto; min-height: 560px; align-items: center; text-align: center; }
+.m10 .hero-titre { font-size: clamp(3rem, 7vw, 6.2rem); line-height: .98; }
+.m10 .hero-accent { font-style: italic; }
+.m10 .hero-chapo { max-width: 640px; font-size: 1.12rem; }
+.m10 .hero-actions { justify-content: center; }
+.m10 .surtitre { letter-spacing: .26em; }
+.m10 .tete h2 { font-size: clamp(2.5rem, 5.6vw, 4.8rem); line-height: 1; will-change: transform; }
+.m10 .stat, .m10 .etape, .m10 .inclus-item, .m10 .offre, .m10 .faq details { -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+.m10 .stat-v { font-size: 5rem; font-style: italic; }
+.m10 .etapes { background: var(--fond-2); }
+.m10 .etape-n { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 1.3rem; font-weight: 400; letter-spacing: 0; text-transform: none; }
+.m10 .etape h3 { font-size: 2rem; }
+.m10 .inclus-liste { perspective: 900px; gap: 0; border-top: 1px solid var(--trait-fort); border-left: 1px solid var(--trait-fort); }
+.m10 .inclus-item { border-radius: 0; border: 0; border-right: 1px solid var(--trait-fort); border-bottom: 1px solid var(--trait-fort); background: transparent; transform-origin: top center; }
+.m10 .inclus-item h3 { font-size: 1.6rem; }
+.m10 .offre h3 { font-size: 2rem; }
+.m10 .offre-prix { font-size: 3rem; }
+.m10 .pied-cta h2 { font-size: clamp(2.6rem, 6vw, 5rem); font-style: italic; }
+
+/* --------------------------------------------------------------------------
+   11 · GALERIE — théâtre sombre : les sites des restaurants flottent en 3D derrière le titre
+   -------------------------------------------------------------------------- */
+.m11 {
+    color-scheme: dark;
+    --fond: #0F0B0C; --fond-2: #1A1315; --texte: #F4ECE6; --texte-2: #A99A90; --trait: rgba(244, 236, 230, .1); --trait-fort: rgba(244, 236, 230, .3);
+    --accent: #E3A857; --accent-2: #E88494; --f-titre: 'Archivo', 'Arial Narrow', sans-serif; --g-titre: 800; --ls-titre: -.01em; --f-texte: 'Manrope', system-ui, sans-serif;
+    --rayon: 14px; --carte-fond: rgba(255, 255, 255, .04); --entete-fond: rgba(15, 11, 12, .6); --rayon-btn: 10px;
+    --vedette-fond: linear-gradient(160deg, #F4ECE6, #E7D9CD); --vedette-texte: #1A1214; --vedette-texte-2: #5E514C; --vedette-accent: var(--wine);
+    --pied-fond: #080607; --pied-texte: #FFFFFF; --pied-texte-2: rgba(244, 236, 230, .6); --pied-trait: rgba(255, 255, 255, .08); --pied-accent: #E3A857;
+}
+.m11 h1, .m11 h2, .m11 .marque-nom { font-stretch: 82%; text-transform: uppercase; }
+.m11 .marque-nom { font-size: 20px; }
+.m11 .scene-3d { top: 0; left: 0; right: 0; width: auto; height: 100%; max-height: 900px; }
+.m11 .hero::after { content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none; background: linear-gradient(90deg, rgba(15, 11, 12, .94) 0%, rgba(15, 11, 12, .6) 40%, rgba(15, 11, 12, .1) 70%), linear-gradient(0deg, var(--fond) 0%, transparent 30%); }
+.m11 .hero-texte { max-width: 580px; min-height: 600px; }
+.m11 .hero-titre { font-size: clamp(2.4rem, 4.3vw, 4rem); line-height: .96; }
+.m11 .btn-secondaire:hover { background: rgba(255, 255, 255, .06); }
+.m11 .ex-barre { background: #221A1C; }
+.m11 .tete h2 { font-size: clamp(2.2rem, 4.8vw, 4rem); line-height: .98; }
+.m11 .stat-v { font-size: 4.6rem; font-stretch: 75%; }
+.m11 .etape h3, .m11 .inclus-item h3, .m11 .offre h3 { font-family: 'Manrope', sans-serif; font-weight: 700; letter-spacing: -.01em; }
+.m11 .offre-prix { font-stretch: 78%; font-size: 3rem; }
+.m11 .pied-cta h2 { font-stretch: 80%; text-transform: uppercase; }
+@media (max-width: 960px) {
+    .m11 .scene-3d { position: absolute; height: 100%; margin: 0; }
+    .m11 .hero::after { background: linear-gradient(0deg, rgba(15, 11, 12, .96) 30%, rgba(15, 11, 12, .45) 70%, rgba(15, 11, 12, .2)); }
+    .m11 .hero-texte { padding-top: 260px; }
+    .m10 .scene-3d { position: absolute; height: auto; margin: 0; }
+    .m10 .hero-texte { min-height: 520px; }
+}
