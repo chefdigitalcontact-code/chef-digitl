@@ -32,4 +32,4 @@ PHOTOS = '''{
     5: { dossier: "brasserie", hero: "brasserie/hero.jpg", photos: 8, effet: "reflets", axeX: 0.5, axeY: 0.45 }
 }'''
 if sys.argv[2] == 'clients': assembler('clients-donnees.js', ESSAIS + 'maquettes-clients-3d.html', 'Maquettes client photoréalistes', photos=PHOTOS)
-if sys.argv[2] == 'dani': assembler('dani-donnees.js', ESSAIS + 'maquette-chez-dani.html', 'Maquette Chez Dani', '{ dossier: "chez-dani", images: 36, photos: 8, depart: 0, vitesse: 2.2, suivi: 5, zoom: 1.02, axeX: 0.5, axeY: 0.55 }')
+if sys.argv[2] == 'dani': assembler('dani-donnees.js', ESSAIS + 'maquette-chez-dani.html', 'Maquette Chez Dani', '{ dossier: "chez-dani", images: 36, photos: 8, depart: 0, vitesse: 2.2, suivi: 5, zoom: 1.0, axeX: 0.5, axeY: 0.3 }')

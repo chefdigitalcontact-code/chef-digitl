@@ -177,7 +177,7 @@ def mat_fromage():
     m, nt, p = noeuds('fromage')
     n = bruit(nt, 5, 4, 0.5)
     if DANI: r = rampe(nt, [(0.3, srgb(0.90, 0.79, 0.52)), (0.7, srgb(0.95, 0.87, 0.64))])
-    else: r = rampe(nt, [(0.3, (0.95, 0.52, 0.06)), (0.7, (1.0, 0.64, 0.12))])
+    else: r = rampe(nt, [(0.3, srgb(0.97, 0.66, 0.16)), (0.7, srgb(0.99, 0.74, 0.24))])
     nt.links.new(n.outputs['Fac'], r.inputs['Fac']); nt.links.new(r.outputs['Color'], p.inputs['Base Color'])
     p.inputs['Roughness'].default_value = 0.3
     p.inputs['Coat Weight'].default_value = 0.35; p.inputs['Coat Roughness'].default_value = 0.15
@@ -431,7 +431,22 @@ couche(st, z + 0.23); z += 0.46
 if DANI:
     fr = nappe('fromage', 1.18, 0.22, coulures(0.03, 8, 0.4, 11), 0.035, 2, 180, 44)
 else:
-    fr = nappe('fromage', 1.2, 0.18, coulures(0.0, 4, 0.36, 5), 0.035, 2, 180, 40)
+    # Tranche de cheddar carrée : à plat sur le steak, les quatre coins fondent et retombent.
+    fr = lier(bpy.data.objects.new('fromage', bpy.data.meshes.new('fromage')))
+    bm = bmesh.new(); bmesh.ops.create_grid(bm, x_segments=80, y_segments=80, size=1.36); bm.to_mesh(fr.data); bm.free()
+    rnd = random.Random(5)
+    ph = [rnd.uniform(0, 6) for _ in range(3)]
+    for v in fr.data.vertices:
+        x, y = v.co.x, v.co.y
+        r = math.hypot(x, y); a = math.atan2(y, x)
+        bord = 1.43 + 0.03 * math.sin(a * 7 + ph[0])
+        d = max(0.0, r - bord)
+        # Au-delà du bord du steak, la tranche se replie vers le bas en s'étirant.
+        v.co.z = -min(d * 2.2, 0.55) - 0.4 * max(0.0, d - 0.25) + 0.012 * math.sin(x * 9 + ph[1]) * math.sin(y * 8 + ph[2])
+        if d > 0: v.co.x, v.co.y = x * (bord + d * 0.6) / r, y * (bord + d * 0.6) / r
+    fr.rotation_euler.z = math.radians(12)
+    fr.modifiers.new('ep', 'SOLIDIFY').thickness = 0.028
+    lisser(fr, 2)
 fr.data.materials.append(mat_fromage())
 deplacer(fr, 'CLOUDS', 0.35, 0.012, 2)
 couche(fr, z + 0.075); z += 0.13
@@ -494,10 +509,10 @@ couche(pdes, z)
 if not DANI:
     graine = lier(bpy.data.objects.new('graine', bpy.data.meshes.new('graine')))
     bm = bmesh.new(); bmesh.ops.create_uvsphere(bm, u_segments=12, v_segments=8, radius=1); bm.to_mesh(graine.data); bm.free()
-    graine.scale = (0.06, 0.035, 0.022); graine.data.materials.append(mat_simple('sesame', (0.93, 0.85, 0.66), 0.45))
+    graine.scale = (0.042, 0.026, 0.016); graine.data.materials.append(mat_simple('sesame', srgb(0.91, 0.80, 0.58), 0.45))
     graine.location = (0, 0, -50)
     ps = pdes.modifiers.new('graines', 'PARTICLE_SYSTEM').particle_system.settings
-    ps.type = 'HAIR'; ps.use_advanced_hair = True; ps.count = 140; ps.hair_length = 1; ps.render_type = 'OBJECT'; ps.instance_object = graine
+    ps.type = 'HAIR'; ps.use_advanced_hair = True; ps.count = 300; ps.hair_length = 1; ps.render_type = 'OBJECT'; ps.instance_object = graine
     ps.particle_size = 1; ps.size_random = 0.3; ps.use_rotations = True; ps.rotation_mode = 'NOR'; ps.phase_factor_random = 2
     ps.emit_from = 'FACE'; ps.use_emit_random = True
     pdes.vertex_groups.new(name='haut')

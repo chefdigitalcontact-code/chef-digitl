@@ -52,7 +52,9 @@
         ctx.clearRect(0, 0, l, h);
         if (!prets[base]) return;
         peindre(images[base], 1);
-        if (base === i0 && prets[i1] && f > 0.02) peindre(images[i1], f);
+        // Fondu court, seulement au passage d'une image à l'autre : pas d'image fantôme à l'arrêt.
+        const m = Math.min(1, Math.max(0, (f - 0.38) / 0.24)), fondu = m * m * (3 - 2 * m);
+        if (base === i0 && prets[i1] && fondu > 0.01) peindre(images[i1], fondu);
         ctx.globalAlpha = 1;
     }
     window.addEventListener('pointermove', function (e) { pointeur = (e.clientX / window.innerWidth - 0.5) * 2; }, { passive: true });
