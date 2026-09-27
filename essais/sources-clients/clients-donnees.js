@@ -4,7 +4,7 @@ window.CLIENTS = {
     titre: 'Maquettes client',
     cle: 'maquette-client-3d',
     designs: [
-        { n: 1, style: 'ardoise', nom: 'Ardoise', type: 'Bistrot, ardoise 3D', resto: {
+        { n: 1, style: 'ardoise', nom: 'Ardoise', type: 'Bistrot, ardoise et vin', resto: {
             nom: 'Le Bistrot de la Place',
             accroche: 'Une cuisine généreuse et authentique au cœur de la ville',
             adresse: '12 Place des Terreaux, 69001 Lyon', tel: '04 78 00 00 00',
@@ -21,7 +21,7 @@ window.CLIENTS = {
                     { nom: 'Tarte aux pralines', desc: 'Spécialité lyonnaise, crème fraîche', prix: '8.00' }] }
             ]
         } },
-        { n: 2, style: 'four', nom: 'Four à bois', type: 'Pizzeria, pizza 3D', resto: {
+        { n: 2, style: 'four', nom: 'Four à bois', type: 'Pizzeria, four à bois', resto: {
             nom: 'Pizzeria Bella Napoli',
             accroche: 'Pizza napolitaine au feu de bois, depuis 1998',
             adresse: '5 Cours Vitton, 69006 Lyon', tel: '04 78 90 00 00',
@@ -35,7 +35,7 @@ window.CLIENTS = {
                     { nom: 'Tiramisu maison', desc: 'Recette traditionnelle italienne', prix: '6.50' }] }
             ]
         } },
-        { n: 3, style: 'sakura', nom: 'Sakura', type: 'Sushi, plateau 3D', resto: {
+        { n: 3, style: 'sakura', nom: 'Sakura', type: 'Sushi, plateau', resto: {
             nom: 'Sakura Sushi',
             accroche: 'Sushis et sashimis préparés minute par notre chef japonais',
             adresse: '20 Rue Victor Hugo, 69002 Lyon', tel: '04 78 40 00 00',
@@ -49,7 +49,7 @@ window.CLIENTS = {
                     { nom: 'Chirashi saumon', desc: 'Riz vinaigré, saumon, avocat, edamame', prix: '18.00' }] }
             ]
         } },
-        { n: 4, style: 'smash', nom: 'Smash', type: 'Burger, montage 3D', resto: {
+        { n: 4, style: 'smash', nom: 'Smash', type: 'Burger, comptoir', resto: {
             nom: 'Le Comptoir Burger',
             accroche: 'Burgers gourmets, viande fraîche hachée sur place',
             adresse: '8 Rue de la République, 69002 Lyon', tel: '04 72 00 00 00',
@@ -63,7 +63,7 @@ window.CLIENTS = {
                     { nom: 'Frites maison', desc: 'Coupe épaisse, sel de Guérande', prix: '5.00' }] }
             ]
         } },
-        { n: 5, style: 'pression', nom: 'Pression', type: 'Brasserie, bière 3D', resto: {
+        { n: 5, style: 'pression', nom: 'Pression', type: 'Brasserie, pression', resto: {
             nom: 'La Brasserie du Marché',
             accroche: 'Brasserie traditionnelle, produits frais du marché',
             adresse: '3 Place des Célestins, 69002 Lyon', tel: '04 78 30 00 00',

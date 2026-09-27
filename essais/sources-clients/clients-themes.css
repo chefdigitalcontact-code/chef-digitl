@@ -317,3 +317,14 @@ body { margin: 0; background: #F2EEE9; padding-bottom: 86px; }
 .dani .categorie-nom { font-style: italic; }
 .dani .plat-nom { font-family: var(--f-titre); font-size: 1.35rem; font-weight: 600; }
 .dani .onglets a.actif { color: #16130F; }
+/* Chez Dani : le burger est une suite de rendus photoréalistes ; les bords se fondent dans le fond. */
+.dani .hero { background: radial-gradient(55% 75% at 72% 48%, #2A231C, #14110E 60%, #0F0E0C); }
+.dani .scene-3d { width: 60%; }
+.dani .scene-3d canvas { -webkit-mask-image: radial-gradient(62% 70% at 55% 52%, #000 58%, transparent 100%); mask-image: radial-gradient(62% 70% at 55% 52%, #000 58%, transparent 100%); }
+.dani .photo-cadre { background: #14110E; }
+@media (max-width: 960px) { .dani .scene-3d { width: 100%; } .dani .hero-scene { height: 380px; } }
+
+/* Ouvertures photoréalistes : la photo se fond dans le fond de l'ouverture. */
+.site:not(.dani) .scene-3d canvas { -webkit-mask-image: radial-gradient(58% 72% at 60% 50%, #000 48%, transparent 100%); mask-image: radial-gradient(58% 72% at 60% 50%, #000 48%, transparent 100%); }
+.site:not(.dani) .scene-3d { width: 60%; }
+@media (max-width: 960px) { .site:not(.dani) .scene-3d { width: 100%; } .site:not(.dani) .hero-scene { height: 380px; } }

@@ -4,7 +4,7 @@ G = sys.argv[1]
 ESSAIS = '/home/user/chef-digitl/essais/'
 def lire(p): return open(G + '/' + p, encoding='utf-8').read()
 POLICES = 'https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Anton&family=Barlow:wght@400;500;600;700&family=Caveat:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Fraunces:opsz,wght@9..144,500..700&family=Jost:wght@400;500;600;700&family=Karla:wght@400;500;600;700&family=Nunito+Sans:opsz,wght@6..12,400..800&family=Prata&family=Shippori+Mincho:wght@600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap'
-def assembler(donnees, sortie, titre):
+def assembler(donnees, sortie, titre, sequence=None, photos=None):
     html = ('<title>' + titre + '</title>\n'
         '<link rel="preconnect" href="https://fonts.googleapis.com">\n<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n'
         '<link rel="stylesheet" href="' + POLICES + '">\n'
@@ -18,9 +18,18 @@ def assembler(donnees, sortie, titre):
         '<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>\n'
         '<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>\n'
         '<script>\n' + lire('clients-page.js') + '</script>\n'
+        + (('<script>\nwindow.SEQUENCE = ' + sequence + ';\n' + lire('sequence.js') + '</script>\n') if sequence else
+           ('<script>\nwindow.PHOTOS_CLIENTS = ' + photos + ';\n' + lire('photo-hero.js') + '</script>\n') if photos else (
         '<script type="importmap">\n{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/" } }\n</script>\n'
-        '<script type="module">\n' + lire('clients-3d.js') + '</script>\n')
+        '<script type="module">\n' + lire('clients-3d.js') + '</script>\n')))
     open(sortie, 'w', encoding='utf-8').write(html)
     print(sortie, len(html))
-if sys.argv[2] == 'clients': assembler('clients-donnees.js', ESSAIS + 'maquettes-clients-3d.html', 'Maquettes client 3D')
-if sys.argv[2] == 'dani': assembler('dani-donnees.js', ESSAIS + 'maquette-chez-dani.html', 'Maquette Chez Dani')
+PHOTOS = '''{
+    1: { dossier: "bistrot", hero: "bistrot/hero.jpg", photos: 8, effet: "craie", vacille: "#FFB060", axeX: 0.55, axeY: 0.5 },
+    2: { dossier: "pizza", hero: "pizza/hero.jpg", photos: 8, effet: "braises", vacille: "#FF8A30", axeX: 0.5, axeY: 0.55 },
+    3: { dossier: "sushi", hero: "sushi/hero.jpg", photos: 8, effet: "petales", axeX: 0.5, axeY: 0.55 },
+    4: { dossier: "comptoir", hero: "comptoir/hero.jpg", photos: 8, effet: "vapeur", vapeurX: 0.5, vapeurY: 0.3, axeX: 0.5, axeY: 0.5 },
+    5: { dossier: "brasserie", hero: "brasserie/hero.jpg", photos: 8, effet: "reflets", axeX: 0.5, axeY: 0.45 }
+}'''
+if sys.argv[2] == 'clients': assembler('clients-donnees.js', ESSAIS + 'maquettes-clients-3d.html', 'Maquettes client photoréalistes', photos=PHOTOS)
+if sys.argv[2] == 'dani': assembler('dani-donnees.js', ESSAIS + 'maquette-chez-dani.html', 'Maquette Chez Dani', '{ dossier: "chez-dani", images: 36, photos: 8, depart: 0, vitesse: 2.2, suivi: 5, zoom: 1.02, axeX: 0.5, axeY: 0.55 }')
