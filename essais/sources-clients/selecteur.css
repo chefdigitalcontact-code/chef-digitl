@@ -1,0 +1,21 @@
+/* ==========================================================================
+   Sélecteur de maquette (hors maquette)
+   ========================================================================== */
+.selecteur { position: fixed; z-index: 100; left: 50%; bottom: calc(14px + env(safe-area-inset-bottom, 0px)); translate: -50% 0; display: flex; align-items: center; gap: 6px; max-width: calc(100vw - 24px); padding: 6px; border-radius: 16px; background: rgba(18, 16, 15, .94); color: #fff; font: 500 13px/1.2 system-ui, -apple-system, 'Segoe UI', sans-serif; box-shadow: 0 16px 40px -12px rgba(0, 0, 0, .6); }
+.selecteur button { font: inherit; color: inherit; border: 0; cursor: pointer; border-radius: 11px; background: transparent; }
+.sel-fleche { width: 36px; height: 36px; font-size: 18px; }
+.sel-fleche:hover, .sel-choix button:hover { background: rgba(255, 255, 255, .1); }
+.sel-choix { display: flex; gap: 2px; }
+.sel-choix button { display: grid; gap: 2px; padding: 6px 12px; text-align: left; min-width: 0; }
+.sel-choix button b { font-size: 13px; white-space: nowrap; }
+.sel-choix button span { font-size: 10.5px; opacity: .6; text-transform: uppercase; letter-spacing: .08em; }
+.sel-choix button[aria-pressed="true"] { background: #fff; color: #12100F; }
+.sel-choix button[aria-pressed="true"] span { opacity: .55; }
+.selecteur :focus-visible { outline: 2px solid #E9B35A; outline-offset: 2px; }
+.sel-actuel { display: none; padding: 0 8px; text-align: center; }
+.sel-actuel b { display: block; font-size: 13.5px; white-space: nowrap; }
+.sel-actuel span { font-size: 11px; opacity: .65; }
+@media (max-width: 980px) {
+    .sel-choix { display: none; }
+    .sel-actuel { display: block; min-width: 170px; }
+}

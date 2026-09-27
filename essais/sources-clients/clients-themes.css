@@ -1,0 +1,319 @@
+/* ==========================================================================
+   Maquettes de sites clients : une structure commune (les 6 pages d'un site Chef Digital),
+   pilotée par des variables, puis le réglage propre à chaque maquette.
+   ========================================================================== */
+*, *::before, *::after { box-sizing: border-box; }
+html { background: #F2EEE9; }
+body { margin: 0; background: #F2EEE9; padding-bottom: 86px; }
+.site { min-height: 100vh; overflow-x: clip; background: var(--fond); color: var(--texte); font-family: var(--f-texte); font-size: 16.5px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+.site p, .site h1, .site h2, .site h3, .site ul, .site figure { margin: 0; }
+.site ul { padding: 0; list-style: none; }
+.site a { color: inherit; }
+.site :focus-visible { outline: 2px solid var(--accent-texte, var(--accent)); outline-offset: 3px; border-radius: 4px; }
+.site h1, .site h2, .site h3 { font-family: var(--f-titre); font-weight: var(--g-titre, 600); letter-spacing: var(--ls-titre, -.01em); line-height: 1.06; text-wrap: balance; color: var(--titre, var(--texte)); text-transform: var(--tt-titre, none); }
+.enveloppe { max-width: 1180px; margin-inline: auto; padding-inline: clamp(16px, 4vw, 40px); }
+.surtitre { font-family: var(--f-surtitre, var(--f-texte)); font-size: var(--t-surtitre, 12.5px); font-weight: var(--g-surtitre, 700); letter-spacing: var(--ls-surtitre, .2em); text-transform: var(--tt-surtitre, uppercase); color: var(--accent-texte, var(--accent)); }
+[hidden] { display: none !important; }
+
+/* ---- Navigation ---- */
+.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; background: var(--nav-fond); -webkit-backdrop-filter: blur(14px) saturate(140%); backdrop-filter: blur(14px) saturate(140%); border-bottom: 1px solid var(--trait); }
+.nav-in { display: flex; align-items: center; gap: 26px; min-height: 72px; }
+.nav-logo { margin-right: auto; font-family: var(--f-titre); font-weight: var(--g-titre, 600); font-size: 1.3rem; letter-spacing: var(--ls-titre, -.01em); text-transform: var(--tt-titre, none); text-decoration: none; white-space: nowrap; color: var(--titre, var(--texte)); }
+.nav-liens { display: flex; gap: 22px; }
+.nav-liens a { font-size: 14.5px; text-decoration: none; color: var(--texte-2); white-space: nowrap; transition: color .2s; }
+.nav-liens a:hover, .nav-liens a[aria-current="page"] { color: var(--accent-texte, var(--accent)); }
+.nav-liens .nav-liens-resa { display: none; }
+.burger { display: none; width: 42px; height: 42px; flex: none; border: 1px solid var(--trait-fort); border-radius: 10px; background: none; color: inherit; cursor: pointer; place-items: center; }
+.burger span { display: block; width: 18px; height: 2px; background: currentColor; box-shadow: 0 -6px 0 currentColor, 0 6px 0 currentColor; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 15px 26px; border: 1px solid transparent; border-radius: var(--rayon-btn, 999px); font: 700 13.5px/1.2 var(--f-texte); letter-spacing: .08em; text-transform: uppercase; text-decoration: none; white-space: nowrap; cursor: pointer; transition: background-color .2s, color .2s, border-color .2s, box-shadow .2s; }
+.btn-plein { background: var(--accent); color: var(--sur-accent, #fff); box-shadow: var(--btn-ombre, none); }
+.btn-plein:hover { background: var(--accent-survol, var(--accent)); }
+.btn-ligne { border-color: var(--ligne-bord, var(--trait-fort)); color: var(--ligne-texte, var(--texte)); background: transparent; }
+.btn-ligne:hover { border-color: currentColor; }
+.nav-resa { padding: 11px 18px; font-size: 12px; }
+.lien { display: inline-flex; gap: 8px; align-items: center; font-weight: 700; color: var(--accent-texte, var(--accent)); text-decoration: none; }
+.lien::after { content: "→"; transition: transform .2s; }
+.lien:hover::after { transform: translateX(4px); }
+
+/* ---- Pages ---- */
+.page { display: none; }
+.page.active { display: block; }
+.page-corps { padding-block: 80px 104px; }
+.page-tete { max-width: 760px; margin-bottom: 40px; }
+.page-tete h2 { margin-top: 12px; font-size: clamp(2.5rem, 5.4vw, 4.4rem); }
+.histoire-texte h2, .resa-texte h2 { margin-top: 12px; font-size: clamp(2.1rem, 3.8vw, 3.3rem); }
+
+/* Accueil */
+.hero { position: relative; overflow: hidden; background: var(--hero-fond, var(--fond)); color: var(--hero-texte, var(--texte)); }
+.hero-scene { position: absolute; inset: 0; pointer-events: none; }
+.scene-3d { position: absolute; top: 0; right: 0; width: 56%; height: 100%; }
+.scene-3d canvas { display: block; width: 100%; height: 100%; opacity: 0; transition: opacity 1s ease; }
+.scene-3d canvas.pret { opacity: 1; }
+.hero-in { position: relative; z-index: 1; display: flex; align-items: center; min-height: 640px; padding-block: 56px 88px; }
+.hero-texte { max-width: 520px; }
+.site .hero-titre { margin-top: 10px; font-size: clamp(3.2rem, 6.6vw, 5.8rem); line-height: .96; color: var(--hero-titre, var(--titre, var(--texte))); }
+.hero-titre .hero-petit { display: block; font-size: .46em; line-height: 1.1; }
+.mot { display: inline-block; overflow: hidden; vertical-align: top; padding: 0 .06em .12em 0; margin: 0 -.06em -.12em 0; }
+.mot-i { display: inline-block; will-change: transform; }
+.hero-accroche { margin-top: 22px; font-size: 1.15rem; color: var(--hero-texte-2, var(--texte-2)); max-width: 30em; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+.hero-stats { display: flex; gap: 40px; margin-top: 38px; }
+.hero-stats b { display: block; font-family: var(--f-titre); font-size: 2.4rem; line-height: 1; color: var(--accent-texte, var(--accent)); }
+.hero-stats span { display: block; margin-top: 6px; font-size: 13.5px; color: var(--hero-texte-2, var(--texte-2)); }
+.decouvrir { position: absolute; z-index: 1; left: 50%; bottom: 16px; translate: -50% 0; display: flex; flex-direction: column; align-items: center; gap: 8px; font-size: 11px; letter-spacing: .26em; text-transform: uppercase; color: var(--hero-texte-2, var(--texte-2)); }
+.decouvrir::after { content: ""; width: 1px; height: 30px; background: currentColor; opacity: .5; }
+.tuiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; padding-block: 72px 16px; }
+.tuile { position: relative; display: block; padding: 30px 28px 34px; border-radius: var(--rayon, 18px); background: var(--carte-fond); border: 1px solid var(--trait); text-decoration: none; transition: transform .3s, border-color .3s, box-shadow .3s; }
+.tuile:hover { transform: translateY(-4px); border-color: var(--accent-texte, var(--accent)); }
+.tuile::after { content: "→"; position: absolute; right: 26px; top: 30px; font-size: 1.2rem; color: var(--accent-texte, var(--accent)); transition: transform .3s; }
+.tuile:hover::after { transform: translateX(4px); }
+.tuile h3 { font-size: 1.55rem; padding-right: 30px; }
+.tuile p { margin-top: 8px; color: var(--texte-2); }
+.teaser { padding-block: 64px 104px; }
+.teaser-in, .histoire-in, .contact-grille { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+.teaser h2 { margin-top: 12px; font-size: clamp(2rem, 3.6vw, 3rem); }
+.teaser p:not(.surtitre), .histoire-texte > p:not(.surtitre):not(.badge), .resa-texte > p:not(.surtitre) { margin-top: 16px; color: var(--texte-2); }
+.teaser .lien { margin-top: 22px; }
+.photo-cadre { position: relative; overflow: hidden; border-radius: var(--rayon, 18px); aspect-ratio: 4 / 3; background: var(--photo-fond, linear-gradient(135deg, var(--fond-2), var(--trait-fort))); }
+.photo-cadre img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .8s cubic-bezier(.2, .7, .2, 1); }
+.photo-cadre:hover img { transform: scale(1.04); }
+.photo-cadre img:not([src]) { visibility: hidden; }
+.photo-haute { aspect-ratio: 4 / 5; }
+.badge { display: inline-flex; align-items: center; gap: 8px; margin-top: 22px; padding: 8px 14px; border-radius: 999px; border: 1px solid var(--accent-texte, var(--accent)); color: var(--accent-texte, var(--accent)); font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.badge::before { content: "★"; }
+.infos { display: grid; gap: 14px; margin-top: 28px; }
+.infos li { display: flex; gap: 14px; align-items: flex-start; }
+.infos svg { flex: none; width: 20px; height: 20px; margin-top: 3px; fill: none; stroke: var(--accent-texte, var(--accent)); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.infos-grandes { gap: 18px; font-size: 1.12rem; }
+
+/* La Carte */
+.onglets { position: sticky; top: calc(72px + env(safe-area-inset-top, 0px)); z-index: 5; display: flex; gap: 8px; margin-inline: -4px; padding: 12px 4px; background: var(--fond); overflow-x: auto; scrollbar-width: none; }
+.onglets a { padding: 9px 17px; border-radius: var(--rayon-btn, 999px); border: 1px solid var(--trait-fort); font-size: 14px; font-weight: 700; text-decoration: none; white-space: nowrap; transition: background-color .25s, color .25s, border-color .25s; }
+.onglets a.actif { background: var(--accent); border-color: var(--accent); color: var(--sur-accent, #fff); }
+.categorie { padding-top: 40px; scroll-margin-top: 150px; }
+.categorie-nom { font-size: clamp(1.8rem, 3vw, 2.5rem); padding-bottom: 14px; border-bottom: 1px solid var(--trait-fort); }
+.plats { display: grid; grid-template-columns: 1fr 1fr; gap: 0 56px; margin-top: 8px; }
+.plat { padding-block: 20px; border-bottom: 1px solid var(--trait); }
+.plat-ligne { display: flex; align-items: baseline; gap: 10px; }
+.plat-nom { font-weight: 700; font-size: 1.08rem; }
+.plat-points { flex: 1; min-width: 16px; border-bottom: 1px dotted var(--trait-fort); translate: 0 -5px; }
+.plat-prix { font-weight: 700; color: var(--accent-texte, var(--accent)); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.plat-desc { margin-top: 4px; color: var(--texte-2); font-size: 15px; }
+.carte-note { display: grid; gap: 6px; margin-top: 48px; padding: 22px 26px; border-radius: var(--rayon, 18px); background: var(--fond-2); color: var(--texte-2); font-size: 14.5px; }
+
+/* Galerie */
+.galerie-grille { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.galerie-grille .photo-cadre:first-child { grid-column: span 2; grid-row: span 2; aspect-ratio: auto; }
+
+/* Réservation */
+.resa { display: grid; grid-template-columns: .9fr 1.1fr; gap: 56px; align-items: start; }
+.resa-form { padding: 34px; border-radius: var(--rayon, 18px); background: var(--carte-fond); border: 1px solid var(--trait); }
+.resa-form h3 { margin-bottom: 22px; font-size: 1.7rem; }
+.champs { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 16px; }
+.champ { display: grid; gap: 6px; font-size: 13px; font-weight: 700; letter-spacing: .02em; color: var(--texte-2); }
+.champ-large { grid-column: 1 / -1; }
+.champ input, .champ select { width: 100%; min-width: 0; padding: 12px 14px; border: 1px solid var(--trait-fort); border-radius: var(--rayon-champ, 10px); background: var(--champ-fond, transparent); color: var(--texte); font: 400 15px/1.3 var(--f-texte); }
+.champ input:focus, .champ select:focus { outline: 2px solid var(--accent-texte, var(--accent)); outline-offset: 1px; }
+.champ select option { color: #111; }
+.resa-form .btn { width: 100%; margin-top: 24px; }
+.resa-message { margin-top: 14px; font-size: 14px; color: var(--texte-2); }
+.contact-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+
+/* Pied de page */
+.pied { background: var(--pied-fond); color: var(--pied-texte-2); font-size: 15px; }
+.pied-grille { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 36px; padding-block: 60px 36px; }
+.pied-nom { font-family: var(--f-titre); font-weight: var(--g-titre, 600); font-size: 1.7rem; text-transform: var(--tt-titre, none); color: var(--pied-texte); }
+.pied-nom + p { margin-top: 10px; max-width: 34ch; }
+.pied h3 { margin-bottom: 12px; font-family: var(--f-texte); font-size: 12px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--pied-accent, var(--accent)); }
+.pied p + p { margin-top: 6px; }
+.pied-bas { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px 24px; padding-block: 20px 26px; border-top: 1px solid var(--pied-trait); font-size: 13px; }
+.pied-bas a { text-decoration: none; }
+.pied-bas a:hover { color: var(--pied-texte); }
+
+/* Rideau de transition entre les pages */
+.rideau { position: fixed; inset: 0; z-index: 60; pointer-events: none; visibility: hidden; background: var(--rideau, #111); }
+.boite-attente { position: absolute; width: 1px; height: 1px; overflow: hidden; }
+
+@media (max-width: 960px) {
+    .nav-liens { display: none; }
+    .burger { display: grid; }
+    .site.menu-ouvert .nav-liens { display: flex; flex-direction: column; gap: 0; position: absolute; left: 0; right: 0; top: 100%; padding: 8px clamp(16px, 4vw, 40px) 16px; background: var(--menu-fond, var(--fond)); border-bottom: 1px solid var(--trait); }
+    .site.menu-ouvert .nav-liens a { padding: 12px 0; }
+    .hero-scene { position: relative; height: 340px; }
+    .scene-3d { width: 100%; }
+    .hero-in { min-height: 0; padding-block: 0 72px; }
+    .decouvrir { display: none; }
+    .tuiles, .teaser-in, .histoire-in, .contact-grille, .resa, .pied-grille { grid-template-columns: 1fr; }
+    .plats { grid-template-columns: 1fr; }
+    .galerie-grille { grid-template-columns: 1fr 1fr; }
+    .page-corps { padding-block: 56px 80px; }
+}
+@media (max-width: 560px) {
+    .nav-resa { display: none; }
+    .site.menu-ouvert .nav-liens .nav-liens-resa { display: block; font-weight: 700; color: var(--accent-texte, var(--accent)); }
+    .champs { grid-template-columns: 1fr; }
+    .hero-stats { gap: 26px; }
+    .resa-form { padding: 24px 20px; }
+    .nav-logo { font-size: 1.15rem; white-space: normal; line-height: 1.15; }
+}
+
+/* --------------------------------------------------------------------------
+   1 · ARDOISE — bistrot lyonnais : bois sombre, craie et lie-de-vin, l'ardoise du jour en 3D
+   -------------------------------------------------------------------------- */
+.ardoise {
+    color-scheme: dark;
+    --fond: #1C1712; --fond-2: #251E18; --texte: #F3E9DC; --texte-2: #C2B2A0; --trait: rgba(243, 233, 220, .12); --trait-fort: rgba(243, 233, 220, .3);
+    --accent: #B23A2E; --accent-survol: #C44536; --accent-texte: #E88A70; --sur-accent: #FFFFFF;
+    --f-titre: 'Fraunces', Georgia, serif; --g-titre: 600; --ls-titre: -.02em; --f-texte: 'Karla', system-ui, sans-serif;
+    --f-surtitre: 'Caveat', 'Segoe Print', cursive; --t-surtitre: 1.55rem; --g-surtitre: 600; --ls-surtitre: 0; --tt-surtitre: none;
+    --rayon: 6px; --rayon-btn: 6px; --carte-fond: #25201A; --nav-fond: rgba(28, 23, 18, .82); --menu-fond: #1C1712;
+    --hero-fond: radial-gradient(60% 70% at 72% 40%, rgba(178, 58, 46, .22), transparent 70%), #16120E;
+    --photo-fond: linear-gradient(135deg, #2A302E, #1C1712);
+    --pied-fond: #120F0C; --pied-texte: #F3E9DC; --pied-texte-2: rgba(243, 233, 220, .6); --pied-trait: rgba(255, 255, 255, .08); --pied-accent: #E88A70;
+    --rideau: #2A302E;
+}
+@media (max-width: 560px) { .pression .page-tete .surtitre::before, .pression .page-tete .surtitre::after { display: none; } }
+.ardoise .hero-titre .hero-petit { font-family: 'Caveat', cursive; font-weight: 600; font-size: .5em; color: var(--accent-texte); }
+.ardoise .tuile { background: #2A302E; border: 6px solid #6B4A32; box-shadow: inset 0 0 40px rgba(0, 0, 0, .35); }
+.ardoise .tuile h3 { font-family: 'Caveat', cursive; font-size: 2.1rem; font-weight: 600; color: #FBF6EE; }
+.ardoise .page-tete h2, .ardoise .teaser h2, .ardoise .histoire-texte h2, .ardoise .resa-texte h2 { position: relative; padding-bottom: 18px; }
+.ardoise .page-tete h2::after, .ardoise .teaser h2::after, .ardoise .histoire-texte h2::after, .ardoise .resa-texte h2::after { content: ""; position: absolute; left: 0; bottom: 0; width: 120px; height: 10px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 10'%3E%3Cpath d='M2 6c20-5 38 3 58-1s38-5 58 0' fill='none' stroke='%23E88A70' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat; }
+.ardoise .categorie-nom { font-family: 'Caveat', cursive; font-weight: 600; font-size: 2.6rem; color: #FBF6EE; border-bottom-style: dashed; }
+.ardoise .page[data-page="carte"] { background: radial-gradient(80% 60% at 50% 0%, rgba(42, 48, 46, .7), transparent 70%); }
+.ardoise .resa-form { background: #2A302E; border: 6px solid #6B4A32; }
+.ardoise .resa-form h3 { font-family: 'Caveat', cursive; font-size: 2.2rem; font-weight: 600; }
+.ardoise .champ input, .ardoise .champ select { background: rgba(0, 0, 0, .18); border-color: rgba(255, 255, 255, .22); }
+.ardoise .photo-cadre { border: 6px solid #6B4A32; }
+
+/* --------------------------------------------------------------------------
+   2 · FOUR À BOIS — pizzeria : l'ouverture dans la lueur du four, le reste en crème et tomate
+   -------------------------------------------------------------------------- */
+.four {
+    --fond: #FFFAF3; --fond-2: #F7EDDF; --texte: #241A12; --texte-2: #6B584A; --trait: #EFE2D1; --trait-fort: #D9C4AA;
+    --accent: #C0392B; --accent-survol: #A93226; --accent-texte: #B03325; --sur-accent: #FFFFFF;
+    --f-titre: 'Abril Fatface', Georgia, serif; --g-titre: 400; --ls-titre: 0; --f-texte: 'Nunito Sans', system-ui, sans-serif;
+    --rayon: 26px; --carte-fond: #FFFFFF; --nav-fond: rgba(255, 250, 243, .88);
+    --hero-fond: radial-gradient(55% 75% at 74% 62%, rgba(255, 120, 40, .35), transparent 65%), radial-gradient(90% 60% at 74% 100%, #3A1B0D, transparent 70%), #1B110B;
+    --hero-texte: #FFF4E6; --hero-texte-2: rgba(255, 244, 230, .76); --hero-titre: #FFF4E6; --ligne-bord: rgba(255, 244, 230, .45); --ligne-texte: #FFF4E6;
+    --btn-ombre: 0 14px 30px -12px rgba(192, 57, 43, .7);
+    --pied-fond: #1B110B; --pied-texte: #FFF4E6; --pied-texte-2: rgba(255, 244, 230, .62); --pied-trait: rgba(255, 255, 255, .1); --pied-accent: #F2A65A;
+    --rideau: #C0392B;
+}
+.four .hero-titre .hero-petit { font-family: 'Nunito Sans', sans-serif; font-weight: 800; font-size: .26em; letter-spacing: .3em; text-transform: uppercase; color: #F2A65A; }
+.four .surtitre { color: #2E7D32; }
+.four .tuile { border: 0; box-shadow: 0 24px 50px -34px rgba(90, 40, 20, .5); }
+.four .tuile:nth-child(1) { background: #FDEBE7; } .four .tuile:nth-child(2) { background: #EEF5EA; } .four .tuile:nth-child(3) { background: #FFF1DC; }
+.four .categorie-nom { border-bottom: 3px solid var(--accent); }
+.four .plat { border-bottom-style: dashed; }
+.four .onglets a.actif { box-shadow: 0 10px 20px -10px rgba(192, 57, 43, .7); }
+.four .resa-form { border: 0; box-shadow: 0 30px 60px -40px rgba(90, 40, 20, .55); }
+
+/* --------------------------------------------------------------------------
+   3 · SAKURA — sushis : noir d'encre, rouge laqué et pétales, tout en retenue
+   -------------------------------------------------------------------------- */
+.sakura {
+    color-scheme: dark;
+    --fond: #100E0D; --fond-2: #181514; --texte: #ECE6DE; --texte-2: #A79C92; --trait: rgba(236, 230, 222, .1); --trait-fort: rgba(236, 230, 222, .26);
+    --accent: #B91C1C; --accent-survol: #D02525; --accent-texte: #F2A7B6; --sur-accent: #FFFFFF;
+    --f-titre: 'Shippori Mincho', 'Yu Mincho', Georgia, serif; --g-titre: 700; --ls-titre: .01em; --f-texte: 'Zen Kaku Gothic New', system-ui, sans-serif;
+    --ls-surtitre: .34em; --rayon: 2px; --rayon-btn: 2px; --carte-fond: transparent; --nav-fond: rgba(16, 14, 13, .8); --menu-fond: #100E0D;
+    --hero-fond: radial-gradient(50% 70% at 72% 50%, rgba(185, 28, 28, .16), transparent 70%), #0B0A09;
+    --photo-fond: linear-gradient(135deg, #1E1A18, #100E0D);
+    --pied-fond: #0B0A09; --pied-texte: #ECE6DE; --pied-texte-2: rgba(236, 230, 222, .55); --pied-trait: rgba(255, 255, 255, .07); --pied-accent: #F2A7B6;
+    --rideau: #7F1414;
+}
+.sakura .hero-titre { font-weight: 800; }
+.sakura .hero-titre .hero-petit { font-size: 1em; display: inline; }
+.sakura .hero-titre .hero-grand { color: var(--accent-texte); }
+.sakura .tuile { border: 0; border-top: 1px solid var(--trait-fort); border-radius: 0; padding-inline: 0; }
+.sakura .tuile::after { right: 0; }
+.sakura .tuile:hover { transform: none; border-color: var(--accent-texte); }
+.sakura .categorie-nom { border-bottom: 0; display: flex; align-items: center; gap: 18px; }
+.sakura .categorie-nom::after { content: ""; flex: 1; height: 1px; background: var(--trait-fort); }
+.sakura .plat { border-bottom: 0; }
+.sakura .plat-points { border-bottom-style: solid; border-color: var(--trait); }
+.sakura .resa-form { border-color: var(--trait-fort); }
+.sakura .champ input, .sakura .champ select { border-width: 0 0 1px; border-radius: 0; padding-inline: 0; }
+.sakura .carte-note { background: transparent; border: 1px solid var(--trait); }
+
+/* --------------------------------------------------------------------------
+   4 · SMASH — burger : blanc, noir et rouge ketchup, contours épais, tout en capitales
+   -------------------------------------------------------------------------- */
+.smash {
+    --fond: #FFFFFF; --fond-2: #FFF6E0; --texte: #111827; --texte-2: #4B5563; --trait: #E5E7EB; --trait-fort: #111827;
+    --accent: #EF4444; --accent-survol: #DC2626; --accent-texte: #D42F2F; --sur-accent: #FFFFFF;
+    --f-titre: 'Anton', Impact, sans-serif; --g-titre: 400; --ls-titre: .01em; --tt-titre: uppercase; --f-texte: 'Barlow', system-ui, sans-serif;
+    --rayon: 14px; --rayon-btn: 12px; --carte-fond: #FFFFFF; --nav-fond: rgba(255, 255, 255, .92);
+    --hero-fond: radial-gradient(50% 60% at 74% 50%, #FFE7A8, transparent 70%), #FFF6E0;
+    --btn-ombre: 4px 4px 0 #111827; --photo-fond: linear-gradient(135deg, #FFF6E0, #FFE1A0);
+    --pied-fond: #111827; --pied-texte: #FFFFFF; --pied-texte-2: rgba(255, 255, 255, .65); --pied-trait: rgba(255, 255, 255, .12); --pied-accent: #FFC93C;
+    --rideau: #EF4444;
+}
+.smash .hero-titre { font-size: clamp(3.4rem, 7.4vw, 6.6rem); line-height: .92; }
+.smash .hero-titre .hero-petit { color: var(--accent); }
+.smash .btn { border: 2px solid #111827; }
+.smash .btn-plein:hover { transform: translate(2px, 2px); box-shadow: 2px 2px 0 #111827; }
+.smash .btn-ligne { background: #FFFFFF; box-shadow: 4px 4px 0 #111827; }
+.smash .tuile, .smash .resa-form, .smash .photo-cadre, .smash .carte-note { border: 2px solid #111827; box-shadow: 6px 6px 0 #111827; }
+.smash .tuile:nth-child(2) { background: #FFC93C; } .smash .tuile:nth-child(3) { background: var(--accent); color: #FFFFFF; }
+.smash .tuile:nth-child(3) p, .smash .tuile:nth-child(3)::after, .smash .tuile:nth-child(3) h3 { color: #FFFFFF; }
+.smash .tuile:hover { transform: translate(-3px, -3px); box-shadow: 9px 9px 0 #111827; border-color: #111827; }
+.smash .categorie-nom { border-bottom: 3px solid #111827; }
+.smash .onglets a { border: 2px solid #111827; }
+.smash .champ input, .smash .champ select { border: 2px solid #111827; }
+.smash .surtitre { color: #111827; background: #FFC93C; display: inline-block; padding: 3px 10px; }
+
+/* --------------------------------------------------------------------------
+   5 · PRESSION — brasserie : bois sombre et laiton, filets Art déco, titres didone centrés
+   -------------------------------------------------------------------------- */
+.pression {
+    color-scheme: dark;
+    --fond: #14110D; --fond-2: #1D1914; --texte: #F5EDE0; --texte-2: #BCAE97; --trait: rgba(184, 134, 11, .2); --trait-fort: rgba(184, 134, 11, .45);
+    --accent: #B8860B; --accent-survol: #CC9A1C; --accent-texte: #DDB45A; --sur-accent: #14110D;
+    --f-titre: 'Prata', Georgia, serif; --g-titre: 400; --ls-titre: 0; --f-texte: 'Jost', system-ui, sans-serif;
+    --ls-surtitre: .32em; --rayon: 0px; --rayon-btn: 0px; --carte-fond: rgba(255, 255, 255, .02); --nav-fond: rgba(20, 17, 13, .84); --menu-fond: #14110D;
+    --hero-fond: radial-gradient(45% 65% at 72% 55%, rgba(224, 144, 28, .22), transparent 70%), #100D0A;
+    --photo-fond: linear-gradient(135deg, #2A2116, #14110D);
+    --pied-fond: #0D0B08; --pied-texte: #F5EDE0; --pied-texte-2: rgba(245, 237, 224, .58); --pied-trait: rgba(184, 134, 11, .2); --pied-accent: #DDB45A;
+    --rideau: #B8860B;
+}
+.pression .hero-titre .hero-petit { font-family: 'Jost', sans-serif; font-weight: 500; font-size: .22em; letter-spacing: .5em; text-transform: uppercase; color: var(--accent-texte); }
+.pression .page-tete, .pression .categorie-nom { text-align: center; margin-inline: auto; }
+.pression .page-tete .surtitre, .pression .teaser .surtitre, .pression .histoire-texte .surtitre, .pression .resa-texte .surtitre { display: inline-flex; align-items: center; gap: 14px; }
+.pression .page-tete .surtitre::before, .pression .page-tete .surtitre::after { content: ""; width: 34px; height: 5px; border-block: 1px solid currentColor; }
+.pression .onglets { justify-content: center; }
+.pression .categorie-nom { border-bottom: 0; }
+.pression .categorie-nom::after { content: ""; display: block; width: 90px; height: 5px; margin: 14px auto 0; border-block: 1px solid var(--accent); }
+.pression .tuile, .pression .resa-form { border: 1px solid var(--trait-fort); outline: 1px solid var(--trait); outline-offset: 5px; }
+.pression .photo-cadre { outline: 1px solid var(--trait-fort); outline-offset: 6px; overflow: hidden; }
+.pression .contact-grille .photo-cadre, .pression .teaser .photo-cadre { overflow: hidden; }
+
+/* --------------------------------------------------------------------------
+   CHEZ DANI — noir, ivoire et or (les couleurs et polices de son site) ; Le Lyonnais en 3D
+   -------------------------------------------------------------------------- */
+.dani {
+    --fond: #FBF8F1; --fond-2: #F3EDE0; --texte: #16130F; --texte-2: #5E574C; --trait: #E9E1D0; --trait-fort: #CDBF9F;
+    --accent: #D4AF37; --accent-survol: #E2C25A; --accent-texte: #8C6B12; --sur-accent: #16130F;
+    --f-titre: 'Cormorant Garamond', Georgia, serif; --g-titre: 600; --ls-titre: -.01em; --f-texte: 'Jost', system-ui, sans-serif;
+    --rayon: 4px; --rayon-btn: 2px; --carte-fond: #FFFFFF; --nav-fond: rgba(15, 14, 12, .86); --menu-fond: #0F0E0C;
+    --hero-fond: radial-gradient(50% 70% at 72% 50%, rgba(212, 175, 55, .2), transparent 70%), #0F0E0C;
+    --hero-texte: #F6F1E6; --hero-texte-2: rgba(246, 241, 230, .72); --hero-titre: #F6F1E6; --ligne-bord: rgba(212, 175, 55, .6); --ligne-texte: #F2D98A;
+    --photo-fond: linear-gradient(135deg, #1C1A16, #0F0E0C);
+    --pied-fond: #0F0E0C; --pied-texte: #F6F1E6; --pied-texte-2: rgba(246, 241, 230, .6); --pied-trait: rgba(212, 175, 55, .18); --pied-accent: #D4AF37;
+    --rideau: #D4AF37;
+}
+.dani .nav { border-bottom-color: rgba(212, 175, 55, .2); }
+.dani .nav-logo { color: #F2D98A; font-size: 1.6rem; }
+.dani .nav-liens a { color: rgba(246, 241, 230, .78); }
+.dani .nav-liens a:hover, .dani .nav-liens a[aria-current="page"] { color: #F2D98A; }
+.dani .burger { color: #F6F1E6; border-color: rgba(212, 175, 55, .5); }
+.dani.menu-ouvert .nav-liens a { color: rgba(246, 241, 230, .85); }
+.dani .hero-titre { font-size: clamp(3.6rem, 8vw, 7rem); font-weight: 600; }
+.dani .hero-titre .hero-petit { font-style: italic; font-weight: 500; font-size: .42em; color: #F2D98A; }
+.dani .hero-titre .hero-grand { font-style: italic; }
+.dani .hero-surtitre { color: #D4AF37; }
+.dani .hero-stats b { color: #F2D98A; }
+.dani .tuile { border-color: var(--trait); box-shadow: 0 20px 40px -32px rgba(22, 19, 15, .5); }
+.dani .categorie-nom { font-style: italic; }
+.dani .plat-nom { font-family: var(--f-titre); font-size: 1.35rem; font-weight: 600; }
+.dani .onglets a.actif { color: #16130F; }

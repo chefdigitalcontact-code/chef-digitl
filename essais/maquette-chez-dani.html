@@ -1,0 +1,1417 @@
+<title>Maquette Chez Dani</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Anton&family=Barlow:wght@400;500;600;700&family=Caveat:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Fraunces:opsz,wght@9..144,500..700&family=Jost:wght@400;500;600;700&family=Karla:wght@400;500;600;700&family=Nunito+Sans:opsz,wght@6..12,400..800&family=Prata&family=Shippori+Mincho:wght@600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
+<style>
+/* ==========================================================================
+   Maquettes de sites clients : une structure commune (les 6 pages d'un site Chef Digital),
+   pilotée par des variables, puis le réglage propre à chaque maquette.
+   ========================================================================== */
+*, *::before, *::after { box-sizing: border-box; }
+html { background: #F2EEE9; }
+body { margin: 0; background: #F2EEE9; padding-bottom: 86px; }
+.site { min-height: 100vh; overflow-x: clip; background: var(--fond); color: var(--texte); font-family: var(--f-texte); font-size: 16.5px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+.site p, .site h1, .site h2, .site h3, .site ul, .site figure { margin: 0; }
+.site ul { padding: 0; list-style: none; }
+.site a { color: inherit; }
+.site :focus-visible { outline: 2px solid var(--accent-texte, var(--accent)); outline-offset: 3px; border-radius: 4px; }
+.site h1, .site h2, .site h3 { font-family: var(--f-titre); font-weight: var(--g-titre, 600); letter-spacing: var(--ls-titre, -.01em); line-height: 1.06; text-wrap: balance; color: var(--titre, var(--texte)); text-transform: var(--tt-titre, none); }
+.enveloppe { max-width: 1180px; margin-inline: auto; padding-inline: clamp(16px, 4vw, 40px); }
+.surtitre { font-family: var(--f-surtitre, var(--f-texte)); font-size: var(--t-surtitre, 12.5px); font-weight: var(--g-surtitre, 700); letter-spacing: var(--ls-surtitre, .2em); text-transform: var(--tt-surtitre, uppercase); color: var(--accent-texte, var(--accent)); }
+[hidden] { display: none !important; }
+
+/* ---- Navigation ---- */
+.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; background: var(--nav-fond); -webkit-backdrop-filter: blur(14px) saturate(140%); backdrop-filter: blur(14px) saturate(140%); border-bottom: 1px solid var(--trait); }
+.nav-in { display: flex; align-items: center; gap: 26px; min-height: 72px; }
+.nav-logo { margin-right: auto; font-family: var(--f-titre); font-weight: var(--g-titre, 600); font-size: 1.3rem; letter-spacing: var(--ls-titre, -.01em); text-transform: var(--tt-titre, none); text-decoration: none; white-space: nowrap; color: var(--titre, var(--texte)); }
+.nav-liens { display: flex; gap: 22px; }
+.nav-liens a { font-size: 14.5px; text-decoration: none; color: var(--texte-2); white-space: nowrap; transition: color .2s; }
+.nav-liens a:hover, .nav-liens a[aria-current="page"] { color: var(--accent-texte, var(--accent)); }
+.nav-liens .nav-liens-resa { display: none; }
+.burger { display: none; width: 42px; height: 42px; flex: none; border: 1px solid var(--trait-fort); border-radius: 10px; background: none; color: inherit; cursor: pointer; place-items: center; }
+.burger span { display: block; width: 18px; height: 2px; background: currentColor; box-shadow: 0 -6px 0 currentColor, 0 6px 0 currentColor; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 15px 26px; border: 1px solid transparent; border-radius: var(--rayon-btn, 999px); font: 700 13.5px/1.2 var(--f-texte); letter-spacing: .08em; text-transform: uppercase; text-decoration: none; white-space: nowrap; cursor: pointer; transition: background-color .2s, color .2s, border-color .2s, box-shadow .2s; }
+.btn-plein { background: var(--accent); color: var(--sur-accent, #fff); box-shadow: var(--btn-ombre, none); }
+.btn-plein:hover { background: var(--accent-survol, var(--accent)); }
+.btn-ligne { border-color: var(--ligne-bord, var(--trait-fort)); color: var(--ligne-texte, var(--texte)); background: transparent; }
+.btn-ligne:hover { border-color: currentColor; }
+.nav-resa { padding: 11px 18px; font-size: 12px; }
+.lien { display: inline-flex; gap: 8px; align-items: center; font-weight: 700; color: var(--accent-texte, var(--accent)); text-decoration: none; }
+.lien::after { content: "→"; transition: transform .2s; }
+.lien:hover::after { transform: translateX(4px); }
+
+/* ---- Pages ---- */
+.page { display: none; }
+.page.active { display: block; }
+.page-corps { padding-block: 80px 104px; }
+.page-tete { max-width: 760px; margin-bottom: 40px; }
+.page-tete h2 { margin-top: 12px; font-size: clamp(2.5rem, 5.4vw, 4.4rem); }
+.histoire-texte h2, .resa-texte h2 { margin-top: 12px; font-size: clamp(2.1rem, 3.8vw, 3.3rem); }
+
+/* Accueil */
+.hero { position: relative; overflow: hidden; background: var(--hero-fond, var(--fond)); color: var(--hero-texte, var(--texte)); }
+.hero-scene { position: absolute; inset: 0; pointer-events: none; }
+.scene-3d { position: absolute; top: 0; right: 0; width: 56%; height: 100%; }
+.scene-3d canvas { display: block; width: 100%; height: 100%; opacity: 0; transition: opacity 1s ease; }
+.scene-3d canvas.pret { opacity: 1; }
+.hero-in { position: relative; z-index: 1; display: flex; align-items: center; min-height: 640px; padding-block: 56px 88px; }
+.hero-texte { max-width: 520px; }
+.site .hero-titre { margin-top: 10px; font-size: clamp(3.2rem, 6.6vw, 5.8rem); line-height: .96; color: var(--hero-titre, var(--titre, var(--texte))); }
+.hero-titre .hero-petit { display: block; font-size: .46em; line-height: 1.1; }
+.mot { display: inline-block; overflow: hidden; vertical-align: top; padding: 0 .06em .12em 0; margin: 0 -.06em -.12em 0; }
+.mot-i { display: inline-block; will-change: transform; }
+.hero-accroche { margin-top: 22px; font-size: 1.15rem; color: var(--hero-texte-2, var(--texte-2)); max-width: 30em; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+.hero-stats { display: flex; gap: 40px; margin-top: 38px; }
+.hero-stats b { display: block; font-family: var(--f-titre); font-size: 2.4rem; line-height: 1; color: var(--accent-texte, var(--accent)); }
+.hero-stats span { display: block; margin-top: 6px; font-size: 13.5px; color: var(--hero-texte-2, var(--texte-2)); }
+.decouvrir { position: absolute; z-index: 1; left: 50%; bottom: 16px; translate: -50% 0; display: flex; flex-direction: column; align-items: center; gap: 8px; font-size: 11px; letter-spacing: .26em; text-transform: uppercase; color: var(--hero-texte-2, var(--texte-2)); }
+.decouvrir::after { content: ""; width: 1px; height: 30px; background: currentColor; opacity: .5; }
+.tuiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; padding-block: 72px 16px; }
+.tuile { position: relative; display: block; padding: 30px 28px 34px; border-radius: var(--rayon, 18px); background: var(--carte-fond); border: 1px solid var(--trait); text-decoration: none; transition: transform .3s, border-color .3s, box-shadow .3s; }
+.tuile:hover { transform: translateY(-4px); border-color: var(--accent-texte, var(--accent)); }
+.tuile::after { content: "→"; position: absolute; right: 26px; top: 30px; font-size: 1.2rem; color: var(--accent-texte, var(--accent)); transition: transform .3s; }
+.tuile:hover::after { transform: translateX(4px); }
+.tuile h3 { font-size: 1.55rem; padding-right: 30px; }
+.tuile p { margin-top: 8px; color: var(--texte-2); }
+.teaser { padding-block: 64px 104px; }
+.teaser-in, .histoire-in, .contact-grille { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+.teaser h2 { margin-top: 12px; font-size: clamp(2rem, 3.6vw, 3rem); }
+.teaser p:not(.surtitre), .histoire-texte > p:not(.surtitre):not(.badge), .resa-texte > p:not(.surtitre) { margin-top: 16px; color: var(--texte-2); }
+.teaser .lien { margin-top: 22px; }
+.photo-cadre { position: relative; overflow: hidden; border-radius: var(--rayon, 18px); aspect-ratio: 4 / 3; background: var(--photo-fond, linear-gradient(135deg, var(--fond-2), var(--trait-fort))); }
+.photo-cadre img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .8s cubic-bezier(.2, .7, .2, 1); }
+.photo-cadre:hover img { transform: scale(1.04); }
+.photo-cadre img:not([src]) { visibility: hidden; }
+.photo-haute { aspect-ratio: 4 / 5; }
+.badge { display: inline-flex; align-items: center; gap: 8px; margin-top: 22px; padding: 8px 14px; border-radius: 999px; border: 1px solid var(--accent-texte, var(--accent)); color: var(--accent-texte, var(--accent)); font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.badge::before { content: "★"; }
+.infos { display: grid; gap: 14px; margin-top: 28px; }
+.infos li { display: flex; gap: 14px; align-items: flex-start; }
+.infos svg { flex: none; width: 20px; height: 20px; margin-top: 3px; fill: none; stroke: var(--accent-texte, var(--accent)); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.infos-grandes { gap: 18px; font-size: 1.12rem; }
+
+/* La Carte */
+.onglets { position: sticky; top: calc(72px + env(safe-area-inset-top, 0px)); z-index: 5; display: flex; gap: 8px; margin-inline: -4px; padding: 12px 4px; background: var(--fond); overflow-x: auto; scrollbar-width: none; }
+.onglets a { padding: 9px 17px; border-radius: var(--rayon-btn, 999px); border: 1px solid var(--trait-fort); font-size: 14px; font-weight: 700; text-decoration: none; white-space: nowrap; transition: background-color .25s, color .25s, border-color .25s; }
+.onglets a.actif { background: var(--accent); border-color: var(--accent); color: var(--sur-accent, #fff); }
+.categorie { padding-top: 40px; scroll-margin-top: 150px; }
+.categorie-nom { font-size: clamp(1.8rem, 3vw, 2.5rem); padding-bottom: 14px; border-bottom: 1px solid var(--trait-fort); }
+.plats { display: grid; grid-template-columns: 1fr 1fr; gap: 0 56px; margin-top: 8px; }
+.plat { padding-block: 20px; border-bottom: 1px solid var(--trait); }
+.plat-ligne { display: flex; align-items: baseline; gap: 10px; }
+.plat-nom { font-weight: 700; font-size: 1.08rem; }
+.plat-points { flex: 1; min-width: 16px; border-bottom: 1px dotted var(--trait-fort); translate: 0 -5px; }
+.plat-prix { font-weight: 700; color: var(--accent-texte, var(--accent)); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.plat-desc { margin-top: 4px; color: var(--texte-2); font-size: 15px; }
+.carte-note { display: grid; gap: 6px; margin-top: 48px; padding: 22px 26px; border-radius: var(--rayon, 18px); background: var(--fond-2); color: var(--texte-2); font-size: 14.5px; }
+
+/* Galerie */
+.galerie-grille { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.galerie-grille .photo-cadre:first-child { grid-column: span 2; grid-row: span 2; aspect-ratio: auto; }
+
+/* Réservation */
+.resa { display: grid; grid-template-columns: .9fr 1.1fr; gap: 56px; align-items: start; }
+.resa-form { padding: 34px; border-radius: var(--rayon, 18px); background: var(--carte-fond); border: 1px solid var(--trait); }
+.resa-form h3 { margin-bottom: 22px; font-size: 1.7rem; }
+.champs { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 16px; }
+.champ { display: grid; gap: 6px; font-size: 13px; font-weight: 700; letter-spacing: .02em; color: var(--texte-2); }
+.champ-large { grid-column: 1 / -1; }
+.champ input, .champ select { width: 100%; min-width: 0; padding: 12px 14px; border: 1px solid var(--trait-fort); border-radius: var(--rayon-champ, 10px); background: var(--champ-fond, transparent); color: var(--texte); font: 400 15px/1.3 var(--f-texte); }
+.champ input:focus, .champ select:focus { outline: 2px solid var(--accent-texte, var(--accent)); outline-offset: 1px; }
+.champ select option { color: #111; }
+.resa-form .btn { width: 100%; margin-top: 24px; }
+.resa-message { margin-top: 14px; font-size: 14px; color: var(--texte-2); }
+.contact-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+
+/* Pied de page */
+.pied { background: var(--pied-fond); color: var(--pied-texte-2); font-size: 15px; }
+.pied-grille { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 36px; padding-block: 60px 36px; }
+.pied-nom { font-family: var(--f-titre); font-weight: var(--g-titre, 600); font-size: 1.7rem; text-transform: var(--tt-titre, none); color: var(--pied-texte); }
+.pied-nom + p { margin-top: 10px; max-width: 34ch; }
+.pied h3 { margin-bottom: 12px; font-family: var(--f-texte); font-size: 12px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--pied-accent, var(--accent)); }
+.pied p + p { margin-top: 6px; }
+.pied-bas { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px 24px; padding-block: 20px 26px; border-top: 1px solid var(--pied-trait); font-size: 13px; }
+.pied-bas a { text-decoration: none; }
+.pied-bas a:hover { color: var(--pied-texte); }
+
+/* Rideau de transition entre les pages */
+.rideau { position: fixed; inset: 0; z-index: 60; pointer-events: none; visibility: hidden; background: var(--rideau, #111); }
+.boite-attente { position: absolute; width: 1px; height: 1px; overflow: hidden; }
+
+@media (max-width: 960px) {
+    .nav-liens { display: none; }
+    .burger { display: grid; }
+    .site.menu-ouvert .nav-liens { display: flex; flex-direction: column; gap: 0; position: absolute; left: 0; right: 0; top: 100%; padding: 8px clamp(16px, 4vw, 40px) 16px; background: var(--menu-fond, var(--fond)); border-bottom: 1px solid var(--trait); }
+    .site.menu-ouvert .nav-liens a { padding: 12px 0; }
+    .hero-scene { position: relative; height: 340px; }
+    .scene-3d { width: 100%; }
+    .hero-in { min-height: 0; padding-block: 0 72px; }
+    .decouvrir { display: none; }
+    .tuiles, .teaser-in, .histoire-in, .contact-grille, .resa, .pied-grille { grid-template-columns: 1fr; }
+    .plats { grid-template-columns: 1fr; }
+    .galerie-grille { grid-template-columns: 1fr 1fr; }
+    .page-corps { padding-block: 56px 80px; }
+}
+@media (max-width: 560px) {
+    .nav-resa { display: none; }
+    .site.menu-ouvert .nav-liens .nav-liens-resa { display: block; font-weight: 700; color: var(--accent-texte, var(--accent)); }
+    .champs { grid-template-columns: 1fr; }
+    .hero-stats { gap: 26px; }
+    .resa-form { padding: 24px 20px; }
+    .nav-logo { font-size: 1.15rem; white-space: normal; line-height: 1.15; }
+}
+
+/* --------------------------------------------------------------------------
+   1 · ARDOISE — bistrot lyonnais : bois sombre, craie et lie-de-vin, l'ardoise du jour en 3D
+   -------------------------------------------------------------------------- */
+.ardoise {
+    color-scheme: dark;
+    --fond: #1C1712; --fond-2: #251E18; --texte: #F3E9DC; --texte-2: #C2B2A0; --trait: rgba(243, 233, 220, .12); --trait-fort: rgba(243, 233, 220, .3);
+    --accent: #B23A2E; --accent-survol: #C44536; --accent-texte: #E88A70; --sur-accent: #FFFFFF;
+    --f-titre: 'Fraunces', Georgia, serif; --g-titre: 600; --ls-titre: -.02em; --f-texte: 'Karla', system-ui, sans-serif;
+    --f-surtitre: 'Caveat', 'Segoe Print', cursive; --t-surtitre: 1.55rem; --g-surtitre: 600; --ls-surtitre: 0; --tt-surtitre: none;
+    --rayon: 6px; --rayon-btn: 6px; --carte-fond: #25201A; --nav-fond: rgba(28, 23, 18, .82); --menu-fond: #1C1712;
+    --hero-fond: radial-gradient(60% 70% at 72% 40%, rgba(178, 58, 46, .22), transparent 70%), #16120E;
+    --photo-fond: linear-gradient(135deg, #2A302E, #1C1712);
+    --pied-fond: #120F0C; --pied-texte: #F3E9DC; --pied-texte-2: rgba(243, 233, 220, .6); --pied-trait: rgba(255, 255, 255, .08); --pied-accent: #E88A70;
+    --rideau: #2A302E;
+}
+@media (max-width: 560px) { .pression .page-tete .surtitre::before, .pression .page-tete .surtitre::after { display: none; } }
+.ardoise .hero-titre .hero-petit { font-family: 'Caveat', cursive; font-weight: 600; font-size: .5em; color: var(--accent-texte); }
+.ardoise .tuile { background: #2A302E; border: 6px solid #6B4A32; box-shadow: inset 0 0 40px rgba(0, 0, 0, .35); }
+.ardoise .tuile h3 { font-family: 'Caveat', cursive; font-size: 2.1rem; font-weight: 600; color: #FBF6EE; }
+.ardoise .page-tete h2, .ardoise .teaser h2, .ardoise .histoire-texte h2, .ardoise .resa-texte h2 { position: relative; padding-bottom: 18px; }
+.ardoise .page-tete h2::after, .ardoise .teaser h2::after, .ardoise .histoire-texte h2::after, .ardoise .resa-texte h2::after { content: ""; position: absolute; left: 0; bottom: 0; width: 120px; height: 10px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 10'%3E%3Cpath d='M2 6c20-5 38 3 58-1s38-5 58 0' fill='none' stroke='%23E88A70' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat; }
+.ardoise .categorie-nom { font-family: 'Caveat', cursive; font-weight: 600; font-size: 2.6rem; color: #FBF6EE; border-bottom-style: dashed; }
+.ardoise .page[data-page="carte"] { background: radial-gradient(80% 60% at 50% 0%, rgba(42, 48, 46, .7), transparent 70%); }
+.ardoise .resa-form { background: #2A302E; border: 6px solid #6B4A32; }
+.ardoise .resa-form h3 { font-family: 'Caveat', cursive; font-size: 2.2rem; font-weight: 600; }
+.ardoise .champ input, .ardoise .champ select { background: rgba(0, 0, 0, .18); border-color: rgba(255, 255, 255, .22); }
+.ardoise .photo-cadre { border: 6px solid #6B4A32; }
+
+/* --------------------------------------------------------------------------
+   2 · FOUR À BOIS — pizzeria : l'ouverture dans la lueur du four, le reste en crème et tomate
+   -------------------------------------------------------------------------- */
+.four {
+    --fond: #FFFAF3; --fond-2: #F7EDDF; --texte: #241A12; --texte-2: #6B584A; --trait: #EFE2D1; --trait-fort: #D9C4AA;
+    --accent: #C0392B; --accent-survol: #A93226; --accent-texte: #B03325; --sur-accent: #FFFFFF;
+    --f-titre: 'Abril Fatface', Georgia, serif; --g-titre: 400; --ls-titre: 0; --f-texte: 'Nunito Sans', system-ui, sans-serif;
+    --rayon: 26px; --carte-fond: #FFFFFF; --nav-fond: rgba(255, 250, 243, .88);
+    --hero-fond: radial-gradient(55% 75% at 74% 62%, rgba(255, 120, 40, .35), transparent 65%), radial-gradient(90% 60% at 74% 100%, #3A1B0D, transparent 70%), #1B110B;
+    --hero-texte: #FFF4E6; --hero-texte-2: rgba(255, 244, 230, .76); --hero-titre: #FFF4E6; --ligne-bord: rgba(255, 244, 230, .45); --ligne-texte: #FFF4E6;
+    --btn-ombre: 0 14px 30px -12px rgba(192, 57, 43, .7);
+    --pied-fond: #1B110B; --pied-texte: #FFF4E6; --pied-texte-2: rgba(255, 244, 230, .62); --pied-trait: rgba(255, 255, 255, .1); --pied-accent: #F2A65A;
+    --rideau: #C0392B;
+}
+.four .hero-titre .hero-petit { font-family: 'Nunito Sans', sans-serif; font-weight: 800; font-size: .26em; letter-spacing: .3em; text-transform: uppercase; color: #F2A65A; }
+.four .surtitre { color: #2E7D32; }
+.four .tuile { border: 0; box-shadow: 0 24px 50px -34px rgba(90, 40, 20, .5); }
+.four .tuile:nth-child(1) { background: #FDEBE7; } .four .tuile:nth-child(2) { background: #EEF5EA; } .four .tuile:nth-child(3) { background: #FFF1DC; }
+.four .categorie-nom { border-bottom: 3px solid var(--accent); }
+.four .plat { border-bottom-style: dashed; }
+.four .onglets a.actif { box-shadow: 0 10px 20px -10px rgba(192, 57, 43, .7); }
+.four .resa-form { border: 0; box-shadow: 0 30px 60px -40px rgba(90, 40, 20, .55); }
+
+/* --------------------------------------------------------------------------
+   3 · SAKURA — sushis : noir d'encre, rouge laqué et pétales, tout en retenue
+   -------------------------------------------------------------------------- */
+.sakura {
+    color-scheme: dark;
+    --fond: #100E0D; --fond-2: #181514; --texte: #ECE6DE; --texte-2: #A79C92; --trait: rgba(236, 230, 222, .1); --trait-fort: rgba(236, 230, 222, .26);
+    --accent: #B91C1C; --accent-survol: #D02525; --accent-texte: #F2A7B6; --sur-accent: #FFFFFF;
+    --f-titre: 'Shippori Mincho', 'Yu Mincho', Georgia, serif; --g-titre: 700; --ls-titre: .01em; --f-texte: 'Zen Kaku Gothic New', system-ui, sans-serif;
+    --ls-surtitre: .34em; --rayon: 2px; --rayon-btn: 2px; --carte-fond: transparent; --nav-fond: rgba(16, 14, 13, .8); --menu-fond: #100E0D;
+    --hero-fond: radial-gradient(50% 70% at 72% 50%, rgba(185, 28, 28, .16), transparent 70%), #0B0A09;
+    --photo-fond: linear-gradient(135deg, #1E1A18, #100E0D);
+    --pied-fond: #0B0A09; --pied-texte: #ECE6DE; --pied-texte-2: rgba(236, 230, 222, .55); --pied-trait: rgba(255, 255, 255, .07); --pied-accent: #F2A7B6;
+    --rideau: #7F1414;
+}
+.sakura .hero-titre { font-weight: 800; }
+.sakura .hero-titre .hero-petit { font-size: 1em; display: inline; }
+.sakura .hero-titre .hero-grand { color: var(--accent-texte); }
+.sakura .tuile { border: 0; border-top: 1px solid var(--trait-fort); border-radius: 0; padding-inline: 0; }
+.sakura .tuile::after { right: 0; }
+.sakura .tuile:hover { transform: none; border-color: var(--accent-texte); }
+.sakura .categorie-nom { border-bottom: 0; display: flex; align-items: center; gap: 18px; }
+.sakura .categorie-nom::after { content: ""; flex: 1; height: 1px; background: var(--trait-fort); }
+.sakura .plat { border-bottom: 0; }
+.sakura .plat-points { border-bottom-style: solid; border-color: var(--trait); }
+.sakura .resa-form { border-color: var(--trait-fort); }
+.sakura .champ input, .sakura .champ select { border-width: 0 0 1px; border-radius: 0; padding-inline: 0; }
+.sakura .carte-note { background: transparent; border: 1px solid var(--trait); }
+
+/* --------------------------------------------------------------------------
+   4 · SMASH — burger : blanc, noir et rouge ketchup, contours épais, tout en capitales
+   -------------------------------------------------------------------------- */
+.smash {
+    --fond: #FFFFFF; --fond-2: #FFF6E0; --texte: #111827; --texte-2: #4B5563; --trait: #E5E7EB; --trait-fort: #111827;
+    --accent: #EF4444; --accent-survol: #DC2626; --accent-texte: #D42F2F; --sur-accent: #FFFFFF;
+    --f-titre: 'Anton', Impact, sans-serif; --g-titre: 400; --ls-titre: .01em; --tt-titre: uppercase; --f-texte: 'Barlow', system-ui, sans-serif;
+    --rayon: 14px; --rayon-btn: 12px; --carte-fond: #FFFFFF; --nav-fond: rgba(255, 255, 255, .92);
+    --hero-fond: radial-gradient(50% 60% at 74% 50%, #FFE7A8, transparent 70%), #FFF6E0;
+    --btn-ombre: 4px 4px 0 #111827; --photo-fond: linear-gradient(135deg, #FFF6E0, #FFE1A0);
+    --pied-fond: #111827; --pied-texte: #FFFFFF; --pied-texte-2: rgba(255, 255, 255, .65); --pied-trait: rgba(255, 255, 255, .12); --pied-accent: #FFC93C;
+    --rideau: #EF4444;
+}
+.smash .hero-titre { font-size: clamp(3.4rem, 7.4vw, 6.6rem); line-height: .92; }
+.smash .hero-titre .hero-petit { color: var(--accent); }
+.smash .btn { border: 2px solid #111827; }
+.smash .btn-plein:hover { transform: translate(2px, 2px); box-shadow: 2px 2px 0 #111827; }
+.smash .btn-ligne { background: #FFFFFF; box-shadow: 4px 4px 0 #111827; }
+.smash .tuile, .smash .resa-form, .smash .photo-cadre, .smash .carte-note { border: 2px solid #111827; box-shadow: 6px 6px 0 #111827; }
+.smash .tuile:nth-child(2) { background: #FFC93C; } .smash .tuile:nth-child(3) { background: var(--accent); color: #FFFFFF; }
+.smash .tuile:nth-child(3) p, .smash .tuile:nth-child(3)::after, .smash .tuile:nth-child(3) h3 { color: #FFFFFF; }
+.smash .tuile:hover { transform: translate(-3px, -3px); box-shadow: 9px 9px 0 #111827; border-color: #111827; }
+.smash .categorie-nom { border-bottom: 3px solid #111827; }
+.smash .onglets a { border: 2px solid #111827; }
+.smash .champ input, .smash .champ select { border: 2px solid #111827; }
+.smash .surtitre { color: #111827; background: #FFC93C; display: inline-block; padding: 3px 10px; }
+
+/* --------------------------------------------------------------------------
+   5 · PRESSION — brasserie : bois sombre et laiton, filets Art déco, titres didone centrés
+   -------------------------------------------------------------------------- */
+.pression {
+    color-scheme: dark;
+    --fond: #14110D; --fond-2: #1D1914; --texte: #F5EDE0; --texte-2: #BCAE97; --trait: rgba(184, 134, 11, .2); --trait-fort: rgba(184, 134, 11, .45);
+    --accent: #B8860B; --accent-survol: #CC9A1C; --accent-texte: #DDB45A; --sur-accent: #14110D;
+    --f-titre: 'Prata', Georgia, serif; --g-titre: 400; --ls-titre: 0; --f-texte: 'Jost', system-ui, sans-serif;
+    --ls-surtitre: .32em; --rayon: 0px; --rayon-btn: 0px; --carte-fond: rgba(255, 255, 255, .02); --nav-fond: rgba(20, 17, 13, .84); --menu-fond: #14110D;
+    --hero-fond: radial-gradient(45% 65% at 72% 55%, rgba(224, 144, 28, .22), transparent 70%), #100D0A;
+    --photo-fond: linear-gradient(135deg, #2A2116, #14110D);
+    --pied-fond: #0D0B08; --pied-texte: #F5EDE0; --pied-texte-2: rgba(245, 237, 224, .58); --pied-trait: rgba(184, 134, 11, .2); --pied-accent: #DDB45A;
+    --rideau: #B8860B;
+}
+.pression .hero-titre .hero-petit { font-family: 'Jost', sans-serif; font-weight: 500; font-size: .22em; letter-spacing: .5em; text-transform: uppercase; color: var(--accent-texte); }
+.pression .page-tete, .pression .categorie-nom { text-align: center; margin-inline: auto; }
+.pression .page-tete .surtitre, .pression .teaser .surtitre, .pression .histoire-texte .surtitre, .pression .resa-texte .surtitre { display: inline-flex; align-items: center; gap: 14px; }
+.pression .page-tete .surtitre::before, .pression .page-tete .surtitre::after { content: ""; width: 34px; height: 5px; border-block: 1px solid currentColor; }
+.pression .onglets { justify-content: center; }
+.pression .categorie-nom { border-bottom: 0; }
+.pression .categorie-nom::after { content: ""; display: block; width: 90px; height: 5px; margin: 14px auto 0; border-block: 1px solid var(--accent); }
+.pression .tuile, .pression .resa-form { border: 1px solid var(--trait-fort); outline: 1px solid var(--trait); outline-offset: 5px; }
+.pression .photo-cadre { outline: 1px solid var(--trait-fort); outline-offset: 6px; overflow: hidden; }
+.pression .contact-grille .photo-cadre, .pression .teaser .photo-cadre { overflow: hidden; }
+
+/* --------------------------------------------------------------------------
+   CHEZ DANI — noir, ivoire et or (les couleurs et polices de son site) ; Le Lyonnais en 3D
+   -------------------------------------------------------------------------- */
+.dani {
+    --fond: #FBF8F1; --fond-2: #F3EDE0; --texte: #16130F; --texte-2: #5E574C; --trait: #E9E1D0; --trait-fort: #CDBF9F;
+    --accent: #D4AF37; --accent-survol: #E2C25A; --accent-texte: #8C6B12; --sur-accent: #16130F;
+    --f-titre: 'Cormorant Garamond', Georgia, serif; --g-titre: 600; --ls-titre: -.01em; --f-texte: 'Jost', system-ui, sans-serif;
+    --rayon: 4px; --rayon-btn: 2px; --carte-fond: #FFFFFF; --nav-fond: rgba(15, 14, 12, .86); --menu-fond: #0F0E0C;
+    --hero-fond: radial-gradient(50% 70% at 72% 50%, rgba(212, 175, 55, .2), transparent 70%), #0F0E0C;
+    --hero-texte: #F6F1E6; --hero-texte-2: rgba(246, 241, 230, .72); --hero-titre: #F6F1E6; --ligne-bord: rgba(212, 175, 55, .6); --ligne-texte: #F2D98A;
+    --photo-fond: linear-gradient(135deg, #1C1A16, #0F0E0C);
+    --pied-fond: #0F0E0C; --pied-texte: #F6F1E6; --pied-texte-2: rgba(246, 241, 230, .6); --pied-trait: rgba(212, 175, 55, .18); --pied-accent: #D4AF37;
+    --rideau: #D4AF37;
+}
+.dani .nav { border-bottom-color: rgba(212, 175, 55, .2); }
+.dani .nav-logo { color: #F2D98A; font-size: 1.6rem; }
+.dani .nav-liens a { color: rgba(246, 241, 230, .78); }
+.dani .nav-liens a:hover, .dani .nav-liens a[aria-current="page"] { color: #F2D98A; }
+.dani .burger { color: #F6F1E6; border-color: rgba(212, 175, 55, .5); }
+.dani.menu-ouvert .nav-liens a { color: rgba(246, 241, 230, .85); }
+.dani .hero-titre { font-size: clamp(3.6rem, 8vw, 7rem); font-weight: 600; }
+.dani .hero-titre .hero-petit { font-style: italic; font-weight: 500; font-size: .42em; color: #F2D98A; }
+.dani .hero-titre .hero-grand { font-style: italic; }
+.dani .hero-surtitre { color: #D4AF37; }
+.dani .hero-stats b { color: #F2D98A; }
+.dani .tuile { border-color: var(--trait); box-shadow: 0 20px 40px -32px rgba(22, 19, 15, .5); }
+.dani .categorie-nom { font-style: italic; }
+.dani .plat-nom { font-family: var(--f-titre); font-size: 1.35rem; font-weight: 600; }
+.dani .onglets a.actif { color: #16130F; }
+
+/* ==========================================================================
+   Sélecteur de maquette (hors maquette)
+   ========================================================================== */
+.selecteur { position: fixed; z-index: 100; left: 50%; bottom: calc(14px + env(safe-area-inset-bottom, 0px)); translate: -50% 0; display: flex; align-items: center; gap: 6px; max-width: calc(100vw - 24px); padding: 6px; border-radius: 16px; background: rgba(18, 16, 15, .94); color: #fff; font: 500 13px/1.2 system-ui, -apple-system, 'Segoe UI', sans-serif; box-shadow: 0 16px 40px -12px rgba(0, 0, 0, .6); }
+.selecteur button { font: inherit; color: inherit; border: 0; cursor: pointer; border-radius: 11px; background: transparent; }
+.sel-fleche { width: 36px; height: 36px; font-size: 18px; }
+.sel-fleche:hover, .sel-choix button:hover { background: rgba(255, 255, 255, .1); }
+.sel-choix { display: flex; gap: 2px; }
+.sel-choix button { display: grid; gap: 2px; padding: 6px 12px; text-align: left; min-width: 0; }
+.sel-choix button b { font-size: 13px; white-space: nowrap; }
+.sel-choix button span { font-size: 10.5px; opacity: .6; text-transform: uppercase; letter-spacing: .08em; }
+.sel-choix button[aria-pressed="true"] { background: #fff; color: #12100F; }
+.sel-choix button[aria-pressed="true"] span { opacity: .55; }
+.selecteur :focus-visible { outline: 2px solid #E9B35A; outline-offset: 2px; }
+.sel-actuel { display: none; padding: 0 8px; text-align: center; }
+.sel-actuel b { display: block; font-size: 13.5px; white-space: nowrap; }
+.sel-actuel span { font-size: 11px; opacity: .65; }
+@media (max-width: 980px) {
+    .sel-choix { display: none; }
+    .sel-actuel { display: block; min-width: 170px; }
+}
+
+.selecteur { width: max-content; }
+.sel-fleche { flex: none; }
+</style>
+
+<div class="site" id="site"></div>
+<div class="boite-attente"><div class="scene-3d" id="boite-3d" aria-hidden="true" hidden><canvas id="scene-3d"></canvas></div></div>
+<div class="rideau" id="rideau" aria-hidden="true"></div>
+<nav class="selecteur" aria-label="Choisir une maquette">
+    <button type="button" class="sel-fleche" id="sel-prec" aria-label="Maquette précédente">‹</button>
+    <div class="sel-choix" id="sel-choix"></div>
+    <p class="sel-actuel" id="sel-actuel" aria-live="polite"></p>
+    <button type="button" class="sel-fleche" id="sel-suiv" aria-label="Maquette suivante">›</button>
+</nav>
+
+<script>
+// Chez Dani : contenu repris de la maquette existante (chef-digital-app/public/demo-chezdani.html),
+// présenté avec les 6 pages des sites clients actuels. Voir les remarques de cohérence dans le message.
+window.CLIENTS = {
+    titre: 'Chez Dani',
+    cle: 'maquette-chez-dani',
+    designs: [
+        { n: 1, style: 'dani', nom: 'Chez Dani', type: 'Le Lyonnais en 3D', resto: {
+            nom: 'Chez Dani',
+            surtitre: 'Lyon · Burger artisanal',
+            accroche: 'Le burger artisanal lyonnais qui régale depuis 2015',
+            stats: [{ v: '4.7', l: 'Note Google sur 5' }, { v: '100%', l: 'Produits locaux' }],
+            histoireTitre: 'Une passion transmise de génération en génération',
+            histoire: "Le burger artisanal lyonnais qui régale depuis 2015. Chaque assiette qui sort de notre cuisine est l'expression d'un savoir-faire hérité, revisité avec les produits des marchés lyonnais. Nous travaillons directement avec nos producteurs locaux pour vous offrir ce qu'il y a de meilleur.",
+            badge: 'Coup de cœur',
+            piedTexte: "Un restaurant authentique au cœur de Lyon, où chaque plat raconte l'histoire d'un terroir.",
+            adresse: '12 rue de la République, 69001 Lyon', tel: '04 78 12 34 56',
+            horaires: ['Mardi – Vendredi : 12h–14h30', 'Mardi – Samedi : 19h–23h', 'Dimanche : 12h–15h', 'Lundi : Fermé'],
+            bouton: 'RÉSERVER UNE TABLE',
+            categories: [
+                { nom: 'Burgers Signature', plats: [
+                    { nom: 'Le Lyonnais', desc: 'Steak 180g, Saint-Marcellin coulant, oignons caramélisés, sauce aux herbes', prix: '14.90' },
+                    { nom: 'Le Dani Classic', desc: 'Steak 180g, cheddar affiné, tomates confites, roquette, sauce maison', prix: '13.50' },
+                    { nom: 'Le Végétarien', desc: 'Galette quinoa-lentilles, chèvre frais, légumes grillés, pesto basilic', prix: '12.90' },
+                    { nom: 'Le BBQ Pulled', desc: 'Porc effiloché 12h, sauce BBQ fumée, coleslaw croquant, oignons frits', prix: '14.50' }] },
+                { nom: 'Accompagnements', plats: [
+                    { nom: 'Frites maison', desc: 'Pommes de terre fraîches coupées sur place', prix: '4.50' },
+                    { nom: 'Frites de patates douces', desc: 'Servies avec sauce curry-miel', prix: '5.50' },
+                    { nom: 'Salade verte', desc: 'Mesclun frais, vinaigrette balsamique', prix: '4.00' },
+                    { nom: 'Onion rings', desc: "Rondelles d'oignons panées croustillantes", prix: '5.00' }] },
+                { nom: 'Boissons', plats: [
+                    { nom: 'Bières artisanales', desc: 'Sélection locale (33cl)', prix: '5.50' },
+                    { nom: 'Sodas maison', desc: 'Citronnade, thé glacé pêche', prix: '4.50' },
+                    { nom: 'Eaux', desc: 'Plate ou gazeuse (50cl)', prix: '3.00' }] },
+                { nom: 'Desserts', plats: [
+                    { nom: 'Brownie maison', desc: 'Chocolat noir, noix de pécan, glace vanille', prix: '6.50' },
+                    { nom: 'Cheese-cake', desc: 'Coulis fruits rouges maison', prix: '6.00' }] }
+            ]
+        } }
+    ]
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script>
+(function () {
+    'use strict';
+    // Maquettes de sites clients : les 6 pages d'un site généré par Chef Digital (Accueil, Notre
+    // Histoire, La Carte, Galerie, Réservation, Contact), rendues depuis les données du restaurant.
+    const C = window.CLIENTS;
+    const DESIGNS = C.designs, NUMEROS = DESIGNS.map(function (d) { return d.n; });
+    const PAGES = ['accueil', 'histoire', 'carte', 'galerie', 'reservation', 'contact'];
+    const site = document.getElementById('site');
+    const boite3d = document.getElementById('boite-3d');
+    const rideau = document.getElementById('rideau');
+    const reduit = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const G = window.gsap, ST = window.ScrollTrigger;
+    const aGsap = Boolean(G && ST);
+    if (aGsap) G.registerPlugin(ST);
+    let design = DESIGNS[0], page = 'accueil', animations = null, enTransition = false;
+    const photos = {};
+
+    // ---- Défilement doux ----
+    let lenis = null;
+    if (!reduit && window.Lenis) {
+        lenis = new window.Lenis({ lerp: 0.1, smoothWheel: true });
+        if (aGsap) { lenis.on('scroll', ST.update); G.ticker.add(function (t) { lenis.raf(t * 1000); }); G.ticker.lagSmoothing(0); }
+        else { (function f(t) { lenis.raf(t); requestAnimationFrame(f); })(performance.now()); }
+    }
+    function allerEnHaut() { if (lenis) lenis.scrollTo(0, { immediate: true }); else window.scrollTo(0, 0); }
+
+    // ---- Gabarit du site client ----
+    const ECH = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' };
+    function e(v) { return String(v == null ? '' : v).replace(/[&<>'"]/g, function (c) { return ECH[c]; }); }
+    function prix(v) { const n = parseFloat(String(v).replace(',', '.')); return Number.isFinite(n) ? n.toFixed(2).replace('.', ',') : e(v); }
+    function mots(texte) { return e(texte).split(' ').map(function (m) { return '<span class="mot"><span class="mot-i">' + m + '</span></span>'; }).join(' '); }
+    const ICONES = {
+        adresse: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>',
+        tel: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>',
+        horaires: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>'
+    };
+    function infos(r, grandes) {
+        return '<ul class="infos' + (grandes ? ' infos-grandes' : '') + '">' +
+            '<li>' + ICONES.adresse + '<span>' + e(r.adresse) + '</span></li>' +
+            '<li>' + ICONES.tel + '<span>' + e(r.tel) + '</span></li>' +
+            '<li>' + ICONES.horaires + '<span>' + r.horaires.map(e).join('<br>') + '</span></li></ul>';
+    }
+    function photo(k, r, classe) { return '<figure class="photo-cadre' + (classe ? ' ' + classe : '') + '"><img class="photo" data-photo="' + k + '" alt="' + e(r.nom) + ', photo ' + (k + 1) + '"></figure>'; }
+    function gabarit(r) {
+        const nomMots = r.nom.split(' '), premier = nomMots.shift(), reste = nomMots.join(' ');
+        const histoire = r.histoire || (r.nom + " vous accueille pour un moment de convivialité autour d'une cuisine soignée.");
+        const histoireTitre = r.histoireTitre || r.accroche;
+        const liens = [['accueil', 'Accueil'], ['histoire', 'Notre Histoire'], ['carte', 'La Carte'], ['galerie', 'Galerie'], ['contact', 'Contact']];
+        const heures = ['12:00', '12:30', '13:00', '19:00', '19:30', '20:00', '20:30', '21:00'];
+        const couverts = ['1 personne', '2 personnes', '3 personnes', '4 personnes', '5 personnes', '6 personnes et plus'];
+        return '' +
+        '<header class="nav"><div class="enveloppe nav-in">' +
+            '<a class="nav-logo" href="#accueil" data-page="accueil">' + e(r.nom) + '</a>' +
+            '<nav class="nav-liens" aria-label="Navigation principale">' + liens.map(function (l) { return '<a href="#' + l[0] + '" data-page="' + l[0] + '">' + l[1] + '</a>'; }).join('') +
+                '<a class="nav-liens-resa" href="#reservation" data-page="reservation">' + e(r.bouton) + '</a></nav>' +
+            '<a class="btn btn-plein nav-resa" href="#reservation" data-page="reservation">' + e(r.bouton) + '</a>' +
+            '<button type="button" class="burger" aria-expanded="false" aria-label="Ouvrir le menu"><span></span></button>' +
+        '</div></header>' +
+        '<main>' +
+        // Accueil
+        '<section class="page" data-page="accueil">' +
+            '<div class="hero"><div class="hero-scene"></div>' +
+                '<div class="enveloppe hero-in"><div class="hero-texte">' +
+                    (r.surtitre ? '<p class="surtitre hero-surtitre">' + e(r.surtitre) + '</p>' : '') +
+                    '<h1 class="hero-titre" aria-label="' + e(r.nom) + '"><span class="hero-petit">' + mots(premier) + '</span> <span class="hero-grand">' + mots(reste) + '</span></h1>' +
+                    '<p class="hero-accroche">' + e(r.accroche) + '</p>' +
+                    '<div class="hero-actions"><a class="btn btn-plein" href="#carte" data-page="carte">Découvrir la Carte</a><a class="btn btn-ligne" href="#reservation" data-page="reservation">' + e(r.bouton) + '</a></div>' +
+                    (r.stats ? '<ul class="hero-stats">' + r.stats.map(function (s) { return '<li><b>' + e(s.v) + '</b><span>' + e(s.l) + '</span></li>'; }).join('') + '</ul>' : '') +
+                '</div></div>' +
+                '<p class="decouvrir" aria-hidden="true">Découvrir</p>' +
+            '</div>' +
+            '<div class="enveloppe tuiles">' +
+                '<a class="tuile" href="#carte" data-page="carte"><h3>La Carte</h3><p>Découvrez notre sélection du moment.</p></a>' +
+                '<a class="tuile" href="#galerie" data-page="galerie"><h3>Galerie</h3><p>Un aperçu en images de la maison.</p></a>' +
+                '<a class="tuile" href="#reservation" data-page="reservation"><h3>' + e(r.bouton) + '</h3><p>Réservez votre table en ligne.</p></a>' +
+            '</div>' +
+            '<section class="teaser"><div class="enveloppe teaser-in">' + photo(0, r) +
+                '<div><p class="surtitre">Notre Histoire</p><h2>' + e(histoireTitre) + '</h2><p>' + e(histoire) + '</p><a class="lien" href="#histoire" data-page="histoire">En savoir plus</a></div>' +
+            '</div></section>' +
+        '</section>' +
+        // Notre Histoire
+        '<section class="page" data-page="histoire"><div class="enveloppe page-corps histoire-in">' +
+            '<div class="histoire-texte"><p class="surtitre">Notre Histoire</p><h2>' + e(histoireTitre) + '</h2><p>' + e(histoire) + '</p>' +
+                (r.badge ? '<p class="badge">' + e(r.badge) + '</p>' : '') + infos(r) + '</div>' + photo(1, r, 'photo-haute') +
+        '</div></section>' +
+        // La Carte
+        '<section class="page" data-page="carte"><div class="enveloppe page-corps">' +
+            '<div class="page-tete"><p class="surtitre">Notre Sélection</p><h2>La Carte</h2></div>' +
+            '<nav class="onglets" aria-label="Catégories de la carte">' + r.categories.map(function (c, i) { return '<a href="#cat-' + i + '" data-cat="' + i + '">' + e(c.nom) + '</a>'; }).join('') + '</nav>' +
+            r.categories.map(function (c, i) {
+                return '<div class="categorie" id="cat-' + i + '"><h3 class="categorie-nom">' + e(c.nom) + '</h3><ul class="plats">' +
+                    c.plats.map(function (p) { return '<li class="plat"><div class="plat-ligne"><span class="plat-nom">' + e(p.nom) + '</span><span class="plat-points" aria-hidden="true"></span><span class="plat-prix">' + prix(p.prix) + ' €</span></div><p class="plat-desc">' + e(p.desc) + '</p></li>'; }).join('') +
+                    '</ul></div>';
+            }).join('') +
+            '<div class="carte-note"><p>Information allergènes : la liste des allergènes présents dans nos plats est disponible sur demande auprès de notre équipe.</p><p>Vous pouvez aussi nous appeler au ' + e(r.tel) + '.</p><p>Prix nets, taxes et service compris.</p></div>' +
+        '</div></section>' +
+        // Galerie
+        '<section class="page" data-page="galerie"><div class="enveloppe page-corps">' +
+            '<div class="page-tete"><h2>Galerie</h2></div>' +
+            '<div class="galerie-grille">' + [2, 3, 4, 5, 6, 7].map(function (k) { return photo(k, r); }).join('') + '</div>' +
+        '</div></section>' +
+        // Réservation
+        '<section class="page" data-page="reservation"><div class="enveloppe page-corps resa">' +
+            '<div class="resa-texte"><p class="surtitre">Nous Rejoindre</p><h2>Réservez votre table</h2><p>Pour un dîner en amoureux, un déjeuner d\'affaires ou un repas en famille, nous serons heureux de vous accueillir. Réservez en ligne ou appelez-nous directement.</p>' + infos(r) + '</div>' +
+            '<form class="resa-form" id="resa-form"><h3>Votre Réservation</h3><div class="champs">' +
+                '<label class="champ" for="resa-prenom">Prénom<input id="resa-prenom" name="prenom" autocomplete="given-name" required></label>' +
+                '<label class="champ" for="resa-nom">Nom<input id="resa-nom" name="nom" autocomplete="family-name" required></label>' +
+                '<label class="champ" for="resa-email">Email<input id="resa-email" name="email" type="email" autocomplete="email" required></label>' +
+                '<label class="champ" for="resa-tel">Téléphone<input id="resa-tel" name="tel" type="tel" autocomplete="tel" required></label>' +
+                '<label class="champ" for="resa-date">Date<input id="resa-date" name="date" type="date" required></label>' +
+                '<label class="champ" for="resa-heure">Heure<select id="resa-heure" name="heure">' + heures.map(function (h) { return '<option>' + h + '</option>'; }).join('') + '</select></label>' +
+                '<label class="champ champ-large" for="resa-couverts">Nombre de couverts<select id="resa-couverts" name="couverts">' + couverts.map(function (h, i) { return '<option' + (i === 1 ? ' selected' : '') + '>' + h + '</option>'; }).join('') + '</select></label>' +
+            '</div><button type="submit" class="btn btn-plein">Confirmer la Réservation</button><p class="resa-message" id="resa-message" role="status" hidden></p></form>' +
+        '</div></section>' +
+        // Contact
+        '<section class="page" data-page="contact"><div class="enveloppe page-corps contact-grille">' +
+            '<div><div class="page-tete"><p class="surtitre">Nous Trouver</p><h2>Contact</h2></div>' + infos(r, true) +
+                '<div class="contact-actions"><a class="btn btn-plein" href="https://www.google.com/maps/dir/?api=1&amp;destination=' + encodeURIComponent(r.nom + ', ' + r.adresse) + '" target="_blank" rel="noopener">Itinéraire</a><a class="btn btn-ligne" href="tel:' + e(r.tel.replace(/\s/g, '')) + '">Appeler</a></div></div>' +
+            photo(0, r) +
+        '</div></section>' +
+        '</main>' +
+        '<footer class="pied"><div class="enveloppe pied-grille">' +
+            '<div><p class="pied-nom">' + e(r.nom) + '</p><p>' + e(r.piedTexte || r.accroche) + '</p></div>' +
+            '<div><h3>Horaires</h3><p>' + r.horaires.map(e).join('<br>') + '</p></div>' +
+            '<div><h3>Contact</h3><p>' + e(r.adresse) + '</p><p>' + e(r.tel) + '</p></div>' +
+        '</div><div class="enveloppe pied-bas"><span>© 2026 ' + e(r.nom) + '. Tous droits réservés.</span>' +
+            '<span><a href="#mentions" data-legal>Mentions légales</a> · <a href="#cgv" data-legal>CGV</a> · <a href="#confidentialite" data-legal>Confidentialité</a></span>' +
+            '<span>Site réalisé par Chef Digital</span></div></footer>';
+    }
+
+    // ---- Montage d'une maquette ----
+    function monter(d) {
+        design = d;
+        const ouvert = site.classList.contains('menu-ouvert');
+        site.className = 'site ' + d.style;
+        site.innerHTML = gabarit(d.resto);
+        site.querySelector('.hero-scene').appendChild(boite3d);
+        boite3d.hidden = false;
+        if (ouvert) fermerMenu();
+        appliquerPhotos();
+        window.CLIENT_DESIGN = d;
+        document.dispatchEvent(new CustomEvent('maquette', { detail: d }));
+    }
+    function appliquerPhotos() {
+        const liste = photos[design.n];
+        if (!liste) return;
+        site.querySelectorAll('img[data-photo]').forEach(function (img) { const k = Number(img.dataset.photo); if (liste[k]) img.src = liste[k]; });
+    }
+    document.addEventListener('photos', function (ev) { photos[ev.detail.n] = ev.detail.urls; if (ev.detail.n === design.n) appliquerPhotos(); });
+
+    // ---- Navigation entre les pages ----
+    function hash() { return '#' + (DESIGNS.length > 1 ? 'c' + design.n + '-' : '') + page; }
+    function montrer(p) {
+        page = p;
+        site.querySelectorAll('.page').forEach(function (s) { s.classList.toggle('active', s.dataset.page === p); });
+        site.querySelectorAll('.nav [data-page]').forEach(function (a) { if (a.dataset.page === p && !a.classList.contains('nav-logo')) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
+        fermerMenu();
+        allerEnHaut();
+        if (location.hash !== hash()) history.replaceState(null, '', hash());
+        requestAnimationFrame(lancerAnimations);
+    }
+    // Transition entre deux pages : un rideau propre à chaque maquette.
+    const RIDEAUX = {
+        balayage: [{ xPercent: -100, yPercent: 0, clipPath: 'inset(0% 0% 0% 0%)' }, { xPercent: 0 }, { xPercent: 100 }],
+        cercle: [{ xPercent: 0, yPercent: 0, clipPath: 'circle(0% at 50% 50%)' }, { clipPath: 'circle(75% at 50% 50%)' }, { clipPath: 'circle(0% at 50% 50%)' }],
+        volet: [{ xPercent: 0, yPercent: 100, clipPath: 'inset(0% 0% 0% 0%)' }, { yPercent: 0 }, { yPercent: -100 }],
+        diagonale: [{ xPercent: 0, yPercent: 0, clipPath: 'polygon(0% 0%, 0% 0%, -30% 100%, -30% 100%)' }, { clipPath: 'polygon(0% 0%, 130% 0%, 100% 100%, -30% 100%)' }, { clipPath: 'polygon(130% 0%, 130% 0%, 100% 100%, 100% 100%)' }],
+        fondu: [{ xPercent: 0, yPercent: 0, clipPath: 'inset(0% 0% 0% 0%)', opacity: 0 }, { opacity: 1 }, { opacity: 0 }]
+    };
+    const RIDEAU_STYLE = { ardoise: 'balayage', four: 'cercle', sakura: 'fondu', smash: 'diagonale', pression: 'volet', dani: 'volet' };
+    function allerPage(p, anime) {
+        if (PAGES.indexOf(p) < 0) p = 'accueil';
+        if (enTransition) return;
+        if (!anime || reduit || !aGsap || p === page) { montrer(p); return; }
+        const r = RIDEAUX[RIDEAU_STYLE[design.style]] || RIDEAUX.volet;
+        enTransition = true;
+        G.set(rideau, Object.assign({ visibility: 'visible', opacity: 1 }, r[0]));
+        G.timeline({ onComplete: function () { G.set(rideau, { visibility: 'hidden', clearProps: 'clipPath,transform,opacity' }); enTransition = false; } })
+            .to(rideau, Object.assign({ duration: 0.45, ease: 'power3.in' }, r[1]))
+            .add(function () { montrer(p); })
+            .to(rideau, Object.assign({ duration: 0.55, ease: 'power3.out', delay: 0.05 }, r[2]));
+    }
+    function fermerMenu() {
+        site.classList.remove('menu-ouvert');
+        const b = site.querySelector('.burger'); if (b) b.setAttribute('aria-expanded', 'false');
+    }
+    site.addEventListener('click', function (ev) {
+        // Les sections de page portent aussi data-page : seuls les liens naviguent.
+        const lien = ev.target.closest('a[data-page]');
+        if (lien) { ev.preventDefault(); allerPage(lien.dataset.page, true); return; }
+        const onglet = ev.target.closest('[data-cat]');
+        if (onglet) {
+            ev.preventDefault();
+            const cible = document.getElementById('cat-' + onglet.dataset.cat);
+            if (cible) { if (lenis) lenis.scrollTo(cible, { offset: -150 }); else cible.scrollIntoView({ behavior: reduit ? 'auto' : 'smooth' }); }
+            return;
+        }
+        if (ev.target.closest('[data-legal]')) { ev.preventDefault(); return; }
+        const burger = ev.target.closest('.burger');
+        if (burger) {
+            const ouvert = !site.classList.contains('menu-ouvert');
+            site.classList.toggle('menu-ouvert', ouvert);
+            burger.setAttribute('aria-expanded', String(ouvert));
+        }
+    });
+    // Maquette : le formulaire ne transmet rien, il le dit.
+    site.addEventListener('submit', function (ev) {
+        ev.preventDefault();
+        const f = ev.target, m = f.querySelector('.resa-message');
+        if (!f.checkValidity()) { f.reportValidity(); return; }
+        m.hidden = false;
+        m.textContent = 'Maquette de démonstration : aucune réservation n\'est envoyée. Sur le site du restaurant, la demande part directement chez lui.';
+    });
+
+    // ---- Animations ----
+    function de(els, vars) { if (els.length) G.from(els, vars); }
+    function apparaitre(elements, depart, options) {
+        const els = G.utils.toArray(elements);
+        if (!els.length) return;
+        const fin = { opacity: 1, x: 0, y: 0, scale: 1, rotate: 0, rotateX: 0, rotateY: 0, clipPath: 'inset(0% 0% 0% 0%)', filter: 'blur(0px)', duration: 1, ease: 'power3.out' };
+        Object.keys(fin).forEach(function (k) { if (!(k in depart) && ['duration', 'ease'].indexOf(k) < 0) delete fin[k]; });
+        els.forEach(function (el, i) {
+            const rang = el.parentElement ? Array.prototype.indexOf.call(el.parentElement.children, el) : i;
+            G.fromTo(el, Object.assign({}, depart), Object.assign({}, fin, { delay: (rang % 4) * 0.08, scrollTrigger: { trigger: el, start: 'top 92%', once: true } }, options || {}));
+        });
+    }
+    function aimant(selecteur) {
+        const nettoyages = [];
+        G.utils.toArray(selecteur).forEach(function (b) {
+            const bouge = function (ev) { const r = b.getBoundingClientRect(); G.to(b, { x: (ev.clientX - r.left - r.width / 2) * 0.25, y: (ev.clientY - r.top - r.height / 2) * 0.35, duration: 0.4, ease: 'power3.out', overwrite: 'auto' }); };
+            const sort = function () { G.to(b, { x: 0, y: 0, duration: 0.9, ease: 'elastic.out(1, 0.4)', overwrite: 'auto' }); };
+            b.addEventListener('pointermove', bouge); b.addEventListener('pointerleave', sort);
+            nettoyages.push(function () { b.removeEventListener('pointermove', bouge); b.removeEventListener('pointerleave', sort); G.set(b, { clearProps: 'transform' }); });
+        });
+        return function () { nettoyages.forEach(function (f) { f(); }); };
+    }
+    // Onglets de la carte : l'onglet de la catégorie visible s'allume.
+    function suivreOnglets(p) {
+        const onglets = G.utils.toArray(p.querySelectorAll('.onglets a'));
+        onglets.forEach(function (o, i) {
+            const cat = p.querySelector('#cat-' + i);
+            ST.create({ trigger: cat, start: 'top 60%', end: 'bottom 60%', onToggle: function (s) { if (s.isActive) onglets.forEach(function (x) { x.classList.toggle('actif', x === o); }); } });
+        });
+        if (onglets[0]) onglets[0].classList.add('actif');
+    }
+    // Chaque maquette : l'entrée de l'ouverture et l'arrivée des blocs de chaque page.
+    const STYLES = {
+        ardoise: { titre: { yPercent: 110, duration: 1.1, ease: 'expo.out', stagger: 0.06 }, bloc: { opacity: 0, y: 30 }, titres: { clipPath: 'inset(0% 100% 0% 0%)' }, titresOpt: { duration: 1.1, ease: 'steps(16)' }, plat: { opacity: 0, x: -16 } },
+        four: { titre: { yPercent: 120, rotate: 6, duration: 1.2, ease: 'back.out(1.6)', stagger: 0.07 }, bloc: { opacity: 0, y: 50, scale: 0.96 }, blocOpt: { ease: 'back.out(1.4)' }, titres: { opacity: 0, y: 40 }, plat: { opacity: 0, y: 24 } },
+        sakura: { titre: { yPercent: 100, opacity: 0, duration: 1.6, ease: 'power4.out', stagger: 0.12 }, bloc: { opacity: 0, filter: 'blur(8px)' }, blocOpt: { duration: 1.4 }, titres: { opacity: 0, y: 24, filter: 'blur(6px)' }, titresOpt: { duration: 1.4 }, plat: { opacity: 0, y: 12 } },
+        smash: { titre: { yPercent: 110, scale: 1.3, duration: 0.8, ease: 'power4.out', stagger: 0.05 }, bloc: { opacity: 0, y: 70, rotate: -2 }, blocOpt: { ease: 'back.out(2)', duration: 0.8 }, titres: { opacity: 0, scale: 1.2 }, titresOpt: { ease: 'power4.out', duration: 0.7 }, plat: { opacity: 0, x: 30 } },
+        pression: { titre: { yPercent: 110, duration: 1.4, ease: 'expo.out', stagger: 0.08 }, bloc: { opacity: 0, y: 40 }, titres: { clipPath: 'inset(0% 50% 0% 50%)' }, titresOpt: { duration: 1.3, ease: 'power3.inOut' }, plat: { opacity: 0, y: 20 } },
+        dani: { titre: { yPercent: 110, duration: 1.3, ease: 'expo.out', stagger: 0.08 }, bloc: { opacity: 0, y: 40 }, titres: { clipPath: 'inset(0% 0% 100% 0%)', y: 20 }, titresOpt: { duration: 1.2 }, plat: { opacity: 0, y: 20 } }
+    };
+    function choregraphie(p, grand) {
+        const s = STYLES[design.style] || STYLES.dani;
+        const retraits = [];
+        if (page === 'accueil') {
+            de(p.querySelectorAll('.hero-titre .mot-i'), Object.assign({ delay: 0.15 }, s.titre));
+            de(p.querySelectorAll('.hero-surtitre, .hero-accroche, .hero-actions, .hero-stats li, .decouvrir'), { y: 22, opacity: 0, duration: 0.9, ease: 'power3.out', stagger: 0.08, delay: 0.45 });
+            if (grand) G.to(p.querySelector('.hero-in'), { yPercent: 14, opacity: 0.3, ease: 'none', scrollTrigger: { trigger: p.querySelector('.hero'), start: 'top top', end: 'bottom top', scrub: true } });
+            apparaitre(p.querySelectorAll('.tuile'), s.bloc, s.blocOpt);
+            apparaitre(p.querySelectorAll('.teaser .photo-cadre'), { opacity: 0, clipPath: 'inset(12% 12% 12% 12%)' }, { duration: 1.3, ease: 'power3.out', clearProps: 'clipPath' });
+            apparaitre(p.querySelectorAll('.teaser h2'), s.titres, Object.assign({ clearProps: 'clipPath,filter' }, s.titresOpt));
+            apparaitre(p.querySelectorAll('.teaser p, .teaser .lien'), { opacity: 0, y: 20 });
+            retraits.push(aimant(p.querySelectorAll('.hero-actions .btn')));
+        } else {
+            de(p.querySelectorAll('.page-tete .surtitre, .histoire-texte .surtitre, .resa-texte .surtitre'), { opacity: 0, y: 16, duration: 0.8, ease: 'power3.out', delay: 0.1 });
+            G.fromTo(p.querySelectorAll('h2'), Object.assign({}, s.titres), Object.assign({ opacity: 1, x: 0, y: 0, scale: 1, clipPath: 'inset(0% 0% 0% 0%)', filter: 'blur(0px)', duration: 1, ease: 'power3.out', delay: 0.15, clearProps: 'clipPath,filter' }, s.titresOpt));
+            de(p.querySelectorAll('.histoire-texte > p:not(.surtitre), .resa-texte > p:not(.surtitre), .infos li, .badge, .contact-actions'), { opacity: 0, y: 20, duration: 0.8, ease: 'power3.out', stagger: 0.06, delay: 0.35 });
+            de(p.querySelectorAll('.onglets a'), { opacity: 0, y: 12, duration: 0.6, stagger: 0.05, delay: 0.3 });
+            apparaitre(p.querySelectorAll('.categorie-nom'), s.titres, Object.assign({ clearProps: 'clipPath,filter' }, s.titresOpt));
+            apparaitre(p.querySelectorAll('.plat'), s.plat, { duration: 0.8 });
+            apparaitre(p.querySelectorAll('.carte-note'), { opacity: 0, y: 20 });
+            apparaitre(p.querySelectorAll('.photo-cadre'), { opacity: 0, clipPath: 'inset(10% 10% 10% 10%)', scale: 1.04 }, { duration: 1.2, clearProps: 'clipPath' });
+            apparaitre(p.querySelectorAll('.resa-form'), s.bloc, s.blocOpt);
+            if (page === 'carte') suivreOnglets(p);
+        }
+        return function () { retraits.forEach(function (f) { f(); }); };
+    }
+    function lancerAnimations() {
+        if (animations) { animations.revert(); animations = null; }
+        const p = site.querySelector('.page.active');
+        if (!aGsap || reduit || !p) return;
+        animations = G.matchMedia();
+        animations.add({ grand: '(min-width: 900px)', petit: '(max-width: 899px)' }, function (ctx) {
+            const retirer = choregraphie(p, ctx.conditions.grand);
+            return function () { if (typeof retirer === 'function') retirer(); };
+        });
+        ST.refresh();
+    }
+
+    // ---- Barre de choix des maquettes ----
+    const choix = document.getElementById('sel-choix'), actuel = document.getElementById('sel-actuel');
+    const barre = document.querySelector('.selecteur');
+    function afficher(n, defiler) {
+        const d = DESIGNS.filter(function (x) { return x.n === n; })[0] || DESIGNS[0];
+        if (animations) { animations.revert(); animations = null; }
+        monter(d);
+        if (choix) choix.querySelectorAll('button').forEach(function (b, i) { b.setAttribute('aria-pressed', String(NUMEROS[i] === d.n)); });
+        if (actuel) actuel.innerHTML = '<b>Maquette ' + d.n + ' · ' + e(d.nom) + '</b><span>' + e(d.type) + '</span>';
+        try { localStorage.setItem(C.cle, String(d.n)); } catch (err) {}
+        montrer(defiler ? 'accueil' : page);
+    }
+    if (DESIGNS.length > 1 && choix) {
+        DESIGNS.forEach(function (d) {
+            const b = document.createElement('button'); b.type = 'button';
+            b.innerHTML = '<b>' + d.n + ' · ' + e(d.nom) + '</b><span>' + e(d.type) + '</span>';
+            b.addEventListener('click', function () { afficher(d.n, true); });
+            choix.appendChild(b);
+        });
+        const voisine = function (sens) { const i = NUMEROS.indexOf(design.n); return NUMEROS[(i + sens + NUMEROS.length) % NUMEROS.length]; };
+        document.getElementById('sel-prec').addEventListener('click', function () { afficher(voisine(-1), true); });
+        document.getElementById('sel-suiv').addEventListener('click', function () { afficher(voisine(1), true); });
+    } else if (barre) barre.remove();
+
+    // Point de départ : #c2-carte, #carte, ou la dernière maquette vue.
+    let depart = DESIGNS[0].n;
+    const h = (location.hash || '').replace('#', '');
+    const m = h.match(/^c(\d+)-([a-z]+)$/);
+    if (m && NUMEROS.indexOf(Number(m[1])) >= 0) { depart = Number(m[1]); if (PAGES.indexOf(m[2]) >= 0) page = m[2]; }
+    else if (PAGES.indexOf(h) >= 0) page = h;
+    else { try { const s = Number(localStorage.getItem(C.cle)); if (NUMEROS.indexOf(s) >= 0) depart = s; } catch (err) {} }
+    afficher(depart, false);
+    window.addEventListener('load', function () { if (aGsap) ST.refresh(); });
+})();
+</script>
+<script type="importmap">
+{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/" } }
+</script>
+<script type="module">
+// Scènes 3D des maquettes client (Three.js) : une par maquette, construite à partir des données du
+// restaurant. Chaque scène sert aussi de studio photo : les images de la galerie en sont tirées.
+import * as THREE from 'three';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
+
+const canvas = document.getElementById('scene-3d');
+const boite = canvas.parentElement;
+const reduit = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+let renderer;
+try {
+    renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true, powerPreference: 'high-performance' });
+} catch (e) {
+    renderer = null;
+}
+
+const lisse = (a, b, x) => { const t = Math.min(1, Math.max(0, (x - a) / (b - a))); return t * t * (3 - 2 * t); };
+const sortie = x => 1 - Math.pow(1 - x, 3);
+const rebond = x => { const c = 1.70158; return 1 + (c + 1) * Math.pow(x - 1, 3) + c * Math.pow(x - 1, 2); };
+const alea = (a, b) => a + Math.random() * (b - a);
+const TAN = Math.tan(THREE.MathUtils.degToRad(15));
+const prixCourt = v => { const n = parseFloat(String(v).replace(',', '.')); return Number.isFinite(n) ? n.toFixed(2).replace('.', ',') : String(v); };
+
+function rondRect(x, px, py, l, h, r) { x.beginPath(); x.moveTo(px + r, py); x.arcTo(px + l, py, px + l, py + h, r); x.arcTo(px + l, py + h, px, py + h, r); x.arcTo(px, py + h, px, py, r); x.arcTo(px, py, px + l, py, r); x.closePath(); }
+function toile(l, h) { const c = document.createElement('canvas'); c.width = l; c.height = h; return c; }
+function textureDepuis(c) {
+    const t = new THREE.CanvasTexture(c);
+    t.colorSpace = THREE.SRGBColorSpace;
+    t.anisotropy = renderer ? renderer.capabilities.getMaxAnisotropy() : 1;
+    return t;
+}
+function spriteRond() {
+    const c = toile(64, 64), x = c.getContext('2d'), g = x.createRadialGradient(32, 32, 0, 32, 32, 32);
+    g.addColorStop(0, 'rgba(255,255,255,1)'); g.addColorStop(0.3, 'rgba(255,255,255,.5)'); g.addColorStop(1, 'rgba(255,255,255,0)');
+    x.fillStyle = g; x.fillRect(0, 0, 64, 64);
+    return new THREE.CanvasTexture(c);
+}
+function ombreSol(taille, force, teinte) {
+    const c = toile(256, 256), x = c.getContext('2d'), g = x.createRadialGradient(128, 128, 0, 128, 128, 128), t = teinte || '30,18,10';
+    g.addColorStop(0, 'rgba(' + t + ',' + force + ')'); g.addColorStop(0.55, 'rgba(' + t + ',' + (force * 0.4) + ')'); g.addColorStop(1, 'rgba(' + t + ',0)');
+    x.fillStyle = g; x.fillRect(0, 0, 256, 256);
+    const m = new THREE.Mesh(new THREE.PlaneGeometry(taille, taille), new THREE.MeshBasicMaterial({ map: new THREE.CanvasTexture(c), transparent: true, depthWrite: false }));
+    m.rotation.x = -Math.PI / 2;
+    return m;
+}
+function geoFeuille(echelle, courbure) {
+    const s = new THREE.Shape();
+    s.moveTo(0, 0); s.bezierCurveTo(0.44, 0.2, 0.42, 0.78, 0, 1.18); s.bezierCurveTo(-0.42, 0.78, -0.44, 0.2, 0, 0);
+    const g = new THREE.ShapeGeometry(s, 16), p = g.attributes.position;
+    for (let i = 0; i < p.count; i++) { const x = p.getX(i), y = p.getY(i); p.setZ(i, -x * x * courbure + Math.sin(y * 2.6) * 0.04); }
+    g.scale(echelle, echelle, echelle); g.computeVertexNormals();
+    return g;
+}
+// Bruit déterministe léger pour déformer les surfaces (croûte, steak, mousse).
+const bruit = (x, y, z) => Math.sin(x * 12.9898 + y * 78.233 + z * 37.719) * 0.5 + Math.sin(x * 4.1 - z * 5.3 + y * 2.7) * 0.3 + Math.sin(z * 9.7 + x * 3.1) * 0.2;
+function deformer(geo, f) {
+    const p = geo.attributes.position, v = new THREE.Vector3();
+    for (let i = 0; i < p.count; i++) { v.fromBufferAttribute(p, i); f(v); p.setXYZ(i, v.x, v.y, v.z); }
+    geo.computeVertexNormals();
+    return geo;
+}
+function bois(l, h, base, fonce) {
+    const c = toile(l, h), x = c.getContext('2d');
+    x.fillStyle = base; x.fillRect(0, 0, l, h);
+    for (let i = 0; i < 70; i++) { x.strokeStyle = 'rgba(' + fonce + ',' + alea(0.05, 0.16).toFixed(2) + ')'; x.lineWidth = alea(1, 3); x.beginPath(); const y = alea(0, h); x.moveTo(0, y); x.bezierCurveTo(l * 0.3, y + alea(-12, 12), l * 0.7, y + alea(-12, 12), l, y + alea(-8, 8)); x.stroke(); }
+    return textureDepuis(c);
+}
+function boisRond(taille, base, fonce) {
+    const c = toile(taille, taille), x = c.getContext('2d'), m = taille / 2;
+    x.fillStyle = base; x.fillRect(0, 0, taille, taille);
+    for (let r = 6; r < m; r += alea(5, 12)) { x.strokeStyle = 'rgba(' + fonce + ',' + alea(0.06, 0.18).toFixed(2) + ')'; x.lineWidth = alea(1, 2.5); x.beginPath(); x.ellipse(m + alea(-3, 3), m + alea(-3, 3), r, r * alea(0.96, 1.04), alea(0, 3), 0, Math.PI * 2); x.stroke(); }
+    return textureDepuis(c);
+}
+function limiter(x, texte, largeur) { if (x.measureText(texte).width <= largeur) return texte; let t = texte; while (t.length > 3 && x.measureText(t + '…').width > largeur) t = t.slice(0, -1); return t.trim() + '…'; }
+
+// ---- 1 · Ardoise : le plat du jour s'écrit à la craie, un verre de rouge à côté ----
+function dessinerCraie(r) {
+    const W = 1024, H = 720, c = toile(W, H), x = c.getContext('2d');
+    x.fillStyle = x.strokeStyle = '#FBF6EE';
+    x.textAlign = 'center'; x.font = '700 86px "Caveat", cursive'; x.fillText('Ardoise du jour', W / 2, 112);
+    x.lineWidth = 4; x.lineCap = 'round'; x.beginPath(); x.moveTo(W / 2 - 210, 138); x.bezierCurveTo(W / 2 - 80, 126, W / 2 + 60, 152, W / 2 + 210, 134); x.stroke();
+    const plats = [];
+    r.categories.forEach(function (cat) { if (cat.plats[0]) plats.push(cat.plats[0]); });
+    r.categories.forEach(function (cat) { cat.plats.slice(1).forEach(function (p) { plats.push(p); }); });
+    const lignes = [{ y0: 30, y1: 160 }];
+    plats.slice(0, 4).forEach(function (p, i) {
+        const y = 250 + i * 120, prix = prixCourt(p.prix);
+        x.font = '600 58px "Caveat", cursive';
+        const lp = x.measureText(prix).width;
+        x.textAlign = 'right'; x.fillText(prix, W - 90, y);
+        x.textAlign = 'left'; x.fillText(limiter(x, p.nom, W - 250 - lp), 90, y);
+        x.globalAlpha = 0.72; x.font = '500 36px "Caveat", cursive'; x.fillText(limiter(x, p.desc, W - 190), 98, y + 44); x.globalAlpha = 1;
+        lignes.push({ y0: y - 62, y1: y + 60 });
+    });
+    x.globalCompositeOperation = 'destination-out';
+    for (let i = 0; i < 26000; i++) { x.fillStyle = 'rgba(0,0,0,' + alea(0.15, 0.8).toFixed(2) + ')'; x.fillRect(Math.random() * W, Math.random() * H, alea(1, 2.4), alea(1, 2.4)); }
+    x.globalCompositeOperation = 'source-over';
+    return { plein: c, lignes: lignes };
+}
+function fondArdoise() {
+    const c = toile(1024, 720), x = c.getContext('2d');
+    x.fillStyle = '#2A302E'; x.fillRect(0, 0, 1024, 720);
+    for (let i = 0; i < 46; i++) { const g = x.createRadialGradient(alea(0, 1024), alea(0, 720), 0, alea(0, 1024), alea(0, 720), alea(80, 260)); g.addColorStop(0, 'rgba(255,255,255,' + alea(0.02, 0.05).toFixed(3) + ')'); g.addColorStop(1, 'rgba(255,255,255,0)'); x.fillStyle = g; x.fillRect(0, 0, 1024, 720); }
+    x.strokeStyle = 'rgba(255,255,255,.04)'; x.lineWidth = 18; x.lineCap = 'round';
+    for (let i = 0; i < 9; i++) { x.beginPath(); x.moveTo(alea(0, 1024), alea(0, 720)); x.bezierCurveTo(alea(0, 1024), alea(0, 720), alea(0, 1024), alea(0, 720), alea(0, 1024), alea(0, 720)); x.stroke(); }
+    return c;
+}
+function sceneArdoise(env, r) {
+    const scene = new THREE.Scene(); scene.environment = env;
+    const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 100);
+    scene.add(new THREE.HemisphereLight(0xfff0dc, 0x3a2a20, 0.55));
+    const cle = new THREE.DirectionalLight(0xfff3e2, 1.25); cle.position.set(-4, 6, 7); scene.add(cle);
+    const rouge = new THREE.PointLight(0xff6a4a, 22, 12, 1.6); rouge.position.set(4, 1, 3); scene.add(rouge);
+    const groupe = new THREE.Group(); scene.add(groupe);
+    const tableau = new THREE.Group(); tableau.position.set(-0.5, 0.45, 0); tableau.rotation.y = 0.16; groupe.add(tableau);
+    const craie = dessinerCraie(r), fond = fondArdoise(), aff = toile(1024, 720), ax = aff.getContext('2d');
+    ax.drawImage(fond, 0, 0);
+    const tex = textureDepuis(aff);
+    tableau.add(new THREE.Mesh(new THREE.PlaneGeometry(4.4, 3.1), new THREE.MeshStandardMaterial({ map: tex, roughness: 0.92, envMapIntensity: 0.3 })));
+    const cadre = new THREE.MeshStandardMaterial({ map: bois(512, 64, '#6B4A32', '30,18,10'), roughness: 0.7 });
+    [[0, 1.65, 4.8, 0.22], [0, -1.65, 4.8, 0.22], [-2.3, 0, 0.22, 3.1], [2.3, 0, 0.22, 3.1]].forEach(function (b) { const m = new THREE.Mesh(new THREE.BoxGeometry(b[2], b[3], 0.16), cadre); m.position.set(b[0], b[1], 0.02); tableau.add(m); });
+    const dos = new THREE.Mesh(new THREE.BoxGeometry(4.6, 3.3, 0.06), new THREE.MeshStandardMaterial({ color: 0x1B1512, roughness: 0.9 })); dos.position.z = -0.05; tableau.add(dos);
+    const pied = new THREE.MeshStandardMaterial({ color: 0x5B3D29, roughness: 0.7 });
+    [[-1.5, 0.18], [1.5, 0.18]].forEach(function (p) { const l = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.06, 2.4, 10), pied); l.position.set(p[0], -2.55, p[1]); l.rotation.x = -0.12; tableau.add(l); });
+    const baton = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.05, 0.3, 12), new THREE.MeshStandardMaterial({ color: 0xF4F0E8, roughness: 0.95 }));
+    baton.rotation.z = 1.2; tableau.add(baton);
+    // Le verre de vin rouge
+    const verre = new THREE.Group(); verre.position.set(2.55, -1.55, 1.05); groupe.add(verre);
+    const profilVerre = [[0, 0], [0.46, 0], [0.47, 0.03], [0.06, 0.07], [0.04, 0.12], [0.035, 0.92], [0.07, 0.98], [0.3, 1.1], [0.45, 1.34], [0.49, 1.6], [0.46, 1.9], [0.41, 2.18]].map(p => new THREE.Vector2(p[0], p[1]));
+    verre.add(new THREE.Mesh(new THREE.LatheGeometry(profilVerre, 64), new THREE.MeshPhysicalMaterial({ color: 0xffffff, roughness: 0.04, transparent: true, opacity: 0.2, clearcoat: 1, envMapIntensity: 1.4, side: THREE.DoubleSide, depthWrite: false })));
+    const profilVin = [[0, 1.0], [0.24, 1.04], [0.4, 1.2], [0.46, 1.4], [0.47, 1.52], [0, 1.52]].map(p => new THREE.Vector2(p[0], p[1]));
+    const vin = new THREE.Mesh(new THREE.LatheGeometry(profilVin, 64), new THREE.MeshPhysicalMaterial({ color: 0x5A0B1C, roughness: 0.12, clearcoat: 1, transparent: true, opacity: 0.94 }));
+    verre.add(vin);
+    const ombre = ombreSol(3, 0.45); ombre.position.set(2.55, -1.54, 1.05); groupe.add(ombre);
+    const nb = 40, pos = new Float32Array(nb * 3), vit = [];
+    for (let i = 0; i < nb; i++) { pos[i * 3] = alea(-3, 3); pos[i * 3 + 1] = alea(-2, 2.5); pos[i * 3 + 2] = alea(-0.5, 2); vit.push(alea(0.05, 0.16)); }
+    const gp = new THREE.BufferGeometry(); gp.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+    const poussiere = new THREE.Points(gp, new THREE.PointsMaterial({ size: 0.05, map: spriteRond(), color: 0xFFFFFF, transparent: true, opacity: 0.45, depthWrite: false }));
+    groupe.add(poussiere);
+    let dernier = -1;
+    const ecrire = function (p) {
+        const k = Math.round(p * 240);
+        if (k === dernier) return;
+        dernier = k;
+        ax.drawImage(fond, 0, 0);
+        const n = craie.lignes.length;
+        let tete = null;
+        craie.lignes.forEach(function (l, i) {
+            const local = Math.min(1, Math.max(0, p * n - i));
+            if (!local) return;
+            const larg = 70 + 884 * local;
+            ax.save(); ax.beginPath(); ax.rect(0, l.y0, larg, l.y1 - l.y0); ax.clip(); ax.drawImage(craie.plein, 0, 0); ax.restore();
+            if (local < 1) tete = { x: larg, y: (l.y0 + l.y1) / 2 };
+        });
+        tex.needsUpdate = true;
+        if (tete) baton.position.set(-2.2 + 4.4 * tete.x / 1024, 1.55 - 3.1 * tete.y / 720, 0.14);
+        else baton.position.set(1.6, -1.49, 0.12);
+    };
+    return {
+        scene: scene, camera: camera, fondPhoto: '#16120E',
+        photos: [
+            { pos: [4, 1.4, 10], cible: [0.3, 0.1, 0] }, { pos: [4.4, -0.3, 3.8], cible: [2.5, -0.7, 1], fov: 36 },
+            { pos: [0, 0.5, 8.4], cible: [-0.45, 0.45, 0] }, { pos: [-1.3, 1.3, 4], cible: [-1.2, 0.9, 0] },
+            { pos: [1.5, -2.3, 7], cible: [0.5, 0, 0] }, { pos: [2.6, 2.4, 3.4], cible: [2.55, -0.6, 1] },
+            { pos: [-5, 1, 8], cible: [0.4, 0, 0] }, { pos: [0.9, -0.5, 4], cible: [0.5, -0.7, 0] }
+        ],
+        dimension: function (w, h) { const a = w / h; camera.aspect = a; camera.position.set(0, 0.6, Math.max(11, 7.6 / (2 * TAN * a))); camera.lookAt(0.3, -0.1, 0); camera.updateProjectionMatrix(); },
+        maj: function (t, souris, defil) {
+            ecrire(Math.min(1, Math.max(0, (t - 0.9) / 4.5)));
+            const e = sortie(lisse(0, 1.2, t));
+            groupe.position.y = (1 - e) * -2;
+            groupe.rotation.y = -0.1 + souris.x * 0.25 + Math.sin(t * 0.3) * 0.05 + defil * 0.5;
+            groupe.rotation.x = -souris.y * 0.06;
+            vin.rotation.z = Math.sin(t * 1.3) * 0.015;
+            for (let i = 0; i < nb; i++) { pos[i * 3 + 1] = -2 + ((t * vit[i] + i * 0.37) % 4.5); }
+            gp.attributes.position.needsUpdate = true;
+        }
+    };
+}
+
+// ---- 2 · Four à bois : la pizza se garnit sur sa pelle, devant les braises ----
+function textureSauce() {
+    const c = toile(512, 512), x = c.getContext('2d');
+    x.beginPath();
+    for (let i = 0; i <= 120; i++) { const a = i / 120 * Math.PI * 2, r = 236 + Math.sin(a * 7) * 6 + Math.sin(a * 13 + 1) * 4; x.lineTo(256 + Math.cos(a) * r, 256 + Math.sin(a) * r); }
+    x.closePath();
+    const g = x.createRadialGradient(256, 256, 20, 256, 256, 240); g.addColorStop(0, '#C73A24'); g.addColorStop(1, '#A92A1A');
+    x.fillStyle = g; x.fill(); x.save(); x.clip();
+    for (let i = 0; i < 260; i++) { x.fillStyle = Math.random() < 0.5 ? 'rgba(120,20,10,.25)' : 'rgba(240,110,60,.22)'; x.beginPath(); x.ellipse(alea(20, 492), alea(20, 492), alea(4, 18), alea(3, 10), alea(0, 3), 0, Math.PI * 2); x.fill(); }
+    for (let i = 0; i < 40; i++) { x.fillStyle = 'rgba(255,190,90,.25)'; x.beginPath(); x.arc(alea(40, 472), alea(40, 472), alea(2, 6), 0, Math.PI * 2); x.fill(); }
+    x.restore();
+    return textureDepuis(c);
+}
+function scenePizza(env) {
+    const scene = new THREE.Scene(); scene.environment = env;
+    const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 100);
+    scene.add(new THREE.HemisphereLight(0xffe2c0, 0x3a1a0a, 0.75));
+    const cle = new THREE.DirectionalLight(0xfff0dc, 1.6); cle.position.set(-3, 7, 5); scene.add(cle);
+    const four = new THREE.PointLight(0xff7a2a, 60, 16, 1.5); four.position.set(0, 1.6, -3.5); scene.add(four);
+    const groupe = new THREE.Group(); scene.add(groupe);
+    const pelle = new THREE.Group(); groupe.add(pelle);
+    const texBois = boisRond(512, '#C99A63', '70,40,15');
+    const plateau = new THREE.Mesh(new THREE.CylinderGeometry(2.05, 2.05, 0.06, 72), [new THREE.MeshStandardMaterial({ color: 0xB88A55, roughness: 0.7 }), new THREE.MeshStandardMaterial({ map: texBois, roughness: 0.7 }), new THREE.MeshStandardMaterial({ map: texBois, roughness: 0.7 })]);
+    plateau.position.y = -0.03; pelle.add(plateau);
+    const manche = new THREE.Mesh(new THREE.BoxGeometry(0.42, 0.06, 2.6), new THREE.MeshStandardMaterial({ map: bois(64, 512, '#C99A63', '70,40,15'), roughness: 0.7 }));
+    manche.position.set(0, -0.03, -3.25); pelle.add(manche);
+    pelle.rotation.y = 0.55;
+    const pizza = new THREE.Group(); groupe.add(pizza);
+    const profil = [[0, 0.035], [1.34, 0.035], [1.46, 0.07], [1.56, 0.15], [1.66, 0.18], [1.73, 0.13], [1.74, 0.05], [1.66, 0], [0, 0]].map(p => new THREE.Vector2(p[0], p[1]));
+    const geoPate = new THREE.LatheGeometry(profil, 120), pp = geoPate.attributes.position, couleurs = new Float32Array(pp.count * 3), cp = new THREE.Color();
+    for (let i = 0; i < pp.count; i++) {
+        const x = pp.getX(i), y = pp.getY(i), z = pp.getZ(i), rr = Math.hypot(x, z), a = Math.atan2(z, x);
+        const tache = rr > 1.4 && (Math.sin(a * 23 + rr * 7) * Math.sin(a * 11 - 3) > 0.55);
+        cp.set(rr > 1.4 ? 0xE9C17F : 0xF0D6A8).multiplyScalar(tache ? 0.42 : (0.92 + y * 0.6));
+        couleurs[i * 3] = cp.r; couleurs[i * 3 + 1] = cp.g; couleurs[i * 3 + 2] = cp.b;
+    }
+    geoPate.setAttribute('color', new THREE.BufferAttribute(couleurs, 3));
+    pizza.add(new THREE.Mesh(geoPate, new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 0.85 })));
+    const sauce = new THREE.Mesh(new THREE.CircleGeometry(1.42, 72), new THREE.MeshStandardMaterial({ map: textureSauce(), transparent: true, roughness: 0.4 }));
+    sauce.rotation.x = -Math.PI / 2; sauce.position.y = 0.045; pizza.add(sauce);
+    const geoMozza = new THREE.SphereGeometry(0.26, 24, 16), matMozza = new THREE.MeshPhysicalMaterial({ color: 0xFFF7E6, roughness: 0.42, clearcoat: 0.25 });
+    const mozzas = [];
+    for (let i = 0; i < 15; i++) { const a = i * 2.39996, rr = 0.25 + Math.sqrt((i + 0.5) / 15) * 0.9; const m = new THREE.Mesh(geoMozza, matMozza); m.userData = { x: Math.cos(a) * rr, z: Math.sin(a) * rr, debut: 1.8 + i * 0.07 }; pizza.add(m); mozzas.push(m); }
+    const geoBasilic = geoFeuille(0.42, 0.7), matBasilic = new THREE.MeshStandardMaterial({ color: 0x2F7A2C, roughness: 0.45, side: THREE.DoubleSide });
+    const basilics = [];
+    for (let i = 0; i < 7; i++) { const a = i * 0.9 + 0.4, rr = 0.35 + (i % 3) * 0.3; const b = new THREE.Mesh(geoBasilic, matBasilic); b.userData = { x: Math.cos(a) * rr, z: Math.sin(a) * rr, rot: a * 2, debut: 3.0 + i * 0.08 }; pizza.add(b); basilics.push(b); }
+    const sprite = spriteRond();
+    const nbB = 130, posB = new Float32Array(nbB * 3), infoB = [];
+    for (let i = 0; i < nbB; i++) infoB.push({ x: alea(-5, 5), z: alea(-6, -2), v: alea(0.3, 0.9), ph: Math.random() * 6 });
+    const gB = new THREE.BufferGeometry(); gB.setAttribute('position', new THREE.BufferAttribute(posB, 3));
+    scene.add(new THREE.Points(gB, new THREE.PointsMaterial({ size: 0.09, map: sprite, color: 0xFFA040, transparent: true, opacity: 0.9, depthWrite: false, blending: THREE.AdditiveBlending })));
+    const nbV = 18, posV = new Float32Array(nbV * 3), infoV = [];
+    for (let i = 0; i < nbV; i++) infoV.push({ x: alea(-0.9, 0.9), z: alea(-0.9, 0.9), v: alea(0.25, 0.5), ph: Math.random() * 3 });
+    const gV = new THREE.BufferGeometry(); gV.setAttribute('position', new THREE.BufferAttribute(posV, 3));
+    const vapeur = new THREE.Points(gV, new THREE.PointsMaterial({ size: 0.9, map: sprite, color: 0xFFFFFF, transparent: true, opacity: 0, depthWrite: false }));
+    pizza.add(vapeur);
+    return {
+        scene: scene, camera: camera, fondPhoto: '#1B110B',
+        photos: [
+            { pos: [3.4, 3.1, 5.4], cible: [0, 0, 0] }, { pos: [0, 8.2, 0.01], cible: [0, 0, 0], fov: 32 },
+            { pos: [2.3, 1.1, 2.1], cible: [1.0, 0.1, 0.4] }, { pos: [0, 1.3, 5.6], cible: [0, 0.2, 0] },
+            { pos: [0.5, 2.3, 1.7], cible: [0.2, 0, 0] }, { pos: [-4, 3, 6.4], cible: [0, 0.3, -1] },
+            { pos: [1.3, 4.2, 1.3], cible: [0.6, 0, 0.3] }, { pos: [4.2, 2.1, 3.2], cible: [0.8, 0, 0.8] }
+        ],
+        dimension: function (w, h) { const a = w / h; camera.aspect = a; camera.position.set(0, 4.3, Math.max(6.3, 5.4 / (2 * TAN * a))); camera.lookAt(0, -0.25, 0.2); camera.updateProjectionMatrix(); },
+        maj: function (t, souris, defil) {
+            const e = sortie(lisse(0, 1.1, t));
+            groupe.position.x = (1 - e) * 5;
+            groupe.rotation.y = -(1 - e) * 1.4 + souris.x * 0.3 + defil * 0.6;
+            groupe.rotation.x = -souris.y * 0.08 + defil * 0.25;
+            pizza.rotation.y = Math.max(0, t - 4.2) * 0.12;
+            const s = sortie(lisse(0.9, 1.9, t));
+            sauce.scale.setScalar(Math.max(0.001, s)); sauce.rotation.z = (1 - s) * 2;
+            mozzas.forEach(function (m) {
+                const d = m.userData, p = lisse(d.debut, d.debut + 0.45, t), fonte = lisse(d.debut + 0.5, d.debut + 2.8, t);
+                m.visible = t > d.debut;
+                m.position.set(d.x, 0.08 + (1 - rebond(p)) * 2.4, d.z);
+                m.scale.set(0.9 + 0.38 * fonte, 0.42 - 0.24 * fonte, 0.9 + 0.38 * fonte);
+            });
+            basilics.forEach(function (b) {
+                const d = b.userData, p = sortie(lisse(d.debut, d.debut + 0.6, t));
+                b.visible = t > d.debut;
+                b.position.set(d.x, 0.13 + (1 - p) * 1.8, d.z);
+                b.rotation.set(-Math.PI / 2 + 0.15, 0, d.rot + (1 - p) * 3);
+            });
+            for (let i = 0; i < nbB; i++) { const b = infoB[i], y = ((t * b.v + b.ph) % 5); posB[i * 3] = b.x + Math.sin(t + b.ph) * 0.3; posB[i * 3 + 1] = -1.5 + y; posB[i * 3 + 2] = b.z; }
+            gB.attributes.position.needsUpdate = true;
+            for (let i = 0; i < nbV; i++) { const v = infoV[i], y = ((t * v.v + v.ph) % 2.4); posV[i * 3] = v.x + Math.sin(t * 0.8 + v.ph) * 0.15; posV[i * 3 + 1] = 0.3 + y; posV[i * 3 + 2] = v.z; }
+            gV.attributes.position.needsUpdate = true;
+            vapeur.material.opacity = lisse(3.6, 5.2, t) * 0.18;
+            four.intensity = 60 + Math.sin(t * 7) * 6 + Math.sin(t * 13) * 4;
+        }
+    };
+}
+
+// ---- 3 · Sakura : le plateau de sushis se dresse, des pétales tombent ----
+function textureRiz() {
+    const c = toile(256, 256), x = c.getContext('2d');
+    x.fillStyle = '#F2EEE4'; x.fillRect(0, 0, 256, 256);
+    for (let i = 0; i < 520; i++) { x.fillStyle = Math.random() < 0.5 ? 'rgba(255,255,255,.9)' : 'rgba(205,195,175,.55)'; x.beginPath(); x.ellipse(alea(0, 256), alea(0, 256), alea(5, 8), alea(2.4, 3.6), alea(0, 3.14), 0, Math.PI * 2); x.fill(); }
+    return c;
+}
+function texturePoisson(base, filet) {
+    const c = toile(256, 128), x = c.getContext('2d'), g = x.createLinearGradient(0, 0, 256, 128);
+    g.addColorStop(0, base[0]); g.addColorStop(1, base[1]); x.fillStyle = g; x.fillRect(0, 0, 256, 128);
+    x.strokeStyle = filet; x.lineWidth = 5;
+    for (let i = -2; i < 9; i++) { x.beginPath(); x.moveTo(i * 34, 128); x.bezierCurveTo(i * 34 + 20, 80, i * 34 + 30, 40, i * 34 + 60, 0); x.stroke(); }
+    return textureDepuis(c);
+}
+function textureMaki() {
+    const c = toile(256, 256), x = c.getContext('2d');
+    x.fillStyle = '#1B2A1E'; x.beginPath(); x.arc(128, 128, 128, 0, Math.PI * 2); x.fill();
+    x.drawImage(textureRiz(), 0, 0, 256, 256, 14, 14, 228, 228);
+    x.globalCompositeOperation = 'destination-in'; x.beginPath(); x.arc(128, 128, 128, 0, Math.PI * 2); x.fill(); x.globalCompositeOperation = 'source-over';
+    x.strokeStyle = '#1B2A1E'; x.lineWidth = 14; x.beginPath(); x.arc(128, 128, 121, 0, Math.PI * 2); x.stroke();
+    x.fillStyle = '#F07A4F'; x.beginPath(); x.ellipse(118, 124, 44, 34, 0.4, 0, Math.PI * 2); x.fill();
+    x.fillStyle = '#8DB33A'; x.beginPath(); x.ellipse(160, 150, 22, 16, -0.4, 0, Math.PI * 2); x.fill();
+    return textureDepuis(c);
+}
+function sceneSushi(env) {
+    const scene = new THREE.Scene(); scene.environment = env;
+    const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 100);
+    scene.add(new THREE.HemisphereLight(0xfff4ec, 0x201010, 0.5));
+    const cle = new THREE.DirectionalLight(0xffffff, 1.35); cle.position.set(-3, 7, 5); scene.add(cle);
+    const rouge = new THREE.PointLight(0xff3040, 18, 12, 1.6); rouge.position.set(3, 2, -2); scene.add(rouge);
+    const groupe = new THREE.Group(); scene.add(groupe);
+    const ardoise = new THREE.Mesh(new RoundedBoxGeometry(5, 0.14, 2.7, 4, 0.05), new THREE.MeshStandardMaterial({ color: 0x1D1D1F, roughness: 0.75, metalness: 0.1 }));
+    ardoise.position.y = -0.07; groupe.add(ardoise);
+    const riz = textureRiz(), texRiz = textureDepuis(riz);
+    const matRiz = new THREE.MeshStandardMaterial({ map: texRiz, bumpMap: new THREE.CanvasTexture(riz), bumpScale: 0.6, roughness: 0.85 });
+    const geoRiz = new THREE.SphereGeometry(1, 32, 20); geoRiz.scale(0.5, 0.2, 0.26);
+    const geoPoisson = deformer(new THREE.BoxGeometry(1.08, 0.08, 0.5, 24, 1, 8), function (v) { v.y -= 0.2 * Math.pow(v.x / 0.54, 2) + 0.05 * Math.pow(v.z / 0.25, 2); });
+    const saumon = new THREE.MeshPhysicalMaterial({ map: texturePoisson(['#F58A5A', '#E8683E'], 'rgba(255,238,225,.75)'), roughness: 0.3, clearcoat: 0.7 });
+    const thon = new THREE.MeshPhysicalMaterial({ map: texturePoisson(['#B2263B', '#8E1A2C'], 'rgba(255,190,190,.18)'), roughness: 0.3, clearcoat: 0.7 });
+    const pieces = [];
+    const poser = function (o, x, z, rot) { o.userData = { x: x, z: z }; o.rotation.y = rot || 0; groupe.add(o); pieces.push(o); };
+    [[-1.65, 0.5, saumon, 0.1], [-0.6, 0.55, thon, -0.08], [0.45, 0.5, saumon, 0.06]].forEach(function (n) {
+        const g = new THREE.Group(); const b = new THREE.Mesh(geoRiz, matRiz); b.position.y = 0.2; g.add(b);
+        const p = new THREE.Mesh(geoPoisson, n[2]); p.position.y = 0.43; g.add(p); poser(g, n[0], n[1], n[3]);
+    });
+    const nori = new THREE.MeshStandardMaterial({ color: 0x1B2A1E, roughness: 0.55 }), dessus = new THREE.MeshStandardMaterial({ map: textureMaki(), roughness: 0.8 });
+    [[-1.55, -0.6], [-0.85, -0.62], [-0.15, -0.6]].forEach(function (m) { const k = new THREE.Mesh(new THREE.CylinderGeometry(0.3, 0.3, 0.34, 40), [nori, dessus, dessus]); k.position.y = 0.17; const g = new THREE.Group(); g.add(k); poser(g, m[0], m[1]); });
+    const coupelle = new THREE.Group();
+    coupelle.add(new THREE.Mesh(new THREE.LatheGeometry([[0, 0], [0.32, 0], [0.38, 0.04], [0.44, 0.15], [0.46, 0.17], [0.43, 0.17], [0.37, 0.07], [0, 0.05]].map(p => new THREE.Vector2(p[0], p[1])), 48), new THREE.MeshPhysicalMaterial({ color: 0xF5F2EC, roughness: 0.2, clearcoat: 1 })));
+    const soja = new THREE.Mesh(new THREE.CircleGeometry(0.36, 40), new THREE.MeshPhysicalMaterial({ color: 0x2A1006, roughness: 0.05, clearcoat: 1 })); soja.rotation.x = -Math.PI / 2; soja.position.y = 0.1; coupelle.add(soja);
+    poser(coupelle, 1.6, 0.35);
+    const wasabi = new THREE.Mesh(deformer(new THREE.IcosahedronGeometry(0.17, 3), function (v) { v.multiplyScalar(1 + bruit(v.x * 5, v.y * 5, v.z * 5) * 0.12); v.y *= 0.8; }), new THREE.MeshStandardMaterial({ color: 0x8DB33A, roughness: 0.8 }));
+    wasabi.position.y = 0.13; const gw = new THREE.Group(); gw.add(wasabi); poser(gw, 1.15, -0.6);
+    const gingembre = new THREE.Group(), matG = new THREE.MeshStandardMaterial({ color: 0xF4C0B2, roughness: 0.4, side: THREE.DoubleSide });
+    for (let i = 0; i < 3; i++) { const f = new THREE.Mesh(geoFeuille(0.34, 0.5), matG); f.rotation.set(-Math.PI / 2 + 0.3, 0, i * 0.8); f.position.set(i * 0.08, 0.05 + i * 0.03, 0); gingembre.add(f); }
+    poser(gingembre, 1.75, -0.7);
+    const baguettes = new THREE.Group(), laque = new THREE.MeshPhysicalMaterial({ color: 0x111111, roughness: 0.2, clearcoat: 1 }), vermillon = new THREE.MeshStandardMaterial({ color: 0xB91C1C, roughness: 0.3 });
+    [-0.07, 0.07].forEach(function (dz) { const b = new THREE.Mesh(new THREE.CylinderGeometry(0.032, 0.017, 3.1, 12), laque); b.rotation.z = Math.PI / 2; b.position.set(0, 0.16, dz); baguettes.add(b); const bague = new THREE.Mesh(new THREE.CylinderGeometry(0.034, 0.034, 0.12, 12), vermillon); bague.rotation.z = Math.PI / 2; bague.position.set(1.2, 0.16, dz); baguettes.add(bague); });
+    const repose = new THREE.Mesh(new RoundedBoxGeometry(0.16, 0.1, 0.36, 2, 0.03), vermillon); repose.position.set(0.95, 0.05, 0); baguettes.add(repose);
+    baguettes.rotation.y = 0.25; groupe.add(baguettes);
+    // Pétales de cerisier
+    const petale = new THREE.Shape(); petale.moveTo(0, 0); petale.bezierCurveTo(0.12, 0.05, 0.16, 0.2, 0.08, 0.3); petale.lineTo(0, 0.25); petale.lineTo(-0.08, 0.3); petale.bezierCurveTo(-0.16, 0.2, -0.12, 0.05, 0, 0);
+    const NP = 110, petales = new THREE.InstancedMesh(new THREE.ShapeGeometry(petale, 6), new THREE.MeshStandardMaterial({ color: 0xF6B7C8, roughness: 0.5, side: THREE.DoubleSide }), NP);
+    const infoP = []; for (let i = 0; i < NP; i++) infoP.push({ x: alea(-4.5, 4.5), z: alea(-3, 2.5), v: alea(0.35, 0.7), ph: Math.random(), f: alea(0.6, 1.4), rs: new THREE.Vector3(alea(-2, 2), alea(-2, 2), alea(-2, 2)) });
+    scene.add(petales);
+    const m = new THREE.Object3D();
+    return {
+        scene: scene, camera: camera, fondPhoto: '#0E0C0B',
+        photos: [
+            { pos: [3.5, 2.6, 5], cible: [0, 0, 0] }, { pos: [-0.7, 1.1, 2.2], cible: [-1.0, 0.3, 0.4] },
+            { pos: [0, 7.6, 0.01], cible: [0, 0, 0] }, { pos: [0, 0.8, 5], cible: [0, 0.3, 0] },
+            { pos: [-0.8, 1.4, 1.3], cible: [-0.8, 0.2, -0.6] }, { pos: [2.7, 1.4, 2], cible: [1.4, 0.1, 0] },
+            { pos: [-4, 2.5, 6], cible: [0, 0.8, 0] }, { pos: [3, 1, 2.6], cible: [1.2, 0.1, 0.6] }
+        ],
+        dimension: function (w, h) { const a = w / h; camera.aspect = a; camera.position.set(0, 3.9, Math.max(7.6, 6.2 / (2 * TAN * a))); camera.lookAt(0, -0.1, 0); camera.updateProjectionMatrix(); },
+        maj: function (t, souris, defil) {
+            const e = sortie(lisse(0, 0.9, t));
+            groupe.scale.setScalar(0.85 + 0.15 * e);
+            groupe.rotation.y = -0.25 + souris.x * 0.3 + Math.sin(t * 0.25) * 0.06 + defil * 0.6;
+            groupe.rotation.x = -souris.y * 0.06;
+            pieces.forEach(function (o, i) {
+                const d = 0.9 + i * 0.16, p = lisse(d, d + 0.5, t);
+                o.visible = t > d;
+                o.position.set(o.userData.x, (1 - rebond(p)) * 2.6, o.userData.z);
+            });
+            const b = sortie(lisse(2.6, 3.4, t));
+            baguettes.position.set(1.3 + (1 - b) * 3, 0, 0.95);
+            const apparition = lisse(0.6, 1.6, t);
+            for (let i = 0; i < NP; i++) {
+                const p = infoP[i], y = 4.5 - ((t * p.v + p.ph * 7) % 7);
+                m.position.set(p.x + Math.sin(t * p.f + p.ph * 6) * 0.5, y, p.z);
+                m.rotation.set(t * p.rs.x + p.ph, t * p.rs.y, t * p.rs.z);
+                m.scale.setScalar(apparition);
+                m.updateMatrix(); petales.setMatrixAt(i, m.matrix);
+            }
+            petales.instanceMatrix.needsUpdate = true;
+        }
+    };
+}
+
+// ---- 4 · Smash (et Chez Dani) : le burger se monte couche par couche, puis s'éclate au défilement ----
+function textureTomate() {
+    const c = toile(256, 256), x = c.getContext('2d');
+    x.fillStyle = '#C8281C'; x.beginPath(); x.arc(128, 128, 128, 0, Math.PI * 2); x.fill();
+    x.fillStyle = '#E2452E'; x.beginPath(); x.arc(128, 128, 112, 0, Math.PI * 2); x.fill();
+    for (let i = 0; i < 4; i++) { const a = i / 4 * Math.PI * 2 + 0.4; x.fillStyle = '#F07A52'; x.beginPath(); x.ellipse(128 + Math.cos(a) * 58, 128 + Math.sin(a) * 58, 36, 22, a, 0, Math.PI * 2); x.fill(); for (let k = 0; k < 7; k++) { x.fillStyle = '#F6E3A0'; x.beginPath(); x.ellipse(128 + Math.cos(a) * alea(44, 72), 128 + Math.sin(a) * alea(44, 72), 4, 2.5, a, 0, Math.PI * 2); x.fill(); } }
+    x.fillStyle = '#D93A28'; x.beginPath(); x.arc(128, 128, 22, 0, Math.PI * 2); x.fill();
+    return textureDepuis(c);
+}
+function textureSauceHerbes() {
+    const c = toile(256, 256), x = c.getContext('2d');
+    x.beginPath(); for (let i = 0; i <= 60; i++) { const a = i / 60 * Math.PI * 2, r = 118 + Math.sin(a * 6) * 7; x.lineTo(128 + Math.cos(a) * r, 128 + Math.sin(a) * r); } x.closePath();
+    x.fillStyle = '#EDE6C8'; x.fill(); x.save(); x.clip();
+    for (let i = 0; i < 180; i++) { x.fillStyle = Math.random() < 0.7 ? '#3F7A2A' : '#6FA048'; x.fillRect(alea(0, 256), alea(0, 256), alea(2, 6), alea(1.5, 3)); }
+    x.restore();
+    return textureDepuis(c);
+}
+function dessinerFanion(nom, fond, encre, police) {
+    const c = toile(512, 256), x = c.getContext('2d');
+    x.fillStyle = fond; x.fillRect(0, 0, 512, 256);
+    x.fillStyle = encre; x.textAlign = 'center'; x.textBaseline = 'middle';
+    let taille = 110; x.font = police.replace('#', taille);
+    while (x.measureText(nom).width > 440 && taille > 40) { taille -= 6; x.font = police.replace('#', taille); }
+    x.fillText(nom, 256, 134);
+    return textureDepuis(c);
+}
+function sceneBurger(env, r, dani) {
+    const scene = new THREE.Scene(); scene.environment = env;
+    const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 100);
+    scene.add(new THREE.HemisphereLight(0xfff4e6, dani ? 0x2a2018 : 0xa08060, dani ? 0.5 : 0.8));
+    const cle = new THREE.DirectionalLight(0xfff2e0, 1.4); cle.position.set(-4, 7, 6); scene.add(cle);
+    const contre = new THREE.PointLight(dani ? 0xD4AF37 : 0xffc070, dani ? 40 : 20, 14, 1.6); contre.position.set(4, 3, -3); scene.add(contre);
+    const groupe = new THREE.Group(); scene.add(groupe);
+    const planche = new THREE.Mesh(new THREE.CylinderGeometry(2.3, 2.3, 0.16, 72), [new THREE.MeshStandardMaterial({ color: dani ? 0x3B2A1E : 0xB98A58, roughness: 0.7 }), new THREE.MeshStandardMaterial({ map: boisRond(512, dani ? '#4A3526' : '#CFA271', '60,35,15'), roughness: 0.7 }), new THREE.MeshStandardMaterial({ color: 0x3B2A1E })]);
+    planche.position.y = -0.08; groupe.add(planche);
+    const ombre = ombreSol(6.5, dani ? 0.6 : 0.3); ombre.position.y = -0.17; groupe.add(ombre);
+    const burger = new THREE.Group(); groupe.add(burger);
+    const couches = [];
+    let haut = 0;
+    const empiler = function (o, h) { o.userData.base = haut; couches.push(o); burger.add(o); haut += h; };
+    const pain = new THREE.MeshPhysicalMaterial({ color: dani ? 0xB8662A : 0xD08A3E, roughness: 0.45, clearcoat: dani ? 0.8 : 0.4, clearcoatRoughness: 0.3 });
+    const dessous = new THREE.Group();
+    dessous.add(new THREE.Mesh(new THREE.LatheGeometry([[0, 0], [1.05, 0], [1.2, 0.06], [1.26, 0.2], [1.23, 0.32], [1.16, 0.36], [0, 0.36]].map(p => new THREE.Vector2(p[0], p[1])), 64), pain));
+    const mie = new THREE.Mesh(new THREE.CircleGeometry(1.15, 64), new THREE.MeshStandardMaterial({ color: 0xF0D29E, roughness: 0.9 })); mie.rotation.x = -Math.PI / 2; mie.position.y = 0.362; dessous.add(mie);
+    empiler(dessous, 0.36);
+    if (dani) {
+        const sauce = new THREE.Mesh(new THREE.CircleGeometry(1.2, 48), new THREE.MeshStandardMaterial({ map: textureSauceHerbes(), transparent: true, roughness: 0.3 })); sauce.rotation.x = -Math.PI / 2;
+        const gs = new THREE.Group(); sauce.position.y = 0.01; gs.add(sauce); empiler(gs, 0.02);
+    } else {
+        const salade = new THREE.Mesh(deformer(new THREE.RingGeometry(0.01, 1.5, 120, 5), function (v) { const rr = Math.hypot(v.x, v.y), a = Math.atan2(v.y, v.x); const f = 1 + Math.sin(a * 9) * 0.05; v.x *= f; v.y *= f; v.z = 0.07 * Math.sin(a * 16) * Math.pow(rr / 1.5, 1.5) - 0.08 * Math.pow(Math.max(0, rr - 1.1), 2); }), new THREE.MeshStandardMaterial({ color: 0x6BB23E, roughness: 0.55, side: THREE.DoubleSide }));
+        salade.rotation.x = -Math.PI / 2; const gsal = new THREE.Group(); salade.position.y = 0.03; gsal.add(salade); empiler(gsal, 0.06);
+        const tomates = new THREE.Group(), texT = textureTomate(), cote = new THREE.MeshStandardMaterial({ color: 0xC8281C, roughness: 0.4 }), face = new THREE.MeshStandardMaterial({ map: texT, roughness: 0.35 });
+        [-0.45, 0.48].forEach(function (x, i) { const tr = new THREE.Mesh(new THREE.CylinderGeometry(0.62, 0.62, 0.09, 40), [cote, face, face]); tr.position.set(x, 0.045, i ? 0.1 : -0.1); tomates.add(tr); });
+        empiler(tomates, 0.09);
+    }
+    const steak = new THREE.Mesh(deformer(new THREE.CylinderGeometry(1.3, 1.28, 0.42, 72, 6), function (v) { const a = Math.atan2(v.z, v.x), rr = Math.hypot(v.x, v.z); const n = bruit(Math.cos(a) * 3, v.y * 4, Math.sin(a) * 3); if (rr > 0.01) { const f = 1 + n * 0.035; v.x *= f; v.z *= f; } if (Math.abs(v.y) > 0.2) v.y += n * 0.03 * Math.sign(v.y); }), new THREE.MeshStandardMaterial({ color: 0x4E2C1B, roughness: 0.95 }));
+    steak.position.y = 0.21; const gst = new THREE.Group(); gst.add(steak); empiler(gst, 0.42);
+    // Le fromage : cheddar carré pour le Comptoir, Saint-Marcellin coulant pour Chez Dani.
+    const geoFromage = dani ? new THREE.RingGeometry(0.01, 1.4, 128, 14) : new THREE.PlaneGeometry(2.4, 2.4, 36, 36);
+    if (dani) geoFromage.rotateX(-Math.PI / 2); else { geoFromage.rotateX(-Math.PI / 2); geoFromage.rotateY(Math.PI / 4); }
+    const baseFromage = geoFromage.attributes.position.array.slice();
+    const fromage = new THREE.Mesh(geoFromage, new THREE.MeshPhysicalMaterial({ color: dani ? 0xF0DCA4 : 0xF2A516, roughness: dani ? 0.3 : 0.35, clearcoat: 0.4, side: THREE.DoubleSide }));
+    const gfr = new THREE.Group(); fromage.position.y = 0.02; gfr.add(fromage); empiler(gfr, 0.04);
+    const oignons = new THREE.Group();
+    if (dani) {
+        const cara = new THREE.MeshPhysicalMaterial({ color: 0x8A4B1C, roughness: 0.3, clearcoat: 0.8 });
+        for (let i = 0; i < 16; i++) { const o = new THREE.Mesh(new THREE.TorusGeometry(alea(0.18, 0.3), 0.04, 8, 24, alea(1.6, 3)), cara); const a = i * 2.4, rr = Math.sqrt(i / 16) * 0.95; o.position.set(Math.cos(a) * rr, 0.04, Math.sin(a) * rr); o.rotation.set(-Math.PI / 2 + alea(-0.3, 0.3), 0, alea(0, 6)); oignons.add(o); }
+    } else {
+        const violet = new THREE.MeshStandardMaterial({ color: 0xB06A9C, roughness: 0.4 });
+        [[0.3, 0.2, 0.46], [-0.4, -0.25, 0.4], [0.1, -0.5, 0.34], [-0.2, 0.45, 0.3]].forEach(function (o) { const m = new THREE.Mesh(new THREE.TorusGeometry(o[2], 0.045, 8, 36), violet); m.rotation.x = -Math.PI / 2; m.position.set(o[0], 0.04, o[1]); oignons.add(m); });
+    }
+    empiler(oignons, 0.08);
+    const dessus = new THREE.Group();
+    const profilDome = [[0, 0], [1.2, 0], [1.3, 0.1], [1.28, 0.35], [1.15, 0.65], [0.85, 0.9], [0.45, 1.02], [0, 1.05]];
+    dessus.add(new THREE.Mesh(new THREE.LatheGeometry(profilDome.map(p => new THREE.Vector2(p[0], p[1])), 64), pain));
+    if (!dani) {
+        const NS = 70, sesame = new THREE.InstancedMesh(new THREE.SphereGeometry(1, 8, 6), new THREE.MeshStandardMaterial({ color: 0xF6E8C4, roughness: 0.6 }), NS), mm = new THREE.Object3D();
+        for (let i = 0; i < NS; i++) {
+            const u = Math.random() * 0.8 + 0.1, k = Math.min(profilDome.length - 2, Math.floor(u * 3) + 3), a = Math.random() * Math.PI * 2;
+            const p0 = profilDome[k], p1 = profilDome[k + 1], f = Math.random();
+            const rr = p0[0] + (p1[0] - p0[0]) * f, y = p0[1] + (p1[1] - p0[1]) * f;
+            mm.position.set(Math.cos(a) * rr * 1.01, y + 0.01, Math.sin(a) * rr * 1.01); mm.scale.set(0.055, 0.032, 0.022); mm.lookAt(0, -2, 0); mm.rotateZ(alea(0, 3));
+            mm.updateMatrix(); sesame.setMatrixAt(i, mm.matrix);
+        }
+        dessus.add(sesame);
+    }
+    empiler(dessus, 1.05);
+    const fanion = new THREE.Group();
+    const pique = new THREE.Mesh(new THREE.CylinderGeometry(0.02, 0.02, 1.7, 8), new THREE.MeshStandardMaterial({ color: 0xD9B98A, roughness: 0.6 })); pique.position.y = 0.85; fanion.add(pique);
+    const nomFanion = r.nom;
+    const geoFanion = new THREE.PlaneGeometry(1.1, 0.55, 12, 1); geoFanion.translate(0.55, 0, 0);
+    const baseFanion = geoFanion.attributes.position.array.slice();
+    const drapeau = new THREE.Mesh(geoFanion, new THREE.MeshStandardMaterial({ map: dani ? dessinerFanion(nomFanion, '#0F0E0C', '#D4AF37', 'italic 600 #px "Cormorant Garamond", serif') : dessinerFanion(nomFanion.toUpperCase(), '#EF4444', '#FFFFFF', '400 #px "Anton", sans-serif'), side: THREE.DoubleSide, roughness: 0.7 }));
+    drapeau.position.set(0.02, 1.38, 0); fanion.add(drapeau);
+    // Au revers, le même nom, remis à l'endroit.
+    const texRevers = drapeau.material.map.clone(); texRevers.repeat.x = -1; texRevers.offset.x = 1; texRevers.needsUpdate = true;
+    drapeau.material.side = THREE.FrontSide;
+    const revers = new THREE.Mesh(geoFanion, new THREE.MeshStandardMaterial({ map: texRevers, side: THREE.BackSide, roughness: 0.7 }));
+    revers.position.copy(drapeau.position); fanion.add(revers);
+    burger.add(fanion);
+    const fonteMax = dani ? 1 : 0.8;
+    return {
+        scene: scene, camera: camera, fondPhoto: dani ? '#0F0E0C' : '#FFF3D6',
+        photos: [
+            { pos: [3.3, 2.4, 5.2], cible: [0, 1.1, 0] }, { pos: [0.6, 1.9, 6.2], cible: [0, 1.3, 0] },
+            { pos: [4, 2.6, 6.2], cible: [0, 1.9, 0], defil: 0.9 }, { pos: [0, 6.4, 0.01], cible: [0, 1, 0] },
+            { pos: [1.7, 1.3, 2.2], cible: [0.5, 1.0, 0.4] }, { pos: [0, 0.4, 5], cible: [0, 1.2, 0] },
+            { pos: [0.9, 3.6, 2.2], cible: [0, 2.7, 0] }, { pos: [-4, 3, 5], cible: [0, 0.8, 0] }
+        ],
+        dimension: function (w, h) { const a = w / h; camera.aspect = a; camera.position.set(0, 2.9, Math.max(8.6, 6 / (2 * TAN * a))); camera.lookAt(0, 1.15, 0); camera.updateProjectionMatrix(); },
+        maj: function (t, souris, defil) {
+            const e = sortie(lisse(0, 0.8, t));
+            groupe.scale.setScalar(0.9 + 0.1 * e);
+            groupe.rotation.y = t * 0.22 + souris.x * 0.4;
+            groupe.rotation.x = -souris.y * 0.06;
+            let debutFromage = 0;
+            couches.forEach(function (o, i) {
+                const debut = 0.25 + i * 0.3, p = lisse(debut, debut + 0.5, t);
+                if (o === gfr) debutFromage = debut;
+                o.visible = t > debut;
+                const ecrase = 1 - 0.16 * Math.sin(Math.PI * Math.min(1, Math.max(0, (t - debut - 0.42) / 0.25)));
+                o.position.y = o.userData.base + (1 - rebond(p)) * 4.5 + i * defil * 0.55;
+                o.scale.set(1, ecrase, 1);
+            });
+            // Le fromage fond : les bords retombent (et coulent, pour le Saint-Marcellin).
+            const fonte = lisse(debutFromage + 0.5, debutFromage + 3.4, t) * fonteMax;
+            const pos = geoFromage.attributes.position.array;
+            for (let i = 0; i < pos.length; i += 3) {
+                const x = baseFromage[i], z = baseFromage[i + 2], rr = Math.hypot(x, z);
+                let chute = fonte * Math.pow(Math.max(0, rr - (dani ? 1.08 : 1.05)), 2) * (dani ? 0.9 : 1.2);
+                if (dani) chute *= 1 + 2.2 * Math.pow(Math.max(0, Math.sin(Math.atan2(z, x) * 5 + 1)), 4);
+                pos[i + 1] = baseFromage[i + 1] - chute;
+            }
+            geoFromage.attributes.position.needsUpdate = true; geoFromage.computeVertexNormals();
+            const f = sortie(lisse(0.25 + couches.length * 0.3 + 0.3, 0.25 + couches.length * 0.3 + 0.9, t));
+            fanion.visible = f > 0.01; fanion.scale.setScalar(Math.max(0.001, f));
+            fanion.position.y = haut - 0.35 + (couches.length - 1) * defil * 0.55;
+            const pf = geoFanion.attributes.position.array;
+            for (let i = 0; i < pf.length; i += 3) pf[i + 2] = baseFanion[i + 2] + Math.sin(baseFanion[i] * 4 - t * 4) * 0.05 * baseFanion[i];
+            geoFanion.attributes.position.needsUpdate = true;
+        }
+    };
+}
+
+// ---- 5 · Pression : la bière se sert, la mousse monte, les bulles filent ----
+function dessinerSousBock(r) {
+    const c = toile(512, 512), x = c.getContext('2d');
+    x.fillStyle = '#F2E6CF'; x.beginPath(); x.arc(256, 256, 256, 0, Math.PI * 2); x.fill();
+    x.strokeStyle = '#B8860B'; x.lineWidth = 10; x.beginPath(); x.arc(256, 256, 232, 0, Math.PI * 2); x.stroke();
+    x.lineWidth = 2; x.beginPath(); x.arc(256, 256, 214, 0, Math.PI * 2); x.stroke();
+    const mots = r.nom.split(' '), coupe = Math.ceil(mots.length / 2);
+    const lignes = mots.length > 2 ? [mots.slice(0, coupe).join(' '), mots.slice(coupe).join(' ')] : [r.nom];
+    x.fillStyle = '#2A1F12'; x.textAlign = 'center'; x.textBaseline = 'middle';
+    lignes.forEach(function (l, i) { let t = 58; x.font = '400 ' + t + 'px "Prata", serif'; while (x.measureText(l).width > 370 && t > 26) { t -= 4; x.font = '400 ' + t + 'px "Prata", serif'; } x.fillText(l, 256, 236 + (i - (lignes.length - 1) / 2) * 70); });
+    const ville = (r.adresse.split(' ').pop() || '').toUpperCase();
+    x.fillStyle = '#B8860B'; x.font = '500 22px "Jost", sans-serif'; try { x.letterSpacing = '8px'; } catch (e) {}
+    x.fillText(ville, 256, 360);
+    return textureDepuis(c);
+}
+function sceneBiere(env, r) {
+    const scene = new THREE.Scene(); scene.environment = env;
+    const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 100);
+    scene.add(new THREE.HemisphereLight(0xffe8c8, 0x2a1a0a, 0.5));
+    const cle = new THREE.DirectionalLight(0xfff0dc, 1.2); cle.position.set(-3, 6, 6); scene.add(cle);
+    const chaud = new THREE.PointLight(0xffa040, 40, 14, 1.6); chaud.position.set(2.5, 2, -2); scene.add(chaud);
+    const groupe = new THREE.Group(); scene.add(groupe);
+    const sousBock = new THREE.Mesh(new THREE.CylinderGeometry(1.25, 1.25, 0.05, 64), [new THREE.MeshStandardMaterial({ color: 0xE8D8B8, roughness: 0.9 }), new THREE.MeshStandardMaterial({ map: dessinerSousBock(r), roughness: 0.85 }), new THREE.MeshStandardMaterial({ color: 0xE8D8B8 })]);
+    sousBock.position.y = -0.025; groupe.add(sousBock);
+    const PROFIL = [[0, 0], [0.6, 0], [0.63, 0.04], [0.64, 0.3], [0.66, 1.6], [0.74, 2.3], [0.8, 2.55], [0.78, 2.8], [0.75, 3.05]];
+    const rayonA = function (y) { for (let i = 1; i < PROFIL.length; i++) if (y <= PROFIL[i][1]) { const a = PROFIL[i - 1], b = PROFIL[i], f = (y - a[1]) / (b[1] - a[1] || 1); return a[0] + (b[0] - a[0]) * f; } return PROFIL[PROFIL.length - 1][0]; };
+    const verre = new THREE.Mesh(new THREE.LatheGeometry(PROFIL.map(p => new THREE.Vector2(p[0], p[1])), 72), new THREE.MeshPhysicalMaterial({ color: 0xffffff, roughness: 0.03, transparent: true, opacity: 0.16, clearcoat: 1, envMapIntensity: 1.5, side: THREE.DoubleSide, depthWrite: false }));
+    verre.renderOrder = 3; groupe.add(verre);
+    const niveau = new THREE.Plane(new THREE.Vector3(0, -1, 0), 0);
+    const biere = new THREE.Mesh(new THREE.LatheGeometry([[0, 0.06], [0.57, 0.06], [0.6, 0.3], [0.62, 1.6], [0.7, 2.3], [0.745, 2.5], [0, 2.5]].map(p => new THREE.Vector2(p[0], p[1])), 72), new THREE.MeshPhysicalMaterial({ color: 0xD98A1A, roughness: 0.12, transparent: true, opacity: 0.9, emissive: 0x6A3300, emissiveIntensity: 0.35, clippingPlanes: [niveau] }));
+    groupe.add(biere);
+    const mousse = new THREE.Mesh(deformer(new THREE.LatheGeometry([[0, 0], [1, 0], [1.02, 0.1], [0.97, 0.24], [0.7, 0.33], [0, 0.36]].map(p => new THREE.Vector2(p[0], p[1])), 64, 0, Math.PI * 2), function (v) { v.y += Math.max(0, v.y - 0.05) * bruit(v.x * 4, 0, v.z * 4) * 0.35; }), new THREE.MeshStandardMaterial({ color: 0xFFF6E2, roughness: 0.95 }));
+    groupe.add(mousse);
+    const filet = new THREE.Mesh(new THREE.CylinderGeometry(0.035, 0.05, 1, 12), new THREE.MeshPhysicalMaterial({ color: 0xE6A030, transparent: true, opacity: 0.8, roughness: 0.1, emissive: 0x6A3300, emissiveIntensity: 0.3 }));
+    groupe.add(filet);
+    const sprite = spriteRond();
+    const NB = 170, posB = new Float32Array(NB * 3), infoB = [];
+    for (let i = 0; i < NB; i++) { const a = Math.random() * Math.PI * 2, rr = Math.sqrt(Math.random()) * 0.5; infoB.push({ x: Math.cos(a) * rr, z: Math.sin(a) * rr, v: alea(0.35, 0.9), ph: Math.random() * 3 }); }
+    const gB = new THREE.BufferGeometry(); gB.setAttribute('position', new THREE.BufferAttribute(posB, 3));
+    const bulles = new THREE.Points(gB, new THREE.PointsMaterial({ size: 0.045, map: sprite, color: 0xFFF3D0, transparent: true, opacity: 0.85, depthWrite: false, blending: THREE.AdditiveBlending }));
+    groupe.add(bulles);
+    const ND = 130, gouttes = new THREE.InstancedMesh(new THREE.SphereGeometry(1, 10, 8), new THREE.MeshPhysicalMaterial({ color: 0xffffff, roughness: 0.05, transparent: true, opacity: 0.4, clearcoat: 1 }), ND), md = new THREE.Object3D();
+    for (let i = 0; i < ND; i++) { const y = alea(0.2, 2.25), a = Math.random() * Math.PI * 2, rr = rayonA(y) + 0.012; md.position.set(Math.cos(a) * rr, y, Math.sin(a) * rr); md.scale.setScalar(alea(0.012, 0.03)); md.scale.y *= 1.3; md.updateMatrix(); gouttes.setMatrixAt(i, md.matrix); }
+    groupe.add(gouttes);
+    const NK = 60, posK = new Float32Array(NK * 3);
+    for (let i = 0; i < NK; i++) { posK[i * 3] = alea(-7, 7); posK[i * 3 + 1] = alea(-1, 5); posK[i * 3 + 2] = alea(-8, -3); }
+    const gK = new THREE.BufferGeometry(); gK.setAttribute('position', new THREE.BufferAttribute(posK, 3));
+    scene.add(new THREE.Points(gK, new THREE.PointsMaterial({ size: 0.55, map: sprite, color: 0xE9B04A, transparent: true, opacity: 0.35, depthWrite: false, blending: THREE.AdditiveBlending })));
+    return {
+        scene: scene, camera: camera, fondPhoto: '#14110D',
+        photos: [
+            { pos: [2.5, 2.2, 5.5], cible: [0, 1.4, 0] }, { pos: [0.9, 3.4, 2.1], cible: [0, 2.6, 0] },
+            { pos: [-3, 2, 7], cible: [0, 1.5, 0] }, { pos: [0, 5.2, 1.6], cible: [0, 0.2, 0] },
+            { pos: [0, 1.2, 2.7], cible: [0, 1.2, 0] }, { pos: [0, 0.3, 4.6], cible: [0, 1.2, 0] },
+            { pos: [1.8, 1.2, 1.9], cible: [0.4, 1.1, 0.4] }, { pos: [3, 1.5, 7], cible: [0, 1.8, -1] }
+        ],
+        dimension: function (w, h) { const a = w / h; camera.aspect = a; camera.position.set(0, 2.2, Math.max(8.4, 4.6 / (2 * TAN * a))); camera.lookAt(0, 1.45, 0); camera.updateProjectionMatrix(); },
+        maj: function (t, souris, defil) {
+            const service = sortie(lisse(0.5, 3.4, t)), y = 0.06 + 2.3 * service;
+            niveau.constant = y;
+            const epaisseur = 0.05 + 0.3 * lisse(1.2, 3.6, t), rr = rayonA(y) * 0.99;
+            mousse.scale.set(rr, epaisseur / 0.36, rr); mousse.position.y = y - 0.02;
+            mousse.visible = service > 0.02;
+            const coule = t > 0.4 && t < 3.3;
+            filet.visible = coule;
+            if (coule) { const h = 4.6 - y; filet.scale.y = h; filet.position.set(0.05, y + h / 2, 0); filet.material.opacity = 0.8 * (1 - lisse(3.0, 3.3, t)); }
+            for (let i = 0; i < NB; i++) { const b = infoB[i], k = Math.max(0.01, y - 0.12), yy = 0.1 + ((t * b.v + b.ph) % k); const lim = rayonA(yy) * 0.8 / 0.6; posB[i * 3] = b.x * lim; posB[i * 3 + 1] = yy; posB[i * 3 + 2] = b.z * lim; }
+            gB.attributes.position.needsUpdate = true;
+            bulles.visible = service > 0.05;
+            gouttes.visible = t > 2.2; gouttes.material.opacity = 0.4 * lisse(2.2, 4.2, t);
+            groupe.rotation.y = Math.sin(t * 0.3) * 0.35 + souris.x * 0.35 + defil * 0.7;
+            groupe.rotation.x = -souris.y * 0.05;
+        }
+    };
+}
+
+const SCENES = { ardoise: sceneArdoise, four: scenePizza, sakura: sceneSushi, smash: function (env, r) { return sceneBurger(env, r, false); }, pression: sceneBiere, dani: function (env, r) { return sceneBurger(env, r, true); } };
+
+if (renderer) {
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.75));
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1;
+    renderer.localClippingEnabled = true;
+    const pmrem = new THREE.PMREMGenerator(renderer);
+    const env = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+    const horloge = new THREE.Clock();
+    const souris = new THREE.Vector2(), sourisL = new THREE.Vector2(), zero = new THREE.Vector2();
+    const pointeur = { x: 0, y: 0, dedans: false, cx: -1, cy: -1 }, pointeurNul = { x: 0, y: 0, dedans: false };
+    window.addEventListener('pointermove', function (e) { souris.set(e.clientX / window.innerWidth * 2 - 1, -(e.clientY / window.innerHeight * 2 - 1)); pointeur.cx = e.clientX; pointeur.cy = e.clientY; }, { passive: true });
+    let actuelle = null, design = null, debut = 0, visible = true, premiere = false, jeton = 0;
+
+    const liberer = function (s) {
+        s.scene.traverse(function (o) {
+            if (o.geometry) o.geometry.dispose();
+            if (o.material) [].concat(o.material).forEach(function (m) { Object.values(m).forEach(function (v) { if (v && v.isTexture) v.dispose(); }); m.dispose(); });
+        });
+    };
+    const taille = function () {
+        const w = boite.clientWidth, h = boite.clientHeight;
+        if (!w || !h) return;
+        renderer.setSize(w, h, false);
+        if (actuelle) actuelle.dimension(w, h);
+    };
+    // Studio photo : on rend la scène sous d'autres angles, dans le même canevas, entre deux images.
+    const photographier = function (s, n) {
+        if (!s.photos) return;
+        const W = 960, H = 720, avant = new THREE.Vector2(); renderer.getSize(avant);
+        const ratio = renderer.getPixelRatio(), fond = s.scene.background, cam = new THREE.PerspectiveCamera(30, W / H, 0.1, 200), urls = [];
+        s.scene.background = new THREE.Color(s.fondPhoto);
+        renderer.setPixelRatio(1); renderer.setSize(W, H, false);
+        s.photos.forEach(function (p) {
+            s.maj(p.t || 12, zero, p.defil || 0, pointeurNul);
+            cam.fov = p.fov || 30; cam.position.fromArray(p.pos); cam.lookAt(p.cible[0], p.cible[1], p.cible[2]); cam.updateProjectionMatrix();
+            renderer.render(s.scene, cam);
+            urls.push(canvas.toDataURL('image/jpeg', 0.84));
+        });
+        s.scene.background = fond;
+        renderer.setPixelRatio(ratio); renderer.setSize(avant.x || 1, avant.y || 1, false);
+        document.dispatchEvent(new CustomEvent('photos', { detail: { n: n, urls: urls } }));
+    };
+    const construire = function (d) {
+        if (actuelle) { liberer(actuelle); actuelle = null; }
+        canvas.classList.remove('pret'); premiere = false;
+        const fabrique = SCENES[d.style];
+        if (!fabrique) return;
+        const mien = ++jeton;
+        const lancer = function () {
+            if (mien !== jeton) return;
+            actuelle = fabrique(env, d.resto);
+            design = d;
+            debut = horloge.getElapsedTime();
+            requestAnimationFrame(taille);
+            setTimeout(function () { if (mien === jeton && actuelle) photographier(actuelle, d.n); }, 350);
+        };
+        // Les textures dessinent du texte : on attend les polices utilisées.
+        const polices = ['700 80px "Caveat"', '600 56px "Caveat"', '500 36px "Caveat"', '400 60px "Anton"', '400 50px "Prata"', '500 22px "Jost"', 'italic 600 60px "Cormorant Garamond"'];
+        if (document.fonts && document.fonts.load) Promise.all(polices.map(function (f) { return document.fonts.load(f).catch(function () {}); })).then(lancer);
+        else lancer();
+    };
+    new ResizeObserver(taille).observe(boite);
+    if ('IntersectionObserver' in window) new IntersectionObserver(function (e) { visible = e[0].isIntersecting; }).observe(boite);
+    document.addEventListener('maquette', function (e) { construire(e.detail); });
+    if (window.CLIENT_DESIGN) construire(window.CLIENT_DESIGN);
+
+    (function boucle() {
+        requestAnimationFrame(boucle);
+        if (!actuelle || !visible) return;
+        const t = reduit ? 12 : horloge.getElapsedTime() - debut;
+        sourisL.lerp(reduit ? zero : souris, 0.05);
+        const r = boite.getBoundingClientRect();
+        pointeur.dedans = !reduit && pointeur.cx >= r.left && pointeur.cx <= r.right && pointeur.cy >= r.top && pointeur.cy <= r.bottom;
+        if (pointeur.dedans) { pointeur.x = (pointeur.cx - r.left) / r.width * 2 - 1; pointeur.y = -((pointeur.cy - r.top) / r.height * 2 - 1); }
+        const defil = Math.min(1, window.scrollY / Math.max(1, r.height + 200));
+        actuelle.maj(t, sourisL, defil, pointeur);
+        renderer.render(actuelle.scene, actuelle.camera);
+        if (!premiere) { premiere = true; canvas.classList.add('pret'); }
+    })();
+}
+</script>
