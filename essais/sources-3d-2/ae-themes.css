@@ -1,0 +1,253 @@
+/* ==========================================================================
+   Maquettes animées 12 à 16 d'Aegis : base commune pilotée par des variables, puis réglages
+   propres à chaque maquette. Bleu nuit et or partout ; scène 3D (Three.js) dans l'ouverture.
+   ========================================================================== */
+.site { background: var(--fond); color: var(--texte); font-family: var(--f-texte); font-size: 16.5px; line-height: 1.65; }
+.site h1, .site h2, .site h3 { font-family: var(--f-titre); font-weight: var(--g-titre, 500); color: var(--titre); line-height: 1.12; letter-spacing: var(--ls-titre, -.01em); text-wrap: balance; }
+.alerte { background: #030B1C; color: rgba(255, 255, 255, .8); }
+.alerte a { color: var(--gold-light); }
+.entete { background: var(--entete-fond); -webkit-backdrop-filter: blur(14px) saturate(140%); backdrop-filter: blur(14px) saturate(140%); border-bottom: 1px solid var(--entete-trait); }
+.marque-nom { font-family: var(--f-titre); font-size: 20px; color: var(--entete-marque); }
+.marque-sous { color: var(--entete-sous); }
+.nav a { color: var(--entete-texte); font-size: 14.5px; }
+.nav a:hover { color: var(--entete-survol); }
+.sous { background: var(--menu-fond); border: 1px solid var(--trait); border-radius: 10px; box-shadow: 0 18px 40px rgba(6, 18, 42, .25); }
+.sous a { color: var(--menu-texte); }
+.sous a:hover { background: rgba(201, 165, 76, .12); }
+.btn { padding: 13px 24px; border-radius: var(--rayon-btn, 8px); font-weight: 600; font-size: 15px; border: 1px solid transparent; }
+.btn-or { background: var(--gold); color: var(--navy-950) !important; }
+.btn-or:hover { background: var(--gold-light); }
+.btn-clair { border-color: var(--clair-bord); color: var(--clair-texte) !important; }
+.btn-clair:hover { background: rgba(228, 205, 138, .1); }
+.btn-fantome { border-color: var(--fantome-bord); color: var(--fantome-texte) !important; }
+.btn-sombre { background: var(--navy-900); color: #fff !important; }
+.burger { color: var(--entete-texte); }
+.site.menu-ouvert .nav { background: var(--entete-plein); border-bottom: 1px solid var(--entete-trait); }
+.surtitre, .hero-surtitre { font-size: 12px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--surtitre); }
+.hero { position: relative; overflow: hidden; padding-block: 72px 88px; background: var(--hero-fond); color: var(--hero-texte-2); }
+.hero-texte { position: relative; z-index: 1; }
+.hero h1 { font-size: clamp(2.6rem, 5.2vw, 4.4rem); line-height: 1.04; color: var(--hero-titre); }
+.hero-surtitre { margin-bottom: 20px; color: var(--hero-surtitre, var(--gold)); }
+.hero h1 em { color: var(--hero-accent); font-style: italic; }
+.hero h1 .mot { display: inline-block; overflow: hidden; vertical-align: top; padding: 0 .06em .12em 0; margin: 0 -.06em -.12em 0; }
+.hero h1 .mot-i { display: inline-block; will-change: transform; }
+.hero .lead { margin-top: 24px; max-width: 580px; font-size: 1.12rem; color: var(--hero-texte-2); }
+.hero-actions { margin-top: 34px; }
+.hero-preuves { margin-top: 32px; font-size: 14.5px; color: var(--hero-texte-2); }
+.hero-preuves .ic { color: var(--gold); font-size: 18px; }
+.hero-art { position: relative; min-height: 480px; }
+.site .embleme, .site .radar { display: none; }
+.scene-3d { position: absolute; inset: -40px; pointer-events: none; }
+.scene-3d canvas { display: block; width: 100%; height: 100%; opacity: 0; transition: opacity 1s ease; }
+.scene-3d canvas.pret { opacity: 1; }
+main > section:not(.hero) { padding-block: 96px; }
+.alt { background: var(--fond-alt); }
+.tete { max-width: 780px; margin-bottom: 48px; }
+.tete h2 { margin-top: 12px; font-size: clamp(2rem, 3.8vw, 3rem); }
+.tete p:not(.surtitre) { margin-top: 14px; color: var(--texte-2); }
+.stat { padding: 30px 28px; border-radius: var(--rayon, 16px); background: var(--carte-fond); border: 1px solid var(--trait); }
+.stat-v { display: block; font-family: var(--f-titre); font-weight: var(--g-titre, 500); font-size: 3.6rem; line-height: 1; color: var(--chiffre); font-variant-numeric: tabular-nums; }
+.stat-l { display: block; margin-top: 12px; color: var(--texte-2); }
+.deux-col h2 { margin-top: 12px; font-size: clamp(1.9rem, 3.4vw, 2.7rem); }
+.deux-col p:not(.surtitre) { margin-top: 16px; color: var(--texte-2); }
+.deux-col strong { color: var(--titre); }
+.deux-col .lien-fleche { margin-top: 20px; color: var(--lien); }
+.coches li { padding: 16px 18px; border-radius: var(--rayon, 16px); background: var(--carte-fond); border: 1px solid var(--trait); }
+.coches .ic { color: var(--gold); }
+.pilier, .carte { padding: 30px 26px; border-radius: var(--rayon, 16px); background: var(--carte-fond); border: 1px solid var(--trait); color: inherit; transition: border-color .2s; }
+.pilier:hover, .carte:hover { border-color: var(--gold); }
+.pilier .ic { font-size: 30px; color: var(--gold); }
+.pilier h3 { margin-top: 18px; font-size: 1.7rem; }
+.pilier p, .carte p { margin-top: 10px; color: var(--texte-2); flex: 1; }
+.pilier .lien-fleche, .carte .lien-fleche { margin-top: 18px; color: var(--lien); }
+.carte-ic { font-size: 22px; color: var(--gold); }
+.carte h3 { margin-top: 14px; font-size: 1.25rem; }
+.carte p { font-size: 15px; }
+.gov-col { padding: 28px; border-radius: var(--rayon, 16px); background: var(--carte-fond); border: 1px solid var(--trait); }
+.gov-n { display: block; font-family: var(--f-titre); font-size: 2.8rem; line-height: 1; color: var(--gold); }
+.gov-col h3 { margin-top: 10px; font-size: 1.6rem; }
+.gov-col ul, .gov-col p { margin-top: 12px; color: var(--texte-2); font-size: 15.5px; }
+.gov-col li::before { content: "— "; color: var(--gold); }
+.gov-col .lien-fleche { margin-top: 16px; color: var(--lien); }
+.sombre { background: var(--sombre-fond); color: rgba(255, 255, 255, .78); }
+.sombre h2, .sombre h3 { color: #F4EEDD; }
+.sombre .surtitre { color: var(--gold); }
+.sombre .tete p:not(.surtitre) { color: rgba(255, 255, 255, .7); }
+.plans { perspective: 1200px; }
+.plan { padding: 34px 28px; border-radius: var(--rayon, 16px); border: 1px solid rgba(201, 165, 76, .25); background: rgba(255, 255, 255, .02); }
+.plan-vedette { border-color: var(--gold); background: linear-gradient(180deg, rgba(201, 165, 76, .13), rgba(201, 165, 76, .02) 60%); }
+.plan-tag { font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); }
+.plan h3 { margin-top: 10px; font-size: 1.9rem; }
+.plan-pour { margin-top: 6px; color: rgba(255, 255, 255, .7); font-size: 15px; }
+.plan-prix { margin: 20px 0; color: rgba(255, 255, 255, .65); font-size: 15px; }
+.plan-prix strong { font-family: var(--f-titre); font-size: 2.4rem; font-weight: var(--g-titre, 500); color: #FFFFFF; }
+.plan ul { font-size: 15px; }
+.plan li .ic { color: var(--gold); }
+.plans + .centre { margin-top: 42px; }
+.note-entree { margin-top: 16px; color: rgba(255, 255, 255, .7); font-size: 15px; }
+.note-entree a { color: var(--gold-light); }
+.puce { padding: 11px 20px; border-radius: 99px; border: 1px solid var(--trait-fort); color: var(--titre); display: inline-block; }
+.puce:hover { border-color: var(--gold); }
+.pied-section { margin-top: 40px; padding-top: 30px; border-top: 1px solid var(--trait); display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; color: var(--texte-2); font-size: 15.5px; }
+.pied-section strong { color: var(--titre); }
+.pied-section a:not(.btn) { color: var(--lien); }
+.tete-ligne .lien-fleche { color: var(--lien); }
+.post { padding: 28px; border-radius: var(--rayon, 16px); background: var(--carte-fond); border: 1px solid var(--trait); }
+.post .meta { font-size: 13.5px; color: var(--texte-2); }
+.post h3 { margin-top: 10px; font-size: 1.35rem; }
+.post p:not(.meta) { margin-top: 10px; color: var(--texte-2); font-size: 15px; flex: 1; }
+.post .lien-fleche { margin-top: 16px; color: var(--lien); }
+.faq .wrap { max-width: 840px; }
+.faq details { padding: 20px 24px; border-radius: var(--rayon, 16px); background: var(--carte-fond); border: 1px solid var(--trait); }
+.faq summary { font-family: var(--f-titre); font-size: 1.3rem; color: var(--titre); }
+.faq summary::after { color: var(--gold); }
+.faq details p { margin-top: 10px; color: var(--texte-2); }
+.faq .centre { margin-top: 30px; }
+.faq .lien-fleche { color: var(--lien); }
+.bandeau-cta { padding-block: 70px; background: var(--cta-fond); color: rgba(255, 255, 255, .75); }
+.bandeau-cta h2 { font-family: var(--f-titre); font-size: clamp(1.9rem, 3.4vw, 2.6rem); color: #F4EEDD; }
+.bandeau-cta p { margin-top: 8px; }
+.bandeau-cta .btn-clair { border-color: rgba(228, 205, 138, .5); color: var(--gold-light) !important; }
+.pied { padding-block: 56px 26px; background: #030B1C; color: rgba(255, 255, 255, .62); font-size: 15px; }
+.pied .marque-nom { color: var(--gold-light); }
+.pied h3 { font-family: var(--f-texte); font-size: 12px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
+.pied a:hover { color: #FFFFFF; }
+.promesse { margin-top: 16px; max-width: 36ch; }
+.conf-note { margin-top: 14px; font-size: 14px; }
+.conf { display: inline-block; margin-right: 8px; padding: 2px 9px; border-radius: 99px; border: 1px solid var(--gold); color: var(--gold-light); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; }
+.pied-bas { margin-top: 44px; padding-top: 22px; border-top: 1px solid rgba(255, 255, 255, .1); font-size: 13.5px; }
+.cta-mobile .btn-clair { background: var(--navy-900); border-color: var(--navy-900); color: #FFFFFF !important; }
+@media (max-width: 860px) {
+    .hero-art { display: block; order: -1; min-height: 300px; margin: -30px 0 -10px; }
+    .scene-3d { inset: 0; }
+}
+
+/* ---- Palettes : sombre (bleu nuit) et claire (ivoire) ---- */
+.m13, .m14 {
+    --fantome-bord: rgba(228, 205, 138, .5); --fantome-texte: var(--gold-light); --clair-bord: rgba(228, 205, 138, .5); --clair-texte: var(--gold-light);
+    --entete-fond: rgba(6, 18, 42, .82); --entete-plein: #06122A; --entete-trait: rgba(201, 165, 76, .2); --entete-marque: var(--gold-light); --entete-sous: rgba(255, 255, 255, .5); --entete-texte: rgba(255, 255, 255, .82); --entete-survol: #FFFFFF;
+    --menu-fond: #0B1B33; --menu-texte: #E8ECF3;
+    --hero-titre: #F4EEDD; --hero-accent: var(--gold-light); --hero-texte-2: rgba(255, 255, 255, .72);
+    --sombre-fond: linear-gradient(180deg, #0B1B33, #06122A); --cta-fond: #0B1B33;
+}
+.m12, .m15, .m16 {
+    --fantome-bord: var(--navy-900); --fantome-texte: var(--navy-900); --clair-bord: var(--navy-900); --clair-texte: var(--navy-900);
+    --entete-trait: rgba(11, 27, 51, .1); --entete-marque: var(--navy-900); --entete-sous: var(--gold-600); --entete-texte: #3E4A5C; --entete-survol: var(--navy-900);
+    --menu-fond: #FFFFFF; --menu-texte: var(--ink);
+    --hero-titre: var(--navy-900); --hero-accent: var(--gold-600); --hero-texte-2: #3E4A5C; --hero-surtitre: var(--gold-600);
+    --sombre-fond: linear-gradient(180deg, #0B1B33, #06122A); --cta-fond: #0B1B33;
+}
+
+/* --------------------------------------------------------------------------
+   12 · DOSSIER — papier ivoire et encre bleu nuit : les pièces du dossier se déploient
+   -------------------------------------------------------------------------- */
+.m12 {
+    --fond: #FBFAF6; --fond-alt: #F2EEE4; --texte: #1A2130; --texte-2: #4B5466; --titre: #0B1B33; --trait: #E6E0D0; --trait-fort: #CFC5AB;
+    --carte-fond: #FFFFFF; --chiffre: #0B1B33; --lien: #1A355F; --surtitre: #86681F; --rayon: 3px; --rayon-btn: 3px;
+    --f-titre: 'Libre Baskerville', Georgia, serif; --g-titre: 400; --ls-titre: -.02em; --f-texte: 'Source Sans 3', system-ui, sans-serif;
+    --entete-fond: rgba(251, 250, 246, .9); --entete-plein: #FBFAF6;
+    --hero-fond: radial-gradient(45% 65% at 76% 50%, rgba(201, 165, 76, .14), transparent 70%), linear-gradient(180deg, #FBFAF6, #F2EEE4);
+}
+.m12 .hero h1 { font-size: clamp(2.3rem, 4.5vw, 3.8rem); line-height: 1.1; }
+.m12 .tete h2::after, .m12 .deux-col h2::after { content: ""; display: block; width: 72px; height: 2px; margin-top: 18px; background: var(--gold); transform: scaleX(var(--trait, 1)); transform-origin: 0 50%; }
+.m12 .tete h2, .m12 .deux-col h2 { font-size: clamp(1.8rem, 3.2vw, 2.5rem); }
+.m12 .stat, .m12 .pilier, .m12 .carte, .m12 .gov-col, .m12 .post, .m12 .coches li { box-shadow: 0 1px 0 rgba(11, 27, 51, .04), 0 18px 32px -26px rgba(11, 27, 51, .4); }
+.m12 .stat-v { font-size: 3.2rem; }
+.m12 .gov-n { display: inline-grid; place-items: center; width: 62px; height: 62px; border: 2px solid var(--gold-600); border-radius: 50%; outline: 1px solid var(--gold-600); outline-offset: 3px; font-size: 1.7rem; color: var(--gold-600); }
+.m12 .gov-col h3 { margin-top: 18px; }
+.m12 .faq summary { font-size: 1.15rem; }
+
+/* --------------------------------------------------------------------------
+   13 · PALAIS — la colonnade de nuit, capitales romaines et or : sobre et monumental
+   -------------------------------------------------------------------------- */
+.m13 {
+    color-scheme: dark;
+    --fond: #07142C; --fond-alt: #0B1B33; --texte: #D8DEE8; --texte-2: #9DA8BB; --titre: #F4EEDD; --trait: rgba(201, 165, 76, .18); --trait-fort: rgba(201, 165, 76, .4);
+    --carte-fond: rgba(255, 255, 255, .025); --chiffre: var(--gold-light); --lien: var(--gold-light); --surtitre: var(--gold); --rayon: 2px; --rayon-btn: 2px;
+    --f-titre: 'Marcellus', Georgia, serif; --g-titre: 400; --ls-titre: 0; --f-texte: 'Nunito Sans', system-ui, sans-serif;
+    --hero-fond: #07142C; --menu-fond: #0B1B33;
+}
+.m13 .surtitre, .m13 .hero-surtitre, .m13 .gov-n, .m13 .plan-tag, .m13 .marque-sous { font-family: 'Cinzel', Georgia, serif; font-weight: 500; letter-spacing: .24em; }
+.m13 .hero-art { position: static; }
+.m13 .scene-3d { inset: 0; }
+.m13 .hero::after { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(90deg, rgba(7, 20, 44, .94) 0%, rgba(7, 20, 44, .6) 42%, rgba(7, 20, 44, 0) 66%); }
+.m13 .hero-texte { z-index: 2; }
+.m13 .hero h1 { font-size: clamp(2.7rem, 5.4vw, 4.6rem); line-height: 1.04; }
+.m13 main > section:not(.hero) .tete:not(.tete-ligne) { text-align: center; margin-inline: auto; }
+.m13 .pilier { text-align: center; align-items: center; border-top: 2px solid var(--gold); }
+.m13 .stat { text-align: center; }
+.m13 .gov-n { font-size: 3.2rem; }
+.m13 .coches li, .m13 .stat { background: rgba(255, 255, 255, .02); }
+@media (max-width: 860px) {
+    .m13 .hero-art { min-height: 0; margin: 0; }
+    .m13 .hero::after { background: linear-gradient(0deg, rgba(7, 20, 44, .96) 38%, rgba(7, 20, 44, .5) 70%, rgba(7, 20, 44, .15)); }
+    .m13 .hero-texte { padding-top: 230px; }
+}
+
+/* --------------------------------------------------------------------------
+   14 · RADAR — la veille en continu : écran de contrôle bleu nuit, chiffres en police mono
+   -------------------------------------------------------------------------- */
+.m14 {
+    color-scheme: dark;
+    --fond: #050F22; --fond-alt: #091A33; --texte: #D5DCE7; --texte-2: #93A0B5; --titre: #F2F4F8; --trait: rgba(148, 170, 210, .16); --trait-fort: rgba(201, 165, 76, .45);
+    --carte-fond: rgba(9, 26, 51, .6); --chiffre: var(--gold-light); --lien: var(--gold-light); --surtitre: var(--gold); --rayon: 10px;
+    --f-titre: 'Petrona', Georgia, serif; --g-titre: 500; --ls-titre: -.015em; --f-texte: 'Geist', system-ui, sans-serif;
+    --hero-fond: radial-gradient(45% 70% at 74% 50%, rgba(26, 53, 95, .8), transparent 70%), #050F22; --menu-fond: #0B1B33;
+    --coin: linear-gradient(var(--gold), var(--gold));
+}
+.m14 .surtitre, .m14 .hero-surtitre, .m14 .stat-l, .m14 .gov-n, .m14 .plan-tag, .m14 .post .meta { font-family: 'Geist Mono', ui-monospace, monospace; }
+.m14 main > section:not(.hero) .surtitre::before { content: ""; display: inline-block; width: 7px; height: 7px; margin-right: 10px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 0 4px rgba(201, 165, 76, .18); vertical-align: 1px; }
+.m14 .hero h1 { font-size: clamp(2.6rem, 5vw, 4.3rem); }
+.m14 .scene-3d, .m16 .scene-3d { inset: -60px -100px -60px -50px; }
+@media (max-width: 860px) { .m14 .scene-3d, .m16 .scene-3d { inset: 0; } }
+.m14 .stat, .m14 .pilier, .m14 .carte, .m14 .gov-col { background: var(--coin) 0 0 / 14px 1px no-repeat, var(--coin) 0 0 / 1px 14px no-repeat, var(--coin) 100% 100% / 14px 1px no-repeat, var(--coin) 100% 100% / 1px 14px no-repeat, var(--carte-fond); }
+.m14 .stat-l { font-size: 13.5px; letter-spacing: .01em; }
+.m14 .gov-n { font-size: 2.2rem; }
+.m14 .gouvernance .gov { position: relative; }
+.m14 .gouvernance .gov::before { content: ""; position: absolute; left: 0; right: 0; top: -18px; height: 2px; background: linear-gradient(90deg, var(--gold), rgba(201, 165, 76, .15)); transform: scaleX(var(--balayage, 1)); transform-origin: 0 50%; }
+
+/* --------------------------------------------------------------------------
+   15 · RELIEF — gris perle : un paysage de lignes agité qui s'apaise, une ligne d'or
+   -------------------------------------------------------------------------- */
+.m15 {
+    --fond: #F4F5F7; --fond-alt: #FFFFFF; --texte: #151C28; --texte-2: #4A5568; --titre: #0B1B33; --trait: #DEE2E9; --trait-fort: #C1C8D4;
+    --carte-fond: #FFFFFF; --chiffre: #0B1B33; --lien: #1A355F; --surtitre: #86681F; --rayon: 14px;
+    --f-titre: 'Crimson Pro', Georgia, serif; --g-titre: 500; --ls-titre: -.015em; --f-texte: 'Inter Tight', system-ui, sans-serif;
+    --entete-fond: rgba(244, 245, 247, .86); --entete-plein: #F4F5F7;
+    --hero-fond: linear-gradient(180deg, #FFFFFF, #EDEFF3);
+}
+.m15 .hero-art { position: static; }
+.m15 .scene-3d { inset: 0; }
+.m15 .hero::after { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(90deg, rgba(250, 250, 251, .95) 0%, rgba(250, 250, 251, .72) 40%, rgba(250, 250, 251, 0) 66%); }
+.m15 .hero-texte { z-index: 2; }
+.m15 .hero h1 { font-size: clamp(2.9rem, 5.8vw, 5rem); line-height: .98; }
+.m15 .tete h2, .m15 .deux-col h2 { font-size: clamp(2.2rem, 4vw, 3.2rem); }
+.m15 .stat::after { content: ""; display: block; height: 2px; margin-top: 20px; background: linear-gradient(90deg, var(--gold), var(--navy-900)); transform: scaleX(var(--jauge, 1)); transform-origin: 0 50%; }
+.m15 .stat, .m15 .pilier, .m15 .carte, .m15 .gov-col, .m15 .post { border-color: transparent; box-shadow: 0 18px 36px -30px rgba(6, 18, 42, .45), 0 0 0 1px rgba(11, 27, 51, .05); transform-style: preserve-3d; }
+.m15 .stat-v { font-size: 4rem; }
+@media (max-width: 860px) {
+    .m15 .hero-art { min-height: 0; margin: 0; }
+    .m15 .hero::after { background: linear-gradient(0deg, rgba(250, 250, 251, .97) 40%, rgba(250, 250, 251, .6) 70%, rgba(250, 250, 251, .1)); }
+    .m15 .hero-texte { padding-top: 220px; }
+}
+
+/* --------------------------------------------------------------------------
+   16 · TEXTES — ivoire, ouverture bleu nuit : les textes de loi tournent autour de l'emblème
+   -------------------------------------------------------------------------- */
+.m16 {
+    --fond: #F8F5EE; --fond-alt: #F0EBE0; --texte: #1A2130; --texte-2: #4C5465; --titre: #0B1B33; --trait: #E4DDCC; --trait-fort: #CBBE9E;
+    --carte-fond: #FFFDF8; --chiffre: #0B1B33; --lien: #1A355F; --surtitre: #86681F; --rayon: 6px;
+    --f-titre: 'Castoro', Georgia, serif; --g-titre: 400; --ls-titre: -.01em; --f-texte: 'Albert Sans', system-ui, sans-serif;
+    --entete-fond: rgba(248, 245, 238, .9); --entete-plein: #F8F5EE;
+    --hero-fond: radial-gradient(55% 75% at 75% 50%, #15305A, #0B1B33 60%, #06122A); --hero-titre: #F4EEDD; --hero-accent: var(--gold-light); --hero-texte-2: rgba(255, 255, 255, .74); --hero-surtitre: var(--gold);
+    --clair-bord: rgba(228, 205, 138, .5); --clair-texte: var(--gold-light);
+}
+.m16 .hero h1 { font-size: clamp(2.7rem, 5.4vw, 4.6rem); line-height: 1.02; }
+.m16 .gov-n { font-family: 'Castoro', Georgia, serif; font-style: italic; font-size: 3.6rem; color: var(--gold-600); }
+.m16 .stat-v { font-style: italic; }
+.m16 .pilier, .m16 .carte, .m16 .post, .m16 .gov-col { transform-style: preserve-3d; }
+.m16 .puce { background: #FFFDF8; }
+
+/* Barre de choix des maquettes : largeur de son contenu, flèches toujours cliquables */
+.selecteur { width: max-content; }
+.sel-fleche { flex: none; }

@@ -1,0 +1,264 @@
+/* ==========================================================================
+   Maquettes animées 12 à 16 : une base commune pilotée par des variables, puis les réglages
+   propres à chaque maquette. Scène 3D (Three.js) dans l'ouverture, animations GSAP au défilement.
+   ========================================================================== */
+.site { background: var(--fond); color: var(--texte); font-family: var(--f-texte); font-size: 16px; line-height: 1.65; }
+.site h1, .site h2, .site h3 { font-family: var(--f-titre); font-weight: var(--g-titre, 600); letter-spacing: var(--ls-titre, -.02em); text-wrap: balance; color: var(--titre, var(--texte)); }
+.entete { background: var(--entete-fond); -webkit-backdrop-filter: blur(14px) saturate(140%); backdrop-filter: blur(14px) saturate(140%); border-bottom: 1px solid var(--trait); }
+.marque-logo { border-radius: var(--rayon-logo, 10px); background: var(--wine); color: #fff; }
+.marque-nom { font-family: var(--f-titre); font-weight: var(--g-titre, 600); font-size: 19px; letter-spacing: -.02em; }
+.menu a, .lien-client { font-size: 14.5px; color: var(--texte-2); font-weight: 500; }
+.menu a:hover, .lien-client:hover { color: var(--accent); }
+.btn { font-weight: 600; font-size: 15px; padding: 15px 26px; border-radius: var(--rayon-btn, 99px); }
+.btn-principal { background: var(--bouton, var(--wine)); color: var(--bouton-texte, #fff); box-shadow: 0 12px 26px -12px rgba(155, 27, 48, .65); }
+.btn-principal:hover { background: var(--bouton-survol, var(--wine-dark)); }
+.btn-secondaire { border: 1px solid var(--trait-fort); color: var(--texte); background: transparent; }
+.btn-secondaire:hover { border-color: var(--texte); }
+.btn-entete { padding: 10px 18px; font-size: 14px; box-shadow: none; }
+.surtitre { font-size: 12.5px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--accent-2); }
+.hero { position: relative; overflow: hidden; padding-block: 56px 56px; }
+.scene-3d { position: absolute; top: 0; right: 0; width: 52%; height: 640px; pointer-events: none; }
+.scene-3d canvas { display: block; width: 100%; height: 100%; opacity: 0; transition: opacity 1s ease; }
+.scene-3d canvas.pret { opacity: 1; }
+.hero > .enveloppe, .hero > .exemples, .hero > .ex-note { position: relative; z-index: 1; }
+.hero-texte { max-width: 560px; min-height: 540px; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; }
+.hero-titre { margin-top: 18px; font-size: clamp(2.5rem, 5vw, 4.3rem); line-height: 1.03; }
+.hero-titre .mot { display: inline-block; overflow: hidden; vertical-align: top; padding: 0 .05em .12em 0; margin: 0 -.05em -.12em 0; }
+.hero-titre .mot-i { display: inline-block; will-change: transform; }
+.hero-accent { color: var(--accent); }
+.hero-chapo { margin-top: 22px; font-size: 1.08rem; color: var(--texte-2); }
+.hero-chapo strong { color: var(--texte); }
+.hero-actions { margin-top: 30px; }
+.hero-garanties { margin-top: 18px; font-size: 13.5px; color: var(--texte-2); }
+.exemples { margin-top: 30px; }
+.ex-fenetre { -webkit-mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent); mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent); }
+.ex-ecran { border-radius: var(--rayon, 18px); background: var(--carte-fond); border: 1px solid var(--trait); box-shadow: var(--ombre, none); }
+.ex-barre { background: var(--fond-2); }
+.ex-barre i { background: var(--trait-fort); }
+.ex-barre span { background: var(--carte-fond); color: var(--texte-2); }
+.ex-legende { color: var(--texte-2); }
+.ex-legende strong { color: var(--texte); }
+.ex-voir { color: var(--accent); }
+.ex-fleche { background: var(--carte-fond); border: 1px solid var(--trait); color: var(--texte); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+.ex-note { margin-top: 22px; font-size: 14px; color: var(--texte-2); }
+main > section:not(.hero) { padding-block: 104px; }
+.tete { max-width: 780px; margin-bottom: 52px; }
+.tete h2 { margin-top: 14px; font-size: clamp(2rem, 4vw, 3.2rem); line-height: 1.06; }
+.tete-sous { color: var(--texte-2); }
+.stat { padding: 30px; border-radius: var(--rayon, 18px); background: var(--carte-fond); border: 1px solid var(--trait); }
+.stat-v { font-family: var(--f-titre); font-weight: var(--g-titre, 600); font-size: 3.8rem; line-height: 1; color: var(--accent); font-variant-numeric: tabular-nums; }
+.stat-l { margin-top: 12px; font-weight: 700; }
+.stat-t { margin-top: 8px; color: var(--texte-2); font-size: 15px; }
+.etape { padding: 32px 28px; border-radius: var(--rayon, 18px); background: var(--carte-fond); border: 1px solid var(--trait); }
+.etape-n { font-size: 12.5px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--accent-2); }
+.etape h3 { margin-top: 12px; font-size: 1.5rem; line-height: 1.12; }
+.etape p:last-child { margin-top: 10px; color: var(--texte-2); }
+.lien-fleche { margin-top: 36px; font-weight: 700; color: var(--accent); }
+.inclus-item { padding: 26px; border-radius: var(--rayon, 18px); background: var(--carte-fond); border: 1px solid var(--trait); }
+.inclus-item h3 { font-size: 1.2rem; }
+.inclus-item p { margin-top: 6px; color: var(--texte-2); font-size: 15px; }
+.offres { perspective: 1200px; }
+.offre { padding: 34px 30px; border-radius: var(--rayon, 18px); background: var(--carte-fond); border: 1px solid var(--trait); }
+.offre h3 { font-size: 1.35rem; }
+.offre-prix { margin-top: 14px; font-family: var(--f-titre); font-weight: var(--g-titre, 600); font-size: 2.5rem; line-height: 1.05; }
+.offre-prix small { font-family: var(--f-texte); font-size: .36em; font-weight: 500; color: var(--texte-2); letter-spacing: 0; }
+.offre-annuel { margin-top: 6px; font-size: 13px; font-weight: 700; color: var(--accent-2); }
+.offre-texte { margin-top: 14px; color: var(--texte-2); font-size: 15px; }
+.offre-vedette { background: var(--vedette-fond); border-color: transparent; color: var(--vedette-texte); }
+.offre-vedette h3, .offre-vedette .offre-prix { color: var(--vedette-texte); }
+.offre-vedette .offre-prix small, .offre-vedette .offre-texte { color: var(--vedette-texte-2); }
+.offre-vedette .offre-annuel { color: var(--vedette-accent); }
+.faq .enveloppe { max-width: 860px; }
+.faq details { padding: 20px 24px; border-radius: var(--rayon, 18px); background: var(--carte-fond); border: 1px solid var(--trait); }
+.faq summary { font-weight: 700; }
+.faq summary::after { color: var(--accent); }
+.faq details p { margin-top: 10px; color: var(--texte-2); font-size: 15px; }
+.pied { background: var(--pied-fond); color: var(--pied-texte-2); }
+.pied-cta { padding-block: 100px; text-align: center; }
+.pied-cta h2 { color: var(--pied-texte); font-size: clamp(2.1rem, 4.4vw, 3.6rem); max-width: 840px; margin-inline: auto; line-height: 1.06; }
+.pied-cta p { margin: 16px auto 30px; max-width: 560px; }
+.pied-cols { padding-block: 56px 36px; font-size: 14.5px; border-top: 1px solid var(--pied-trait); }
+.pied-cols h3 { font-family: var(--f-texte); font-size: 12.5px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--pied-accent); margin-bottom: 14px; }
+.pied-cols a:hover { color: var(--pied-texte); }
+.pied-marque .marque-nom { color: var(--pied-texte); }
+.pied-marque p { margin-top: 14px; max-width: 32ch; }
+.pied-bas { padding-block: 22px; border-top: 1px solid var(--pied-trait); font-size: 13px; }
+.site.menu-ouvert .menu { background: var(--fond); border-bottom: 1px solid var(--trait); }
+@media (max-width: 960px) {
+    .scene-3d { position: relative; width: 100%; height: 330px; margin-top: -20px; }
+    .hero-texte { max-width: none; min-height: 0; }
+}
+
+/* --------------------------------------------------------------------------
+   12 · CARTE — papier crème et encre : la carte pliée en trois s'ouvre, les étapes s'empilent
+   -------------------------------------------------------------------------- */
+.m12 {
+    --fond: #F6F0E4; --fond-2: #EEE4D2; --texte: #231815; --texte-2: #665750; --trait: #E0D3BC; --trait-fort: #C6B18E;
+    --accent: var(--wine); --accent-2: #93661F; --f-titre: 'Libre Caslon Display', Georgia, serif; --g-titre: 400; --ls-titre: -.01em; --f-texte: 'Mulish', system-ui, sans-serif;
+    --rayon: 2px; --carte-fond: #FFFCF6; --ombre: 0 22px 40px -30px rgba(35, 24, 21, .5); --entete-fond: rgba(246, 240, 228, .88); --rayon-btn: 2px;
+    --vedette-fond: #231815; --vedette-texte: #FFFCF6; --vedette-texte-2: rgba(255, 252, 246, .74); --vedette-accent: #E3B461;
+    --pied-fond: #231815; --pied-texte: #FFFCF6; --pied-texte-2: rgba(246, 240, 228, .66); --pied-trait: rgba(255, 255, 255, .1); --pied-accent: #E3B461;
+}
+.m12 .hero { background: radial-gradient(42% 58% at 78% 36%, rgba(155, 27, 48, .09), transparent 70%); }
+.m12 .hero-titre { font-size: clamp(2.6rem, 5.2vw, 4.6rem); line-height: 1.02; }
+.m12 .hero-accent, .m12 .etape-n, .m12 .surtitre { font-family: 'Libre Caslon Text', Georgia, serif; font-style: italic; font-weight: 400; }
+.m12 .surtitre { display: inline-flex; align-items: center; gap: 12px; font-size: 1.08rem; letter-spacing: 0; text-transform: none; color: var(--accent-2); }
+.m12 .surtitre::before, .m12 .surtitre::after { content: ""; width: 26px; height: 1px; background: currentColor; opacity: .6; }
+.m12 .btn-secondaire { border-color: var(--texte); }
+.m12 .btn-secondaire:hover { background: var(--texte); color: var(--fond); }
+.m12 main > section:not(.hero) .tete { text-align: center; margin-inline: auto; }
+.m12 .stat { text-align: center; border-color: var(--trait-fort); outline: 1px solid var(--trait-fort); outline-offset: -8px; padding: 36px 30px; }
+.m12 .stat-v { font-size: 4.2rem; }
+.m12 .etapes { background: var(--fond-2); }
+.m12 .etapes-liste { grid-template-columns: 1fr; max-width: 780px; margin-inline: auto; gap: 16vh; }
+.m12 .etape { position: sticky; top: 100px; min-height: 240px; padding: 44px 48px; border-color: var(--trait-fort); outline: 1px solid var(--trait-fort); outline-offset: -9px; box-shadow: 0 -24px 50px -34px rgba(35, 24, 21, .45); transform-origin: 50% 0; }
+.m12 .etape:nth-child(2) { top: 116px; }
+.m12 .etape:nth-child(3) { top: 132px; }
+.m12 .etape-n { font-size: 1.2rem; letter-spacing: 0; text-transform: none; color: var(--accent); }
+.m12 .etape h3 { font-size: 2.1rem; }
+.m12 .etape p:last-child { font-size: 1.05rem; max-width: 44ch; }
+.m12 .inclus-liste { gap: 0 44px; }
+.m12 .inclus-item { padding: 22px 0; border: 0; border-bottom: 1px dotted var(--trait-fort); border-radius: 0; background: none; }
+.m12 .inclus-item h3 { font-size: 1.45rem; }
+.m12 .offre { text-align: center; border-color: var(--trait-fort); outline: 1px solid var(--trait-fort); outline-offset: -9px; }
+.m12 .offre-vedette { outline-color: rgba(227, 180, 97, .45); }
+.m12 .offre h3 { font-size: 1.7rem; }
+.m12 .faq details { background: none; border: 0; border-bottom: 1px solid var(--trait-fort); border-radius: 0; padding-inline: 0; }
+.m12 .faq summary { font-family: var(--f-titre); font-weight: 400; font-size: 1.35rem; }
+.m12 .pied-cta h2 { font-size: clamp(2.2rem, 4.6vw, 3.8rem); }
+@media (max-width: 560px) { .m12 .hero .surtitre::before, .m12 .hero .surtitre::after { display: none; } }
+@media (max-width: 960px) {
+    .m12 .etape { top: 88px; padding: 32px 26px; min-height: 0; }
+    .m12 .etape:nth-child(2) { top: 100px; }
+    .m12 .etape:nth-child(3) { top: 112px; }
+    .m12 .etapes-liste { gap: 10vh; }
+}
+
+/* --------------------------------------------------------------------------
+   13 · NÉON — la devanture le soir : enseigne au néon sur mur de briques, titres d'affiche
+   -------------------------------------------------------------------------- */
+.m13 {
+    color-scheme: dark;
+    --fond: #120B0D; --fond-2: #1A1013; --texte: #F6ECE8; --texte-2: #B9A7A2; --trait: rgba(246, 236, 232, .1); --trait-fort: rgba(246, 236, 232, .26);
+    --accent: #FF6680; --accent-2: #F0B35E; --f-titre: 'Big Shoulders Display', 'Arial Narrow', sans-serif; --g-titre: 800; --ls-titre: .005em; --f-texte: 'DM Sans', system-ui, sans-serif;
+    --rayon: 14px; --carte-fond: rgba(255, 255, 255, .03); --entete-fond: rgba(18, 11, 13, .72); --rayon-btn: 12px;
+    --bouton: #C21E3A; --bouton-survol: #D8284A;
+    --vedette-fond: linear-gradient(170deg, #2C0E16, #17090D); --vedette-texte: #FFFFFF; --vedette-texte-2: rgba(255, 255, 255, .72); --vedette-accent: #FF9CAE;
+    --pied-fond: #0B0708; --pied-texte: #FFFFFF; --pied-texte-2: rgba(246, 236, 232, .6); --pied-trait: rgba(255, 255, 255, .08); --pied-accent: #F0B35E;
+    --lueur: 0 0 6px rgba(255, 61, 110, .6), 0 0 26px rgba(255, 61, 110, .38);
+}
+.m13 h1, .m13 h2, .m13 .marque-nom, .m13 .stat-v, .m13 .offre-prix { text-transform: uppercase; }
+.m13 .marque-nom { font-size: 22px; letter-spacing: .02em; }
+.m13 .scene-3d { top: 0; left: 0; right: 0; width: auto; height: 100%; max-height: 780px; }
+.m13 .hero::after { content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none; background: linear-gradient(90deg, rgba(18, 11, 13, .92) 0%, rgba(18, 11, 13, .55) 38%, rgba(18, 11, 13, 0) 62%), linear-gradient(0deg, var(--fond) 20%, rgba(18, 11, 13, 0) 50%); }
+.m13 .hero-texte { max-width: 560px; min-height: 600px; }
+.m13 .hero-titre { font-size: clamp(2.9rem, 5.9vw, 5.3rem); line-height: .94; }
+.m13 .hero-accent { color: #FFE3EA; text-shadow: var(--lueur); }
+.m13 .surtitre { color: var(--accent-2); text-shadow: 0 0 16px rgba(240, 179, 94, .45); }
+.m13 .btn-principal { box-shadow: 0 0 0 1px rgba(255, 102, 128, .45), 0 12px 32px -10px rgba(255, 61, 110, .65); }
+.m13 .btn-secondaire:hover { background: rgba(255, 255, 255, .06); }
+.m13 .ex-barre { background: #22171A; }
+.m13 .tete h2 { font-size: clamp(2.4rem, 5vw, 4.1rem); line-height: .98; }
+.m13 .stat, .m13 .etape, .m13 .inclus-item, .m13 .offre, .m13 .faq details { transition: border-color .3s, box-shadow .3s; }
+.m13 .stat:hover, .m13 .etape:hover, .m13 .inclus-item:hover, .m13 .offre:hover { border-color: rgba(255, 102, 128, .55); box-shadow: 0 0 0 1px rgba(255, 102, 128, .2), 0 0 36px -8px rgba(255, 61, 110, .45); }
+.m13 .stat-v { font-size: 5.2rem; color: #FFE3EA; text-shadow: var(--lueur); }
+.m13 .etape-n { color: var(--accent-2); }
+.m13 .etape h3, .m13 .inclus-item h3, .m13 .offre h3 { font-size: 1.7rem; letter-spacing: .01em; text-transform: uppercase; }
+.m13 .offre-vedette { border: 1px solid rgba(255, 102, 128, .5); box-shadow: 0 0 44px -12px rgba(255, 61, 110, .55); animation: bourdon 6s infinite; }
+.m13 .offre-vedette .offre-prix { text-shadow: var(--lueur); }
+.m13 .pied-cta h2 { font-size: clamp(2.6rem, 5.4vw, 4.6rem); line-height: .96; }
+@keyframes bourdon { 0%, 90%, 94%, 100% { box-shadow: 0 0 44px -12px rgba(255, 61, 110, .55); } 92% { box-shadow: 0 0 20px -16px rgba(255, 61, 110, .2); } }
+@media (prefers-reduced-motion: reduce) { .m13 .offre-vedette { animation: none; } }
+@media (max-width: 960px) {
+    .m13 .scene-3d { position: absolute; height: 100%; margin: 0; }
+    .m13 .hero::after { background: linear-gradient(0deg, rgba(18, 11, 13, .97) 36%, rgba(18, 11, 13, .5) 64%, rgba(18, 11, 13, .1)); }
+    .m13 .hero-texte { padding-top: 250px; }
+}
+
+/* --------------------------------------------------------------------------
+   14 · APESANTEUR — blanc et frais : tomates, basilic et citron flottent, les cartes aussi
+   -------------------------------------------------------------------------- */
+.m14 {
+    --fond: #FFFFFF; --fond-2: #F7F3ED; --texte: #1F1715; --texte-2: #5F534E; --trait: #EEE6DC; --trait-fort: #D8CBBE;
+    --accent: var(--wine); --accent-2: #A06A1C; --f-titre: 'Young Serif', Georgia, serif; --g-titre: 400; --ls-titre: -.02em; --f-texte: 'Plus Jakarta Sans', system-ui, sans-serif;
+    --rayon: 28px; --carte-fond: #FFFFFF; --ombre: 0 30px 60px -36px rgba(90, 45, 30, .35), 0 2px 6px rgba(90, 45, 30, .05); --entete-fond: rgba(255, 255, 255, .82);
+    --vedette-fond: var(--wine); --vedette-texte: #FFFFFF; --vedette-texte-2: rgba(255, 255, 255, .8); --vedette-accent: #F6D39B;
+    --pied-fond: #F7F3ED; --pied-texte: #1F1715; --pied-texte-2: #5F534E; --pied-trait: #E3D9CE; --pied-accent: var(--wine);
+}
+.m14 .hero { background: radial-gradient(56% 66% at 76% 38%, #FFF1E6, transparent 70%); }
+.m14 .scene-3d { width: 60%; height: 680px; }
+.m14 .hero-titre { font-size: clamp(2.6rem, 5.3vw, 4.6rem); line-height: 1.02; }
+.m14 .btn-secondaire { background: #FFFFFF; box-shadow: var(--ombre); border-color: transparent; }
+.m14 .stat, .m14 .etape, .m14 .inclus-item, .m14 .offre, .m14 .faq details { border-color: transparent; box-shadow: var(--ombre); }
+.m14 .constat, .m14 .inclus, .m14 .faq { background: var(--fond-2); }
+.m14 .stat-v { font-size: 4.2rem; }
+.m14 .etape-n { display: inline-block; padding: 5px 12px; border-radius: 99px; background: rgba(155, 27, 48, .08); color: var(--wine); letter-spacing: .08em; }
+.m14 .etape h3 { font-size: 1.7rem; }
+.m14 .offre-vedette { translate: 0 -12px; box-shadow: 0 34px 60px -30px rgba(155, 27, 48, .7); }
+.m14 .pied-cta { background: #FFFFFF; }
+@media (max-width: 960px) { .m14 .scene-3d { width: 100%; height: 360px; } }
+
+/* --------------------------------------------------------------------------
+   15 · PLAN DE SALLE — papier millimétré : la salle en 3D se remplit de réservations
+   -------------------------------------------------------------------------- */
+.m15 {
+    --fond: #F3F1EC; --fond-2: #E9E5DC; --texte: #1B1A17; --texte-2: #5C5750; --trait: #D9D3C7; --trait-fort: #1B1A17;
+    --accent: var(--wine); --accent-2: #8C6A2E; --f-titre: 'Schibsted Grotesk', system-ui, sans-serif; --g-titre: 700; --ls-titre: -.035em; --f-texte: 'Schibsted Grotesk', system-ui, sans-serif;
+    --rayon: 4px; --carte-fond: #FBFAF7; --entete-fond: rgba(243, 241, 236, .88); --rayon-btn: 4px; --rayon-logo: 4px;
+    --vedette-fond: var(--wine); --vedette-texte: #FFFFFF; --vedette-texte-2: rgba(255, 255, 255, .8); --vedette-accent: #F2C98A;
+    --pied-fond: #1B1A17; --pied-texte: #FFFFFF; --pied-texte-2: rgba(243, 241, 236, .62); --pied-trait: rgba(255, 255, 255, .1); --pied-accent: #E0B062;
+    --grille: linear-gradient(rgba(27, 26, 23, .055) 1px, transparent 1px) 0 0 / 28px 28px, linear-gradient(90deg, rgba(27, 26, 23, .055) 1px, transparent 1px) 0 0 / 28px 28px;
+}
+.m15 .hero, .m15 .etapes { background: var(--grille), var(--fond); }
+.m15 .surtitre, .m15 .etape-n, .m15 .offre-annuel, .m15 .hero-garanties, .m15 .stat-l { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+.m15 .surtitre { font-size: 12px; font-weight: 600; letter-spacing: .06em; color: var(--accent); }
+.m15 .hero-titre { font-size: clamp(2.5rem, 5vw, 4.3rem); line-height: 1; }
+.m15 .hero-garanties { font-size: 12.5px; }
+.m15 .btn-secondaire { border-color: var(--texte); }
+.m15 .btn-secondaire:hover { background: var(--texte); color: var(--fond); }
+.m15 .stat { position: relative; border-color: var(--texte); }
+.m15 .stat::before { content: ""; position: absolute; inset: -6px; border: 1px dashed rgba(27, 26, 23, .22); border-radius: 8px; pointer-events: none; }
+.m15 .stat-l { font-size: 13px; font-weight: 600; letter-spacing: .02em; }
+.m15 .etapes-liste { position: relative; padding-top: 28px; --trace: 1; }
+.m15 .etape { position: relative; border-color: var(--texte); }
+.m15 .etape-n { font-size: 12px; letter-spacing: .06em; }
+.m15 .inclus-item { border-color: var(--trait); }
+.m15 .inclus-item h3 { display: flex; align-items: center; gap: 10px; }
+.m15 .inclus-item h3::before { content: ""; flex: none; width: 10px; height: 10px; background: var(--wine); transform: rotate(45deg); }
+.m15 .offre { border-color: var(--texte); }
+.m15 .offre-vedette { border-color: transparent; }
+.m15 .faq details { border-color: var(--trait); }
+@media (min-width: 961px) {
+    .m15 .etapes-liste::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 2px; background: var(--wine); transform: scaleX(var(--trace)); transform-origin: 0 50%; }
+    .m15 .etape::before { content: ""; position: absolute; top: -34px; left: 28px; width: 12px; height: 12px; background: var(--fond); border: 2px solid var(--wine); transform: rotate(45deg); }
+}
+
+/* --------------------------------------------------------------------------
+   16 · MÉTAMORPHOSE — velours lie-de-vin et or : des milliers de points dessinent le métier
+   -------------------------------------------------------------------------- */
+.m16 {
+    color-scheme: dark;
+    --fond: #1A0810; --fond-2: #230C16; --texte: #F7EDE6; --texte-2: #CBB1AA; --trait: rgba(247, 237, 230, .1); --trait-fort: rgba(247, 237, 230, .28);
+    --accent: #E9BD6E; --accent-2: #E9BD6E; --f-titre: 'Unbounded', system-ui, sans-serif; --g-titre: 500; --ls-titre: -.03em; --f-texte: 'Onest', system-ui, sans-serif;
+    --rayon: 24px; --carte-fond: rgba(255, 255, 255, .04); --entete-fond: rgba(26, 8, 16, .72);
+    --bouton: #E9BD6E; --bouton-texte: #1A0810; --bouton-survol: #F4D292;
+    --vedette-fond: linear-gradient(160deg, #EFC77E, #C99545); --vedette-texte: #1A0810; --vedette-texte-2: rgba(26, 8, 16, .74); --vedette-accent: #7A1526;
+    --pied-fond: #12050B; --pied-texte: #FFFFFF; --pied-texte-2: rgba(247, 237, 230, .6); --pied-trait: rgba(255, 255, 255, .08); --pied-accent: #E9BD6E;
+}
+.m16 .marque-logo { background: #E9BD6E; color: #1A0810; }
+.m16 .hero { background: radial-gradient(52% 70% at 76% 40%, rgba(155, 27, 48, .6), transparent 70%), radial-gradient(40% 60% at 0% 100%, rgba(233, 189, 110, .08), transparent 70%); }
+.m16 .hero-titre { font-size: clamp(2.2rem, 4.3vw, 3.8rem); line-height: 1.06; }
+.m16 .btn-principal { box-shadow: 0 14px 34px -14px rgba(233, 189, 110, .7); }
+.m16 .btn-secondaire:hover { background: rgba(255, 255, 255, .06); }
+.m16 .ex-barre { background: #2C1019; }
+.m16 .tete h2 { font-size: clamp(1.9rem, 3.8vw, 3.1rem); }
+.m16 .etapes, .m16 .tarifs { background: var(--fond-2); }
+.m16 .stat-v { font-size: 3.6rem; }
+.m16 .etape-n { color: var(--accent); }
+.m16 .etape h3, .m16 .inclus-item h3, .m16 .offre h3 { font-family: 'Onest', sans-serif; font-weight: 600; letter-spacing: -.01em; }
+.m16 .offre-prix { font-size: 2.2rem; }
+.m16 .pied-cta h2 { font-size: clamp(1.9rem, 3.8vw, 3.1rem); }
+
+/* Barre de choix des maquettes : largeur de son contenu, flèches toujours cliquables */
+.selecteur { width: max-content; }
+.sel-fleche { flex: none; }

@@ -1,0 +1,1463 @@
+<title>Aegis Maquettes 12 à 16</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;500;600&family=Castoro:ital@0;1&family=Cinzel:wght@500;600&family=Crimson+Pro:ital,wght@0,400..600;1,400..500&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Inter+Tight:wght@400;500;600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Marcellus&family=Nunito+Sans:opsz,wght@6..12,400..700&family=Petrona:ital,wght@0,400..600;1,400..500&family=Source+Sans+3:wght@400;500;600&display=swap">
+<style>
+/* ==========================================================================
+   Six maquettes de l'accueil Aegis Fama & Doxa sur UNE même page : textes, liens et ordre
+   des sections identiques au site actuel. Seule la feuille de style change (.m1 à .m6).
+   Charte conservée partout : bleu nuit, or, serif pour les titres. Tout reste sobre.
+   ========================================================================== */
+*, *::before, *::after { box-sizing: border-box; }
+html { background: #F5F6F9; }
+body { margin: 0; background: #F5F6F9; padding-bottom: 86px; }
+.site {
+    --navy-950: #06122A; --navy-900: #0B1B33; --navy-800: #11264A; --navy-700: #1A355F;
+    --gold: #C9A54C; --gold-600: #86681F; --gold-light: #E4CD8A; --gold-soft: #F7F0DC;
+    --ink: #141B26; --ink-2: #3E4A5C; --muted: #5F6A7B; --line: #E3E6EC; --bg-2: #F5F6F9;
+    min-height: 100vh; overflow-x: clip; -webkit-font-smoothing: antialiased;
+}
+.site p, .site h1, .site h2, .site h3, .site ul, .site ol { margin: 0; }
+.site ul, .site ol { padding: 0; list-style: none; }
+.site a { color: inherit; }
+.site :focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; border-radius: 4px; }
+.wrap { max-width: 1180px; margin-inline: auto; padding-inline: clamp(16px, 4vw, 40px); }
+.ic { width: 1em; height: 1em; flex: none; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+
+/* ---- Structure commune ---- */
+.alerte-in { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; padding-block: 8px; font-size: 14px; }
+.alerte a { text-decoration: none; font-weight: 600; }
+.pouls { display: inline-block; width: 8px; height: 8px; margin-right: 8px; border-radius: 50%; background: #FF6B5E; vertical-align: 1px; animation: pouls 2s infinite; }
+@keyframes pouls { 0% { box-shadow: 0 0 0 0 rgba(255, 107, 94, .6); } 70% { box-shadow: 0 0 0 8px rgba(255, 107, 94, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 107, 94, 0); } }
+.entete { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; }
+.entete-in { display: flex; align-items: center; gap: 20px; min-height: 74px; }
+.marque { display: flex; align-items: center; gap: 12px; text-decoration: none; flex: none; }
+.marque svg { width: 36px; height: 36px; }
+.marque-nom { display: block; line-height: 1.1; }
+.marque-sous { display: block; font-size: 10.5px; letter-spacing: .2em; text-transform: uppercase; white-space: nowrap; }
+.nav { margin-left: auto; }
+.nav > ul { display: flex; align-items: center; gap: 2px; }
+.nav a { display: block; padding: 10px 11px; text-decoration: none; white-space: nowrap; font-size: 15px; }
+.sous-menu { position: relative; }
+.sous-menu > a::after { content: ""; display: inline-block; width: 6px; height: 6px; margin-left: 8px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: rotate(45deg) translateY(-3px); opacity: .7; }
+.sous { position: absolute; top: 100%; left: 0; min-width: 250px; padding: 8px; opacity: 0; visibility: hidden; transform: translateY(6px); transition: .15s; z-index: 5; }
+.sous-menu:hover .sous, .sous-menu:focus-within .sous { opacity: 1; visibility: visible; transform: none; }
+.sous a { padding: 9px 12px; }
+.nav .btn { margin-left: 6px; padding: 9px 16px; }
+.burger { display: none; margin-left: auto; width: 42px; height: 40px; border-radius: 8px; background: none; cursor: pointer; place-items: center; color: inherit; border: 1px solid currentColor; }
+.burger span { display: block; width: 18px; height: 2px; background: currentColor; box-shadow: 0 -6px 0 currentColor, 0 6px 0 currentColor; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; white-space: nowrap; cursor: pointer; transition: background-color .15s, color .15s, border-color .15s, transform .15s; }
+.btn:hover { transform: translateY(-1px); }
+.hero-grille { display: grid; grid-template-columns: 1.25fr .75fr; gap: 48px; align-items: center; }
+.hero-surtitre { display: block; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.hero-preuves { display: flex; flex-wrap: wrap; gap: 10px 26px; }
+.hero-preuves li { display: flex; align-items: center; gap: 8px; }
+.hero-art { display: grid; place-items: center; }
+.embleme { width: 100%; max-width: 380px; height: auto; }
+.radar { display: none; width: 100%; max-width: 420px; aspect-ratio: 1; }
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.deux-col { display: grid; grid-template-columns: 1.1fr .9fr; gap: 56px; align-items: center; }
+.coches { display: grid; gap: 16px; }
+.coches li { display: flex; gap: 14px; align-items: flex-start; }
+.coches .ic { font-size: 20px; margin-top: 3px; }
+.piliers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.pilier, .carte, .post { display: flex; flex-direction: column; text-decoration: none; }
+.cartes { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+.gov { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+.gov-col ul { display: grid; gap: 8px; }
+.plans { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; align-items: stretch; }
+.plan ul { display: grid; gap: 10px; }
+.plan li { display: flex; gap: 10px; align-items: flex-start; }
+.plan li .ic { font-size: 16px; margin-top: 4px; }
+.puces { display: flex; flex-wrap: wrap; gap: 12px; }
+.puce { text-decoration: none; }
+.posts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.post h3 a { text-decoration: none; }
+.tete-ligne { display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; flex-wrap: wrap; }
+.faq-liste { display: grid; gap: 10px; }
+.faq summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; flex: none; font-size: 1.4em; line-height: 1; transition: transform .2s; }
+.faq details[open] summary::after { transform: rotate(45deg); }
+.faq summary h3 { font-size: inherit; font-weight: inherit; font-family: inherit; }
+.lien-fleche { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; text-decoration: none; }
+.lien-fleche::after { content: "→"; transition: transform .15s; }
+a:hover > .lien-fleche::after, .lien-fleche:hover::after { transform: translateX(4px); }
+.centre { text-align: center; }
+.bandeau-cta-in { display: flex; justify-content: space-between; align-items: center; gap: 28px; flex-wrap: wrap; }
+.bandeau-cta-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.pied-grille { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 36px; }
+.pied-grille ul { display: grid; gap: 8px; }
+.pied-grille a { text-decoration: none; }
+.pied-bas { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.pied-bas a { text-decoration: none; }
+.cta-mobile { display: none; }
+
+@media (max-width: 1080px) {
+    .nav { display: none; }
+    .burger { display: grid; }
+    .site.menu-ouvert .nav { display: block; position: absolute; left: 0; right: 0; top: 100%; padding: 8px clamp(16px, 4vw, 40px) 18px; }
+    .site.menu-ouvert .nav > ul { flex-direction: column; align-items: stretch; }
+    .site.menu-ouvert .sous { position: static; opacity: 1; visibility: visible; transform: none; display: none; }
+    .nav .btn { margin: 8px 0 0; }
+    .cartes { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 860px) {
+    .hero-grille, .deux-col { grid-template-columns: 1fr; }
+    .hero-art { display: none; }
+    .stats, .piliers, .gov, .plans, .posts { grid-template-columns: 1fr; }
+    .pied-grille { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 560px) {
+    .cartes, .pied-grille { grid-template-columns: 1fr; }
+    .cta-mobile { display: flex; gap: 8px; position: fixed; z-index: 40; left: 12px; right: 12px; bottom: calc(76px + env(safe-area-inset-bottom, 0px)); }
+    .cta-mobile .btn { flex: 1; padding: 11px 10px !important; }
+    body { padding-bottom: 140px; }
+    .marque-sous { display: none; }
+}
+@media (prefers-reduced-motion: reduce) { .site *, .site *::before, .site *::after { animation: none !important; transition: none !important; } }
+
+/* ==========================================================================
+   Maquettes animées 12 à 16 d'Aegis : base commune pilotée par des variables, puis réglages
+   propres à chaque maquette. Bleu nuit et or partout ; scène 3D (Three.js) dans l'ouverture.
+   ========================================================================== */
+.site { background: var(--fond); color: var(--texte); font-family: var(--f-texte); font-size: 16.5px; line-height: 1.65; }
+.site h1, .site h2, .site h3 { font-family: var(--f-titre); font-weight: var(--g-titre, 500); color: var(--titre); line-height: 1.12; letter-spacing: var(--ls-titre, -.01em); text-wrap: balance; }
+.alerte { background: #030B1C; color: rgba(255, 255, 255, .8); }
+.alerte a { color: var(--gold-light); }
+.entete { background: var(--entete-fond); -webkit-backdrop-filter: blur(14px) saturate(140%); backdrop-filter: blur(14px) saturate(140%); border-bottom: 1px solid var(--entete-trait); }
+.marque-nom { font-family: var(--f-titre); font-size: 20px; color: var(--entete-marque); }
+.marque-sous { color: var(--entete-sous); }
+.nav a { color: var(--entete-texte); font-size: 14.5px; }
+.nav a:hover { color: var(--entete-survol); }
+.sous { background: var(--menu-fond); border: 1px solid var(--trait); border-radius: 10px; box-shadow: 0 18px 40px rgba(6, 18, 42, .25); }
+.sous a { color: var(--menu-texte); }
+.sous a:hover { background: rgba(201, 165, 76, .12); }
+.btn { padding: 13px 24px; border-radius: var(--rayon-btn, 8px); font-weight: 600; font-size: 15px; border: 1px solid transparent; }
+.btn-or { background: var(--gold); color: var(--navy-950) !important; }
+.btn-or:hover { background: var(--gold-light); }
+.btn-clair { border-color: var(--clair-bord); color: var(--clair-texte) !important; }
+.btn-clair:hover { background: rgba(228, 205, 138, .1); }
+.btn-fantome { border-color: var(--fantome-bord); color: var(--fantome-texte) !important; }
+.btn-sombre { background: var(--navy-900); color: #fff !important; }
+.burger { color: var(--entete-texte); }
+.site.menu-ouvert .nav { background: var(--entete-plein); border-bottom: 1px solid var(--entete-trait); }
+.surtitre, .hero-surtitre { font-size: 12px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--surtitre); }
+.hero { position: relative; overflow: hidden; padding-block: 72px 88px; background: var(--hero-fond); color: var(--hero-texte-2); }
+.hero-texte { position: relative; z-index: 1; }
+.hero h1 { font-size: clamp(2.6rem, 5.2vw, 4.4rem); line-height: 1.04; color: var(--hero-titre); }
+.hero-surtitre { margin-bottom: 20px; color: var(--hero-surtitre, var(--gold)); }
+.hero h1 em { color: var(--hero-accent); font-style: italic; }
+.hero h1 .mot { display: inline-block; overflow: hidden; vertical-align: top; padding: 0 .06em .12em 0; margin: 0 -.06em -.12em 0; }
+.hero h1 .mot-i { display: inline-block; will-change: transform; }
+.hero .lead { margin-top: 24px; max-width: 580px; font-size: 1.12rem; color: var(--hero-texte-2); }
+.hero-actions { margin-top: 34px; }
+.hero-preuves { margin-top: 32px; font-size: 14.5px; color: var(--hero-texte-2); }
+.hero-preuves .ic { color: var(--gold); font-size: 18px; }
+.hero-art { position: relative; min-height: 480px; }
+.site .embleme, .site .radar { display: none; }
+.scene-3d { position: absolute; inset: -40px; pointer-events: none; }
+.scene-3d canvas { display: block; width: 100%; height: 100%; opacity: 0; transition: opacity 1s ease; }
+.scene-3d canvas.pret { opacity: 1; }
+main > section:not(.hero) { padding-block: 96px; }
+.alt { background: var(--fond-alt); }
+.tete { max-width: 780px; margin-bottom: 48px; }
+.tete h2 { margin-top: 12px; font-size: clamp(2rem, 3.8vw, 3rem); }
+.tete p:not(.surtitre) { margin-top: 14px; color: var(--texte-2); }
+.stat { padding: 30px 28px; border-radius: var(--rayon, 16px); background: var(--carte-fond); border: 1px solid var(--trait); }
+.stat-v { display: block; font-family: var(--f-titre); font-weight: var(--g-titre, 500); font-size: 3.6rem; line-height: 1; color: var(--chiffre); font-variant-numeric: tabular-nums; }
+.stat-l { display: block; margin-top: 12px; color: var(--texte-2); }
+.deux-col h2 { margin-top: 12px; font-size: clamp(1.9rem, 3.4vw, 2.7rem); }
+.deux-col p:not(.surtitre) { margin-top: 16px; color: var(--texte-2); }
+.deux-col strong { color: var(--titre); }
+.deux-col .lien-fleche { margin-top: 20px; color: var(--lien); }
+.coches li { padding: 16px 18px; border-radius: var(--rayon, 16px); background: var(--carte-fond); border: 1px solid var(--trait); }
+.coches .ic { color: var(--gold); }
+.pilier, .carte { padding: 30px 26px; border-radius: var(--rayon, 16px); background: var(--carte-fond); border: 1px solid var(--trait); color: inherit; transition: border-color .2s; }
+.pilier:hover, .carte:hover { border-color: var(--gold); }
+.pilier .ic { font-size: 30px; color: var(--gold); }
+.pilier h3 { margin-top: 18px; font-size: 1.7rem; }
+.pilier p, .carte p { margin-top: 10px; color: var(--texte-2); flex: 1; }
+.pilier .lien-fleche, .carte .lien-fleche { margin-top: 18px; color: var(--lien); }
+.carte-ic { font-size: 22px; color: var(--gold); }
+.carte h3 { margin-top: 14px; font-size: 1.25rem; }
+.carte p { font-size: 15px; }
+.gov-col { padding: 28px; border-radius: var(--rayon, 16px); background: var(--carte-fond); border: 1px solid var(--trait); }
+.gov-n { display: block; font-family: var(--f-titre); font-size: 2.8rem; line-height: 1; color: var(--gold); }
+.gov-col h3 { margin-top: 10px; font-size: 1.6rem; }
+.gov-col ul, .gov-col p { margin-top: 12px; color: var(--texte-2); font-size: 15.5px; }
+.gov-col li::before { content: "— "; color: var(--gold); }
+.gov-col .lien-fleche { margin-top: 16px; color: var(--lien); }
+.sombre { background: var(--sombre-fond); color: rgba(255, 255, 255, .78); }
+.sombre h2, .sombre h3 { color: #F4EEDD; }
+.sombre .surtitre { color: var(--gold); }
+.sombre .tete p:not(.surtitre) { color: rgba(255, 255, 255, .7); }
+.plans { perspective: 1200px; }
+.plan { padding: 34px 28px; border-radius: var(--rayon, 16px); border: 1px solid rgba(201, 165, 76, .25); background: rgba(255, 255, 255, .02); }
+.plan-vedette { border-color: var(--gold); background: linear-gradient(180deg, rgba(201, 165, 76, .13), rgba(201, 165, 76, .02) 60%); }
+.plan-tag { font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); }
+.plan h3 { margin-top: 10px; font-size: 1.9rem; }
+.plan-pour { margin-top: 6px; color: rgba(255, 255, 255, .7); font-size: 15px; }
+.plan-prix { margin: 20px 0; color: rgba(255, 255, 255, .65); font-size: 15px; }
+.plan-prix strong { font-family: var(--f-titre); font-size: 2.4rem; font-weight: var(--g-titre, 500); color: #FFFFFF; }
+.plan ul { font-size: 15px; }
+.plan li .ic { color: var(--gold); }
+.plans + .centre { margin-top: 42px; }
+.note-entree { margin-top: 16px; color: rgba(255, 255, 255, .7); font-size: 15px; }
+.note-entree a { color: var(--gold-light); }
+.puce { padding: 11px 20px; border-radius: 99px; border: 1px solid var(--trait-fort); color: var(--titre); display: inline-block; }
+.puce:hover { border-color: var(--gold); }
+.pied-section { margin-top: 40px; padding-top: 30px; border-top: 1px solid var(--trait); display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; color: var(--texte-2); font-size: 15.5px; }
+.pied-section strong { color: var(--titre); }
+.pied-section a:not(.btn) { color: var(--lien); }
+.tete-ligne .lien-fleche { color: var(--lien); }
+.post { padding: 28px; border-radius: var(--rayon, 16px); background: var(--carte-fond); border: 1px solid var(--trait); }
+.post .meta { font-size: 13.5px; color: var(--texte-2); }
+.post h3 { margin-top: 10px; font-size: 1.35rem; }
+.post p:not(.meta) { margin-top: 10px; color: var(--texte-2); font-size: 15px; flex: 1; }
+.post .lien-fleche { margin-top: 16px; color: var(--lien); }
+.faq .wrap { max-width: 840px; }
+.faq details { padding: 20px 24px; border-radius: var(--rayon, 16px); background: var(--carte-fond); border: 1px solid var(--trait); }
+.faq summary { font-family: var(--f-titre); font-size: 1.3rem; color: var(--titre); }
+.faq summary::after { color: var(--gold); }
+.faq details p { margin-top: 10px; color: var(--texte-2); }
+.faq .centre { margin-top: 30px; }
+.faq .lien-fleche { color: var(--lien); }
+.bandeau-cta { padding-block: 70px; background: var(--cta-fond); color: rgba(255, 255, 255, .75); }
+.bandeau-cta h2 { font-family: var(--f-titre); font-size: clamp(1.9rem, 3.4vw, 2.6rem); color: #F4EEDD; }
+.bandeau-cta p { margin-top: 8px; }
+.bandeau-cta .btn-clair { border-color: rgba(228, 205, 138, .5); color: var(--gold-light) !important; }
+.pied { padding-block: 56px 26px; background: #030B1C; color: rgba(255, 255, 255, .62); font-size: 15px; }
+.pied .marque-nom { color: var(--gold-light); }
+.pied h3 { font-family: var(--f-texte); font-size: 12px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
+.pied a:hover { color: #FFFFFF; }
+.promesse { margin-top: 16px; max-width: 36ch; }
+.conf-note { margin-top: 14px; font-size: 14px; }
+.conf { display: inline-block; margin-right: 8px; padding: 2px 9px; border-radius: 99px; border: 1px solid var(--gold); color: var(--gold-light); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; }
+.pied-bas { margin-top: 44px; padding-top: 22px; border-top: 1px solid rgba(255, 255, 255, .1); font-size: 13.5px; }
+.cta-mobile .btn-clair { background: var(--navy-900); border-color: var(--navy-900); color: #FFFFFF !important; }
+@media (max-width: 860px) {
+    .hero-art { display: block; order: -1; min-height: 300px; margin: -30px 0 -10px; }
+    .scene-3d { inset: 0; }
+}
+
+/* ---- Palettes : sombre (bleu nuit) et claire (ivoire) ---- */
+.m13, .m14 {
+    --fantome-bord: rgba(228, 205, 138, .5); --fantome-texte: var(--gold-light); --clair-bord: rgba(228, 205, 138, .5); --clair-texte: var(--gold-light);
+    --entete-fond: rgba(6, 18, 42, .82); --entete-plein: #06122A; --entete-trait: rgba(201, 165, 76, .2); --entete-marque: var(--gold-light); --entete-sous: rgba(255, 255, 255, .5); --entete-texte: rgba(255, 255, 255, .82); --entete-survol: #FFFFFF;
+    --menu-fond: #0B1B33; --menu-texte: #E8ECF3;
+    --hero-titre: #F4EEDD; --hero-accent: var(--gold-light); --hero-texte-2: rgba(255, 255, 255, .72);
+    --sombre-fond: linear-gradient(180deg, #0B1B33, #06122A); --cta-fond: #0B1B33;
+}
+.m12, .m15, .m16 {
+    --fantome-bord: var(--navy-900); --fantome-texte: var(--navy-900); --clair-bord: var(--navy-900); --clair-texte: var(--navy-900);
+    --entete-trait: rgba(11, 27, 51, .1); --entete-marque: var(--navy-900); --entete-sous: var(--gold-600); --entete-texte: #3E4A5C; --entete-survol: var(--navy-900);
+    --menu-fond: #FFFFFF; --menu-texte: var(--ink);
+    --hero-titre: var(--navy-900); --hero-accent: var(--gold-600); --hero-texte-2: #3E4A5C; --hero-surtitre: var(--gold-600);
+    --sombre-fond: linear-gradient(180deg, #0B1B33, #06122A); --cta-fond: #0B1B33;
+}
+
+/* --------------------------------------------------------------------------
+   12 · DOSSIER — papier ivoire et encre bleu nuit : les pièces du dossier se déploient
+   -------------------------------------------------------------------------- */
+.m12 {
+    --fond: #FBFAF6; --fond-alt: #F2EEE4; --texte: #1A2130; --texte-2: #4B5466; --titre: #0B1B33; --trait: #E6E0D0; --trait-fort: #CFC5AB;
+    --carte-fond: #FFFFFF; --chiffre: #0B1B33; --lien: #1A355F; --surtitre: #86681F; --rayon: 3px; --rayon-btn: 3px;
+    --f-titre: 'Libre Baskerville', Georgia, serif; --g-titre: 400; --ls-titre: -.02em; --f-texte: 'Source Sans 3', system-ui, sans-serif;
+    --entete-fond: rgba(251, 250, 246, .9); --entete-plein: #FBFAF6;
+    --hero-fond: radial-gradient(45% 65% at 76% 50%, rgba(201, 165, 76, .14), transparent 70%), linear-gradient(180deg, #FBFAF6, #F2EEE4);
+}
+.m12 .hero h1 { font-size: clamp(2.3rem, 4.5vw, 3.8rem); line-height: 1.1; }
+.m12 .tete h2::after, .m12 .deux-col h2::after { content: ""; display: block; width: 72px; height: 2px; margin-top: 18px; background: var(--gold); transform: scaleX(var(--trait, 1)); transform-origin: 0 50%; }
+.m12 .tete h2, .m12 .deux-col h2 { font-size: clamp(1.8rem, 3.2vw, 2.5rem); }
+.m12 .stat, .m12 .pilier, .m12 .carte, .m12 .gov-col, .m12 .post, .m12 .coches li { box-shadow: 0 1px 0 rgba(11, 27, 51, .04), 0 18px 32px -26px rgba(11, 27, 51, .4); }
+.m12 .stat-v { font-size: 3.2rem; }
+.m12 .gov-n { display: inline-grid; place-items: center; width: 62px; height: 62px; border: 2px solid var(--gold-600); border-radius: 50%; outline: 1px solid var(--gold-600); outline-offset: 3px; font-size: 1.7rem; color: var(--gold-600); }
+.m12 .gov-col h3 { margin-top: 18px; }
+.m12 .faq summary { font-size: 1.15rem; }
+
+/* --------------------------------------------------------------------------
+   13 · PALAIS — la colonnade de nuit, capitales romaines et or : sobre et monumental
+   -------------------------------------------------------------------------- */
+.m13 {
+    color-scheme: dark;
+    --fond: #07142C; --fond-alt: #0B1B33; --texte: #D8DEE8; --texte-2: #9DA8BB; --titre: #F4EEDD; --trait: rgba(201, 165, 76, .18); --trait-fort: rgba(201, 165, 76, .4);
+    --carte-fond: rgba(255, 255, 255, .025); --chiffre: var(--gold-light); --lien: var(--gold-light); --surtitre: var(--gold); --rayon: 2px; --rayon-btn: 2px;
+    --f-titre: 'Marcellus', Georgia, serif; --g-titre: 400; --ls-titre: 0; --f-texte: 'Nunito Sans', system-ui, sans-serif;
+    --hero-fond: #07142C; --menu-fond: #0B1B33;
+}
+.m13 .surtitre, .m13 .hero-surtitre, .m13 .gov-n, .m13 .plan-tag, .m13 .marque-sous { font-family: 'Cinzel', Georgia, serif; font-weight: 500; letter-spacing: .24em; }
+.m13 .hero-art { position: static; }
+.m13 .scene-3d { inset: 0; }
+.m13 .hero::after { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(90deg, rgba(7, 20, 44, .94) 0%, rgba(7, 20, 44, .6) 42%, rgba(7, 20, 44, 0) 66%); }
+.m13 .hero-texte { z-index: 2; }
+.m13 .hero h1 { font-size: clamp(2.7rem, 5.4vw, 4.6rem); line-height: 1.04; }
+.m13 main > section:not(.hero) .tete:not(.tete-ligne) { text-align: center; margin-inline: auto; }
+.m13 .pilier { text-align: center; align-items: center; border-top: 2px solid var(--gold); }
+.m13 .stat { text-align: center; }
+.m13 .gov-n { font-size: 3.2rem; }
+.m13 .coches li, .m13 .stat { background: rgba(255, 255, 255, .02); }
+@media (max-width: 860px) {
+    .m13 .hero-art { min-height: 0; margin: 0; }
+    .m13 .hero::after { background: linear-gradient(0deg, rgba(7, 20, 44, .96) 38%, rgba(7, 20, 44, .5) 70%, rgba(7, 20, 44, .15)); }
+    .m13 .hero-texte { padding-top: 230px; }
+}
+
+/* --------------------------------------------------------------------------
+   14 · RADAR — la veille en continu : écran de contrôle bleu nuit, chiffres en police mono
+   -------------------------------------------------------------------------- */
+.m14 {
+    color-scheme: dark;
+    --fond: #050F22; --fond-alt: #091A33; --texte: #D5DCE7; --texte-2: #93A0B5; --titre: #F2F4F8; --trait: rgba(148, 170, 210, .16); --trait-fort: rgba(201, 165, 76, .45);
+    --carte-fond: rgba(9, 26, 51, .6); --chiffre: var(--gold-light); --lien: var(--gold-light); --surtitre: var(--gold); --rayon: 10px;
+    --f-titre: 'Petrona', Georgia, serif; --g-titre: 500; --ls-titre: -.015em; --f-texte: 'Geist', system-ui, sans-serif;
+    --hero-fond: radial-gradient(45% 70% at 74% 50%, rgba(26, 53, 95, .8), transparent 70%), #050F22; --menu-fond: #0B1B33;
+    --coin: linear-gradient(var(--gold), var(--gold));
+}
+.m14 .surtitre, .m14 .hero-surtitre, .m14 .stat-l, .m14 .gov-n, .m14 .plan-tag, .m14 .post .meta { font-family: 'Geist Mono', ui-monospace, monospace; }
+.m14 main > section:not(.hero) .surtitre::before { content: ""; display: inline-block; width: 7px; height: 7px; margin-right: 10px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 0 4px rgba(201, 165, 76, .18); vertical-align: 1px; }
+.m14 .hero h1 { font-size: clamp(2.6rem, 5vw, 4.3rem); }
+.m14 .scene-3d, .m16 .scene-3d { inset: -60px -100px -60px -50px; }
+@media (max-width: 860px) { .m14 .scene-3d, .m16 .scene-3d { inset: 0; } }
+.m14 .stat, .m14 .pilier, .m14 .carte, .m14 .gov-col { background: var(--coin) 0 0 / 14px 1px no-repeat, var(--coin) 0 0 / 1px 14px no-repeat, var(--coin) 100% 100% / 14px 1px no-repeat, var(--coin) 100% 100% / 1px 14px no-repeat, var(--carte-fond); }
+.m14 .stat-l { font-size: 13.5px; letter-spacing: .01em; }
+.m14 .gov-n { font-size: 2.2rem; }
+.m14 .gouvernance .gov { position: relative; }
+.m14 .gouvernance .gov::before { content: ""; position: absolute; left: 0; right: 0; top: -18px; height: 2px; background: linear-gradient(90deg, var(--gold), rgba(201, 165, 76, .15)); transform: scaleX(var(--balayage, 1)); transform-origin: 0 50%; }
+
+/* --------------------------------------------------------------------------
+   15 · RELIEF — gris perle : un paysage de lignes agité qui s'apaise, une ligne d'or
+   -------------------------------------------------------------------------- */
+.m15 {
+    --fond: #F4F5F7; --fond-alt: #FFFFFF; --texte: #151C28; --texte-2: #4A5568; --titre: #0B1B33; --trait: #DEE2E9; --trait-fort: #C1C8D4;
+    --carte-fond: #FFFFFF; --chiffre: #0B1B33; --lien: #1A355F; --surtitre: #86681F; --rayon: 14px;
+    --f-titre: 'Crimson Pro', Georgia, serif; --g-titre: 500; --ls-titre: -.015em; --f-texte: 'Inter Tight', system-ui, sans-serif;
+    --entete-fond: rgba(244, 245, 247, .86); --entete-plein: #F4F5F7;
+    --hero-fond: linear-gradient(180deg, #FFFFFF, #EDEFF3);
+}
+.m15 .hero-art { position: static; }
+.m15 .scene-3d { inset: 0; }
+.m15 .hero::after { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(90deg, rgba(250, 250, 251, .95) 0%, rgba(250, 250, 251, .72) 40%, rgba(250, 250, 251, 0) 66%); }
+.m15 .hero-texte { z-index: 2; }
+.m15 .hero h1 { font-size: clamp(2.9rem, 5.8vw, 5rem); line-height: .98; }
+.m15 .tete h2, .m15 .deux-col h2 { font-size: clamp(2.2rem, 4vw, 3.2rem); }
+.m15 .stat::after { content: ""; display: block; height: 2px; margin-top: 20px; background: linear-gradient(90deg, var(--gold), var(--navy-900)); transform: scaleX(var(--jauge, 1)); transform-origin: 0 50%; }
+.m15 .stat, .m15 .pilier, .m15 .carte, .m15 .gov-col, .m15 .post { border-color: transparent; box-shadow: 0 18px 36px -30px rgba(6, 18, 42, .45), 0 0 0 1px rgba(11, 27, 51, .05); transform-style: preserve-3d; }
+.m15 .stat-v { font-size: 4rem; }
+@media (max-width: 860px) {
+    .m15 .hero-art { min-height: 0; margin: 0; }
+    .m15 .hero::after { background: linear-gradient(0deg, rgba(250, 250, 251, .97) 40%, rgba(250, 250, 251, .6) 70%, rgba(250, 250, 251, .1)); }
+    .m15 .hero-texte { padding-top: 220px; }
+}
+
+/* --------------------------------------------------------------------------
+   16 · TEXTES — ivoire, ouverture bleu nuit : les textes de loi tournent autour de l'emblème
+   -------------------------------------------------------------------------- */
+.m16 {
+    --fond: #F8F5EE; --fond-alt: #F0EBE0; --texte: #1A2130; --texte-2: #4C5465; --titre: #0B1B33; --trait: #E4DDCC; --trait-fort: #CBBE9E;
+    --carte-fond: #FFFDF8; --chiffre: #0B1B33; --lien: #1A355F; --surtitre: #86681F; --rayon: 6px;
+    --f-titre: 'Castoro', Georgia, serif; --g-titre: 400; --ls-titre: -.01em; --f-texte: 'Albert Sans', system-ui, sans-serif;
+    --entete-fond: rgba(248, 245, 238, .9); --entete-plein: #F8F5EE;
+    --hero-fond: radial-gradient(55% 75% at 75% 50%, #15305A, #0B1B33 60%, #06122A); --hero-titre: #F4EEDD; --hero-accent: var(--gold-light); --hero-texte-2: rgba(255, 255, 255, .74); --hero-surtitre: var(--gold);
+    --clair-bord: rgba(228, 205, 138, .5); --clair-texte: var(--gold-light);
+}
+.m16 .hero h1 { font-size: clamp(2.7rem, 5.4vw, 4.6rem); line-height: 1.02; }
+.m16 .gov-n { font-family: 'Castoro', Georgia, serif; font-style: italic; font-size: 3.6rem; color: var(--gold-600); }
+.m16 .stat-v { font-style: italic; }
+.m16 .pilier, .m16 .carte, .m16 .post, .m16 .gov-col { transform-style: preserve-3d; }
+.m16 .puce { background: #FFFDF8; }
+
+/* Barre de choix des maquettes : largeur de son contenu, flèches toujours cliquables */
+.selecteur { width: max-content; }
+.sel-fleche { flex: none; }
+
+/* ---- Sélecteur de maquette (hors maquette) ---- */
+.selecteur { position: fixed; z-index: 100; left: 50%; bottom: calc(14px + env(safe-area-inset-bottom, 0px)); translate: -50% 0; display: flex; align-items: center; gap: 6px; max-width: calc(100vw - 24px); padding: 6px; border-radius: 16px; background: rgba(8, 12, 22, .95); color: #fff; font: 500 13px/1.2 system-ui, -apple-system, 'Segoe UI', sans-serif; box-shadow: 0 16px 40px -12px rgba(0, 0, 0, .6); }
+.selecteur button { font: inherit; color: inherit; border: 0; cursor: pointer; border-radius: 11px; background: transparent; }
+.sel-fleche { width: 36px; height: 36px; font-size: 18px; }
+.sel-fleche:hover, .sel-choix button:hover { background: rgba(255, 255, 255, .1); }
+.sel-choix { display: flex; gap: 2px; }
+.sel-choix button { display: grid; gap: 2px; padding: 6px 12px; text-align: left; }
+.sel-choix button b { font-size: 13px; white-space: nowrap; }
+.sel-choix button span { font-size: 10.5px; opacity: .6; text-transform: uppercase; letter-spacing: .08em; white-space: nowrap; }
+.sel-choix button[aria-pressed="true"] { background: #E4CD8A; color: #06122A; }
+.selecteur :focus-visible { outline: 2px solid #E4CD8A; outline-offset: 2px; }
+.sel-actuel { display: none; padding: 0 8px; text-align: center; }
+.sel-actuel b { display: block; font-size: 13.5px; white-space: nowrap; }
+.sel-actuel span { font-size: 11px; opacity: .65; }
+@media (max-width: 1000px) { .sel-choix { display: none; } .sel-actuel { display: block; min-width: 180px; } }
+</style>
+
+<div class="site m12" id="site">
+    <div class="alerte" role="note">
+        <div class="wrap alerte-in">
+            <span><span class="pouls" aria-hidden="true"></span> Crise en cours ? Notre cellule d'intervention répond 24h/24, 7j/7.</span>
+            <a href="#">Déclencher la cellule de crise</a>
+        </div>
+    </div>
+
+    <header class="entete">
+        <div class="wrap entete-in">
+            <a class="marque" href="#">
+                <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M32 6 52 14v15c0 13.5-8.5 24-20 28-11.5-4-20-14.5-20-28V14z" fill="rgba(201,165,76,.12)" stroke="#C9A54C" stroke-width="3" stroke-linejoin="round"/><path d="M23.5 40 32 20l8.5 20M26.6 33h10.8" fill="none" stroke="#C9A54C" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span><span class="marque-nom">Aegis Fama &amp; Doxa</span><span class="marque-sous">Capital réputationnel</span></span>
+            </a>
+            <button type="button" class="burger" id="burger" aria-expanded="false" aria-controls="nav"><span></span><b style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Menu</b></button>
+            <nav id="nav" class="nav" aria-label="Navigation principale">
+                <ul>
+                    <li class="sous-menu"><a href="#">Expertises</a>
+                        <ul class="sous">
+                            <li><a href="#">Gestion de crise</a></li><li><a href="#">Avis hostiles</a></li><li><a href="#">Droit à l'oubli</a></li><li><a href="#">Diffamation en ligne</a></li><li><a href="#">Veille e-réputation</a></li><li><a href="#">Dirigeants &amp; Comex</a></li><li><a href="#">Audit &amp; due diligence</a></li><li><a href="#">SEO Shield</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Approche</a></li>
+                    <li><a href="#">Offres</a></li>
+                    <li><a href="#">Secteurs</a></li>
+                    <li><a href="#">Ressources</a></li>
+                    <li><a href="#">Le cabinet</a></li>
+                    <li><a class="btn btn-fantome" href="#">Espace client</a></li>
+                    <li><a class="btn btn-or" href="#">Nous contacter</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="wrap hero-grille">
+                <div class="hero-texte">
+                    <h1><span class="hero-surtitre surtitre-h">Cabinet de conseil en e-réputation</span> La Protection du <em>Capital Réputationnel</em></h1>
+                    <p class="lead">Avocats et experts du numérique réunis pour détecter, contenir et faire retirer les attaques en ligne qui visent votre entreprise et ses dirigeants. Riposte engagée sous 2 heures, en toute confidentialité.</p>
+                    <div class="hero-actions">
+                        <a class="btn btn-or" href="#">Demander un échange confidentiel</a>
+                        <a class="btn btn-clair" href="#">Cellule de crise 24/7</a>
+                    </div>
+                    <ul class="hero-preuves">
+                        <li><svg class="ic"><use href="#i-radar"/></svg> Veille 24h/24</li>
+                        <li><svg class="ic"><use href="#i-clock"/></svg> Riposte engagée sous 2 heures</li>
+                        <li><svg class="ic"><use href="#i-lock"/></svg> Accord de confidentialité dès le premier échange</li>
+                    </ul>
+                </div>
+                <div class="hero-art" aria-hidden="true">
+                    <div class="scene-3d"><canvas id="scene-3d"></canvas></div>
+                    <svg viewBox="0 0 420 420" class="embleme">
+                        <defs><radialGradient id="halo" cx="50%" cy="45%" r="55%"><stop offset="0" stop-color="#C9A54C" stop-opacity=".28"/><stop offset="1" stop-color="#C9A54C" stop-opacity="0"/></radialGradient></defs>
+                        <circle class="emb-halo" cx="210" cy="210" r="200" fill="url(#halo)"/>
+                        <circle class="emb-c1" cx="210" cy="210" r="170" fill="none" stroke="#C9A54C" stroke-opacity=".25" stroke-dasharray="2 8"/>
+                        <circle class="emb-c2" cx="210" cy="210" r="128" fill="none" stroke="#C9A54C" stroke-opacity=".35"/>
+                        <path class="emb-bouclier" d="M210 92 290 124v58c0 54-34 96-80 112-46-16-80-58-80-112v-58z" fill="#0B1B33" stroke="#C9A54C" stroke-width="5" stroke-linejoin="round"/>
+                        <path class="emb-a" d="M176 250 210 170l34 80M188.5 222h43" fill="none" stroke="#E4CD8A" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+                        <g class="emb-pois"><circle cx="380" cy="210" r="6" fill="#E4CD8A"/><circle cx="82" cy="110" r="4" fill="#E4CD8A" fill-opacity=".7"/><circle cx="120" cy="352" r="5" fill="#E4CD8A" fill-opacity=".6"/></g>
+                    </svg>
+                    <canvas class="radar" id="radar" width="840" height="840"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section class="pourquoi">
+            <div class="wrap">
+                <div class="tete">
+                    <p class="surtitre">Pourquoi maintenant</p>
+                    <h2>La perception est la nouvelle réalité</h2>
+                    <p>Un incident de réputation se propage en quelques minutes et peut détruire des années de confiance. Les dirigeants n'ont plus le luxe de l'improvisation.</p>
+                </div>
+                <div class="stats">
+                    <div class="stat"><span class="stat-v">24 h</span><span class="stat-l">Fenêtre critique avant qu'une crise numérique ne devienne difficilement réversible</span></div>
+                    <div class="stat"><span class="stat-v">3 mois</span><span class="stat-l">Délai pour agir en diffamation après une publication en ligne</span></div>
+                    <div class="stat"><span class="stat-v">0</span><span class="stat-l">Droit à l'erreur à l'ère de la viralité algorithmique</span></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="constat alt">
+            <div class="wrap deux-col">
+                <div>
+                    <p class="surtitre">Le constat</p>
+                    <h2>Trois terrains à tenir en même temps, un seul interlocuteur</h2>
+                    <p>Une atteinte à la réputation se joue simultanément sur le web, où tout va très vite, sur le terrain du droit, qui seul permet d'obtenir des retraits contraints et des réparations, et sur celui de la parole publique, où chaque mot engage. Quand ces compétences sont dispersées entre plusieurs prestataires, chaque heure de coordination profite à l'attaque.</p>
+                    <p><strong>Aegis Fama &amp; Doxa réunit experts du numérique et juristes au sein d'un guichet unique</strong>, confidentiel, qui parle directement le langage des comités de direction.</p>
+                    <a class="lien-fleche" href="#">Découvrir le cabinet</a>
+                </div>
+                <ul class="coches">
+                    <li><svg class="ic"><use href="#i-radar"/></svg><span><strong>Le numérique</strong> : détecter tôt, contenir la propagation, reprendre la première page de Google</span></li>
+                    <li><svg class="ic"><use href="#i-scale"/></svg><span><strong>Le droit</strong> : notifier, mettre en demeure, agir en justice dans les délais</span></li>
+                    <li><svg class="ic"><use href="#i-team"/></svg><span><strong>La parole</strong> : dire juste, au bon moment, sans aggraver votre exposition</span></li>
+                    <li><svg class="ic"><use href="#i-shield"/></svg><span><strong>Une seule équipe</strong> qui coordonne les trois, de la première alerte au dernier recours</span></li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="solution">
+            <div class="wrap">
+                <div class="tete">
+                    <p class="surtitre">Notre solution</p>
+                    <h2>Le bouclier intégral : détecter, neutraliser, réparer</h2>
+                </div>
+                <div class="piliers">
+                    <a class="pilier" href="#"><svg class="ic"><use href="#i-radar"/></svg><h3>Détecter</h3><p>Veille active, analyse des signaux faibles, surveillance algorithmique en temps réel.</p><span class="lien-fleche">Veille e-réputation</span></a>
+                    <a class="pilier" href="#"><svg class="ic"><use href="#i-shield"/></svg><h3>Neutraliser</h3><p>SEO Shield, modération d'urgence, traitement des contenus préjudiciables.</p><span class="lien-fleche">SEO Shield</span></a>
+                    <a class="pilier" href="#"><svg class="ic"><use href="#i-scale"/></svg><h3>Réparer</h3><p>Notifications de retrait, constats numériques, contentieux pénal et civil.</p><span class="lien-fleche">Diffamation en ligne</span></a>
+                </div>
+            </div>
+        </section>
+
+        <section class="expertises alt">
+            <div class="wrap">
+                <div class="tete">
+                    <p class="surtitre">Expertises</p>
+                    <h2>Une réponse à chaque menace</h2>
+                </div>
+                <div class="cartes">
+                    <a class="carte" href="#"><span class="carte-ic"><svg class="ic"><use href="#i-flame"/></svg></span><h3>Gestion de crise réputationnelle, 24 heures sur 24</h3><p>Cellule de crise e-réputation activable 24h/24 : riposte sous 2 heures, blocage juridique des contenus illicites, communication sous contrainte.</p><span class="lien-fleche">En savoir plus</span></a>
+                    <a class="carte" href="#"><span class="carte-ic"><svg class="ic"><use href="#i-star"/></svg></span><h3>Faux avis et avis hostiles : faire respecter les règles</h3><p>Faux avis et campagnes d'avis hostiles sur Google, Trustpilot ou Glassdoor : détection, signalement et notification juridique aux plateformes.</p><span class="lien-fleche">En savoir plus</span></a>
+                    <a class="carte" href="#"><span class="carte-ic"><svg class="ic"><use href="#i-eyeoff"/></svg></span><h3>Droit à l'oubli : faire déréférencer ce qui ne devrait plus vous suivre</h3><p>Faire déréférencer de Google et Bing des articles anciens, inexacts ou préjudiciables : dossier technique et juridique (RGPD, CJUE).</p><span class="lien-fleche">En savoir plus</span></a>
+                    <a class="carte" href="#"><span class="carte-ic"><svg class="ic"><use href="#i-scale"/></svg></span><h3>Diffamation en ligne : agir vite, et dans les règles</h3><p>Diffamation, injure, dénigrement en ligne : constat, notification LCEN à l'hébergeur, mise en demeure et action judiciaire. Délai de prescription de 3 mois.</p><span class="lien-fleche">En savoir plus</span></a>
+                    <a class="carte" href="#"><span class="carte-ic"><svg class="ic"><use href="#i-radar"/></svg></span><h3>Veille e-réputation : détecter avant que cela ne se voie</h3><p>Surveillance continue de la presse, des réseaux sociaux, des forums et des avis : signaux faibles, alertes immédiates et rapport mensuel.</p><span class="lien-fleche">En savoir plus</span></a>
+                    <a class="carte" href="#"><span class="carte-ic"><svg class="ic"><use href="#i-user"/></svg></span><h3>La réputation de vos dirigeants est un actif de l'entreprise</h3><p>E-réputation des dirigeants et du Comex : surveillance personnelle, données exposées, faux profils, personal branding et sécurisation VIP.</p><span class="lien-fleche">En savoir plus</span></a>
+                    <a class="carte" href="#"><span class="carte-ic"><svg class="ic"><use href="#i-audit"/></svg></span><h3>Due diligence réputationnelle : l'audit avant une opération</h3><p>Due diligence réputationnelle avant une levée de fonds, une fusion-acquisition ou une IPO : cartographie des risques et plan d'action daté.</p><span class="lien-fleche">En savoir plus</span></a>
+                    <a class="carte" href="#"><span class="carte-ic"><svg class="ic"><use href="#i-shield"/></svg></span><h3>SEO Shield : reprendre la maîtrise de votre page 1 Google</h3><p>Reprendre la maîtrise de la page 1 de Google : suivi des résultats sur votre nom, contenus d'autorité authentiques, déréférencement des URL éligibles.</p><span class="lien-fleche">En savoir plus</span></a>
+                </div>
+            </div>
+        </section>
+
+        <section class="gouvernance">
+            <div class="wrap">
+                <div class="tete">
+                    <p class="surtitre">Gouvernance de la réputation</p>
+                    <h2>Prévenir, guérir, sanctionner</h2>
+                </div>
+                <div class="gov">
+                    <div class="gov-col"><span class="gov-n">1</span><h3>Prévenir</h3><ul><li>Audits de vulnérabilité avant une levée de fonds, une fusion-acquisition ou une introduction en bourse</li><li>Chartes de gouvernance internes</li><li>Cartographie des risques réputationnels</li></ul><a class="lien-fleche" href="#">Audit et due diligence</a></div>
+                    <div class="gov-col"><span class="gov-n">2</span><h3>Guérir</h3><ul><li>Gestion de crise algorithmique</li><li>Traitement des avis frauduleux</li><li>Communication sous contrainte</li><li>Cellule d'intervention 24/7</li></ul><a class="lien-fleche" href="#">Gestion de crise</a></div>
+                    <div class="gov-col"><span class="gov-n">3</span><h3>Sanctionner</h3><ul><li>Procédures de droit à l'oubli</li><li>Poursuites pour diffamation, dénigrement et concurrence déloyale</li><li>Recours devant les juridictions compétentes</li></ul><a class="lien-fleche" href="#">Droit à l'oubli</a></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="offres sombre">
+            <div class="wrap">
+                <div class="tete">
+                    <p class="surtitre">Nos offres</p>
+                    <h2>Trois niveaux d'accompagnement</h2>
+                    <p>Un abonnement mensuel pour la veille et la prévention, des missions ponctuelles pour les urgences.</p>
+                </div>
+                <div class="plans">
+                    <div class="plan"><p class="plan-tag">Veille &amp; Alerte</p><h3>Aegis Sentinel</h3><p class="plan-pour">Pour surveiller et être prévenu avant les autres.</p><p class="plan-prix"><strong>2 500 €</strong> HT / mois</p><ul><li><svg class="ic"><use href="#i-check"/></svg> Veille stratégique web et réseaux sociaux, 24h/24</li><li><svg class="ic"><use href="#i-check"/></svg> Rapport de réputation mensuel</li><li><svg class="ic"><use href="#i-check"/></svg> Alerte immédiate sur les signaux faibles</li><li><svg class="ic"><use href="#i-check"/></svg> 2 heures de conseil juridique incluses par mois</li></ul></div>
+                    <div class="plan plan-vedette"><p class="plan-tag">Défense Proactive</p><h3>Aegis Shield</h3><p class="plan-pour">Pour défendre activement votre réputation.</p><p class="plan-prix"><strong>5 500 €</strong> HT / mois</p><ul><li><svg class="ic"><use href="#i-check"/></svg> Tout le pack Sentinel</li><li><svg class="ic"><use href="#i-check"/></svg> Stratégie de SEO Shielding</li><li><svg class="ic"><use href="#i-check"/></svg> Nettoyage et modération active des avis</li><li><svg class="ic"><use href="#i-check"/></svg> Retraits juridiques illimités (LCEN)</li><li><svg class="ic"><use href="#i-check"/></svg> 10 heures de conseil juridique incluses par mois</li></ul></div>
+                    <div class="plan"><p class="plan-tag">Souveraineté Totale</p><h3>Aegis Imperium</h3><p class="plan-pour">Pour les directions exposées et les situations sensibles.</p><p class="plan-prix"><strong>12 000 €</strong> HT / mois</p><ul><li><svg class="ic"><use href="#i-check"/></svg> Protection renforcée du Comex et des dirigeants</li><li><svg class="ic"><use href="#i-check"/></svg> Cellule de crise intégrée, prise en charge sous 15 minutes</li><li><svg class="ic"><use href="#i-check"/></svg> Personal branding et sécurisation VIP</li><li><svg class="ic"><use href="#i-check"/></svg> Expert digital et juriste dédiés</li></ul></div>
+                </div>
+                <p class="centre"><a class="btn btn-or" href="#">Comparer les offres</a></p>
+                <p class="centre note-entree">Pour commencer : le <a href="#">Diagnostic confidentiel</a>, 1 500 € HT prix fixe, livré en 5 jours ouvrés.</p>
+            </div>
+        </section>
+
+        <section class="technologie">
+            <div class="wrap deux-col">
+                <div>
+                    <p class="surtitre">Technologie</p>
+                    <h2>L'intelligence artificielle, sans compromis sur la confidentialité</h2>
+                    <p>Notre plateforme analyse en continu des milliers de contenus, détecte les attaques coordonnées et prépare les documents juridiques. Vos dossiers restent chiffrés, dans notre périmètre sécurisé : en mode souverain, aucune donnée n'est transmise à un service d'IA externe.</p>
+                    <a class="lien-fleche" href="#">Notre technologie</a>
+                </div>
+                <ul class="coches">
+                    <li><svg class="ic"><use href="#i-lock"/></svg><span><strong>Données chiffrées</strong> au repos, accès journalisés</span></li>
+                    <li><svg class="ic"><use href="#i-chip"/></svg><span><strong>Mode souverain</strong> : aucune donnée transmise à un service d'IA externe</span></li>
+                    <li><svg class="ic"><use href="#i-team"/></svg><span><strong>Validation humaine</strong> de chaque décision sensible</span></li>
+                    <li><svg class="ic"><use href="#i-doc"/></svg><span><strong>Relecture juridique</strong> par un second juriste avant tout envoi</span></li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="marches alt">
+            <div class="wrap">
+                <div class="tete">
+                    <p class="surtitre">Marchés</p>
+                    <h2>Là où le risque coûte le plus cher</h2>
+                </div>
+                <div class="puces">
+                    <a class="puce" href="#">Finance et gestion de patrimoine</a><a class="puce" href="#">Immobilier d'excellence</a><a class="puce" href="#">Santé</a><a class="puce" href="#">Luxe</a><a class="puce" href="#">ETI et scale-ups</a><a class="puce" href="#">Dirigeants et mandataires sociaux</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="premier-contact">
+            <div class="wrap">
+                <div class="tete">
+                    <p class="surtitre">Premier contact</p>
+                    <h2>Comment se passe le premier échange</h2>
+                    <p>Sans engagement, et sous le sceau de la confidentialité dès le premier message.</p>
+                </div>
+                <div class="gov etapes">
+                    <div class="gov-col"><span class="gov-n">1</span><h3>Vous exposez la situation</h3><p>Par le formulaire confidentiel ou par téléphone. Inutile d'entrer dans les détails sensibles à ce stade : quelques lignes suffisent.</p></div>
+                    <div class="gov-col"><span class="gov-n">2</span><h3>Un premier diagnostic</h3><p>Un consultant et un juriste analysent la situation avec vous, sous accord de non-divulgation si vous le souhaitez. Nous vous disons ce qui est possible, et ce qui ne l'est pas.</p></div>
+                    <div class="gov-col"><span class="gov-n">3</span><h3>Une proposition écrite</h3><p>Approche, calendrier et honoraires sont précisés par écrit avant tout démarrage. En cas d'urgence, la cellule de crise peut être activée immédiatement.</p></div>
+                </div>
+                <div class="pied-section">
+                    <p><strong>Ce que nous refusons de faire :</strong> faux avis, faux profils, faux sites, suppression de critiques légitimes, promesses de résultat. <a href="#">Nos principes</a></p>
+                    <a class="btn btn-sombre" href="#">Demander un échange confidentiel</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="ressources alt">
+            <div class="wrap">
+                <div class="tete tete-ligne">
+                    <div><p class="surtitre">Ressources</p><h2>Guides pratiques</h2></div>
+                    <a class="lien-fleche" href="#">Tous les guides</a>
+                </div>
+                <div class="posts">
+                    <article class="post"><p class="meta"><time datetime="2026-09-24">24 septembre 2026</time> · 6 min de lecture</p><h3><a href="#">Diffamation sur internet : que faire, et dans quels délais ?</a></h3><p>Définition, délai de trois mois, constat, notification à l'hébergeur, mise en demeure et action : les étapes à connaître.</p><a class="lien-fleche" href="#">Lire le guide</a></article>
+                    <article class="post"><p class="meta"><time datetime="2026-09-24">24 septembre 2026</time> · 5 min de lecture</p><h3><a href="#">Comment faire supprimer un avis Google illicite ?</a></h3><p>Ce que Google retire, comment signaler efficacement, les recours en cas de refus et les erreurs à éviter.</p><a class="lien-fleche" href="#">Lire le guide</a></article>
+                    <article class="post"><p class="meta"><time datetime="2026-09-24">24 septembre 2026</time> · 6 min de lecture</p><h3><a href="#">Droit à l'oubli : obtenir le déréférencement d'un article sur Google</a></h3><p>Qui peut en bénéficier, les critères de la CJUE, la procédure pas à pas et les recours en cas de refus.</p><a class="lien-fleche" href="#">Lire le guide</a></article>
+                </div>
+            </div>
+        </section>
+
+        <section class="faq">
+            <div class="wrap">
+                <div class="tete"><p class="surtitre">Questions fréquentes</p><h2>Vos questions</h2></div>
+                <div class="faq-liste">
+                    <details open><summary><h3>Qu'est-ce qu'un cabinet de conseil en e-réputation ?</h3></summary><p>C'est un cabinet qui surveille, protège et restaure la réputation en ligne d'une entreprise ou d'une personne. Aegis Fama &amp; Doxa a la particularité de réunir experts du numérique et juristes : nous agissons à la fois sur le terrain technique (veille, contenus, signalements) et sur le terrain légal (notifications, mises en demeure, actions).</p></details>
+                    <details><summary><h3>Pourquoi associer technique et droit ?</h3></summary><p>Parce qu'une atteinte à la réputation se joue sur les deux terrains à la fois. Les leviers techniques (veille, signalements, contenus) permettent d'agir en quelques heures ; les leviers juridiques (notifications, mises en demeure, actions) permettent d'obtenir des retraits contraints et des réparations. Coordonnés par une même équipe, ils se renforcent au lieu de se succéder.</p></details>
+                    <details><summary><h3>Travaillez-vous avec des particuliers ?</h3></summary><p>Nous accompagnons principalement des entreprises, leurs dirigeants et des personnalités exposées. N'hésitez pas à nous décrire votre situation.</p></details>
+                    <details><summary><h3>Pouvez-vous garantir la suppression d'un contenu ?</h3></summary><p>Non, et aucun cabinet sérieux ne le peut : la décision appartient à la plateforme, à l'éditeur ou au juge. Nous garantissons en revanche la rigueur de la démarche et la rapidité de notre intervention.</p></details>
+                </div>
+                <p class="centre"><a class="lien-fleche" href="#">Toutes les questions</a></p>
+            </div>
+        </section>
+    </main>
+
+    <section class="bandeau-cta">
+        <div class="wrap bandeau-cta-in">
+            <div>
+                <h2>Parlons de votre situation, en toute confidentialité</h2>
+                <p>Accord de non-divulgation dès le premier échange. Un consultant ou un juriste vous répond rapidement.</p>
+            </div>
+            <div class="bandeau-cta-actions">
+                <a class="btn btn-or" href="#">Demander un échange confidentiel</a>
+                <a class="btn btn-clair" href="#">Urgence 24/7</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="pied">
+        <div class="wrap pied-grille">
+            <div>
+                <a class="marque" href="#"><span class="marque-nom">Aegis Fama &amp; Doxa</span></a>
+                <p class="promesse">Allier l'action technologique immédiate à la force de frappe légale, pour protéger ce que vos bilans ne reflètent pas.</p>
+                <p class="conf-note"><span class="conf">Confidentiel</span> Accord de non-divulgation dès le premier échange.</p>
+            </div>
+            <div>
+                <h3>Expertises</h3>
+                <ul><li><a href="#">Gestion de crise</a></li><li><a href="#">Avis hostiles</a></li><li><a href="#">Droit à l'oubli</a></li><li><a href="#">Diffamation en ligne</a></li><li><a href="#">Veille e-réputation</a></li><li><a href="#">Dirigeants &amp; Comex</a></li><li><a href="#">Audit &amp; due diligence</a></li><li><a href="#">SEO Shield</a></li></ul>
+            </div>
+            <div>
+                <h3>Le cabinet</h3>
+                <ul><li><a href="#">Notre approche</a></li><li><a href="#">Nos offres</a></li><li><a href="#">Diagnostic confidentiel</a></li><li><a href="#">Secteurs</a></li><li><a href="#">Technologie et sécurité</a></li><li><a href="#">Ressources</a></li><li><a href="#">La lettre Aegis</a></li><li><a href="#">Questions fréquentes</a></li></ul>
+            </div>
+            <div>
+                <h3>Contact</h3>
+                <ul><li><a href="#">Formulaire confidentiel</a></li><li><a href="#">Espace client sécurisé</a></li></ul>
+            </div>
+        </div>
+        <div class="wrap pied-bas">
+            <span>© 2026 Aegis Fama &amp; Doxa</span>
+            <span><a href="#">Mentions légales</a> · <a href="#">Confidentialité</a> · <a href="#">Cookies</a> · <a href="#">Plan du site</a></span>
+        </div>
+    </footer>
+
+    <nav class="cta-mobile" aria-label="Contact rapide">
+        <a class="btn btn-or" href="#">Échange confidentiel</a>
+        <a class="btn btn-clair" href="#">Urgence 24/7</a>
+    </nav>
+</div>
+
+<nav class="selecteur" aria-label="Choisir une maquette">
+    <button type="button" class="sel-fleche" id="sel-prec" aria-label="Maquette précédente">‹</button>
+    <div class="sel-choix" id="sel-choix"></div>
+    <p class="sel-actuel" id="sel-actuel" aria-live="polite"></p>
+    <button type="button" class="sel-fleche" id="sel-suiv" aria-label="Maquette suivante">›</button>
+</nav>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script>
+(function () {
+    'use strict';
+    const MAQUETTES = {
+        12: { nom: 'Dossier', type: 'Pièces 3D, ivoire' },
+        13: { nom: 'Palais', type: 'Colonnade 3D, de nuit' },
+        14: { nom: 'Radar', type: 'Veille 3D, bleu nuit' },
+        15: { nom: 'Relief', type: 'Lignes 3D, gris perle' },
+        16: { nom: 'Textes', type: 'Anneaux de loi 3D' }
+    };
+    const NUMEROS = [12, 13, 14, 15, 16];
+    const site = document.getElementById('site');
+    const reduit = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const G = window.gsap, ST = window.ScrollTrigger;
+    const aGsap = Boolean(G && ST);
+    if (aGsap) G.registerPlugin(ST);
+    const choix = document.getElementById('sel-choix');
+    const actuel = document.getElementById('sel-actuel');
+    let courante = 12, animations = null;
+
+    // Maquettes seulement : les pages internes n'ont pas d'adresse ici.
+    document.querySelectorAll('.site a[href="#"]').forEach(function (a) { a.addEventListener('click', function (e) { e.preventDefault(); }); });
+
+    let lenis = null;
+    if (!reduit && window.Lenis) {
+        lenis = new window.Lenis({ lerp: 0.1, smoothWheel: true });
+        if (aGsap) { lenis.on('scroll', ST.update); G.ticker.add(function (t) { lenis.raf(t * 1000); }); G.ticker.lagSmoothing(0); }
+        else { (function f(t) { lenis.raf(t); requestAnimationFrame(f); })(performance.now()); }
+    }
+    function allerEnHaut() { if (lenis) lenis.scrollTo(0, { immediate: true }); else window.scrollTo(0, 0); }
+
+    // Titre : chaque mot glisse depuis son masque ; le surtitre reste d'un seul tenant.
+    const titre = document.querySelector('.hero h1');
+    function decouper(noeud) {
+        Array.from(noeud.childNodes).forEach(function (n) {
+            if (n.nodeType === 3) {
+                const frag = document.createDocumentFragment();
+                n.textContent.split(/(\s+)/).forEach(function (m) {
+                    if (!m) return;
+                    if (/^\s+$/.test(m)) { frag.appendChild(document.createTextNode(' ')); return; }
+                    const o = document.createElement('span'); o.className = 'mot';
+                    const i = document.createElement('span'); i.className = 'mot-i'; i.textContent = m;
+                    o.appendChild(i); frag.appendChild(o);
+                });
+                n.replaceWith(frag);
+            } else if (n.nodeType === 1 && !n.classList.contains('hero-surtitre')) decouper(n);
+        });
+    }
+    titre.setAttribute('aria-label', titre.textContent.replace(/\s+/g, ' ').trim());
+    decouper(titre);
+
+    NUMEROS.forEach(function (n) {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.innerHTML = '<b>' + n + ' · ' + MAQUETTES[n].nom + '</b><span>' + MAQUETTES[n].type + '</span>';
+        b.addEventListener('click', function () { afficher(n, true); });
+        choix.appendChild(b);
+    });
+    function voisine(sens) { const i = NUMEROS.indexOf(courante); return NUMEROS[(i + sens + NUMEROS.length) % NUMEROS.length]; }
+    document.getElementById('sel-prec').addEventListener('click', function () { afficher(voisine(-1), true); });
+    document.getElementById('sel-suiv').addEventListener('click', function () { afficher(voisine(1), true); });
+
+    const burger = document.getElementById('burger');
+    burger.addEventListener('click', function () {
+        const ouvert = !site.classList.contains('menu-ouvert');
+        site.classList.toggle('menu-ouvert', ouvert);
+        burger.setAttribute('aria-expanded', String(ouvert));
+    });
+
+    // ---- Outils d'animation (créés tout de suite, annulables au changement de maquette) ----
+    function apparaitre(elements, depart, options) {
+        const els = G.utils.toArray(elements);
+        if (!els.length) return;
+        const fin = { opacity: 1, x: 0, y: 0, scale: 1, rotateX: 0, rotateY: 0, rotate: 0, clipPath: 'inset(0% 0% 0% 0% round 0px)', duration: 1, ease: 'power3.out' };
+        Object.keys(fin).forEach(function (k) { if (!(k in depart) && ['duration', 'ease'].indexOf(k) < 0) delete fin[k]; });
+        els.forEach(function (el, i) {
+            const rang = el.parentElement ? Array.prototype.indexOf.call(el.parentElement.children, el) : i;
+            G.fromTo(el, Object.assign({}, depart), Object.assign({}, fin, { delay: (rang % 4) * 0.09, scrollTrigger: { trigger: el, start: 'top 90%', once: true } }, options || {}));
+        });
+    }
+    function compteurs() {
+        G.utils.toArray('.stat-v').forEach(function (el) {
+            const texte = el.textContent, m = texte.match(/\d+/);
+            if (!m) return;
+            const cible = Number(m[0]), avant = texte.slice(0, m.index), apres = texte.slice(m.index + m[0].length), o = { v: 0 };
+            ST.create({ trigger: el, start: 'top 90%', once: true, onEnter: function () {
+                G.fromTo(o, { v: 0 }, { v: cible, duration: 1.6, ease: 'power2.out', onUpdate: function () { el.textContent = avant + Math.round(o.v) + apres; }, onComplete: function () { el.textContent = texte; } });
+            } });
+        });
+    }
+    function entreeTitre(duree) {
+        G.from('.hero h1 .mot-i', { yPercent: 115, duration: duree || 1.2, ease: 'expo.out', stagger: 0.06, delay: 0.15 });
+        G.from('.hero-surtitre, .hero .lead, .hero-actions, .hero-preuves li', { y: 22, opacity: 0, duration: 0.9, ease: 'power3.out', stagger: 0.07, delay: 0.3 });
+    }
+    function inclinaison(selecteur, force) {
+        const nettoyages = [];
+        G.utils.toArray(selecteur).forEach(function (c) {
+            const rx = G.quickTo(c, 'rotateX', { duration: 0.5, ease: 'power3' }), ry = G.quickTo(c, 'rotateY', { duration: 0.5, ease: 'power3' });
+            G.set(c, { transformPerspective: 900 });
+            const bouge = function (e) { const r = c.getBoundingClientRect(); ry(((e.clientX - r.left) / r.width - 0.5) * force); rx((0.5 - (e.clientY - r.top) / r.height) * force * 0.8); };
+            const sort = function () { rx(0); ry(0); };
+            c.addEventListener('pointermove', bouge); c.addEventListener('pointerleave', sort);
+            nettoyages.push(function () { c.removeEventListener('pointermove', bouge); c.removeEventListener('pointerleave', sort); G.set(c, { clearProps: 'transform' }); });
+        });
+        return function () { nettoyages.forEach(function (f) { f(); }); };
+    }
+    function aimant(selecteur) {
+        const nettoyages = [];
+        G.utils.toArray(selecteur).forEach(function (b) {
+            const bouge = function (e) { const r = b.getBoundingClientRect(); G.to(b, { x: (e.clientX - r.left - r.width / 2) * 0.22, y: (e.clientY - r.top - r.height / 2) * 0.32, duration: 0.4, ease: 'power3.out', overwrite: 'auto' }); };
+            const sort = function () { G.to(b, { x: 0, y: 0, duration: 0.9, ease: 'elastic.out(1, 0.4)', overwrite: 'auto' }); };
+            b.addEventListener('pointermove', bouge); b.addEventListener('pointerleave', sort);
+            nettoyages.push(function () { b.removeEventListener('pointermove', bouge); b.removeEventListener('pointerleave', sort); G.set(b, { clearProps: 'transform' }); });
+        });
+        return function () { nettoyages.forEach(function (f) { f(); }); };
+    }
+    const TOUT = 'main > section:not(.hero) .tete';
+
+    const TITRES = TOUT + ' h2, .deux-col h2';
+    // Pour les éléments qui alternent de sens : leur rang parmi leurs voisins.
+    function rang(el) { return el.parentElement ? Array.prototype.indexOf.call(el.parentElement.children, el) : 0; }
+
+    const CHOREGRAPHIES = {
+        12: function () {
+            entreeTitre(1.2);
+            // Sous chaque titre, un filet d'or se trace.
+            G.utils.toArray(TITRES).forEach(function (h) {
+                G.fromTo(h, { '--trait': 0 }, { '--trait': 1, duration: 1.1, ease: 'power3.inOut', delay: 0.3, scrollTrigger: { trigger: h, start: 'top 88%', once: true } });
+            });
+            apparaitre(TOUT + ', .deux-col > div', { opacity: 0, y: 30 });
+            // Les blocs se posent comme des feuilles sur un bureau.
+            G.utils.toArray('.stat, .pilier, .carte, .post, .gov-col').forEach(function (el) {
+                const r = rang(el);
+                G.fromTo(el, { opacity: 0, y: 50, rotate: (r % 2 ? 1 : -1) * 2.5 }, { opacity: 1, y: 0, rotate: 0, duration: 1.1, ease: 'power3.out', delay: (r % 4) * 0.08, scrollTrigger: { trigger: el, start: 'top 90%', once: true } });
+            });
+            apparaitre('.coches li', { opacity: 0, x: -24 });
+            // Les numéros sont apposés comme un tampon.
+            G.utils.toArray('.gov-n').forEach(function (n) {
+                G.fromTo(n, { scale: 2.2, opacity: 0, rotate: -14 }, { scale: 1, opacity: 1, rotate: 0, duration: 0.55, ease: 'back.out(2.2)', delay: 0.45 + (rang(n.parentElement) % 3) * 0.08, scrollTrigger: { trigger: n, start: 'top 88%', once: true } });
+            });
+            apparaitre('.plan', { opacity: 0, y: 60 });
+            apparaitre('.puce', { opacity: 0, y: 14 }, { duration: 0.6 });
+            apparaitre('.faq details', { opacity: 0, y: 20 });
+            compteurs();
+            return aimant('.hero-actions .btn');
+        },
+        13: function () {
+            G.from('.hero h1 .mot-i', { yPercent: 115, duration: 1.6, ease: 'expo.out', stagger: 0.09, delay: 0.3 });
+            G.from('.hero-surtitre, .hero .lead, .hero-actions, .hero-preuves li', { y: 22, opacity: 0, duration: 1.1, ease: 'power3.out', stagger: 0.1, delay: 0.7 });
+            G.to('.hero-texte', { yPercent: -8, opacity: 0.25, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
+            // Les titres montent derrière leur ligne, lentement.
+            G.utils.toArray(TITRES).forEach(function (h) {
+                G.fromTo(h, { clipPath: 'inset(0% 0% 100% 0%)', y: 40 }, { clipPath: 'inset(0% 0% 0% 0%)', y: 0, duration: 1.3, ease: 'power4.out', clearProps: 'clipPath', scrollTrigger: { trigger: h, start: 'top 90%', once: true } });
+            });
+            apparaitre(TOUT + ' .surtitre, ' + TOUT + ' p:not(.surtitre), .deux-col p, .deux-col .lien-fleche', { opacity: 0, y: 20 });
+            // Les trois piliers et les trois offres s'élèvent comme des colonnes.
+            apparaitre('.pilier, .plan', { clipPath: 'inset(100% 0% 0% 0% round 0px)' }, { duration: 1.5, ease: 'power4.inOut', clearProps: 'clipPath' });
+            apparaitre('.stat, .coches li, .carte, .gov-col, .post, .faq details', { opacity: 0, y: 40 }, { duration: 1.2 });
+            apparaitre('.puce', { opacity: 0, y: 14 }, { duration: 0.7 });
+            compteurs();
+            return aimant('.hero-actions .btn');
+        },
+        14: function (grand) {
+            entreeTitre(1.1);
+            apparaitre(TOUT + ', .deux-col > div', { opacity: 0, y: 30 });
+            apparaitre('.stat, .pilier, .carte, .post, .faq details, .coches li', { opacity: 0, scale: 0.94 }, { duration: 0.9, ease: 'expo.out' });
+            if (grand) {
+                // Gouvernance épinglée : prévenir, guérir, sanctionner s'allument à tour de rôle.
+                const tl = G.timeline({ scrollTrigger: { trigger: '.gouvernance', start: 'top top', end: '+=110%', pin: true, scrub: 0.6 } });
+                tl.fromTo('.gouvernance .gov-col', { opacity: 0.12, y: 50 }, { opacity: 1, y: 0, stagger: 0.5, duration: 0.6, ease: 'power2.out' }, 0);
+                tl.fromTo('.gouvernance .gov', { '--balayage': 0 }, { '--balayage': 1, duration: 1.6, ease: 'none' }, 0);
+                apparaitre('.premier-contact .gov-col', { opacity: 0, y: 36 });
+            } else apparaitre('.gov-col', { opacity: 0, y: 36 });
+            apparaitre('.plan', { opacity: 0, y: 50 });
+            apparaitre('.puce', { opacity: 0, scale: 0.8 }, { duration: 0.6, ease: 'back.out(2)' });
+            compteurs();
+            const a = inclinaison('.carte', 8), b = aimant('.hero-actions .btn');
+            return function () { a(); b(); };
+        },
+        15: function () {
+            entreeTitre(1.3);
+            // Les titres se dévoilent de gauche à droite.
+            G.utils.toArray(TITRES).forEach(function (h) {
+                G.fromTo(h, { clipPath: 'inset(0% 100% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.3, ease: 'power4.inOut', clearProps: 'clipPath', scrollTrigger: { trigger: h, start: 'top 88%', once: true } });
+            });
+            apparaitre(TOUT + ' .surtitre, ' + TOUT + ' p:not(.surtitre), .deux-col p, .deux-col .lien-fleche', { opacity: 0, y: 18 });
+            apparaitre('.stat', { opacity: 0, y: 40 });
+            G.utils.toArray('.stat').forEach(function (s) {
+                G.fromTo(s, { '--jauge': 0 }, { '--jauge': 1, duration: 1.6, ease: 'power2.out', delay: 0.2, scrollTrigger: { trigger: s, start: 'top 90%', once: true } });
+            });
+            apparaitre('.coches li, .pilier, .carte, .gov-col, .post, .faq details', { opacity: 0, y: 40, rotateX: -12 }, { transformPerspective: 900 });
+            apparaitre('.plan', { opacity: 0, rotateX: -30, y: 40 }, { transformPerspective: 1100, transformOrigin: '50% 0%' });
+            apparaitre('.puce', { opacity: 0, y: 12 }, { duration: 0.6 });
+            compteurs();
+            const a = inclinaison('.pilier, .carte, .post', 9), b = aimant('.hero-actions .btn');
+            return function () { a(); b(); };
+        },
+        16: function () {
+            entreeTitre(1.4);
+            // Titres : flous puis nets, comme une page qui vient au point.
+            G.utils.toArray(TITRES + ', .bandeau-cta h2').forEach(function (h) {
+                G.fromTo(h, { opacity: 0, y: 16, filter: 'blur(8px)' }, { opacity: 1, y: 0, filter: 'blur(0px)', duration: 1.3, ease: 'power3.out', clearProps: 'filter', scrollTrigger: { trigger: h, start: 'top 90%', once: true } });
+            });
+            apparaitre(TOUT + ' .surtitre, ' + TOUT + ' p:not(.surtitre), .deux-col p, .deux-col .lien-fleche', { opacity: 0, y: 16 });
+            apparaitre('.stat, .coches li, .faq details', { opacity: 0, y: 30 });
+            // Les cartes s'ouvrent comme les pages d'un code.
+            apparaitre('.pilier, .carte, .gov-col, .post', { opacity: 0, rotateY: -28, x: -20 }, { transformPerspective: 1000, transformOrigin: '0% 50%', duration: 1.2 });
+            apparaitre('.plan', { opacity: 0, y: 60, scale: 0.96 });
+            apparaitre('.puce', { opacity: 0, y: 12 }, { duration: 0.6 });
+            compteurs();
+            return aimant('.hero-actions .btn');
+        }
+    };
+
+    function lancerAnimations() {
+        if (animations) { animations.revert(); animations = null; }
+        if (!aGsap || reduit) return;
+        animations = G.matchMedia();
+        animations.add({ grand: '(min-width: 900px)', petit: '(max-width: 899px)' }, function (ctx) {
+            const retirer = CHOREGRAPHIES[courante](ctx.conditions.grand);
+            return function () { if (typeof retirer === 'function') retirer(); };
+        });
+        ST.refresh();
+    }
+
+    function afficher(n, defiler) {
+        courante = n;
+        const ouvert = site.classList.contains('menu-ouvert');
+        if (animations) { animations.revert(); animations = null; }
+        site.className = 'site m' + n + (ouvert ? ' menu-ouvert' : '');
+        choix.querySelectorAll('button').forEach(function (b, i) { b.setAttribute('aria-pressed', String(NUMEROS[i] === n)); });
+        actuel.innerHTML = '<b>Maquette ' + n + ' · ' + MAQUETTES[n].nom + '</b><span>' + MAQUETTES[n].type + '</span>';
+        try { localStorage.setItem('aegis-maquette-3d-2', String(n)); } catch (e) {}
+        if (location.hash !== '#m' + n) history.replaceState(null, '', '#m' + n);
+        if (defiler) allerEnHaut();
+        window.AE_MAQUETTE = n;
+        document.dispatchEvent(new CustomEvent('maquette', { detail: n }));
+        requestAnimationFrame(lancerAnimations);
+    }
+
+    let depart = 12;
+    const h = (location.hash || '').match(/^#m(12|13|14|15|16)$/);
+    if (h) depart = Number(h[1]);
+    else { try { const s = Number(localStorage.getItem('aegis-maquette-3d-2')); if (NUMEROS.indexOf(s) >= 0) depart = s; } catch (e) {} }
+    afficher(depart, false);
+    window.addEventListener('load', function () { if (aGsap) ST.refresh(); });
+})();
+</script>
+<script type="importmap">
+{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/" } }
+</script>
+<script type="module">
+// Scènes 3D de l'ouverture d'Aegis (Three.js), maquettes 12 à 16 : une par maquette, reconstruite à chaque changement.
+import * as THREE from 'three';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+
+const canvas = document.getElementById('scene-3d');
+const boite = canvas.parentElement;
+const reduit = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+let renderer;
+try {
+    renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true, powerPreference: 'high-performance' });
+} catch (e) {
+    renderer = null;
+}
+
+const lisse = (a, b, x) => { const t = Math.min(1, Math.max(0, (x - a) / (b - a))); return t * t * (3 - 2 * t); };
+const doux = x => x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+const sortie = x => 1 - Math.pow(1 - x, 3);
+const alea = (a, b) => a + Math.random() * (b - a);
+const TAN = Math.tan(THREE.MathUtils.degToRad(15));
+const OR = 0xD4AF5A, NUIT = 0x0B1B33;
+const matOr = (r) => new THREE.MeshStandardMaterial({ color: OR, metalness: 1, roughness: r === undefined ? 0.22 : r });
+const matNuit = () => new THREE.MeshPhysicalMaterial({ color: NUIT, metalness: 0.55, roughness: 0.28, clearcoat: 1, clearcoatRoughness: 0.08 });
+
+function rondRect(x, px, py, l, h, r) { x.beginPath(); x.moveTo(px + r, py); x.arcTo(px + l, py, px + l, py + h, r); x.arcTo(px + l, py + h, px, py + h, r); x.arcTo(px, py + h, px, py, r); x.arcTo(px, py, px + l, py, r); x.closePath(); }
+function textureDepuis(c) {
+    const t = new THREE.CanvasTexture(c);
+    t.colorSpace = THREE.SRGBColorSpace;
+    t.anisotropy = renderer ? renderer.capabilities.getMaxAnisotropy() : 1;
+    return t;
+}
+function espacer(x, valeur) { try { x.letterSpacing = valeur; } catch (e) {} }
+function spriteRond() {
+    const c = document.createElement('canvas'); c.width = c.height = 64;
+    const x = c.getContext('2d'), g = x.createRadialGradient(32, 32, 0, 32, 32, 32);
+    g.addColorStop(0, 'rgba(255,255,255,1)'); g.addColorStop(0.3, 'rgba(255,255,255,.55)'); g.addColorStop(1, 'rgba(255,255,255,0)');
+    x.fillStyle = g; x.fillRect(0, 0, 64, 64);
+    return new THREE.CanvasTexture(c);
+}
+function ombreSol(l, h, force) {
+    const c = document.createElement('canvas'); c.width = c.height = 256;
+    const x = c.getContext('2d'), g = x.createRadialGradient(128, 128, 0, 128, 128, 128);
+    g.addColorStop(0, 'rgba(6,18,42,' + force + ')'); g.addColorStop(0.6, 'rgba(6,18,42,' + (force * 0.35) + ')'); g.addColorStop(1, 'rgba(6,18,42,0)');
+    x.fillStyle = g; x.fillRect(0, 0, 256, 256);
+    const m = new THREE.Mesh(new THREE.PlaneGeometry(l, h), new THREE.MeshBasicMaterial({ map: new THREE.CanvasTexture(c), transparent: true, depthWrite: false }));
+    m.rotation.x = -Math.PI / 2;
+    return m;
+}
+function poussiere(nb, etendue, taille, couleur, opacite) {
+    const pos = new Float32Array(nb * 3);
+    for (let i = 0; i < nb; i++) { pos[i * 3] = alea(-etendue, etendue); pos[i * 3 + 1] = alea(-etendue * 0.7, etendue * 0.7); pos[i * 3 + 2] = alea(-etendue, etendue * 0.3); }
+    const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+    return new THREE.Points(g, new THREE.PointsMaterial({ size: taille, map: spriteRond(), color: couleur, transparent: true, opacity: opacite, depthWrite: false, blending: THREE.AdditiveBlending }));
+}
+// Place la caméra pour qu'un objet de largeur l et de hauteur h tienne dans le cadre.
+function recul(l, h, aspect) { return Math.max(h / (2 * TAN), l / (2 * TAN * aspect)); }
+
+// L'emblème du site (bouclier et « A »), repris de son tracé SVG (repère 420 × 420).
+function formeBouclier(k) {
+    const X = x => (x - 210) * k, Y = y => -(y - 193) * k;
+    const s = new THREE.Shape();
+    s.moveTo(X(210), Y(92));
+    s.lineTo(X(290), Y(124));
+    s.lineTo(X(290), Y(182));
+    s.bezierCurveTo(X(290), Y(236), X(256), Y(278), X(210), Y(294));
+    s.bezierCurveTo(X(164), Y(278), X(130), Y(236), X(130), Y(182));
+    s.lineTo(X(130), Y(124));
+    s.closePath();
+    return s;
+}
+function lettreA(k, rayon, mat) {
+    const X = x => (x - 210) * k, Y = y => -(y - 193) * k;
+    const g = new THREE.Group();
+    const v = p => new THREE.Vector3(X(p[0]), Y(p[1]), 0);
+    [[[176, 250], [210, 170]], [[210, 170], [244, 250]], [[188.5, 222], [231.5, 222]]].forEach(function (s) {
+        g.add(new THREE.Mesh(new THREE.TubeGeometry(new THREE.LineCurve3(v(s[0]), v(s[1])), 1, rayon, 20, false), mat));
+    });
+    [[176, 250], [210, 170], [244, 250], [188.5, 222], [231.5, 222]].forEach(function (p) {
+        const b = new THREE.Mesh(new THREE.SphereGeometry(rayon, 20, 14), mat); b.position.copy(v(p)); g.add(b);
+    });
+    return g;
+}
+function bouclierMassif(k, profondeur, biseau, matFace, matTranche) {
+    const geo = new THREE.ExtrudeGeometry(formeBouclier(k), { depth: profondeur, bevelEnabled: true, bevelThickness: biseau, bevelSize: biseau * 0.85, bevelSegments: 8, curveSegments: 64 });
+    geo.center();
+    return new THREE.Mesh(geo, [matFace, matTranche]);
+}
+
+// ---- 12 · Dossier : la chemise s'ouvre, les pièces du dossier se déploient en éventail ----
+const PIECES = [
+    { n: 1, titre: ['Constat de commissaire', 'de justice'], ref: 'AFD-2026-0412' },
+    { n: 2, titre: ['Notification de', 'contenu illicite'], ref: 'AFD-2026-0413' },
+    { n: 3, titre: ['Demande de', 'déréférencement'], ref: 'AFD-2026-0415' },
+    { n: 4, titre: ['Rapport de veille'], ref: 'AFD-2026-0416' },
+    { n: 5, titre: ['Mise en demeure'], ref: 'AFD-2026-0414', tampon: true }
+];
+function dessinerPiece(p) {
+    const c = document.createElement('canvas'); c.width = 580; c.height = 820;
+    const x = c.getContext('2d'), W = 580, H = 820;
+    x.fillStyle = '#FFFFFF'; x.fillRect(0, 0, W, H);
+    for (let i = 0; i < 900; i++) { x.fillStyle = 'rgba(11,27,51,' + alea(0.01, 0.035).toFixed(3) + ')'; x.fillRect(alea(0, W), alea(0, H), 1.5, 1.5); }
+    x.fillStyle = '#0B1B33'; x.font = '600 14px "Source Sans 3", sans-serif'; espacer(x, '3px'); x.fillText('AEGIS FAMA & DOXA', 50, 66); espacer(x, '0px');
+    x.textAlign = 'right'; x.fillStyle = '#86681F'; x.font = 'italic 400 16px "Libre Baskerville", Georgia, serif'; x.fillText('Pièce n° ' + p.n, W - 50, 66); x.textAlign = 'left';
+    x.fillStyle = '#C9A54C'; x.fillRect(50, 84, W - 100, 1.5);
+    x.fillStyle = '#0B1B33'; x.font = '400 28px "Libre Baskerville", Georgia, serif';
+    p.titre.forEach(function (l, i) { x.fillText(l, 50, 148 + i * 40); });
+    let y = 148 + p.titre.length * 40;
+    x.fillStyle = '#5F6A7B'; x.font = '400 15px "Source Sans 3", sans-serif'; x.fillText('Réf. ' + p.ref + '  ·  Confidentiel', 50, y); y += 46;
+    x.fillStyle = 'rgba(20,27,38,.15)';
+    for (let l = 0; l < 17; l++) { if (l === 5 || l === 11) { y += 16; continue; } const w = (l === 4 || l === 10 || l === 16) ? alea(140, 260) : alea(400, 480); x.fillRect(50, y, w, 7); y += 24; }
+    x.strokeStyle = '#1A355F'; x.lineWidth = 2.2; x.lineCap = 'round';
+    x.beginPath(); x.moveTo(W - 230, H - 104); x.bezierCurveTo(W - 210, H - 150, W - 190, H - 70, W - 170, H - 116); x.bezierCurveTo(W - 150, H - 150, W - 140, H - 80, W - 110, H - 110); x.bezierCurveTo(W - 96, H - 124, W - 84, H - 104, W - 70, H - 112); x.stroke();
+    x.fillStyle = '#5F6A7B'; x.font = '400 13px "Source Sans 3", sans-serif'; x.fillText('Le juriste en charge du dossier', W - 250, H - 66);
+    if (p.tampon) {
+        x.save(); x.translate(170, H - 150); x.rotate(-0.16); x.strokeStyle = x.fillStyle = 'rgba(26,53,95,.78)';
+        x.lineWidth = 3.5; rondRect(x, -118, -34, 236, 68, 8); x.stroke(); x.lineWidth = 1.2; rondRect(x, -110, -26, 220, 52, 5); x.stroke();
+        x.font = '700 24px "Source Sans 3", sans-serif'; espacer(x, '5px'); x.textAlign = 'center'; x.textBaseline = 'middle'; x.fillText('CONFIDENTIEL', 3, 2);
+        x.restore();
+    }
+    return c;
+}
+function dessinerEtiquetteDossier() {
+    const c = document.createElement('canvas'); c.width = 480; c.height = 240;
+    const x = c.getContext('2d');
+    x.fillStyle = '#FBFAF6'; x.fillRect(0, 0, 480, 240);
+    x.strokeStyle = '#C9A54C'; x.lineWidth = 3; x.strokeRect(12, 12, 456, 216);
+    x.fillStyle = '#86681F'; x.font = '600 16px "Source Sans 3", sans-serif'; espacer(x, '4px'); x.textAlign = 'center'; x.fillText('AEGIS FAMA & DOXA', 240, 64); espacer(x, '0px');
+    x.fillStyle = '#0B1B33'; x.font = '400 34px "Libre Baskerville", Georgia, serif'; x.fillText('Dossier', 240, 124);
+    x.font = 'italic 400 22px "Libre Baskerville", Georgia, serif'; x.fillText('confidentiel', 240, 160);
+    x.fillStyle = '#5F6A7B'; x.font = '400 16px "Source Sans 3", sans-serif'; x.fillText('Réf. AFD-2026-04', 240, 200);
+    return c;
+}
+function trombone(mat) {
+    const pts = [];
+    const ligne = (a, b) => { for (let i = 0; i <= 6; i++) pts.push(new THREE.Vector3(a[0] + (b[0] - a[0]) * i / 6, a[1] + (b[1] - a[1]) * i / 6, 0)); };
+    const arc = (cx, cy, r, a0, a1) => { for (let i = 1; i <= 14; i++) { const a = a0 + (a1 - a0) * i / 14; pts.push(new THREE.Vector3(cx + Math.cos(a) * r, cy + Math.sin(a) * r, 0)); } };
+    ligne([-0.06, 0.2], [-0.06, -0.4]); arc(0, -0.4, 0.06, Math.PI, 2 * Math.PI);
+    ligne([0.06, -0.4], [0.06, 0.5]); arc(-0.03, 0.5, 0.09, 0, Math.PI);
+    ligne([-0.12, 0.5], [-0.12, -0.55]); arc(0, -0.55, 0.12, Math.PI, 2 * Math.PI);
+    ligne([0.12, -0.55], [0.12, 0.3]);
+    return new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts), 260, 0.014, 10, false), mat);
+}
+function sceneDossier(env) {
+    const scene = new THREE.Scene(); scene.environment = env;
+    const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 100);
+    scene.add(new THREE.HemisphereLight(0xffffff, 0x9a8f7a, 0.8));
+    const cle = new THREE.DirectionalLight(0xfff6e8, 1.3); cle.position.set(-4, 6, 8); scene.add(cle);
+    const groupe = new THREE.Group(); scene.add(groupe);
+    const L = 3.3, H = 4.5, pL = 2.9, pH = 4.1;
+    const carton = new THREE.MeshStandardMaterial({ color: 0x12264A, roughness: 0.55, metalness: 0.1 });
+    const dos = new THREE.Mesh(new THREE.BoxGeometry(L, H, 0.04), carton); groupe.add(dos);
+    const charniere = new THREE.Group(); charniere.position.set(-L / 2, 0, 0.36); groupe.add(charniere);
+    const couverture = new THREE.Mesh(new THREE.BoxGeometry(L, H, 0.04), carton); couverture.position.x = L / 2; charniere.add(couverture);
+    const lisere = new THREE.Mesh(new THREE.BoxGeometry(L - 0.24, 0.02, 0.05), matOr(0.3)); lisere.position.set(L / 2, -H / 2 + 0.28, 0.01); charniere.add(lisere);
+    const etiquette = new THREE.Mesh(new THREE.PlaneGeometry(1.9, 0.95), new THREE.MeshStandardMaterial({ map: textureDepuis(dessinerEtiquetteDossier()), roughness: 0.8 }));
+    etiquette.position.set(L / 2, 0.9, 0.022); charniere.add(etiquette);
+    // Les pièces : une face imprimée, un verso blanc, une légère courbure du papier.
+    const papier = new THREE.MeshStandardMaterial({ color: 0xF6F3EC, roughness: 0.9, side: THREE.BackSide });
+    const feuilles = PIECES.map(function (p, i) {
+        const geo = new THREE.PlaneGeometry(pL, pH, 1, 14), pos = geo.attributes.position;
+        for (let k = 0; k < pos.count; k++) { const y = pos.getY(k) / (pH / 2); pos.setZ(k, 0.07 * y * y); }
+        geo.computeVertexNormals(); geo.translate(0, pH / 2, 0);
+        const pivot = new THREE.Group(); pivot.position.set(0, -pH / 2 + 0.05, 0.06 + i * 0.05); groupe.add(pivot);
+        pivot.add(new THREE.Mesh(geo, new THREE.MeshStandardMaterial({ map: textureDepuis(dessinerPiece(p)), roughness: 0.88 })));
+        pivot.add(new THREE.Mesh(geo, papier));
+        return pivot;
+    });
+    const clip = trombone(matOr(0.25)); clip.scale.setScalar(1.05); clip.rotation.z = 0.06; clip.position.set(-0.85, pH - 0.25, 0.03); feuilles[feuilles.length - 1].add(clip);
+    const ombre = ombreSol(7, 3, 0.25); ombre.position.y = -H / 2 - 0.5; scene.add(ombre);
+    return {
+        scene: scene, camera: camera,
+        dimension: function (w, h) { const a = w / h; camera.aspect = a; camera.position.set(0, 0.5, recul(7.4, 7.6, a)); camera.lookAt(0, 0.2, 0); camera.updateProjectionMatrix(); },
+        maj: function (t, souris, defil) {
+            const e = sortie(lisse(0, 1.1, t)), ouv = doux(lisse(0.8, 1.9, t));
+            charniere.rotation.y = -ouv * 2.75;
+            groupe.position.set(ouv * 1.25, (1 - e) * -3 + Math.sin(t * 0.7) * 0.05, 0);
+            groupe.rotation.y = (1 - e) * 0.6 - 0.28 + souris.x * 0.3 + Math.sin(t * 0.3) * 0.05 + defil * 0.6;
+            groupe.rotation.x = -0.05 - souris.y * 0.1;
+            feuilles.forEach(function (f, i) {
+                const p = doux(lisse(1.5 + i * 0.12, 2.7 + i * 0.12, t)), c = i - (feuilles.length - 1) / 2;
+                f.rotation.z = -p * (c * 0.17 + Math.sin(t * 0.6 + i) * 0.012);
+                f.position.x = p * c * 0.22;
+                f.position.y = -pH / 2 + 0.05 + p * 0.35;
+                f.rotation.y = p * c * 0.05;
+            });
+            ombre.material.opacity = e;
+        }
+    };
+}
+
+// ---- 13 · Palais : la colonnade éclairée de nuit, un balayage de lumière dorée ----
+function colonneCannelee(r0, r1, h, nb) {
+    const g = new THREE.CylinderGeometry(r1, r0, h, 144, 1, true), p = g.attributes.position;
+    for (let i = 0; i < p.count; i++) { const x = p.getX(i), z = p.getZ(i), a = Math.atan2(z, x), f = 1 - 0.075 * Math.pow(0.5 + 0.5 * Math.cos(a * nb), 3); p.setX(i, x * f); p.setZ(i, z * f); }
+    g.computeVertexNormals();
+    return g;
+}
+function dessinerFrise() {
+    const c = document.createElement('canvas'); c.width = 2048; c.height = 110;
+    const x = c.getContext('2d');
+    x.fillStyle = '#22385F'; x.textAlign = 'center'; x.textBaseline = 'middle'; x.font = '600 70px "Cinzel", Georgia, serif'; espacer(x, '26px');
+    x.fillText('AEGIS · FAMA · DOXA', 1024, 58);
+    return c;
+}
+function scenePalais(env) {
+    const scene = new THREE.Scene(); scene.environment = env;
+    const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 100);
+    scene.add(new THREE.HemisphereLight(0x3a5486, 0x06122A, 0.7));
+    const lumiere = new THREE.DirectionalLight(0xFFD89A, 1.5); lumiere.position.set(-3, 1, 9); scene.add(lumiere);
+    const balayage = new THREE.PointLight(0xFFCF7A, 30, 10, 1.5); scene.add(balayage);
+    const temple = new THREE.Group(); scene.add(temple);
+    const pierre = new THREE.MeshStandardMaterial({ color: 0xE3DCCD, roughness: 0.62, envMapIntensity: 0.35 }), or = matOr(0.28);
+    const bloc = function (l, h, p, x, y, z, mat) { const m = new THREE.Mesh(new THREE.BoxGeometry(l, h, p), mat || pierre); m.position.set(x, y, z); temple.add(m); return m; };
+    bloc(10.4, 0.25, 3.3, 0, 0.125, 0); bloc(9.9, 0.25, 2.9, 0, 0.375, 0); bloc(9.4, 0.25, 2.5, 0, 0.625, 0);
+    // Le mur du fond et sa porte éclairée
+    bloc(8.6, 4.4, 0.3, 0, 2.95, -0.75, new THREE.MeshStandardMaterial({ color: 0x1B2C4B, roughness: 0.8 }));
+    const cp = document.createElement('canvas'); cp.width = 64; cp.height = 128; const xp = cp.getContext('2d'), gp = xp.createLinearGradient(0, 128, 0, 0);
+    gp.addColorStop(0, '#F6DDA0'); gp.addColorStop(1, '#B8893C'); xp.fillStyle = gp; xp.fillRect(0, 0, 64, 128);
+    const porte = new THREE.Mesh(new THREE.PlaneGeometry(1.35, 2.7), new THREE.MeshBasicMaterial({ map: textureDepuis(cp), toneMapped: false })); porte.position.set(0, 2.1, -0.59); temple.add(porte);
+    bloc(1.6, 0.12, 0.1, 0, 3.5, -0.56, or);
+    const fut = colonneCannelee(0.34, 0.29, 4.0, 20);
+    for (let k = 0; k < 6; k++) {
+        const x = -3.9 + k * 1.56, z = 0.55;
+        bloc(0.8, 0.14, 0.8, x, 0.82, z);
+        const tore = new THREE.Mesh(new THREE.TorusGeometry(0.34, 0.055, 12, 48), pierre); tore.rotation.x = Math.PI / 2; tore.position.set(x, 0.95, z); temple.add(tore);
+        const c = new THREE.Mesh(fut, pierre); c.position.set(x, 2.98, z); temple.add(c);
+        const echine = new THREE.Mesh(new THREE.TorusGeometry(0.31, 0.06, 12, 48), or); echine.rotation.x = Math.PI / 2; echine.position.set(x, 5.0, z); temple.add(echine);
+        bloc(0.86, 0.16, 0.86, x, 5.14, z);
+    }
+    bloc(9.2, 0.46, 1.9, 0, 5.45, -0.05);
+    bloc(9.2, 0.56, 1.8, 0, 5.96, -0.05);
+    const frise = new THREE.Mesh(new THREE.PlaneGeometry(8.4, 0.45), new THREE.MeshStandardMaterial({ map: textureDepuis(dessinerFrise()), transparent: true, roughness: 0.6 }));
+    frise.position.set(0, 5.96, 0.86); temple.add(frise);
+    bloc(9.7, 0.16, 2.1, 0, 6.32, -0.05);
+    bloc(9.7, 0.03, 0.04, 0, 6.24, 1.0, or);
+    const fronton = new THREE.Shape(); fronton.moveTo(-4.75, 0); fronton.lineTo(4.75, 0); fronton.lineTo(0, 1.35); fronton.closePath();
+    const geoF = new THREE.ExtrudeGeometry(fronton, { depth: 1.7, bevelEnabled: false }); geoF.translate(0, 0, -0.9);
+    const f = new THREE.Mesh(geoF, pierre); f.position.y = 6.4; temple.add(f);
+    const pente = Math.atan2(1.35, 4.75), long = Math.hypot(1.35, 4.75);
+    [-1, 1].forEach(function (s) { const r = bloc(long + 0.3, 0.14, 2.0, s * 2.375, 6.4 + 0.675 + 0.06, -0.05); r.rotation.z = -s * pente; });
+    const poudre = poussiere(320, 9, 0.09, 0xE4CD8A, 0.5); poudre.position.set(0, 3.5, 2); temple.add(poudre);
+    const vise = new THREE.Vector3();
+    let base = { z: 22, y: 2.4 };
+    return {
+        scene: scene, camera: camera,
+        dimension: function (w, h) {
+            const a = w / h; camera.aspect = a; camera.updateProjectionMatrix();
+            if (a >= 1.15) {
+                const z = Math.max(23, 12.6 / (TAN * a)); base = { z: z, y: 2.9 };
+                temple.scale.setScalar(1); temple.position.set(Math.min(6.6, TAN * a * z - 5.4), -0.9, 0);
+            } else {
+                const z = 22, vh = 2 * z * TAN, vw = vh * a, s = Math.min(1, vw * 0.92 / 10.4); base = { z: z, y: 2.6 };
+                temple.scale.setScalar(s); temple.position.set(0, 2.6 + vh / 2 - 7.8 * s - vh * 0.06, 0);
+            }
+        },
+        maj: function (t, souris, defil) {
+            const e = sortie(lisse(0, 2.2, t));
+            camera.position.set(souris.x * 1.1 + (1 - e) * 3, base.y + souris.y * 0.6 + (1 - e) * 1.5, base.z - defil * 5 + (1 - e) * 4);
+            vise.set(souris.x * 0.3, base.y, 0);
+            camera.lookAt(vise);
+            balayage.position.set(temple.position.x + Math.sin(t * 0.35) * 6 * temple.scale.x, temple.position.y + 3.2 * temple.scale.x, 3);
+            lumiere.intensity = 1.5 * e;
+            poudre.rotation.y = t * 0.02;
+        }
+    };
+}
+
+// ---- 14 · Radar : la veille balaie le web, les signaux s'allument à son passage ----
+const SOURCES = ['Avis Google', 'Forum', 'Presse en ligne', 'Réseau social'];
+function dessinerSource(texte) {
+    const c = document.createElement('canvas'); c.width = 384; c.height = 72;
+    const x = c.getContext('2d');
+    x.fillStyle = 'rgba(6,18,42,.82)'; rondRect(x, 2, 2, 380, 68, 10); x.fill();
+    x.strokeStyle = 'rgba(201,165,76,.7)'; x.lineWidth = 2; rondRect(x, 2, 2, 380, 68, 10); x.stroke();
+    x.fillStyle = '#E4CD8A'; x.font = '500 30px "Geist Mono", ui-monospace, monospace'; x.textBaseline = 'middle'; x.fillText(texte, 22, 38);
+    return c;
+}
+function sceneRadar() {
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 100);
+    const groupe = new THREE.Group(); scene.add(groupe);
+    const R = 5;
+    const disque = new THREE.Mesh(new THREE.PlaneGeometry(2 * R, 2 * R), new THREE.ShaderMaterial({
+        uniforms: { uAngle: { value: 0 } },
+        vertexShader: 'varying vec2 vUv; void main(){ vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }',
+        fragmentShader: [
+            'uniform float uAngle; varying vec2 vUv;',
+            'const float PI = 3.14159265;',
+            'void main(){',
+            '  vec2 p = (vUv - 0.5) * 2.0; float r = length(p); if (r > 1.0) discard;',
+            '  float a = atan(p.y, p.x);',
+            '  float dr = abs(r * 4.0 - floor(r * 4.0 + 0.5)) / 4.0;',
+            '  float anneau = 1.0 - smoothstep(0.002, 0.007, dr);',
+            '  float s = abs(mod(a + PI / 12.0, PI / 6.0) - PI / 12.0);',
+            '  float rayon = (1.0 - smoothstep(0.002, 0.006, s * r)) * step(0.06, r);',
+            '  float d = mod(uAngle - a, 2.0 * PI);',
+            '  float trainee = exp(-d * 2.6) * smoothstep(1.0, 0.94, r);',
+            '  float bord = 1.0 - smoothstep(0.004, 0.014, abs(r - 0.992));',
+            '  vec3 dore = vec3(0.79, 0.65, 0.30);',
+            '  vec3 c = vec3(0.02, 0.05, 0.1) * (1.0 - r) + dore * (anneau * 0.28 + rayon * 0.12 + trainee * 0.42 + bord * 0.55);',
+            '  c += vec3(1.0, 0.92, 0.7) * (1.0 - smoothstep(0.0, 0.035, d)) * 0.5 * step(0.04, r);',
+            '  gl_FragColor = vec4(c, 1.0);',
+            '}'
+        ].join('\n'),
+        transparent: true, blending: THREE.AdditiveBlending, depthWrite: false
+    }));
+    disque.rotation.x = -Math.PI / 2; groupe.add(disque);
+    const sprite = spriteRond();
+    // Signaux : points sur le disque (coordonnées polaires, dans le même repère que le balayage).
+    const NB = 44, pos = new Float32Array(NB * 3), col = new Float32Array(NB * 3), signaux = [];
+    for (let i = 0; i < NB; i++) {
+        const r = Math.sqrt(alea(0.03, 0.9)), a = alea(-Math.PI, Math.PI);
+        pos[i * 3] = r * R * Math.cos(a); pos[i * 3 + 1] = 0.02; pos[i * 3 + 2] = -r * R * Math.sin(a);
+        signaux.push({ a: a, r: r, vu: -10 });
+    }
+    const gP = new THREE.BufferGeometry(); gP.setAttribute('position', new THREE.BufferAttribute(pos, 3)); gP.setAttribute('color', new THREE.BufferAttribute(col, 3));
+    groupe.add(new THREE.Points(gP, new THREE.PointsMaterial({ size: 0.34, map: sprite, vertexColors: true, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending })));
+    // Menaces : un signal plus fort, une colonne qui monte, une onde, parfois le nom de la source.
+    const menaces = [3, 9, 15, 22, 30, 37].map(function (i, k) {
+        const s = signaux[i], x = pos[i * 3], z = pos[i * 3 + 2], hMax = alea(0.9, 1.9);
+        const lg = new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(x, 0, z), new THREE.Vector3(x, hMax, z)]);
+        const ligne = new THREE.Line(lg, new THREE.LineBasicMaterial({ color: 0xE4CD8A, transparent: true, opacity: 0.8, blending: THREE.AdditiveBlending, depthWrite: false })); groupe.add(ligne);
+        const tete = new THREE.Sprite(new THREE.SpriteMaterial({ map: sprite, color: 0xFFE7A6, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending })); tete.position.set(x, hMax, z); groupe.add(tete);
+        const onde = new THREE.Mesh(new THREE.RingGeometry(0.28, 0.32, 48), new THREE.MeshBasicMaterial({ color: 0xE4CD8A, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, side: THREE.DoubleSide }));
+        onde.rotation.x = -Math.PI / 2; onde.position.set(x, 0.03, z); groupe.add(onde);
+        let nom = null;
+        if (k < SOURCES.length) { nom = new THREE.Sprite(new THREE.SpriteMaterial({ map: textureDepuis(dessinerSource(SOURCES[k])), transparent: true, depthWrite: false, depthTest: false })); nom.center.set(0, 0.5); nom.position.set(x + 0.25, hMax + 0.05, z); nom.renderOrder = 5; groupe.add(nom); }
+        return { s: s, ligne: ligne, tete: tete, onde: onde, nom: nom, hMax: hMax };
+    });
+    const pivot = new THREE.Mesh(new THREE.OctahedronGeometry(0.18), new THREE.MeshBasicMaterial({ color: 0xE4CD8A })); pivot.position.y = 0.2; groupe.add(pivot);
+    const TOUR = 4.6, or = new THREE.Color(0xC9A54C), vif = new THREE.Color(0xFFE7A6), tmp = new THREE.Color();
+    let echelleNom = 1;
+    return {
+        scene: scene, camera: camera,
+        dimension: function (w, h) { const a = w / h; camera.aspect = a; camera.position.set(0, 7.2, recul(11, 7.6, a) * 0.95); camera.lookAt(0, -0.4, 0); camera.updateProjectionMatrix(); echelleNom = a < 1 ? 1.15 : 1; },
+        maj: function (t, souris, defil) {
+            const angle = (t / TOUR) * Math.PI * 2 - Math.PI;
+            disque.material.uniforms.uAngle.value = ((angle + Math.PI) % (2 * Math.PI)) - Math.PI;
+            signaux.forEach(function (s, i) {
+                // d : angle parcouru depuis le dernier passage du balayage sur ce signal.
+                const d = ((angle - s.a) % (2 * Math.PI) + 2 * Math.PI) % (2 * Math.PI);
+                s.vu = t - d / (2 * Math.PI) * TOUR;
+                const eclat = Math.exp(-d * 1.6);
+                tmp.copy(or).multiplyScalar(0.28).lerp(vif, eclat);
+                col[i * 3] = tmp.r; col[i * 3 + 1] = tmp.g; col[i * 3 + 2] = tmp.b;
+            });
+            gP.attributes.color.needsUpdate = true;
+            menaces.forEach(function (m) {
+                const vie = t - m.s.vu, monte = sortie(lisse(0, 0.6, vie)) * (1 - lisse(3.2, 4.2, vie));
+                m.ligne.scale.y = Math.max(0.001, monte); m.ligne.material.opacity = 0.8 * monte;
+                m.tete.position.y = m.hMax * monte; m.tete.material.opacity = monte; m.tete.scale.setScalar(0.42 + Math.sin(t * 6) * 0.04);
+                const o = lisse(0, 1.4, vie); m.onde.scale.setScalar(1 + o * 3.2); m.onde.material.opacity = (1 - o) * (vie < 1.4 ? 0.8 : 0);
+                if (m.nom) { const n = lisse(0.3, 0.7, vie) * (1 - lisse(2.6, 3.2, vie)); m.nom.material.opacity = n; m.nom.visible = n > 0.01; m.nom.position.y = m.hMax * monte + 0.05; m.nom.scale.set(1.9 * echelleNom, 0.356 * echelleNom, 1); }
+            });
+            pivot.rotation.y = t * 0.8;
+            groupe.rotation.y = souris.x * 0.25 + Math.sin(t * 0.2) * 0.08 + defil * 0.5;
+            groupe.rotation.x = souris.y * 0.06;
+        }
+    };
+}
+
+// ---- 15 · Relief : un paysage de signaux agité, qui s'apaise ; la ligne d'or reste droite ----
+function sceneRelief() {
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(32, 1, 0.1, 100);
+    const groupe = new THREE.Group(); scene.add(groupe);
+    const RANGS = 48, COLS = 150, X0 = -15, X1 = 15, Z0 = -12, Z1 = 3.5, OR_RANG = 36;
+    const lignes = [];
+    for (let r = 0; r < RANGS; r++) {
+        const z = Z0 + (Z1 - Z0) * r / (RANGS - 1), pos = new Float32Array(COLS * 3);
+        for (let c = 0; c < COLS; c++) { pos[c * 3] = X0 + (X1 - X0) * c / (COLS - 1); pos[c * 3 + 2] = z; }
+        const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+        const estOr = r === OR_RANG, loin = r / (RANGS - 1);
+        const m = new THREE.LineBasicMaterial({ color: estOr ? 0xB8912F : 0x1A355F, transparent: true, opacity: estOr ? 1 : 0.1 + 0.42 * loin * loin });
+        const l = new THREE.Line(g, m); groupe.add(l);
+        lignes.push({ g: g, pos: pos, z: z, or: estOr });
+    }
+    const vise = new THREE.Vector3(), plan = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0), rayon = new THREE.Raycaster(), ndc = new THREE.Vector2();
+    let bosse = 0, bx = 0, bz = 0;
+    return {
+        scene: scene, camera: camera,
+        dimension: function (w, h) {
+            const a = w / h; camera.aspect = a;
+            if (a >= 1) { camera.position.set(0, 3.6, 9.5); camera.lookAt(0, -0.4, -3); } else { camera.position.set(0, 5.2, 10); camera.lookAt(0, -2.6, -4); }
+            camera.updateProjectionMatrix();
+        },
+        maj: function (t, souris, defil, pointeur) {
+            // L'agitation retombe au fil des secondes ; le défilement la relance un peu.
+            const A = 0.22 + 1.5 * Math.exp(-t * 0.32) + defil * 0.5;
+            if (pointeur.dedans) {
+                ndc.set(pointeur.x, pointeur.y); rayon.setFromCamera(ndc, camera);
+                if (rayon.ray.intersectPlane(plan, vise)) { bx += (vise.x - groupe.position.x - bx) * 0.1; bz += (vise.z - bz) * 0.1; bosse += (1 - bosse) * 0.06; }
+            } else bosse *= 0.95;
+            lignes.forEach(function (l) {
+                const p = l.pos, z = l.z, k = l.or ? 0.35 : 1;
+                for (let c = 0; c < COLS; c++) {
+                    const x = p[c * 3];
+                    let y = A * k * (Math.sin(x * 0.42 + t * 0.55 + z * 0.22) * 0.6 + Math.sin(x * 0.93 - z * 0.71 + t * 0.85) * 0.34 + Math.sin(x * 1.71 + z * 1.27 - t * 1.25) * 0.16);
+                    if (bosse > 0.01) { const dx = x - bx, dz = z - bz; y += bosse * 0.9 * Math.exp(-(dx * dx + dz * dz) / 2.2); }
+                    p[c * 3 + 1] = y;
+                }
+                l.g.attributes.position.needsUpdate = true;
+            });
+            groupe.rotation.y = souris.x * 0.08;
+            groupe.rotation.x = souris.y * 0.03;
+        }
+    };
+}
+
+// ---- 16 · Textes : les références de droit tournent en anneaux autour de l'emblème ----
+const REFERENCES = [
+    'CODE CIVIL, ART. 9 · RESPECT DE LA VIE PRIVÉE',
+    'LOI DU 29 JUILLET 1881, ART. 29 · DIFFAMATION ET INJURE',
+    'RGPD, ART. 17 · DROIT À L’EFFACEMENT',
+    'CODE CIVIL, ART. 1240 · DÉNIGREMENT',
+    'RÈGLEMENT (UE) 2022/2065 · SERVICES NUMÉRIQUES',
+    'CODE PÉNAL, ART. 226-4-1 · USURPATION D’IDENTITÉ'
+];
+function dessinerAnneau(debut) {
+    const c = document.createElement('canvas'); c.width = 4096; c.height = 72;
+    const x = c.getContext('2d');
+    x.fillStyle = '#E4CD8A'; x.font = '500 34px "Albert Sans", sans-serif'; espacer(x, '6px'); x.textBaseline = 'middle';
+    let px = 20, i = debut;
+    while (px < 4096) { const t = REFERENCES[i % REFERENCES.length]; x.fillText(t, px, 38); px += x.measureText(t).width + 30; x.fillText('✦', px, 36); px += 70; i++; }
+    return c;
+}
+function sceneTextes(env) {
+    const scene = new THREE.Scene(); scene.environment = env;
+    const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 100);
+    scene.add(new THREE.HemisphereLight(0xdfe6f5, 0x1a1a24, 0.45));
+    const cle = new THREE.DirectionalLight(0xfff3e0, 1.4); cle.position.set(3, 5, 8); scene.add(cle);
+    const contre = new THREE.PointLight(0xE4CD8A, 50, 30, 1.6); contre.position.set(-5, 2, -4); scene.add(contre);
+    const groupe = new THREE.Group(); scene.add(groupe);
+    const or = matOr(0.2);
+    const embleme = new THREE.Group(); groupe.add(embleme);
+    embleme.add(bouclierMassif(1 / 52, 0.32, 0.1, matNuit(), or));
+    const a = lettreA(1 / 52, 0.1, or); a.position.z = 0.16 + 0.1 + 0.05; embleme.add(a);
+    const anneaux = [[-1.25, 3.3, 0.1, 0], [-0.42, 3.55, -0.06, 2], [0.42, 3.55, 0.05, 4], [1.25, 3.3, -0.09, 1]].map(function (p, i) {
+        const tex = textureDepuis(dessinerAnneau(p[3])); tex.wrapS = THREE.RepeatWrapping;
+        const geo = new THREE.CylinderGeometry(p[1], p[1], 0.36, 160, 1, true);
+        const g = new THREE.Group(); g.position.y = p[0]; g.rotation.z = p[2]; g.rotation.x = p[2] * 0.6; groupe.add(g);
+        const avant = new THREE.Mesh(geo, new THREE.MeshBasicMaterial({ map: tex, transparent: true, depthWrite: false, side: THREE.FrontSide, toneMapped: false }));
+        const arriere = new THREE.Mesh(geo, new THREE.MeshBasicMaterial({ map: tex, transparent: true, opacity: 0.22, depthWrite: false, side: THREE.BackSide, toneMapped: false }));
+        arriere.renderOrder = 0; avant.renderOrder = 2;
+        g.add(arriere, avant);
+        return { g: g, sens: i % 2 ? -1 : 1, vitesse: 0.06 + i * 0.012 };
+    });
+    const poudre = poussiere(220, 7, 0.1, 0xE4CD8A, 0.5); scene.add(poudre);
+    return {
+        scene: scene, camera: camera,
+        dimension: function (w, h) { const a = w / h; camera.aspect = a; camera.position.set(0, 2.2, recul(8.4, 6.4, a)); camera.lookAt(0, -0.1, 0); camera.updateProjectionMatrix(); },
+        maj: function (t, souris, defil) {
+            const e = sortie(lisse(0, 1.6, t));
+            anneaux.forEach(function (n, i) {
+                const d = sortie(lisse(0.2 + i * 0.15, 1.6 + i * 0.15, t));
+                n.g.scale.setScalar(0.6 + 0.4 * d);
+                n.g.children.forEach(function (m) { m.material.opacity = (m.material.side === THREE.BackSide ? 0.22 : 1) * d; });
+                n.g.rotation.y = n.sens * (t * n.vitesse + (1 - d) * 1.2) + defil * n.sens * 0.8;
+            });
+            embleme.scale.setScalar(0.7 + 0.3 * e);
+            embleme.rotation.y = Math.sin(t * 0.45) * 0.45 + souris.x * 0.4;
+            embleme.rotation.x = -souris.y * 0.15;
+            groupe.rotation.x = 0.05 + souris.y * 0.05;
+            poudre.rotation.y = t * 0.02;
+        }
+    };
+}
+
+const SCENES = { 12: sceneDossier, 13: scenePalais, 14: sceneRadar, 15: sceneRelief, 16: sceneTextes };
+
+if (renderer) {
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.75));
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.05;
+    const pmrem = new THREE.PMREMGenerator(renderer);
+    const env = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+    const horloge = new THREE.Clock();
+    const souris = new THREE.Vector2(), sourisL = new THREE.Vector2(), zero = new THREE.Vector2();
+    const pointeur = { x: 0, y: 0, dedans: false, cx: -1, cy: -1 };
+    window.addEventListener('pointermove', function (e) { souris.set(e.clientX / window.innerWidth * 2 - 1, -(e.clientY / window.innerHeight * 2 - 1)); pointeur.cx = e.clientX; pointeur.cy = e.clientY; }, { passive: true });
+    let actuelle = null, debut = 0, visible = true, premiere = false;
+    const liberer = function (s) {
+        s.scene.traverse(function (o) {
+            if (o.geometry) o.geometry.dispose();
+            if (o.material) [].concat(o.material).forEach(function (m) { Object.values(m).forEach(function (v) { if (v && v.isTexture) v.dispose(); }); m.dispose(); });
+        });
+    };
+    const taille = function () {
+        const w = boite.clientWidth, h = boite.clientHeight;
+        if (!w || !h) return;
+        renderer.setSize(w, h, false);
+        if (actuelle) actuelle.dimension(w, h);
+    };
+    const construire = function (n) {
+        if (actuelle) { liberer(actuelle); actuelle = null; }
+        canvas.classList.remove('pret'); premiere = false;
+        if (!SCENES[n]) return;
+        const lancer = function () {
+            actuelle = SCENES[n](env);
+            debut = horloge.getElapsedTime();
+            requestAnimationFrame(taille);
+        };
+        // Les textures dessinent du texte : on attend les polices utilisées.
+        const polices = ['400 28px "Libre Baskerville"', 'italic 400 16px "Libre Baskerville"', '400 15px "Source Sans 3"', '600 14px "Source Sans 3"', '700 24px "Source Sans 3"', '600 70px "Cinzel"', '500 30px "Geist Mono"', '500 34px "Albert Sans"'];
+        if (document.fonts && document.fonts.load) Promise.all(polices.map(function (f) { return document.fonts.load(f).catch(function () {}); })).then(function () { if (window.AE_MAQUETTE === n) lancer(); });
+        else lancer();
+    };
+    new ResizeObserver(taille).observe(boite);
+    if ('IntersectionObserver' in window) new IntersectionObserver(function (e) { visible = e[0].isIntersecting; }).observe(boite);
+    document.addEventListener('maquette', function (e) { construire(e.detail); });
+    if (window.AE_MAQUETTE) construire(window.AE_MAQUETTE);
+    (function boucle() {
+        requestAnimationFrame(boucle);
+        if (!actuelle || !visible) return;
+        const t = reduit ? 14 : horloge.getElapsedTime() - debut;
+        sourisL.lerp(reduit ? zero : souris, 0.05);
+        const r = boite.getBoundingClientRect();
+        pointeur.dedans = !reduit && pointeur.cx >= r.left && pointeur.cx <= r.right && pointeur.cy >= r.top && pointeur.cy <= r.bottom;
+        if (pointeur.dedans) { pointeur.x = (pointeur.cx - r.left) / r.width * 2 - 1; pointeur.y = -((pointeur.cy - r.top) / r.height * 2 - 1); }
+        const defil = Math.min(1, window.scrollY / Math.max(1, r.height + 300));
+        actuelle.maj(t, sourisL, defil, pointeur);
+        renderer.render(actuelle.scene, actuelle.camera);
+        if (!premiere) { premiere = true; canvas.classList.add('pret'); }
+    })();
+}
+</script>
