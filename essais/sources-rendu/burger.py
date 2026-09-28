@@ -556,7 +556,9 @@ def cadrer(loc, vise, focale=70, ouverture=2.8, mise_au_point=None, net_sur=None
     else:
         # Par défaut, le net est sur l'avant du burger, comme en photo culinaire.
         v = Vector(vise); d = (Vector(loc) - v); d.z = 0
-        net.location = net_sur if net_sur else (v + d.normalized() * 1.15 if d.length > 0.3 else v)
+        # Visée au centre : le net va sur l'avant du burger. Gros plan décentré : net sur le point visé.
+        avance = 1.15 if Vector((v.x, v.y)).length < 0.3 else 0.0
+        net.location = net_sur if net_sur else (v + d.normalized() * avance if d.length > 0.3 else v)
         cam.data.dof.focus_object = net
 
 def eclater(k):
@@ -584,12 +586,12 @@ elif MODE == 'galerie':
     vues = [
         ('hero', (3.6, -10.0, 2.4), (0, 0, 1.3), 70, 3.5, -20, 0),
         ('photo_0', (5.2, -9.2, 3.2), (0, 0, 1.2), 70, 2.8, -20, 0),
-        ('photo_1', (1.8, -5.0, 2.3), (0.2, -0.6, 1.4), 100, 2.0, 15, 0),
+        ('photo_1', (1.8, -5.6, 2.3), (0.3, -1.3, 1.45), 90, 3.2, 15, 0),
         ('photo_2', (6.5, -9.5, 4.5), (0, 0, 2.2), 60, 4.0, -35, 1),
         ('photo_3', (0.01, -0.6, 11), (0, 0, 1), 50, 5.6, 0, 0),
-        ('photo_4', (2.2, -3.8, 1.35), (0.5, -1.0, 1.05), 105, 1.8, 30, 0),
+        ('photo_4', (2.4, -4.6, 1.35), (0.55, -1.3, 1.1), 95, 3.2, 30, 0),
         ('photo_5', (0, -8.5, 0.9), (0, 0, 1.3), 60, 2.8, 10, 0),
-        ('photo_6', (1.6, -4.2, 3.9), (0.4, -0.05, 3.2), 100, 2.2, -10, 0),
+        ('photo_6', (1.6, -4.2, 3.9), (0.4, -0.05, 3.2), 100, 3.2, -10, 0),
         ('photo_7', (-6.5, -8, 5), (0, 0, 0.9), 45, 4.0, 60, 0),
     ]
     choix = os.environ.get('VUES')
