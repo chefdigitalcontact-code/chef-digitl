@@ -134,7 +134,6 @@ def mat_torchon():
     nt.links.new(ch.outputs['Color'], p.inputs['Base Color'])
     p.inputs['Roughness'].default_value = 0.85
     p.inputs['Sheen Weight'].default_value = 0.6; p.inputs['Sheen Roughness'].default_value = 0.4
-    p.inputs['Subsurface Weight'].default_value = 0.2; p.inputs['Subsurface Scale'].default_value = 0.02
     add = nt.nodes.new('ShaderNodeMath'); add.operation = 'ADD'
     nt.links.new(tr.outputs['Fac'], add.inputs[0]); nt.links.new(ch2.outputs['Fac'], add.inputs[1])
     relief(nt, p, add.outputs['Value'], 0.35, 0.004, False)
@@ -145,10 +144,10 @@ def torchon_mesh(bm):
     for v in bm.verts:
         x, y = v.co.x, v.co.y
         v.co.z = (0.03 * math.sin(x * 4.1 + y * 1.3) * math.sin(y * 3.3 - x) + 0.02 * math.sin(x * 11 + y * 7)
-                  + 0.22 * max(0.0, (x + y) - 1.9) ** 1.5 + 0.05 * math.exp(-((x - 0.3 * y - 0.2) / 0.08) ** 2))
+                  + 0.22 * max(0.0, (x + y) - 1.9) ** 1.5 + 0.03 * math.exp(-((x - 0.3 * y - 0.2) / 0.3) ** 2))
 tor = maillage('torchon', torchon_mesh)
 tor.modifiers.new('ep', 'SOLIDIFY').thickness = 0.02; lisser(tor, 1)
-tor.location = (-3.4, -1.3, 0.03); tor.rotation_euler.z = math.radians(-14)
+tor.location = (-3.4, -1.3, 0.085); tor.rotation_euler.z = math.radians(-14)
 tor.data.materials.append(mat_torchon()); sur_plateau(tor)
 
 # ---- Assiette en porcelaine, part de tarte aux pralines, crème fraîche ----
@@ -273,6 +272,6 @@ executer(
         ('photo_3', (0.9, -0.62, 12), (0.9, -0.6, 0), 50, 5.6, 0, None),
         ('photo_4', (-6.5, -7.5, 3.4), (-2.2, 2.0, 1.8), 55, 3.2, 0, None),
         ('photo_5', (4.5, -6.5, 1.2), (0.5, -0.4, 0.6), 80, 2.8, 0, None),
-        ('photo_6', (-3.2, -5.2, 1.5), (-0.8, 0.3, 1.1), 65, 3.2, 0, None),
+        ('photo_6', (-5.4, -4.6, 2.8), (-2.0, 1.5, 2.6), 70, 3.2, 0, None),
         ('photo_7', (5.5, -9.5, 5.5), (-0.6, 2.2, 2.4), 40, 4.0, 0, None),
     ])

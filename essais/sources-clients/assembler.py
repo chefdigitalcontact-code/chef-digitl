@@ -25,11 +25,11 @@ def assembler(donnees, sortie, titre, sequence=None, photos=None):
     open(sortie, 'w', encoding='utf-8').write(html)
     print(sortie, len(html))
 PHOTOS = '''{
-    1: { dossier: "bistrot", hero: "bistrot/hero.jpg", photos: 8, effet: "craie", vacille: "#FFB060", axeX: 0.55, axeY: 0.5 },
-    2: { dossier: "pizza", hero: "pizza/hero.jpg", photos: 8, effet: "braises", vacille: "#FF8A30", axeX: 0.5, axeY: 0.55 },
-    3: { dossier: "sushi", hero: "sushi/hero.jpg", photos: 8, effet: "petales", axeX: 0.5, axeY: 0.55 },
-    4: { dossier: "comptoir", hero: "comptoir/hero.jpg", photos: 8, effet: "vapeur", vapeurX: 0.5, vapeurY: 0.3, axeX: 0.5, axeY: 0.5 },
-    5: { dossier: "brasserie", hero: "brasserie/hero.jpg", photos: 8, effet: "reflets", axeX: 0.5, axeY: 0.45 }
+    1: { dossier: "clients/bistrot", hero: "clients/bistrot/hero.jpg", photos: 8, effet: "craie", vacille: "#FFB060", axeX: 0.55, axeY: 0.5 },
+    2: { dossier: "clients/pizza", hero: "clients/pizza/hero.jpg", photos: 8, effet: "braises", vacille: "#FF8A30", axeX: 0.5, axeY: 0.55 },
+    3: { dossier: "clients/sushi", hero: "clients/sushi/hero.jpg", photos: 8, effet: "petales", axeX: 0.5, axeY: 0.55 },
+    4: { dossier: "clients/comptoir", hero: "clients/comptoir/hero.jpg", photos: 8, effet: "vapeur", vapeurX: 0.5, vapeurY: 0.3, axeX: 0.5, axeY: 0.5 },
+    5: { dossier: "clients/brasserie", hero: "clients/brasserie/hero.jpg", photos: 8, effet: "reflets", axeX: 0.5, axeY: 0.45 }
 }'''
 if sys.argv[2] == 'clients': assembler('clients-donnees.js', ESSAIS + 'maquettes-clients-3d.html', 'Maquettes client photoréalistes', photos=PHOTOS)
 if sys.argv[2] == 'dani': assembler('dani-donnees.js', ESSAIS + 'maquette-chez-dani.html', 'Maquette Chez Dani', '{ dossier: "chez-dani", images: 36, photos: 8, depart: 0, vitesse: 2.2, suivi: 5, zoom: 1.0, axeX: 0.5, axeY: 0.3 }')
